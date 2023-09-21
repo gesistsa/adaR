@@ -9,6 +9,12 @@ ada_url_parse(url)
 \arguments{
 \item{url}{url}
 }
+\value{
+A list of components
+}
 \description{
 Use ada-url to parse a url
+}
+\examples{
+ada_url_parse("https://user_1:password_1@example.org:8080/dir/../api?q=1#frag")
 }
