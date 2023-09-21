@@ -1,6 +1,7 @@
 /* auto-generated on 2023-09-19 16:48:25 -0400. Do not edit! */
 /* begin file src/ada.cpp */
 #include "ada.h"
+
 /* begin file src/checkers.cpp */
 #include <algorithm>
 
@@ -13017,11 +13018,6 @@ template url parse_url<url>(std::string_view user_input,
 template url_aggregator parse_url<url_aggregator>(
     std::string_view user_input, const url_aggregator* base_url = nullptr);
 
-//[[Rcpp::export]]
-Rcpp::List Rcpp_parse_url(std::string_view x){
-    // url tst = ada::parser::parse_url(x)
-}
-
 }  // namespace ada::parser
 /* end file src/parser.cpp */
 /* begin file src/url_components.cpp */
@@ -15318,3 +15314,27 @@ ada_owned_string ada_idna_to_ascii(const char* input, size_t length) {
 }  // extern "C"
 /* end file src/ada_c.cpp */
 /* end file src/ada.cpp */
+
+std::string charsub(ada_string stringi){
+  const char* res = stringi.data;
+  size_t len = stringi.length;
+  return std::string(res, 0, len); 
+}
+
+// [[Rcpp::export]]
+Rcpp::List Rcpp_ada_parse(const char* input, size_t length) {
+  ada_url tst = ada_parse(input, length);
+  List L = List::create(
+    Named("href")       = charsub(ada_get_href(tst)),
+    _["protocol"]   = charsub(ada_get_protocol(tst)),
+    _["username"]   = charsub(ada_get_username(tst)),
+    _["password"]   = charsub(ada_get_password(tst)),
+    _["host"] = charsub(ada_get_host(tst)) ,
+    _["hostname"] = charsub(ada_get_hostname(tst)) ,
+    _["port"] = charsub(ada_get_port(tst)) ,
+    _["pathname"]   = charsub(ada_get_pathname(tst)),
+    _["search"]     = charsub(ada_get_search(tst)),
+    _["hash"] = charsub(ada_get_hash(tst))
+  );
+  return L;
+}

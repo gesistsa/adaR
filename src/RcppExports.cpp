@@ -10,20 +10,21 @@ Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
 Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
-// Rcpp_parse_url
-Rcpp::List Rcpp_parse_url(std::string_view x);
-RcppExport SEXP _adaR_Rcpp_parse_url(SEXP xSEXP) {
+// Rcpp_ada_parse
+Rcpp::List Rcpp_ada_parse(const char* input, size_t length);
+RcppExport SEXP _adaR_Rcpp_ada_parse(SEXP inputSEXP, SEXP lengthSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< std::string_view >::type x(xSEXP);
-    rcpp_result_gen = Rcpp::wrap(Rcpp_parse_url(x));
+    Rcpp::traits::input_parameter< const char* >::type input(inputSEXP);
+    Rcpp::traits::input_parameter< size_t >::type length(lengthSEXP);
+    rcpp_result_gen = Rcpp::wrap(Rcpp_ada_parse(input, length));
     return rcpp_result_gen;
 END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_adaR_Rcpp_parse_url", (DL_FUNC) &_adaR_Rcpp_parse_url, 1},
+    {"_adaR_Rcpp_ada_parse", (DL_FUNC) &_adaR_Rcpp_ada_parse, 2},
     {NULL, NULL, 0}
 };
 

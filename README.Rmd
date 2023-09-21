@@ -1,0 +1,46 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# adaR
+
+adaR is a wrapper for [ada-url](https://github.com/ada-url/ada), a
+WHATWG-compliant and fast URL parser written in modern C++ .
+
+## Installation
+
+You can install the development version of adaR from [GitHub](https://github.com/) with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("schochastics/adaR")
+```
+
+## Example
+
+This is a basic example whic hshows all the returned component.
+
+```{r example}
+library(adaR)
+ada_url_parse("https://user_1:password_1@example.org:8080/dir/../api?q=1#frag")
+```
+
+
+```{r better}
+urltools::url_parse("https://www.google.com/maps/place/Pennsylvania+Station/@40.7519848,-74.0015045,14.
+   7z/data=!4m5!3m4!1s0x89c259ae15b2adcb:0x7955420634fd7eba!8m2!3d40.750568!4d-73.993519")
+
+ada_url_parse("https://www.google.com/maps/place/Pennsylvania+Station/@40.7519848,-74.0015045,14.7z/data=!4m
+   5!3m4!1s0x89c259ae15b2adcb:0x7955420634fd7eba!8m2!3d40.750568!4d-73.993519")
+```
