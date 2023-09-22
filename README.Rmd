@@ -35,7 +35,7 @@ devtools::install_github("schochastics/adaR")
 
 ## Example
 
-This is a basic example which shows all the returned components
+This is a basic example which shows all the returned components.
 
 ```{r example}
 library(adaR)

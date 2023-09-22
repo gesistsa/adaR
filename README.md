@@ -26,7 +26,7 @@ devtools::install_github("schochastics/adaR")
 
 ## Example
 
-This is a basic example which shows all the returned components
+This is a basic example which shows all the returned components.
 
 ``` r
 library(adaR)
@@ -120,6 +120,6 @@ bench::mark(
 #> # A tibble: 2 × 6
 #>   expression      min   median `itr/sec` mem_alloc `gc/sec`
 #>   <bch:expr> <bch:tm> <bch:tm>     <dbl> <bch:byt>    <dbl>
-#> 1 ada          10.2ms   10.2ms     98.4     2.67MB      0  
-#> 2 urltools    304.2ms  304.2ms      3.29    2.59MB     19.7
+#> 1 ada          10.7ms   10.7ms     93.6     2.67MB      0  
+#> 2 urltools    328.1ms  328.1ms      3.05    2.59MB     18.3
 ```
