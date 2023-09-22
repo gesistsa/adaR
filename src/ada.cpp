@@ -15323,18 +15323,22 @@ std::string charsub(ada_string stringi){
 
 // [[Rcpp::export]]
 Rcpp::List Rcpp_ada_parse(const char* input, size_t length) {
-  ada_url tst = ada_parse(input, length);
-  List L = List::create(
-    Named("href")       = charsub(ada_get_href(tst)),
-    _["protocol"]   = charsub(ada_get_protocol(tst)),
-    _["username"]   = charsub(ada_get_username(tst)),
-    _["password"]   = charsub(ada_get_password(tst)),
-    _["host"] = charsub(ada_get_host(tst)) ,
-    _["hostname"] = charsub(ada_get_hostname(tst)) ,
-    _["port"] = charsub(ada_get_port(tst)) ,
-    _["pathname"]   = charsub(ada_get_pathname(tst)),
-    _["search"]     = charsub(ada_get_search(tst)),
-    _["hash"] = charsub(ada_get_hash(tst))
-  );
-  return L;
+  ada_url url = ada_parse(input, length);
+  if(ada_is_valid(url)){
+    List L = List::create(
+      Named("href")       = charsub(ada_get_href(url)),
+      _["protocol"]   = charsub(ada_get_protocol(url)),
+      _["username"]   = charsub(ada_get_username(url)),
+      _["password"]   = charsub(ada_get_password(url)),
+      _["host"] = charsub(ada_get_host(url)) ,
+      _["hostname"] = charsub(ada_get_hostname(url)) ,
+      _["port"] = charsub(ada_get_port(url)) ,
+      _["pathname"]   = charsub(ada_get_pathname(url)),
+      _["search"]     = charsub(ada_get_search(url)),
+      _["hash"] = charsub(ada_get_hash(url))
+    );
+    return L;
+  } else{
+    stop("input is not a valid url");
+  }
 }
