@@ -26,40 +26,15 @@ devtools::install_github("schochastics/adaR")
 
 ## Example
 
-This is a basic example which shows all the returned components.
+This is a basic example which shows all the returned components
 
 ``` r
 library(adaR)
 ada_url_parse("https://user_1:password_1@example.org:8080/dir/../api?q=1#frag")
-#> $href
-#> [1] "https://user_1:password_1@example.org:8080/api?q=1#frag"
-#> 
-#> $protocol
-#> [1] "https:"
-#> 
-#> $username
-#> [1] "user_1"
-#> 
-#> $password
-#> [1] "password_1"
-#> 
-#> $host
-#> [1] "example.org:8080"
-#> 
-#> $hostname
-#> [1] "example.org"
-#> 
-#> $port
-#> [1] "8080"
-#> 
-#> $pathname
-#> [1] "/api"
-#> 
-#> $search
-#> [1] "?q=1"
-#> 
-#> $hash
-#> [1] "#frag"
+#>                                                      href protocol username
+#> 1 https://user_1:password_1@example.org:8080/api?q=1#frag   https:   user_1
+#>     password             host    hostname port pathname search  hash
+#> 1 password_1 example.org:8080 example.org 8080     /api   ?q=1 #frag
 ```
 
 It solves some problems of urltools with more complex urls.
@@ -76,35 +51,14 @@ urltools::url_parse("https://www.google.com/maps/place/Pennsylvania+Station/@40.
 
 ada_url_parse("https://www.google.com/maps/place/Pennsylvania+Station/@40.7519848,-74.0015045,14.7z/data=!4m
    5!3m4!1s0x89c259ae15b2adcb:0x7955420634fd7eba!8m2!3d40.750568!4d-73.993519")
-#> $href
-#> [1] "https://www.google.com/maps/place/Pennsylvania+Station/@40.7519848,-74.0015045,14.7z/data=!4m%20%20%205!3m4!1s0x89c259ae15b2adcb:0x7955420634fd7eba!8m2!3d40.750568!4d-73.993519"
-#> 
-#> $protocol
-#> [1] "https:"
-#> 
-#> $username
-#> [1] ""
-#> 
-#> $password
-#> [1] ""
-#> 
-#> $host
-#> [1] "www.google.com"
-#> 
-#> $hostname
-#> [1] "www.google.com"
-#> 
-#> $port
-#> [1] ""
-#> 
-#> $pathname
-#> [1] "/maps/place/Pennsylvania+Station/@40.7519848,-74.0015045,14.7z/data=!4m%20%20%205!3m4!1s0x89c259ae15b2adcb:0x7955420634fd7eba!8m2!3d40.750568!4d-73.993519"
-#> 
-#> $search
-#> [1] ""
-#> 
-#> $hash
-#> [1] ""
+#>                                                                                                                                                                         href
+#> 1 https://www.google.com/maps/place/Pennsylvania+Station/@40.7519848,-74.0015045,14.7z/data=!4m   5!3m4!1s0x89c259ae15b2adcb:0x7955420634fd7eba!8m2!3d40.750568!4d-73.993519
+#>   protocol username password           host       hostname port
+#> 1   https:                   www.google.com www.google.com     
+#>                                                                                                                                               pathname
+#> 1 /maps/place/Pennsylvania+Station/@40.7519848,-74.0015045,14.7z/data=!4m   5!3m4!1s0x89c259ae15b2adcb:0x7955420634fd7eba!8m2!3d40.750568!4d-73.993519
+#>   search hash
+#> 1
 ```
 
 and it is fast!
@@ -120,6 +74,6 @@ bench::mark(
 #> # A tibble: 2 × 6
 #>   expression      min   median `itr/sec` mem_alloc `gc/sec`
 #>   <bch:expr> <bch:tm> <bch:tm>     <dbl> <bch:byt>    <dbl>
-#> 1 ada          10.7ms   10.7ms     93.6     2.67MB      0  
-#> 2 urltools    328.1ms  328.1ms      3.05    2.59MB     18.3
+#> 1 ada           375ms    375ms      2.67    2.67MB     40.0
+#> 2 urltools      151ms    151ms      6.61    2.59MB     39.6
 ```
