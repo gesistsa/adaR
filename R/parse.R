@@ -6,5 +6,6 @@
 #' @export
 ada_url_parse <- function(url) {
     url <- stringi::stri_enc_toutf8(url)
-    Rcpp_ada_parse(url, nchar(url))
+    url_parsed <- Rcpp_ada_parse(url, nchar(url, type = "bytes"))
+    lapply(url_parsed, URLdecode)
 }

@@ -7,10 +7,10 @@
 ada_url_parse(url)
 }
 \arguments{
-\item{url}{url}
+\item{url}{character. URL to be parsed}
 }
 \value{
-A list of components
+A list of components of the url
 }
 \description{
 Use ada-url to parse a url
