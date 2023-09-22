@@ -17,13 +17,13 @@ test_that("works with complex url", {
 })
 
 test_that("works with utf8", {
-  res <- ada_url_parse("https://www.hk01.com/zone/1/港聞")
-  expect_equal(res[["pathname"]], "/zone/1/港聞")
-  res <- ada_url_parse("http://www.müller.de")
+  res <- ada_url_parse("https://www.hk01.com/zone/1/\u6e2f\u805e")
+  expect_equal(res[["pathname"]], "/zone/1/\u6e2f\u805e")
+  res <- ada_url_parse("http://www.m\u00fcller.de")
   expect_equal(res[["host"]], "www.xn--mller-kva.de")
 })
 
 test_that("URLdecode optional #5",{
-  expect_equal(ada_url_parse("https://www.google.co.jp/search?q=ドイツ")$search, "?q=ドイツ") ## default TRUE
-  expect_equal(ada_url_parse("https://www.google.co.jp/search?q=ドイツ", decode = FALSE)$search, "?q=%E3%83%89%E3%82%A4%E3%83%84")
+  expect_equal(ada_url_parse("https://www.google.co.jp/search?q=\u30c9\u30a4\u30c4")$search, "?q=\u30c9\u30a4\u30c4") ## default TRUE
+  expect_equal(ada_url_parse("https://www.google.co.jp/search?q=\u30c9\u30a4\u30c4", decode = FALSE)$search, "?q=%E3%83%89%E3%82%A4%E3%83%84")
 })
