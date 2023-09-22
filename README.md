@@ -65,7 +65,7 @@ and it is fast!
 
 ``` r
 bench::mark(
-  ada = replicate(1000, ada_url_parse("https://user_1:password_1@example.org:8080/dir/../api?q=1#frag")),
+  ada = replicate(1000, ada_url_parse("https://user_1:password_1@example.org:8080/dir/../api?q=1#frag", decode = FALSE)),
   urltools = replicate(1000, urltools::url_parse("https://user_1:password_1@example.org:8080/dir/../api?q=1#frag")),
   iterations = 1, check = FALSE
 )
@@ -74,6 +74,6 @@ bench::mark(
 #> # A tibble: 2 × 6
 #>   expression      min   median `itr/sec` mem_alloc `gc/sec`
 #>   <bch:expr> <bch:tm> <bch:tm>     <dbl> <bch:byt>    <dbl>
-#> 1 ada           375ms    375ms      2.67    2.67MB     40.0
-#> 2 urltools      151ms    151ms      6.61    2.59MB     39.6
+#> 1 ada           344ms    344ms      2.90    2.67MB     32.0
+#> 2 urltools      165ms    165ms      6.06    2.59MB     36.4
 ```
