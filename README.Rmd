@@ -52,11 +52,11 @@ ada_url_parse("https://www.google.com/maps/place/Pennsylvania+Station/@40.751984
 ```
 <!-- 
 and it is fast
-```{r faster}
+-->
+```{r faster, echo=FALSE,eval=FALSE}
 bench::mark(
   ada = replicate(1000, ada_url_parse("https://user_1:password_1@example.org:8080/dir/../api?q=1#frag", decode = FALSE)),
   urltools = replicate(1000, urltools::url_parse("https://user_1:password_1@example.org:8080/dir/../api?q=1#frag")),
   iterations = 1, check = FALSE
 )
 ``` 
--->
