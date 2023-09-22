@@ -37,3 +37,43 @@ Rcpp_ada_has_search <- function(input, length) {
     .Call(`_adaR_Rcpp_ada_has_search`, input, length)
 }
 
+Rcpp_ada_get_href <- function(input_vec, length_vec) {
+    .Call(`_adaR_Rcpp_ada_get_href`, input_vec, length_vec)
+}
+
+Rcpp_ada_get_username <- function(input_vec, length_vec) {
+    .Call(`_adaR_Rcpp_ada_get_username`, input_vec, length_vec)
+}
+
+Rcpp_ada_get_password <- function(input_vec, length_vec) {
+    .Call(`_adaR_Rcpp_ada_get_password`, input_vec, length_vec)
+}
+
+Rcpp_ada_get_port <- function(input_vec, length_vec) {
+    .Call(`_adaR_Rcpp_ada_get_port`, input_vec, length_vec)
+}
+
+Rcpp_ada_get_hash <- function(input_vec, length_vec) {
+    .Call(`_adaR_Rcpp_ada_get_hash`, input_vec, length_vec)
+}
+
+Rcpp_ada_get_host <- function(input_vec, length_vec) {
+    .Call(`_adaR_Rcpp_ada_get_host`, input_vec, length_vec)
+}
+
+Rcpp_ada_get_hostname <- function(input_vec, length_vec) {
+    .Call(`_adaR_Rcpp_ada_get_hostname`, input_vec, length_vec)
+}
+
+Rcpp_ada_get_pathname <- function(input_vec, length_vec) {
+    .Call(`_adaR_Rcpp_ada_get_pathname`, input_vec, length_vec)
+}
+
+Rcpp_ada_get_search <- function(input_vec, length_vec) {
+    .Call(`_adaR_Rcpp_ada_get_search`, input_vec, length_vec)
+}
+
+Rcpp_ada_get_protocol <- function(input_vec, length_vec) {
+    .Call(`_adaR_Rcpp_ada_get_protocol`, input_vec, length_vec)
+}
+

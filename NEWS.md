@@ -5,3 +5,4 @@
 * fixed #5 h/t Chung-hong Chan (@chainsawriot)
 * add has checks #7 
 * vectorized functions #4
+* tests h/t Chung-hong Chan (@chainsawriot)
