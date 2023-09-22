@@ -15342,3 +15342,83 @@ Rcpp::List Rcpp_ada_parse(const char* input, size_t length) {
     stop("input is not a valid url");
   }
 }
+
+// [[Rcpp::export]]
+bool Rcpp_ada_has_credentials(const char* input, size_t length){
+  ada_url url = ada_parse(input, length);
+  if(ada_is_valid(url)){
+    return ada_has_credentials(url);
+  } else{
+    stop("input is not a valid url");
+  }
+}
+
+// [[Rcpp::export]]
+bool Rcpp_ada_has_empty_hostname(const char* input, size_t length){
+  ada_url url = ada_parse(input, length);
+  if(ada_is_valid(url)){
+    return ada_has_empty_hostname(url);
+  } else{
+    stop("input is not a valid url");
+  }
+}
+
+// [[Rcpp::export]]
+bool Rcpp_ada_has_hostname(const char* input, size_t length){
+  ada_url url = ada_parse(input, length);
+  if(ada_is_valid(url)){
+    return ada_has_hostname(url);
+  } else{
+    stop("input is not a valid url");
+  }
+}
+
+// [[Rcpp::export]]
+bool Rcpp_ada_has_non_empty_username(const char* input, size_t length){
+  ada_url url = ada_parse(input, length);
+  if(ada_is_valid(url)){
+    return ada_has_non_empty_username(url);
+  } else{
+    stop("input is not a valid url");
+  }
+}
+
+// [[Rcpp::export]]
+bool Rcpp_ada_has_non_empty_password(const char* input, size_t length){
+  ada_url url = ada_parse(input, length);
+  if(ada_is_valid(url)){
+    return ada_has_non_empty_password(url);
+  } else{
+    stop("input is not a valid url");
+  }
+}
+
+// [[Rcpp::export]]
+bool Rcpp_ada_has_port(const char* input, size_t length){
+  ada_url url = ada_parse(input, length);
+  if(ada_is_valid(url)){
+    return ada_has_port(url);
+  } else{
+    stop("input is not a valid url");
+  }
+}
+
+// [[Rcpp::export]]
+bool Rcpp_ada_has_hash(const char* input, size_t length){
+  ada_url url = ada_parse(input, length);
+  if(ada_is_valid(url)){
+    return ada_has_hash(url);
+  } else{
+    stop("input is not a valid url");
+  }
+}
+
+// [[Rcpp::export]]
+bool Rcpp_ada_has_search(const char* input, size_t length){
+  ada_url url = ada_parse(input, length);
+  if(ada_is_valid(url)){
+    return ada_has_search(url);
+  } else{
+    stop("input is not a valid url");
+  }
+}

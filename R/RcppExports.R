@@ -5,3 +5,35 @@ Rcpp_ada_parse <- function(input, length) {
     .Call(`_adaR_Rcpp_ada_parse`, input, length)
 }
 
+Rcpp_ada_has_credentials <- function(input, length) {
+    .Call(`_adaR_Rcpp_ada_has_credentials`, input, length)
+}
+
+Rcpp_ada_has_empty_hostname <- function(input, length) {
+    .Call(`_adaR_Rcpp_ada_has_empty_hostname`, input, length)
+}
+
+Rcpp_ada_has_hostname <- function(input, length) {
+    .Call(`_adaR_Rcpp_ada_has_hostname`, input, length)
+}
+
+Rcpp_ada_has_non_empty_username <- function(input, length) {
+    .Call(`_adaR_Rcpp_ada_has_non_empty_username`, input, length)
+}
+
+Rcpp_ada_has_non_empty_password <- function(input, length) {
+    .Call(`_adaR_Rcpp_ada_has_non_empty_password`, input, length)
+}
+
+Rcpp_ada_has_port <- function(input, length) {
+    .Call(`_adaR_Rcpp_ada_has_port`, input, length)
+}
+
+Rcpp_ada_has_hash <- function(input, length) {
+    .Call(`_adaR_Rcpp_ada_has_hash`, input, length)
+}
+
+Rcpp_ada_has_search <- function(input, length) {
+    .Call(`_adaR_Rcpp_ada_has_search`, input, length)
+}
+

@@ -22,9 +22,113 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// Rcpp_ada_has_credentials
+bool Rcpp_ada_has_credentials(const char* input, size_t length);
+RcppExport SEXP _adaR_Rcpp_ada_has_credentials(SEXP inputSEXP, SEXP lengthSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const char* >::type input(inputSEXP);
+    Rcpp::traits::input_parameter< size_t >::type length(lengthSEXP);
+    rcpp_result_gen = Rcpp::wrap(Rcpp_ada_has_credentials(input, length));
+    return rcpp_result_gen;
+END_RCPP
+}
+// Rcpp_ada_has_empty_hostname
+bool Rcpp_ada_has_empty_hostname(const char* input, size_t length);
+RcppExport SEXP _adaR_Rcpp_ada_has_empty_hostname(SEXP inputSEXP, SEXP lengthSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const char* >::type input(inputSEXP);
+    Rcpp::traits::input_parameter< size_t >::type length(lengthSEXP);
+    rcpp_result_gen = Rcpp::wrap(Rcpp_ada_has_empty_hostname(input, length));
+    return rcpp_result_gen;
+END_RCPP
+}
+// Rcpp_ada_has_hostname
+bool Rcpp_ada_has_hostname(const char* input, size_t length);
+RcppExport SEXP _adaR_Rcpp_ada_has_hostname(SEXP inputSEXP, SEXP lengthSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const char* >::type input(inputSEXP);
+    Rcpp::traits::input_parameter< size_t >::type length(lengthSEXP);
+    rcpp_result_gen = Rcpp::wrap(Rcpp_ada_has_hostname(input, length));
+    return rcpp_result_gen;
+END_RCPP
+}
+// Rcpp_ada_has_non_empty_username
+bool Rcpp_ada_has_non_empty_username(const char* input, size_t length);
+RcppExport SEXP _adaR_Rcpp_ada_has_non_empty_username(SEXP inputSEXP, SEXP lengthSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const char* >::type input(inputSEXP);
+    Rcpp::traits::input_parameter< size_t >::type length(lengthSEXP);
+    rcpp_result_gen = Rcpp::wrap(Rcpp_ada_has_non_empty_username(input, length));
+    return rcpp_result_gen;
+END_RCPP
+}
+// Rcpp_ada_has_non_empty_password
+bool Rcpp_ada_has_non_empty_password(const char* input, size_t length);
+RcppExport SEXP _adaR_Rcpp_ada_has_non_empty_password(SEXP inputSEXP, SEXP lengthSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const char* >::type input(inputSEXP);
+    Rcpp::traits::input_parameter< size_t >::type length(lengthSEXP);
+    rcpp_result_gen = Rcpp::wrap(Rcpp_ada_has_non_empty_password(input, length));
+    return rcpp_result_gen;
+END_RCPP
+}
+// Rcpp_ada_has_port
+bool Rcpp_ada_has_port(const char* input, size_t length);
+RcppExport SEXP _adaR_Rcpp_ada_has_port(SEXP inputSEXP, SEXP lengthSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const char* >::type input(inputSEXP);
+    Rcpp::traits::input_parameter< size_t >::type length(lengthSEXP);
+    rcpp_result_gen = Rcpp::wrap(Rcpp_ada_has_port(input, length));
+    return rcpp_result_gen;
+END_RCPP
+}
+// Rcpp_ada_has_hash
+bool Rcpp_ada_has_hash(const char* input, size_t length);
+RcppExport SEXP _adaR_Rcpp_ada_has_hash(SEXP inputSEXP, SEXP lengthSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const char* >::type input(inputSEXP);
+    Rcpp::traits::input_parameter< size_t >::type length(lengthSEXP);
+    rcpp_result_gen = Rcpp::wrap(Rcpp_ada_has_hash(input, length));
+    return rcpp_result_gen;
+END_RCPP
+}
+// Rcpp_ada_has_search
+bool Rcpp_ada_has_search(const char* input, size_t length);
+RcppExport SEXP _adaR_Rcpp_ada_has_search(SEXP inputSEXP, SEXP lengthSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const char* >::type input(inputSEXP);
+    Rcpp::traits::input_parameter< size_t >::type length(lengthSEXP);
+    rcpp_result_gen = Rcpp::wrap(Rcpp_ada_has_search(input, length));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_adaR_Rcpp_ada_parse", (DL_FUNC) &_adaR_Rcpp_ada_parse, 2},
+    {"_adaR_Rcpp_ada_has_credentials", (DL_FUNC) &_adaR_Rcpp_ada_has_credentials, 2},
+    {"_adaR_Rcpp_ada_has_empty_hostname", (DL_FUNC) &_adaR_Rcpp_ada_has_empty_hostname, 2},
+    {"_adaR_Rcpp_ada_has_hostname", (DL_FUNC) &_adaR_Rcpp_ada_has_hostname, 2},
+    {"_adaR_Rcpp_ada_has_non_empty_username", (DL_FUNC) &_adaR_Rcpp_ada_has_non_empty_username, 2},
+    {"_adaR_Rcpp_ada_has_non_empty_password", (DL_FUNC) &_adaR_Rcpp_ada_has_non_empty_password, 2},
+    {"_adaR_Rcpp_ada_has_port", (DL_FUNC) &_adaR_Rcpp_ada_has_port, 2},
+    {"_adaR_Rcpp_ada_has_hash", (DL_FUNC) &_adaR_Rcpp_ada_has_hash, 2},
+    {"_adaR_Rcpp_ada_has_search", (DL_FUNC) &_adaR_Rcpp_ada_has_search, 2},
     {NULL, NULL, 0}
 };
 
