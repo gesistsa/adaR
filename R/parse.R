@@ -10,6 +10,14 @@ ada_url_parse <- function(url, decode = TRUE) {
     len <- vapply(url, function(x) nchar(x, type = "bytes"), integer(1), USE.NAMES = FALSE)
     url_parsed <- Rcpp_ada_parse(url, len)
     if (isTRUE(decode)) {
+        return(.decoder(url_parsed))
     }
     return(url_parsed)
+}
+
+.decoder <- function(df) {
+    for (i in seq_len(ncol(df))) {
+        df[[i]] <- utils::URLdecode(df[[i]])
+    }
+    df
 }
