@@ -4,10 +4,12 @@
 \alias{ada_url_parse}
 \title{Use ada-url to parse a url}
 \usage{
-ada_url_parse(url)
+ada_url_parse(url, decode = TRUE)
 }
 \arguments{
 \item{url}{character. URL to be parsed}
+
+\item{decode}{logical. Whether to decode the output (see \code{\link[utils:URLencode]{utils::URLdecode()}}), default to \code{TRUE}}
 }
 \value{
 A list of components of the url
