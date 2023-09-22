@@ -1,10 +1,15 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+<!-- badges: start -->
+
+[![R-CMD-check](https://github.com/schochastics/adaR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/schochastics/adaR/actions/workflows/R-CMD-check.yaml)
+<!-- badges: end -->
 
 # adaR
 
 adaR is a wrapper for [ada-url](https://github.com/ada-url/ada), a
-WHATWG-compliant and fast URL parser written in modern C++ .
+[WHATWG](https://url.spec.whatwg.org/#url-parsing)-compliant and fast
+URL parser written in modern C++ .
 
 ## Installation
 
@@ -18,7 +23,7 @@ devtools::install_github("schochastics/adaR")
 
 ## Example
 
-This is a basic example whic hshows all the returned component.
+This is a basic example which shows all the returned components
 
 ``` r
 library(adaR)
@@ -54,7 +59,7 @@ ada_url_parse("https://user_1:password_1@example.org:8080/dir/../api?q=1#frag")
 #> [1] "#frag"
 ```
 
-It solves some problems of urltools with certain urls.
+It solves some problems of urltools with more complex urls.
 
 ``` r
 urltools::url_parse("https://www.google.com/maps/place/Pennsylvania+Station/@40.7519848,-74.0015045,14.
@@ -112,6 +117,6 @@ bench::mark(
 #> # A tibble: 2 × 6
 #>   expression      min   median `itr/sec` mem_alloc `gc/sec`
 #>   <bch:expr> <bch:tm> <bch:tm>     <dbl> <bch:byt>    <dbl>
-#> 1 ada          5.04ms   5.04ms    199.      2.67MB      0  
-#> 2 urltools   148.13ms 148.13ms      6.75    2.59MB     40.5
+#> 1 ada          4.24ms   4.24ms    236.      2.67MB      0  
+#> 2 urltools   152.15ms 152.15ms      6.57    2.59MB     39.4
 ```
