@@ -7,7 +7,7 @@
 ada_has_empty_hostname(url)
 }
 \arguments{
-\item{url}{character. URL to be parsed}
+\item{url}{character. one or more URL to be parsed}
 }
 \value{
 logical

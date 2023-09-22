@@ -7,7 +7,7 @@
 ada_has_non_empty_password(url)
 }
 \arguments{
-\item{url}{character. URL to be parsed}
+\item{url}{character. one or more URL to be parsed}
 }
 \value{
 logical
