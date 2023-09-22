@@ -7,11 +7,9 @@
 #' @export
 ada_url_parse <- function(url, decode = TRUE) {
     url <- utf8::as_utf8(url)
-    # url_parsed <- Rcpp_ada_parse(url, nchar(url, type = "bytes"))
-    url_parsed <- as.data.frame(do.call("rbind", lapply(url, function(x) Rcpp_ada_parse(x, nchar(x, type = "bytes")))))
+    len <- vapply(url, function(x) nchar(x, type = "bytes"), integer(1), USE.NAMES = FALSE)
+    url_parsed <- Rcpp_ada_parse(url, len)
     if (isTRUE(decode)) {
-        url_parsed <- apply(url_parsed, 2, function(x) utils::URLdecode(x))
-        return(url_parsed)
     }
     return(url_parsed)
 }

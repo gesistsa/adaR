@@ -11,14 +11,14 @@ Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
 // Rcpp_ada_parse
-Rcpp::List Rcpp_ada_parse(const char* input, size_t length);
-RcppExport SEXP _adaR_Rcpp_ada_parse(SEXP inputSEXP, SEXP lengthSEXP) {
+Rcpp::List Rcpp_ada_parse(CharacterVector input_vec, IntegerVector length_vec);
+RcppExport SEXP _adaR_Rcpp_ada_parse(SEXP input_vecSEXP, SEXP length_vecSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< const char* >::type input(inputSEXP);
-    Rcpp::traits::input_parameter< size_t >::type length(lengthSEXP);
-    rcpp_result_gen = Rcpp::wrap(Rcpp_ada_parse(input, length));
+    Rcpp::traits::input_parameter< CharacterVector >::type input_vec(input_vecSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type length_vec(length_vecSEXP);
+    rcpp_result_gen = Rcpp::wrap(Rcpp_ada_parse(input_vec, length_vec));
     return rcpp_result_gen;
 END_RCPP
 }
