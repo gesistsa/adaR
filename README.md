@@ -1,11 +1,12 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+
+# adaR
+
 <!-- badges: start -->
 
 [![R-CMD-check](https://github.com/schochastics/adaR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/schochastics/adaR/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
-
-# adaR
 
 adaR is a wrapper for [ada-url](https://github.com/ada-url/ada), a
 [WHATWG](https://url.spec.whatwg.org/#url-parsing)-compliant and fast
@@ -117,6 +118,6 @@ bench::mark(
 #> # A tibble: 2 × 6
 #>   expression      min   median `itr/sec` mem_alloc `gc/sec`
 #>   <bch:expr> <bch:tm> <bch:tm>     <dbl> <bch:byt>    <dbl>
-#> 1 ada          4.24ms   4.24ms    236.      2.67MB      0  
-#> 2 urltools   152.15ms 152.15ms      6.57    2.59MB     39.4
+#> 1 ada          4.06ms   4.06ms    247.      2.67MB      0  
+#> 2 urltools   138.83ms 138.83ms      7.20    2.59MB     43.2
 ```
