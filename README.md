@@ -31,10 +31,26 @@ This is a basic example which shows all the returned components
 ``` r
 library(adaR)
 ada_url_parse("https://user_1:password_1@example.org:8080/dir/../api?q=1#frag")
-#>                                                      href protocol username
-#> 1 https://user_1:password_1@example.org:8080/api?q=1#frag   https:   user_1
-#>     password             host    hostname port pathname search  hash
-#> 1 password_1 example.org:8080 example.org 8080     /api   ?q=1 #frag
+#>                                                      href 
+#> "https://user_1:password_1@example.org:8080/api?q=1#frag" 
+#>                                                  protocol 
+#>                                                  "https:" 
+#>                                                  username 
+#>                                                  "user_1" 
+#>                                                  password 
+#>                                              "password_1" 
+#>                                                      host 
+#>                                        "example.org:8080" 
+#>                                                  hostname 
+#>                                             "example.org" 
+#>                                                      port 
+#>                                                    "8080" 
+#>                                                  pathname 
+#>                                                    "/api" 
+#>                                                    search 
+#>                                                    "?q=1" 
+#>                                                      hash 
+#>                                                   "#frag"
 ```
 
 It solves some problems of urltools with more complex urls.
@@ -51,17 +67,29 @@ urltools::url_parse("https://www.google.com/maps/place/Pennsylvania+Station/@40.
 
 ada_url_parse("https://www.google.com/maps/place/Pennsylvania+Station/@40.7519848,-74.0015045,14.7z/data=!4m
    5!3m4!1s0x89c259ae15b2adcb:0x7955420634fd7eba!8m2!3d40.750568!4d-73.993519")
-#>                                                                                                                                                                         href
-#> 1 https://www.google.com/maps/place/Pennsylvania+Station/@40.7519848,-74.0015045,14.7z/data=!4m   5!3m4!1s0x89c259ae15b2adcb:0x7955420634fd7eba!8m2!3d40.750568!4d-73.993519
-#>   protocol username password           host       hostname port
-#> 1   https:                   www.google.com www.google.com     
-#>                                                                                                                                               pathname
-#> 1 /maps/place/Pennsylvania+Station/@40.7519848,-74.0015045,14.7z/data=!4m   5!3m4!1s0x89c259ae15b2adcb:0x7955420634fd7eba!8m2!3d40.750568!4d-73.993519
-#>   search hash
-#> 1
+#>                                                                                                                                                                         href 
+#> "https://www.google.com/maps/place/Pennsylvania+Station/@40.7519848,-74.0015045,14.7z/data=!4m   5!3m4!1s0x89c259ae15b2adcb:0x7955420634fd7eba!8m2!3d40.750568!4d-73.993519" 
+#>                                                                                                                                                                     protocol 
+#>                                                                                                                                                                     "https:" 
+#>                                                                                                                                                                     username 
+#>                                                                                                                                                                           "" 
+#>                                                                                                                                                                     password 
+#>                                                                                                                                                                           "" 
+#>                                                                                                                                                                         host 
+#>                                                                                                                                                             "www.google.com" 
+#>                                                                                                                                                                     hostname 
+#>                                                                                                                                                             "www.google.com" 
+#>                                                                                                                                                                         port 
+#>                                                                                                                                                                           "" 
+#>                                                                                                                                                                     pathname 
+#>                       "/maps/place/Pennsylvania+Station/@40.7519848,-74.0015045,14.7z/data=!4m   5!3m4!1s0x89c259ae15b2adcb:0x7955420634fd7eba!8m2!3d40.750568!4d-73.993519" 
+#>                                                                                                                                                                       search 
+#>                                                                                                                                                                           "" 
+#>                                                                                                                                                                         hash 
+#>                                                                                                                                                                           ""
 ```
 
-and it is fast!
+and it is fast
 
 ``` r
 bench::mark(
@@ -74,6 +102,6 @@ bench::mark(
 #> # A tibble: 2 × 6
 #>   expression      min   median `itr/sec` mem_alloc `gc/sec`
 #>   <bch:expr> <bch:tm> <bch:tm>     <dbl> <bch:byt>    <dbl>
-#> 1 ada           344ms    344ms      2.90    2.67MB     32.0
-#> 2 urltools      165ms    165ms      6.06    2.59MB     36.4
+#> 1 ada          23.2ms   23.2ms     43.2     2.67MB     43.2
+#> 2 urltools    177.5ms  177.5ms      5.64    2.59MB     33.8
 ```
