@@ -1,5 +1,5 @@
 #' Use ada-url to parse a url
-#' @param url character. URL to be parsed
+#' @param url character. one or more URL to be parsed
 #' @param decode logical. Whether to decode the output (see [utils::URLdecode()]), default to `TRUE`
 #' @return A list of components of the url
 #' @examples
@@ -7,9 +7,11 @@
 #' @export
 ada_url_parse <- function(url, decode = TRUE) {
     url <- stringi::stri_enc_toutf8(url)
-    url_parsed <- Rcpp_ada_parse(url, nchar(url, type = "bytes"))
+    # url_parsed <- Rcpp_ada_parse(url, nchar(url, type = "bytes"))
+    url_parsed <- lapply(url, function(x) Rcpp_ada_parse(x, nchar(x, type = "bytes")))
     if (isTRUE(decode)) {
-      return(lapply(url_parsed, utils::URLdecode))
+        url_parsed <- lapply(url_parsed, function(x) lapply(x, utils::URLdecode))
+        return(do.call("rbind", lapply(url_parsed, data.frame)))
     }
-    return(url_parsed)
+    return(do.call("rbind", lapply(url_parsed, data.frame)))
 }

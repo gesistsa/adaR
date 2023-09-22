@@ -23,7 +23,12 @@ test_that("works with utf8", {
   expect_equal(res[["host"]], "www.xn--mller-kva.de")
 })
 
-test_that("URLdecode optional #5",{
+test_that("URLdecode optional #5", {
   expect_equal(ada_url_parse("https://www.google.co.jp/search?q=\u30c9\u30a4\u30c4")$search, "?q=\u30c9\u30a4\u30c4") ## default TRUE
   expect_equal(ada_url_parse("https://www.google.co.jp/search?q=\u30c9\u30a4\u30c4", decode = FALSE)$search, "?q=%E3%83%89%E3%82%A4%E3%83%84")
+})
+
+test_that("multiple urls", {
+  urls <- rep("https://user_1:password_1@example.org:8080/dir/../api?q=1#frag", 5)
+  expect_equal(nrow(ada_url_parse(urls)), 5L)
 })
