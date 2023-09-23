@@ -1,5 +1,8 @@
 # adaR 0.1.0.9000
 
+* split C++ files h/t Chung-hong Chan (@chainsawriot)
+* add support for public suffix extraction 
+
 # adaR 0.1.0
 
 * added `ada_url_parser`
