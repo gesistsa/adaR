@@ -17,5 +17,9 @@ public_suffix <- function(url) {
 .ftld_lookup <- function(x) {
     res <- fastmatch::fmatch(x, psl)
     res <- res[!is.na(res)]
-    psl[res[length(res)]]
+    if (length(res) != 0) {
+        return(psl[res[length(res)]])
+    } else {
+        return(NA_character_)
+    }
 }
