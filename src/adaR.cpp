@@ -1,4 +1,4 @@
-#include "adaR.hpp"
+#include "adaR.h"
 
 std::string charsub(ada_string stringi){
   const char* res = stringi.data;
