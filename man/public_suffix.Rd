@@ -4,10 +4,10 @@
 \alias{public_suffix}
 \title{Extract the public suffix from a vector of domains}
 \usage{
-public_suffix(domains)
+public_suffix(url)
 }
 \arguments{
-\item{domains}{character. vector of domains}
+\item{url}{character. one or more URL to be parsed}
 }
 \description{
 Extract the public suffix from a vector of domains
