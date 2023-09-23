@@ -3,7 +3,7 @@
 #' @inheritParams ada_url_parse
 #' @export
 public_suffix <- function(url) {
-    domains <- ada_get_host(url)
+    domains <- ada_get_hostname(url)
     dom_split <- strsplit(domains, ".", fixed = TRUE)
     tld_cand <- lapply(dom_split, .tld_build)
     vapply(tld_cand, .ftld_lookup, character(1))
