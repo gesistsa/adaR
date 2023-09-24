@@ -12,6 +12,12 @@ adaR is a wrapper for [ada-url](https://github.com/ada-url/ada), a
 [WHATWG](https://url.spec.whatwg.org/#url-parsing)-compliant and fast
 URL parser written in modern C++ .
 
+It implements several auxilliary functions to work with urls:
+
+-   public suffix extraction (top level domain excluding private
+    domains) like [psl](https://github.com/hrbrmstr/psl)
+-   fast c++ implementation of `utils::URLdecode` (\~40x speedup)
+
 ## Installation
 
 You can install the development version of adaR from
@@ -24,7 +30,7 @@ devtools::install_github("schochastics/adaR")
 
 ## Example
 
-This is a basic example which shows all the returned components
+This is a basic example which shows all the returned components of a URL
 
 ``` r
 library(adaR)
@@ -33,6 +39,21 @@ ada_url_parse("https://user_1:password_1@example.org:8080/dir/../api?q=1#frag")
 #> 1 https://user_1:password_1@example.org:8080/api?q=1#frag   https:   user_1
 #>     password             host    hostname port pathname search  hash
 #> 1 password_1 example.org:8080 example.org 8080     /api   ?q=1 #frag
+```
+
+``` cpp
+  /*
+   * https://user:pass@example.com:1234/foo/bar?baz#quux
+   *       |     |    |          | ^^^^|       |   |
+   *       |     |    |          | |   |       |   `----- hash_start
+   *       |     |    |          | |   |       `--------- search_start
+   *       |     |    |          | |   `----------------- pathname_start
+   *       |     |    |          | `--------------------- port
+   *       |     |    |          `----------------------- host_end
+   *       |     |    `---------------------------------- host_start
+   *       |     `--------------------------------------- username_end
+   *       `--------------------------------------------- protocol_end
+   */
 ```
 
 It solves some problems of urltools with more complex urls.
@@ -59,6 +80,45 @@ ada_url_parse("https://www.google.com/maps/place/Pennsylvania+Station/@40.751984
 #> 1
 ```
 
-<!-- 
-and it is fast
--->
+A “raw” url parse using ada is extremely fast (see
+[ada-url.com](https://www.ada-url.com/)) but the implemented interface
+is not yet optimized. The performance is still very compatible with
+`urltools::url_parse` with the noted advantage in accuracy in some
+practical circumstances.
+
+``` r
+bench::mark(
+  ada = replicate(1000, ada_url_parse("https://user_1:password_1@example.org:8080/dir/../api?q=1#frag", decode = FALSE)),
+  urltools = replicate(1000, urltools::url_parse("https://user_1:password_1@example.org:8080/dir/../api?q=1#frag")),
+  iterations = 1, check = FALSE
+)
+#> Warning: Some expressions had a GC in every iteration; so filtering is
+#> disabled.
+#> # A tibble: 2 × 6
+#>   expression      min   median `itr/sec` mem_alloc `gc/sec`
+#>   <bch:expr> <bch:tm> <bch:tm>     <dbl> <bch:byt>    <dbl>
+#> 1 ada           696ms    696ms      1.44    2.67MB     12.9
+#> 2 urltools      411ms    411ms      2.43    2.59MB     14.6
+```
+
+## Public Suffix extraction
+
+`public_suffix()` takes urls and returns their top level domain from the
+[public suffix list](https://publicsuffix.org/), **excluding** private
+domains. This functionality already exists in the R package
+[psl](https://github.com/hrbrmstr/psl) and
+[urltools](https://cran.r-project.org/package=urltools).
+
+psl relies on a C library an is lighning fast. Hoewver, the package is
+not on CRAN and has the C lib as a system requirement. If these are no
+issues for you and you need that speed, please use that package.
+
+the performance of urltools for that task is quite comparable to psl,
+but it does rely on a different set of top level domains (to the best of
+our knowledge, it does include private domains).
+
+Overall, both packages over higher performance for this task. This comes
+with no surprise, since our extractor is written in base R. Public
+suffix extraction is not the main objective of this package, yet we
+wanted to include a function for this task without introducing new
+dependencies.
