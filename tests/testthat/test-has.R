@@ -9,3 +9,7 @@ test_that("all has functions work", {
   expect_true(ada_has_port(url))
   expect_true(ada_has_search(url))
 })
+
+test_that("ada_has_credentials is vectorized ref #3", {
+  expect_error(res <- ada_has_credentials(c("https://admin:admin@the-internet.herokuapp.com/basic_auth", "https://www.google.com")), NA)  
+})
