@@ -7,7 +7,7 @@ Authors@R:
       person("Chung-hong", "Chan", role = c("ctb"), email = "chainsawtiney@gmail.com",
 	   comment = c(ORCID = "0000-0002-6232-7530"))
      )
-Description: A wrapper for ada-url, a WHATWG-compliant and fast URL parser written in modern C++.
+Description: A wrapper for ada-url, a WHATWG-compliant and fast URL parser written in modern C++. Also contains auxiliary functions to extract public suffix.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
@@ -15,9 +15,12 @@ RoxygenNote: 7.2.3
 LinkingTo: 
     Rcpp
 Imports: 
+    fastmatch,
     Rcpp,
     utf8,
     utils
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
+Depends: 
+    R (>= 2.10)
