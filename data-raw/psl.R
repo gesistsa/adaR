@@ -1,4 +1,5 @@
 psl <- readLines("https://raw.githubusercontent.com/publicsuffix/list/master/public_suffix_list.dat")
+psl <- psl[1:which(psl == "// ===BEGIN PRIVATE DOMAINS===")]
 psl <- psl[!grepl("^//", psl) & psl != ""]
 wildcard <- psl[grepl("^\\*", psl)]
 fixed <- psl[!grepl("^\\*", psl)]
