@@ -22,10 +22,13 @@ ada_url_parse <- function(url, decode = TRUE) {
     df
 }
 
-## NA-aware utils::URLdecode, hopefully without great performance impact
+## NA/NULL-aware utils::URLdecode, hopefully without great performance impact
 .URLdecode <- function(URL) {
+    if (is.null(URL)) {
+        return(character(0))
+    }
     non_na_index <- which(!is.na(URL))
-    URL[non_na_index] <- utils::URLdecode(URL[non_na_index])
+    URL[non_na_index] <- url_decode(URL[non_na_index])
     URL[!non_na_index] <- NA_character_
     return(URL)
 }
