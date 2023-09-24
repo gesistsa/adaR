@@ -6,7 +6,7 @@
 #' @export
 ada_has_credentials <- function(url) {
     url <- utf8::as_utf8(url)
-    vapply(url, function(x) Rcpp_ada_has_credentials(x, nchar(x, type = "bytes")), logical(1))
+    vapply(url, function(x) Rcpp_ada_has_credentials(x), logical(1))
 }
 
 #' Check if URL has an empty hostname
@@ -17,7 +17,7 @@ ada_has_credentials <- function(url) {
 #' @export
 ada_has_empty_hostname <- function(url) {
     url <- utf8::as_utf8(url)
-    vapply(url, function(x) Rcpp_ada_has_empty_hostname(x, nchar(x, type = "bytes")), logical(1))
+    vapply(url, function(x) Rcpp_ada_has_empty_hostname(x), logical(1))
 }
 
 #' Check if URL has a hostname
@@ -28,7 +28,7 @@ ada_has_empty_hostname <- function(url) {
 #' @export
 ada_has_hostname <- function(url) {
     url <- utf8::as_utf8(url)
-    vapply(url, function(x) Rcpp_ada_has_hostname(x, nchar(x, type = "bytes")), logical(1))
+    vapply(url, function(x) Rcpp_ada_has_hostname(x), logical(1))
 }
 
 #' Check if URL has a non empty username
@@ -39,7 +39,7 @@ ada_has_hostname <- function(url) {
 #' @export
 ada_has_non_empty_username <- function(url) {
     url <- utf8::as_utf8(url)
-    vapply(url, function(x) Rcpp_ada_has_non_empty_username(x, nchar(x, type = "bytes")), logical(1))
+    vapply(url, function(x) Rcpp_ada_has_non_empty_username(x), logical(1))
 }
 
 #' Check if URL has a non empty password
@@ -50,7 +50,7 @@ ada_has_non_empty_username <- function(url) {
 #' @export
 ada_has_non_empty_password <- function(url) {
     url <- utf8::as_utf8(url)
-    vapply(url, function(x) Rcpp_ada_has_non_empty_password(x, nchar(x, type = "bytes")), logical(1))
+    vapply(url, function(x) Rcpp_ada_has_non_empty_password(x), logical(1))
 }
 
 #' Check if URL has a port
@@ -61,7 +61,7 @@ ada_has_non_empty_password <- function(url) {
 #' @export
 ada_has_port <- function(url) {
     url <- utf8::as_utf8(url)
-    vapply(url, function(x) Rcpp_ada_has_port(x, nchar(x, type = "bytes")), logical(1))
+    vapply(url, function(x) Rcpp_ada_has_port(x), logical(1))
 }
 
 #' Check if URL has a hash
@@ -72,7 +72,7 @@ ada_has_port <- function(url) {
 #' @export
 ada_has_hash <- function(url) {
     url <- utf8::as_utf8(url)
-    vapply(url, function(x) Rcpp_ada_has_hash(x, nchar(x, type = "bytes")), logical(1))
+    vapply(url, function(x) Rcpp_ada_has_hash(x), logical(1))
 }
 
 #' Check if URL has a search
@@ -83,5 +83,5 @@ ada_has_hash <- function(url) {
 #' @export
 ada_has_search <- function(url) {
     url <- utf8::as_utf8(url)
-    vapply(url, function(x) Rcpp_ada_has_search(x, nchar(x, type = "bytes")), logical(1))
+    vapply(url, function(x) Rcpp_ada_has_search(x), logical(1))
 }
