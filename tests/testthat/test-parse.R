@@ -32,3 +32,12 @@ test_that("multiple urls", {
   urls <- rep("https://user_1:password_1@example.org:8080/dir/../api?q=1#frag", 5)
   expect_equal(nrow(ada_url_parse(urls)), 5L)
 })
+
+test_that("corner cases", {
+  require(adaR)
+  corners <- c(NA, NULL, "", "a", 1)
+  testthat::expect_error(x <- ada_url_parse(corners), NA)
+  testthat::expect_error(y <- ada_url_parse(corners, decode = FALSE), NA)
+  x$host
+  y$host
+})
