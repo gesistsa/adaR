@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# adaR
+# adaR <img src="man/figures/logo.png" align="right" height="139" alt="" />
 
 <!-- badges: start -->
 
@@ -97,8 +97,8 @@ bench::mark(
 #> # A tibble: 2 × 6
 #>   expression      min   median `itr/sec` mem_alloc `gc/sec`
 #>   <bch:expr> <bch:tm> <bch:tm>     <dbl> <bch:byt>    <dbl>
-#> 1 ada           696ms    696ms      1.44    2.67MB     12.9
-#> 2 urltools      411ms    411ms      2.43    2.59MB     14.6
+#> 1 ada           607ms    607ms      1.65    2.67MB     14.8
+#> 2 urltools      400ms    400ms      2.50    2.59MB     15.0
 ```
 
 ## Public Suffix extraction
