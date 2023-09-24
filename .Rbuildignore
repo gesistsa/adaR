@@ -3,5 +3,6 @@
 ^LICENSE\.md$
 ^README\.Rmd$
 ^\.github$
+^data-raw$
 ^codecov.yml$
 ^.covrignore$

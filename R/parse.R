@@ -17,7 +17,15 @@ ada_url_parse <- function(url, decode = TRUE) {
 
 .decoder <- function(df) {
     for (i in seq_len(ncol(df))) {
-        df[[i]] <- utils::URLdecode(df[[i]])
+        df[[i]] <- .URLdecode(df[[i]])
     }
     df
+}
+
+## NA-aware utils::URLdecode, hopefully without great performance impact
+.URLdecode <- function(URL) {
+    non_na_index <- which(!is.na(URL))
+    URL[non_na_index] <- utils::URLdecode(URL[non_na_index])
+    URL[!non_na_index] <- NA_character_
+    return(URL)
 }
