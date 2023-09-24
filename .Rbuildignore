@@ -6,3 +6,4 @@
 ^data-raw$
 ^codecov.yml$
 ^.covrignore$
+^.editorconfig$
