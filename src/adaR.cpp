@@ -58,84 +58,53 @@ DataFrame Rcpp_ada_parse(CharacterVector input_vec, IntegerVector length_vec) {
                             _["search"] = search, _["hash"] = hash));
 }
 
-// [[Rcpp::export]]
-bool Rcpp_ada_has_credentials(const char* input, size_t length) {
+//higher-order function for all Rcpp_ada_has_*
+bool Rcpp_ada_has(const char* input, size_t length, std::function<bool(ada_url)> func) {
   ada_url url = ada_parse(input, length);
-  if (ada_is_valid(url)) {
-    return ada_has_credentials(url);
-  } else {
+  if (!ada_is_valid(url)) {
     stop("input is not a valid url");
   }
+  return func(url);
+}
+
+// [[Rcpp::export]]
+bool Rcpp_ada_has_credentials(const char* input, size_t length) {
+  return Rcpp_ada_has(input, length, &ada_has_credentials);
 }
 
 // [[Rcpp::export]]
 bool Rcpp_ada_has_empty_hostname(const char* input, size_t length) {
-  ada_url url = ada_parse(input, length);
-  if (ada_is_valid(url)) {
-    return ada_has_empty_hostname(url);
-  } else {
-    stop("input is not a valid url");
-  }
+  return Rcpp_ada_has(input, length, &ada_has_empty_hostname);
 }
 
 // [[Rcpp::export]]
 bool Rcpp_ada_has_hostname(const char* input, size_t length) {
-  ada_url url = ada_parse(input, length);
-  if (ada_is_valid(url)) {
-    return ada_has_hostname(url);
-  } else {
-    stop("input is not a valid url");
-  }
+  return Rcpp_ada_has(input, length, &ada_has_hostname);
 }
 
 // [[Rcpp::export]]
 bool Rcpp_ada_has_non_empty_username(const char* input, size_t length) {
-  ada_url url = ada_parse(input, length);
-  if (ada_is_valid(url)) {
-    return ada_has_non_empty_username(url);
-  } else {
-    stop("input is not a valid url");
-  }
+  return Rcpp_ada_has(input, length, &ada_has_non_empty_username);
 }
 
 // [[Rcpp::export]]
 bool Rcpp_ada_has_non_empty_password(const char* input, size_t length) {
-  ada_url url = ada_parse(input, length);
-  if (ada_is_valid(url)) {
-    return ada_has_non_empty_password(url);
-  } else {
-    stop("input is not a valid url");
-  }
+  return Rcpp_ada_has(input, length, &ada_has_non_empty_password);
 }
 
 // [[Rcpp::export]]
 bool Rcpp_ada_has_port(const char* input, size_t length) {
-  ada_url url = ada_parse(input, length);
-  if (ada_is_valid(url)) {
-    return ada_has_port(url);
-  } else {
-    stop("input is not a valid url");
-  }
+    return Rcpp_ada_has(input, length, &ada_has_port);
 }
 
 // [[Rcpp::export]]
 bool Rcpp_ada_has_hash(const char* input, size_t length) {
-  ada_url url = ada_parse(input, length);
-  if (ada_is_valid(url)) {
-    return ada_has_hash(url);
-  } else {
-    stop("input is not a valid url");
-  }
+    return Rcpp_ada_has(input, length, &ada_has_hash);
 }
 
 // [[Rcpp::export]]
 bool Rcpp_ada_has_search(const char* input, size_t length) {
-  ada_url url = ada_parse(input, length);
-  if (ada_is_valid(url)) {
-    return ada_has_search(url);
-  } else {
-    stop("input is not a valid url");
-  }
+    return Rcpp_ada_has(input, length, &ada_has_search);
 }
 
 // [[Rcpp::export]]
