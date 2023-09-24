@@ -97,8 +97,8 @@ bench::mark(
 #> # A tibble: 2 × 6
 #>   expression      min   median `itr/sec` mem_alloc `gc/sec`
 #>   <bch:expr> <bch:tm> <bch:tm>     <dbl> <bch:byt>    <dbl>
-#> 1 ada           607ms    607ms      1.65    2.67MB     14.8
-#> 2 urltools      400ms    400ms      2.50    2.59MB     15.0
+#> 1 ada           594ms    594ms      1.68    2.67MB     15.1
+#> 2 urltools      393ms    393ms      2.55    2.59MB     15.3
 ```
 
 ## Public Suffix extraction
@@ -122,3 +122,10 @@ with no surprise, since our extractor is written in base R. Public
 suffix extraction is not the main objective of this package, yet we
 wanted to include a function for this task without introducing new
 dependencies.
+
+## Acknowledgement
+
+The logo is created from [this
+portrait](https://commons.wikimedia.org/wiki/File:Ada_Lovelace_portrait.jpg)
+of [Ada Lovelace](https://de.wikipedia.org/wiki/Ada_Lovelace), a very
+early pioneer in Computer Science.

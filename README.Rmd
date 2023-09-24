@@ -96,3 +96,6 @@ Overall, both packages over higher performance for this task. This comes with no
 our extractor is written in base R. Public suffix extraction is not the main objective of this package, yet
 we wanted to include a function for this task without introducing new dependencies.
 
+## Acknowledgement
+
+The logo is created from [this portrait](https://commons.wikimedia.org/wiki/File:Ada_Lovelace_portrait.jpg) of [Ada Lovelace](https://de.wikipedia.org/wiki/Ada_Lovelace), a very early pioneer in Computer Science.
