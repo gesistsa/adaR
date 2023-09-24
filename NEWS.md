@@ -1,7 +1,8 @@
 # adaR 0.1.0.9000
 
 * split C++ files h/t Chung-hong Chan (@chainsawriot)
-* add support for public suffix extraction 
+* add support for public suffix extraction #14
+* add support for punnycode #18
 
 # adaR 0.1.0
 
