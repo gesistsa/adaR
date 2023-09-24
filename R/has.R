@@ -6,7 +6,7 @@
 #' @export
 ada_has_credentials <- function(url) {
     url <- utf8::as_utf8(url)
-    vapply(url, function(x) vapply(url, function(x) Rcpp_ada_has_credentials(x, nchar(x, type = "bytes")), logical(1)), logical(1))
+    vapply(url, function(x) Rcpp_ada_has_credentials(x, nchar(x, type = "bytes")), logical(1))
 }
 
 #' Check if URL has an empty hostname
