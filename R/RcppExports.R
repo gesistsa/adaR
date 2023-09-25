@@ -37,44 +37,44 @@ Rcpp_ada_has_search <- function(url_vec) {
     .Call(`_adaR_Rcpp_ada_has_search`, url_vec)
 }
 
-Rcpp_ada_get_href <- function(input_vec, length_vec) {
-    .Call(`_adaR_Rcpp_ada_get_href`, input_vec, length_vec)
+Rcpp_ada_get_href <- function(url_vec) {
+    .Call(`_adaR_Rcpp_ada_get_href`, url_vec)
 }
 
-Rcpp_ada_get_username <- function(input_vec, length_vec) {
-    .Call(`_adaR_Rcpp_ada_get_username`, input_vec, length_vec)
+Rcpp_ada_get_username <- function(url_vec) {
+    .Call(`_adaR_Rcpp_ada_get_username`, url_vec)
 }
 
-Rcpp_ada_get_password <- function(input_vec, length_vec) {
-    .Call(`_adaR_Rcpp_ada_get_password`, input_vec, length_vec)
+Rcpp_ada_get_password <- function(url_vec) {
+    .Call(`_adaR_Rcpp_ada_get_password`, url_vec)
 }
 
-Rcpp_ada_get_port <- function(input_vec, length_vec) {
-    .Call(`_adaR_Rcpp_ada_get_port`, input_vec, length_vec)
+Rcpp_ada_get_port <- function(url_vec) {
+    .Call(`_adaR_Rcpp_ada_get_port`, url_vec)
 }
 
-Rcpp_ada_get_hash <- function(input_vec, length_vec) {
-    .Call(`_adaR_Rcpp_ada_get_hash`, input_vec, length_vec)
+Rcpp_ada_get_hash <- function(url_vec) {
+    .Call(`_adaR_Rcpp_ada_get_hash`, url_vec)
 }
 
-Rcpp_ada_get_host <- function(input_vec, length_vec) {
-    .Call(`_adaR_Rcpp_ada_get_host`, input_vec, length_vec)
+Rcpp_ada_get_host <- function(url_vec) {
+    .Call(`_adaR_Rcpp_ada_get_host`, url_vec)
 }
 
-Rcpp_ada_get_hostname <- function(input_vec, length_vec) {
-    .Call(`_adaR_Rcpp_ada_get_hostname`, input_vec, length_vec)
+Rcpp_ada_get_hostname <- function(url_vec) {
+    .Call(`_adaR_Rcpp_ada_get_hostname`, url_vec)
 }
 
-Rcpp_ada_get_pathname <- function(input_vec, length_vec) {
-    .Call(`_adaR_Rcpp_ada_get_pathname`, input_vec, length_vec)
+Rcpp_ada_get_pathname <- function(url_vec) {
+    .Call(`_adaR_Rcpp_ada_get_pathname`, url_vec)
 }
 
-Rcpp_ada_get_search <- function(input_vec, length_vec) {
-    .Call(`_adaR_Rcpp_ada_get_search`, input_vec, length_vec)
+Rcpp_ada_get_search <- function(url_vec) {
+    .Call(`_adaR_Rcpp_ada_get_search`, url_vec)
 }
 
-Rcpp_ada_get_protocol <- function(input_vec, length_vec) {
-    .Call(`_adaR_Rcpp_ada_get_protocol`, input_vec, length_vec)
+Rcpp_ada_get_protocol <- function(url_vec) {
+    .Call(`_adaR_Rcpp_ada_get_protocol`, url_vec)
 }
 
 #' Function to percent-decode characters in URLs
