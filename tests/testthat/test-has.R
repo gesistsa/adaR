@@ -10,23 +10,24 @@ test_that("all has functions work", {
   expect_true(ada_has_search(url))
 })
 
-test_that("invalid urls", {
+has_functions <- c(ada_has_credentials, ada_has_empty_hostname, ada_has_non_empty_password, ada_has_non_empty_username, ada_has_port, ada_has_hash, ada_has_search)
+
+test_that("invalid urls should return NA, #26", {
   url <- "thisisnoturl"
-  for (func in c(ada_has_credentials, ada_has_empty_hostname, ada_has_non_empty_password, ada_has_non_empty_username, ada_has_port, ada_has_hash, ada_has_search)) {
-    expect_error(func(url))    
+  for (func in has_functions) {
+    expect_error(func(url), NA)
   }
 })
 
-has_functions <- c(ada_has_credentials, ada_has_empty_hostname, ada_has_non_empty_password, ada_has_non_empty_username, ada_has_port, ada_has_hash, ada_has_search)
-
 test_that("corners", {
-  corners <- c(NA, NA_character_, "")
-  for (url in corners) {
     for (func in has_functions) {
-      expect_error(func(url))    
+        expect_error(func(c(NA, NA_character_, "")), NA)
     }
-  }
-  for (func in has_functions) {
-    expect_error(func(NULL), NA)
-  }
+    for (func in has_functions) {
+        expect_error(func(NULL), NA)
+    }
+})
+
+test_that("ada_has_credentials is vectorized ref #3", {
+  expect_error(res <- ada_has_credentials(c("https://admin:admin@the-internet.herokuapp.com/basic_auth", "https://www.google.com")), NA)
 })

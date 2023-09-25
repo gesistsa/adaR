@@ -5,8 +5,7 @@
 #' ada_has_credentials("https://user_1:password_1@example.org:8080/dir/../api?q=1#frag")
 #' @export
 ada_has_credentials <- function(url) {
-    url <- utf8::as_utf8(url)
-    vapply(url, function(x) vapply(url, function(x) Rcpp_ada_has_credentials(x, nchar(x, type = "bytes")), logical(1)), logical(1))
+    Rcpp_ada_has_credentials(utf8::as_utf8(url))
 }
 
 #' Check if URL has an empty hostname
@@ -16,8 +15,7 @@ ada_has_credentials <- function(url) {
 #' ada_has_empty_hostname("https://user_1:password_1@example.org:8080/dir/../api?q=1#frag")
 #' @export
 ada_has_empty_hostname <- function(url) {
-    url <- utf8::as_utf8(url)
-    vapply(url, function(x) Rcpp_ada_has_empty_hostname(x, nchar(x, type = "bytes")), logical(1))
+    Rcpp_ada_has_empty_hostname(utf8::as_utf8(url))
 }
 
 #' Check if URL has a hostname
@@ -27,8 +25,7 @@ ada_has_empty_hostname <- function(url) {
 #' ada_has_hostname("https://user_1:password_1@example.org:8080/dir/../api?q=1#frag")
 #' @export
 ada_has_hostname <- function(url) {
-    url <- utf8::as_utf8(url)
-    vapply(url, function(x) Rcpp_ada_has_hostname(x, nchar(x, type = "bytes")), logical(1))
+    Rcpp_ada_has_hostname(utf8::as_utf8(url))
 }
 
 #' Check if URL has a non empty username
@@ -38,8 +35,7 @@ ada_has_hostname <- function(url) {
 #' ada_has_non_empty_username("https://user_1:password_1@example.org:8080/dir/../api?q=1#frag")
 #' @export
 ada_has_non_empty_username <- function(url) {
-    url <- utf8::as_utf8(url)
-    vapply(url, function(x) Rcpp_ada_has_non_empty_username(x, nchar(x, type = "bytes")), logical(1))
+    Rcpp_ada_has_non_empty_username(utf8::as_utf8(url))
 }
 
 #' Check if URL has a non empty password
@@ -49,8 +45,7 @@ ada_has_non_empty_username <- function(url) {
 #' ada_has_non_empty_password("https://user_1:password_1@example.org:8080/dir/../api?q=1#frag")
 #' @export
 ada_has_non_empty_password <- function(url) {
-    url <- utf8::as_utf8(url)
-    vapply(url, function(x) Rcpp_ada_has_non_empty_password(x, nchar(x, type = "bytes")), logical(1))
+    Rcpp_ada_has_non_empty_password(utf8::as_utf8(url))
 }
 
 #' Check if URL has a port
@@ -60,8 +55,7 @@ ada_has_non_empty_password <- function(url) {
 #' ada_has_port("https://user_1:password_1@example.org:8080/dir/../api?q=1#frag")
 #' @export
 ada_has_port <- function(url) {
-    url <- utf8::as_utf8(url)
-    vapply(url, function(x) Rcpp_ada_has_port(x, nchar(x, type = "bytes")), logical(1))
+    Rcpp_ada_has_port(utf8::as_utf8(url))
 }
 
 #' Check if URL has a hash
@@ -71,8 +65,7 @@ ada_has_port <- function(url) {
 #' ada_has_hash("https://user_1:password_1@example.org:8080/dir/../api?q=1#frag")
 #' @export
 ada_has_hash <- function(url) {
-    url <- utf8::as_utf8(url)
-    vapply(url, function(x) Rcpp_ada_has_hash(x, nchar(x, type = "bytes")), logical(1))
+    Rcpp_ada_has_hash(utf8::as_utf8(url))
 }
 
 #' Check if URL has a search
@@ -82,6 +75,5 @@ ada_has_hash <- function(url) {
 #' ada_has_search("https://user_1:password_1@example.org:8080/dir/../api?q=1#frag")
 #' @export
 ada_has_search <- function(url) {
-    url <- utf8::as_utf8(url)
-    vapply(url, function(x) Rcpp_ada_has_search(x, nchar(x, type = "bytes")), logical(1))
+    Rcpp_ada_has_search(utf8::as_utf8(url))
 }

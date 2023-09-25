@@ -11,110 +11,101 @@ Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
 // Rcpp_ada_parse
-DataFrame Rcpp_ada_parse(CharacterVector input_vec, IntegerVector length_vec);
-RcppExport SEXP _adaR_Rcpp_ada_parse(SEXP input_vecSEXP, SEXP length_vecSEXP) {
+DataFrame Rcpp_ada_parse(const CharacterVector& input_vec);
+RcppExport SEXP _adaR_Rcpp_ada_parse(SEXP input_vecSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< CharacterVector >::type input_vec(input_vecSEXP);
-    Rcpp::traits::input_parameter< IntegerVector >::type length_vec(length_vecSEXP);
-    rcpp_result_gen = Rcpp::wrap(Rcpp_ada_parse(input_vec, length_vec));
+    Rcpp::traits::input_parameter< const CharacterVector& >::type input_vec(input_vecSEXP);
+    rcpp_result_gen = Rcpp::wrap(Rcpp_ada_parse(input_vec));
     return rcpp_result_gen;
 END_RCPP
 }
 // Rcpp_ada_has_credentials
-bool Rcpp_ada_has_credentials(const char* input, size_t length);
-RcppExport SEXP _adaR_Rcpp_ada_has_credentials(SEXP inputSEXP, SEXP lengthSEXP) {
+LogicalVector Rcpp_ada_has_credentials(const CharacterVector& url_vec);
+RcppExport SEXP _adaR_Rcpp_ada_has_credentials(SEXP url_vecSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< const char* >::type input(inputSEXP);
-    Rcpp::traits::input_parameter< size_t >::type length(lengthSEXP);
-    rcpp_result_gen = Rcpp::wrap(Rcpp_ada_has_credentials(input, length));
+    Rcpp::traits::input_parameter< const CharacterVector& >::type url_vec(url_vecSEXP);
+    rcpp_result_gen = Rcpp::wrap(Rcpp_ada_has_credentials(url_vec));
     return rcpp_result_gen;
 END_RCPP
 }
 // Rcpp_ada_has_empty_hostname
-bool Rcpp_ada_has_empty_hostname(const char* input, size_t length);
-RcppExport SEXP _adaR_Rcpp_ada_has_empty_hostname(SEXP inputSEXP, SEXP lengthSEXP) {
+LogicalVector Rcpp_ada_has_empty_hostname(const CharacterVector& url_vec);
+RcppExport SEXP _adaR_Rcpp_ada_has_empty_hostname(SEXP url_vecSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< const char* >::type input(inputSEXP);
-    Rcpp::traits::input_parameter< size_t >::type length(lengthSEXP);
-    rcpp_result_gen = Rcpp::wrap(Rcpp_ada_has_empty_hostname(input, length));
+    Rcpp::traits::input_parameter< const CharacterVector& >::type url_vec(url_vecSEXP);
+    rcpp_result_gen = Rcpp::wrap(Rcpp_ada_has_empty_hostname(url_vec));
     return rcpp_result_gen;
 END_RCPP
 }
 // Rcpp_ada_has_hostname
-bool Rcpp_ada_has_hostname(const char* input, size_t length);
-RcppExport SEXP _adaR_Rcpp_ada_has_hostname(SEXP inputSEXP, SEXP lengthSEXP) {
+LogicalVector Rcpp_ada_has_hostname(const CharacterVector& url_vec);
+RcppExport SEXP _adaR_Rcpp_ada_has_hostname(SEXP url_vecSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< const char* >::type input(inputSEXP);
-    Rcpp::traits::input_parameter< size_t >::type length(lengthSEXP);
-    rcpp_result_gen = Rcpp::wrap(Rcpp_ada_has_hostname(input, length));
+    Rcpp::traits::input_parameter< const CharacterVector& >::type url_vec(url_vecSEXP);
+    rcpp_result_gen = Rcpp::wrap(Rcpp_ada_has_hostname(url_vec));
     return rcpp_result_gen;
 END_RCPP
 }
 // Rcpp_ada_has_non_empty_username
-bool Rcpp_ada_has_non_empty_username(const char* input, size_t length);
-RcppExport SEXP _adaR_Rcpp_ada_has_non_empty_username(SEXP inputSEXP, SEXP lengthSEXP) {
+LogicalVector Rcpp_ada_has_non_empty_username(const CharacterVector& url_vec);
+RcppExport SEXP _adaR_Rcpp_ada_has_non_empty_username(SEXP url_vecSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< const char* >::type input(inputSEXP);
-    Rcpp::traits::input_parameter< size_t >::type length(lengthSEXP);
-    rcpp_result_gen = Rcpp::wrap(Rcpp_ada_has_non_empty_username(input, length));
+    Rcpp::traits::input_parameter< const CharacterVector& >::type url_vec(url_vecSEXP);
+    rcpp_result_gen = Rcpp::wrap(Rcpp_ada_has_non_empty_username(url_vec));
     return rcpp_result_gen;
 END_RCPP
 }
 // Rcpp_ada_has_non_empty_password
-bool Rcpp_ada_has_non_empty_password(const char* input, size_t length);
-RcppExport SEXP _adaR_Rcpp_ada_has_non_empty_password(SEXP inputSEXP, SEXP lengthSEXP) {
+LogicalVector Rcpp_ada_has_non_empty_password(const CharacterVector& url_vec);
+RcppExport SEXP _adaR_Rcpp_ada_has_non_empty_password(SEXP url_vecSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< const char* >::type input(inputSEXP);
-    Rcpp::traits::input_parameter< size_t >::type length(lengthSEXP);
-    rcpp_result_gen = Rcpp::wrap(Rcpp_ada_has_non_empty_password(input, length));
+    Rcpp::traits::input_parameter< const CharacterVector& >::type url_vec(url_vecSEXP);
+    rcpp_result_gen = Rcpp::wrap(Rcpp_ada_has_non_empty_password(url_vec));
     return rcpp_result_gen;
 END_RCPP
 }
 // Rcpp_ada_has_port
-bool Rcpp_ada_has_port(const char* input, size_t length);
-RcppExport SEXP _adaR_Rcpp_ada_has_port(SEXP inputSEXP, SEXP lengthSEXP) {
+LogicalVector Rcpp_ada_has_port(const CharacterVector& url_vec);
+RcppExport SEXP _adaR_Rcpp_ada_has_port(SEXP url_vecSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< const char* >::type input(inputSEXP);
-    Rcpp::traits::input_parameter< size_t >::type length(lengthSEXP);
-    rcpp_result_gen = Rcpp::wrap(Rcpp_ada_has_port(input, length));
+    Rcpp::traits::input_parameter< const CharacterVector& >::type url_vec(url_vecSEXP);
+    rcpp_result_gen = Rcpp::wrap(Rcpp_ada_has_port(url_vec));
     return rcpp_result_gen;
 END_RCPP
 }
 // Rcpp_ada_has_hash
-bool Rcpp_ada_has_hash(const char* input, size_t length);
-RcppExport SEXP _adaR_Rcpp_ada_has_hash(SEXP inputSEXP, SEXP lengthSEXP) {
+LogicalVector Rcpp_ada_has_hash(const CharacterVector& url_vec);
+RcppExport SEXP _adaR_Rcpp_ada_has_hash(SEXP url_vecSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< const char* >::type input(inputSEXP);
-    Rcpp::traits::input_parameter< size_t >::type length(lengthSEXP);
-    rcpp_result_gen = Rcpp::wrap(Rcpp_ada_has_hash(input, length));
+    Rcpp::traits::input_parameter< const CharacterVector& >::type url_vec(url_vecSEXP);
+    rcpp_result_gen = Rcpp::wrap(Rcpp_ada_has_hash(url_vec));
     return rcpp_result_gen;
 END_RCPP
 }
 // Rcpp_ada_has_search
-bool Rcpp_ada_has_search(const char* input, size_t length);
-RcppExport SEXP _adaR_Rcpp_ada_has_search(SEXP inputSEXP, SEXP lengthSEXP) {
+LogicalVector Rcpp_ada_has_search(const CharacterVector& url_vec);
+RcppExport SEXP _adaR_Rcpp_ada_has_search(SEXP url_vecSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< const char* >::type input(inputSEXP);
-    Rcpp::traits::input_parameter< size_t >::type length(lengthSEXP);
-    rcpp_result_gen = Rcpp::wrap(Rcpp_ada_has_search(input, length));
+    Rcpp::traits::input_parameter< const CharacterVector& >::type url_vec(url_vecSEXP);
+    rcpp_result_gen = Rcpp::wrap(Rcpp_ada_has_search(url_vec));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -238,17 +229,28 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// url_decode
+CharacterVector url_decode(CharacterVector url);
+RcppExport SEXP _adaR_url_decode(SEXP urlSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< CharacterVector >::type url(urlSEXP);
+    rcpp_result_gen = Rcpp::wrap(url_decode(url));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_adaR_Rcpp_ada_parse", (DL_FUNC) &_adaR_Rcpp_ada_parse, 2},
-    {"_adaR_Rcpp_ada_has_credentials", (DL_FUNC) &_adaR_Rcpp_ada_has_credentials, 2},
-    {"_adaR_Rcpp_ada_has_empty_hostname", (DL_FUNC) &_adaR_Rcpp_ada_has_empty_hostname, 2},
-    {"_adaR_Rcpp_ada_has_hostname", (DL_FUNC) &_adaR_Rcpp_ada_has_hostname, 2},
-    {"_adaR_Rcpp_ada_has_non_empty_username", (DL_FUNC) &_adaR_Rcpp_ada_has_non_empty_username, 2},
-    {"_adaR_Rcpp_ada_has_non_empty_password", (DL_FUNC) &_adaR_Rcpp_ada_has_non_empty_password, 2},
-    {"_adaR_Rcpp_ada_has_port", (DL_FUNC) &_adaR_Rcpp_ada_has_port, 2},
-    {"_adaR_Rcpp_ada_has_hash", (DL_FUNC) &_adaR_Rcpp_ada_has_hash, 2},
-    {"_adaR_Rcpp_ada_has_search", (DL_FUNC) &_adaR_Rcpp_ada_has_search, 2},
+    {"_adaR_Rcpp_ada_parse", (DL_FUNC) &_adaR_Rcpp_ada_parse, 1},
+    {"_adaR_Rcpp_ada_has_credentials", (DL_FUNC) &_adaR_Rcpp_ada_has_credentials, 1},
+    {"_adaR_Rcpp_ada_has_empty_hostname", (DL_FUNC) &_adaR_Rcpp_ada_has_empty_hostname, 1},
+    {"_adaR_Rcpp_ada_has_hostname", (DL_FUNC) &_adaR_Rcpp_ada_has_hostname, 1},
+    {"_adaR_Rcpp_ada_has_non_empty_username", (DL_FUNC) &_adaR_Rcpp_ada_has_non_empty_username, 1},
+    {"_adaR_Rcpp_ada_has_non_empty_password", (DL_FUNC) &_adaR_Rcpp_ada_has_non_empty_password, 1},
+    {"_adaR_Rcpp_ada_has_port", (DL_FUNC) &_adaR_Rcpp_ada_has_port, 1},
+    {"_adaR_Rcpp_ada_has_hash", (DL_FUNC) &_adaR_Rcpp_ada_has_hash, 1},
+    {"_adaR_Rcpp_ada_has_search", (DL_FUNC) &_adaR_Rcpp_ada_has_search, 1},
     {"_adaR_Rcpp_ada_get_href", (DL_FUNC) &_adaR_Rcpp_ada_get_href, 2},
     {"_adaR_Rcpp_ada_get_username", (DL_FUNC) &_adaR_Rcpp_ada_get_username, 2},
     {"_adaR_Rcpp_ada_get_password", (DL_FUNC) &_adaR_Rcpp_ada_get_password, 2},
@@ -259,6 +261,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_adaR_Rcpp_ada_get_pathname", (DL_FUNC) &_adaR_Rcpp_ada_get_pathname, 2},
     {"_adaR_Rcpp_ada_get_search", (DL_FUNC) &_adaR_Rcpp_ada_get_search, 2},
     {"_adaR_Rcpp_ada_get_protocol", (DL_FUNC) &_adaR_Rcpp_ada_get_protocol, 2},
+    {"_adaR_url_decode", (DL_FUNC) &_adaR_url_decode, 1},
     {NULL, NULL, 0}
 };
 
