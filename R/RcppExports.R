@@ -5,36 +5,36 @@ Rcpp_ada_parse <- function(input_vec) {
     .Call(`_adaR_Rcpp_ada_parse`, input_vec)
 }
 
-Rcpp_ada_has_credentials <- function(input) {
-    .Call(`_adaR_Rcpp_ada_has_credentials`, input)
+Rcpp_ada_has_credentials <- function(url_vec) {
+    .Call(`_adaR_Rcpp_ada_has_credentials`, url_vec)
 }
 
-Rcpp_ada_has_empty_hostname <- function(input) {
-    .Call(`_adaR_Rcpp_ada_has_empty_hostname`, input)
+Rcpp_ada_has_empty_hostname <- function(url_vec) {
+    .Call(`_adaR_Rcpp_ada_has_empty_hostname`, url_vec)
 }
 
-Rcpp_ada_has_hostname <- function(input) {
-    .Call(`_adaR_Rcpp_ada_has_hostname`, input)
+Rcpp_ada_has_hostname <- function(url_vec) {
+    .Call(`_adaR_Rcpp_ada_has_hostname`, url_vec)
 }
 
-Rcpp_ada_has_non_empty_username <- function(input) {
-    .Call(`_adaR_Rcpp_ada_has_non_empty_username`, input)
+Rcpp_ada_has_non_empty_username <- function(url_vec) {
+    .Call(`_adaR_Rcpp_ada_has_non_empty_username`, url_vec)
 }
 
-Rcpp_ada_has_non_empty_password <- function(input) {
-    .Call(`_adaR_Rcpp_ada_has_non_empty_password`, input)
+Rcpp_ada_has_non_empty_password <- function(url_vec) {
+    .Call(`_adaR_Rcpp_ada_has_non_empty_password`, url_vec)
 }
 
-Rcpp_ada_has_port <- function(input) {
-    .Call(`_adaR_Rcpp_ada_has_port`, input)
+Rcpp_ada_has_port <- function(url_vec) {
+    .Call(`_adaR_Rcpp_ada_has_port`, url_vec)
 }
 
-Rcpp_ada_has_hash <- function(input) {
-    .Call(`_adaR_Rcpp_ada_has_hash`, input)
+Rcpp_ada_has_hash <- function(url_vec) {
+    .Call(`_adaR_Rcpp_ada_has_hash`, url_vec)
 }
 
-Rcpp_ada_has_search <- function(input) {
-    .Call(`_adaR_Rcpp_ada_has_search`, input)
+Rcpp_ada_has_search <- function(url_vec) {
+    .Call(`_adaR_Rcpp_ada_has_search`, url_vec)
 }
 
 Rcpp_ada_get_href <- function(input_vec, length_vec) {
