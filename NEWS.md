@@ -2,7 +2,9 @@
 
 * split C++ files h/t Chung-hong Chan (@chainsawriot)
 * add support for public suffix extraction #14
-* add support for punnycode #18
+* add support for punycode #18
+* added `url_decode2` as a fast alternative to `utils::URLdecode` 
+* improved vectorization of `ada_get_*` and `ada_has_*` #26 and #30 h/t Chung-hong Chan (@chainsawriot)
 
 # adaR 0.1.0
 
