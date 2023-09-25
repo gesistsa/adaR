@@ -21,6 +21,9 @@ test_that("works with utf8", {
   expect_equal(res[["pathname"]], "/zone/1/\u6e2f\u805e")
   res <- ada_url_parse("http://www.m\u00fcller.de")
   expect_equal(res[["host"]], "www.m\u00fcller.de")
+  res <- ada_url_parse("https://\u4e2d\u56fd\u79fb\u52a8.\u4e2d\u56fd")
+  expect_equal(res$href[1], "https://xn--fiq02ib9d179b.xn--fiqs8s/")
+  expect_equal(res$host[1], "\u4e2d\u56fd\u79fb\u52a8.\u4e2d\u56fd")
 })
 
 test_that("URLdecode optional #5", {
