@@ -12,7 +12,7 @@ ada_url_parse(url, decode = TRUE)
 \item{decode}{logical. Whether to decode the output (see \code{\link[utils:URLencode]{utils::URLdecode()}}), default to \code{TRUE}}
 }
 \value{
-A list of components of the url
+A data frame of components of the url
 }
 \description{
 Use ada-url to parse a url
