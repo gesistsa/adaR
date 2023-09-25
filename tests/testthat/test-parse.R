@@ -34,10 +34,11 @@ test_that("multiple urls", {
 })
 
 test_that("corner cases", {
-  expect_error(ada_url_parse())
-  corners <- c(NA, NULL, "", "youcantparsethis", 1)
-  testthat::expect_error(x <- ada_url_parse(corners), NA)
-  testthat::expect_error(y <- ada_url_parse(corners, decode = FALSE), NA)
-  expect_equal(x$host, c(NA_character_, NA_character_, NA_character_, NA_character_))
-  expect_equal(y$host, c(NA_character_, NA_character_, NA_character_, NA_character_))
+    expect_error(ada_url_parse())
+    expect_error(ada_url_parse(NULL), NA)
+    corners <- c(NA, NULL, "", "youcantparsethis", 1)
+    testthat::expect_error(x <- ada_url_parse(corners), NA)
+    testthat::expect_error(y <- ada_url_parse(corners, decode = FALSE), NA)
+    expect_equal(x$host, c(NA_character_, NA_character_, NA_character_, NA_character_))
+    expect_equal(y$host, c(NA_character_, NA_character_, NA_character_, NA_character_))
 })
