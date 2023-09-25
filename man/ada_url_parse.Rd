@@ -12,10 +12,14 @@ ada_url_parse(url, decode = TRUE)
 \item{decode}{logical. Whether to decode the output (see \code{\link[utils:URLencode]{utils::URLdecode()}}), default to \code{TRUE}}
 }
 \value{
-A data frame of components of the url
+A data frame of the url components:
+href, protocol, username, password, host, hostname, port, pathname, search, and hash
 }
 \description{
 Use ada-url to parse a url
+}
+\details{
+For details on the returned components refer to the introductory vignette.
 }
 \examples{
 ada_url_parse("https://user_1:password_1@example.org:8080/dir/../api?q=1#frag")

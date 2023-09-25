@@ -10,7 +10,7 @@ url_decode2(url)
 \item{url}{a character vector}
 }
 \description{
-Similar to \link[utils:URLencode]{utils::URLdecode} and \code{\link[urltools:encoder]{urltools::url_decode()}}
+Similar to \link[utils:URLencode]{utils::URLdecode}
 }
 \examples{
 url_decode2("Hello\%20World")

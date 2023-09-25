@@ -79,7 +79,7 @@ Rcpp_ada_get_protocol <- function(url_vec) {
 
 #' Function to percent-decode characters in URLs
 #'
-#' Similar to [utils::URLdecode] and [urltools::url_decode()]
+#' Similar to [utils::URLdecode]
 #'
 #' @param url a character vector
 #' @export
