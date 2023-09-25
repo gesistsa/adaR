@@ -10,6 +10,8 @@
 }
 
 #' Get a specific component of URL
+#'
+#' These functions get a specific component of URL.
 #' @inheritParams ada_url_parse
 #' @return character, `NA` if not a valid URL
 #' @examples

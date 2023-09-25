@@ -42,7 +42,7 @@ ada_get_protocol(url, decode = TRUE)
 character, \code{NA} if not a valid URL
 }
 \description{
-Get a specific component of URL
+These functions get a specific component of URL.
 }
 \examples{
 url <- "https://user_1:password_1@example.org:8080/dir/../api?q=1#frag"
