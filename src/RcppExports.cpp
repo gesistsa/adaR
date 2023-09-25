@@ -229,14 +229,14 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// url_decode
-CharacterVector url_decode(CharacterVector url);
-RcppExport SEXP _adaR_url_decode(SEXP urlSEXP) {
+// url_decode2
+CharacterVector url_decode2(CharacterVector url);
+RcppExport SEXP _adaR_url_decode2(SEXP urlSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< CharacterVector >::type url(urlSEXP);
-    rcpp_result_gen = Rcpp::wrap(url_decode(url));
+    rcpp_result_gen = Rcpp::wrap(url_decode2(url));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -261,7 +261,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_adaR_Rcpp_ada_get_pathname", (DL_FUNC) &_adaR_Rcpp_ada_get_pathname, 2},
     {"_adaR_Rcpp_ada_get_search", (DL_FUNC) &_adaR_Rcpp_ada_get_search, 2},
     {"_adaR_Rcpp_ada_get_protocol", (DL_FUNC) &_adaR_Rcpp_ada_get_protocol, 2},
-    {"_adaR_url_decode", (DL_FUNC) &_adaR_url_decode, 1},
+    {"_adaR_url_decode2", (DL_FUNC) &_adaR_url_decode2, 1},
     {NULL, NULL, 0}
 };
 

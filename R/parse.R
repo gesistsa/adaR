@@ -27,7 +27,7 @@ ada_url_parse <- function(url, decode = TRUE) {
         return(character(0))
     }
     non_na_index <- which(!is.na(URL))
-    URL[non_na_index] <- url_decode(URL[non_na_index])
+    URL[non_na_index] <- url_decode2(URL[non_na_index])
     URL[!non_na_index] <- NA_character_
     return(URL)
 }

@@ -9,7 +9,7 @@ ada_get_href <- function(url, decode = TRUE) {
     len <- vapply(url, function(x) nchar(x, type = "bytes"), integer(1), USE.NAMES = FALSE)
     out <- Rcpp_ada_get_href(url, len)
     if (isTRUE(decode)) {
-        return(utils::URLdecode(out))
+        return(url_decode2(out))
     }
     return(out)
 }
@@ -25,7 +25,7 @@ ada_get_username <- function(url, decode = TRUE) {
     len <- vapply(url, function(x) nchar(x, type = "bytes"), integer(1), USE.NAMES = FALSE)
     out <- Rcpp_ada_get_username(url, len)
     if (isTRUE(decode)) {
-        return(utils::URLdecode(out))
+        return(url_decode2(out))
     }
     return(out)
 }
@@ -42,7 +42,7 @@ ada_get_password <- function(url, decode = TRUE) {
     len <- vapply(url, function(x) nchar(x, type = "bytes"), integer(1), USE.NAMES = FALSE)
     out <- Rcpp_ada_get_password(url, len)
     if (isTRUE(decode)) {
-        return(utils::URLdecode(out))
+        return(url_decode2(out))
     }
     return(out)
 }
@@ -59,7 +59,7 @@ ada_get_port <- function(url, decode = TRUE) {
     len <- vapply(url, function(x) nchar(x, type = "bytes"), integer(1), USE.NAMES = FALSE)
     out <- Rcpp_ada_get_port(url, len)
     if (isTRUE(decode)) {
-        return(utils::URLdecode(out))
+        return(url_decode2(out))
     }
     return(out)
 }
@@ -76,7 +76,7 @@ ada_get_hash <- function(url, decode = TRUE) {
     len <- vapply(url, function(x) nchar(x, type = "bytes"), integer(1), USE.NAMES = FALSE)
     out <- Rcpp_ada_get_hash(url, len)
     if (isTRUE(decode)) {
-        return(utils::URLdecode(out))
+        return(url_decode2(out))
     }
     return(out)
 }
@@ -93,7 +93,7 @@ ada_get_host <- function(url, decode = TRUE) {
     len <- vapply(url, function(x) nchar(x, type = "bytes"), integer(1), USE.NAMES = FALSE)
     out <- Rcpp_ada_get_host(url, len)
     if (isTRUE(decode)) {
-        return(utils::URLdecode(out))
+        return(url_decode2(out))
     }
     return(out)
 }
@@ -110,7 +110,7 @@ ada_get_hostname <- function(url, decode = TRUE) {
     len <- vapply(url, function(x) nchar(x, type = "bytes"), integer(1), USE.NAMES = FALSE)
     out <- Rcpp_ada_get_hostname(url, len)
     if (isTRUE(decode)) {
-        return(utils::URLdecode(out))
+        return(url_decode2(out))
     }
     return(out)
 }
@@ -127,7 +127,7 @@ ada_get_pathname <- function(url, decode = TRUE) {
     len <- vapply(url, function(x) nchar(x, type = "bytes"), integer(1), USE.NAMES = FALSE)
     out <- Rcpp_ada_get_pathname(url, len)
     if (isTRUE(decode)) {
-        return(utils::URLdecode(out))
+        return(url_decode2(out))
     }
     return(out)
 }
@@ -144,7 +144,7 @@ ada_get_search <- function(url, decode = TRUE) {
     len <- vapply(url, function(x) nchar(x, type = "bytes"), integer(1), USE.NAMES = FALSE)
     out <- Rcpp_ada_get_search(url, len)
     if (isTRUE(decode)) {
-        return(utils::URLdecode(out))
+        return(url_decode2(out))
     }
     return(out)
 }
@@ -161,7 +161,7 @@ ada_get_protocol <- function(url, decode = TRUE) {
     len <- vapply(url, function(x) nchar(x, type = "bytes"), integer(1), USE.NAMES = FALSE)
     out <- Rcpp_ada_get_protocol(url, len)
     if (isTRUE(decode)) {
-        return(utils::URLdecode(out))
+        return(url_decode2(out))
     }
     return(out)
 }
