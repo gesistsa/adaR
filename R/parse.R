@@ -7,7 +7,6 @@
 #' @export
 ada_url_parse <- function(url, decode = TRUE) {
     url <- utf8::as_utf8(url)
-    ##len <- vapply(url, function(x) nchar(x, type = "bytes"), integer(1), USE.NAMES = FALSE)
     url_parsed <- Rcpp_ada_parse(url)
     if (isTRUE(decode)) {
         return(.decoder(url_parsed))

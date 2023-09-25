@@ -11,12 +11,12 @@ Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
 // Rcpp_ada_parse
-DataFrame Rcpp_ada_parse(CharacterVector input_vec);
+DataFrame Rcpp_ada_parse(const CharacterVector& input_vec);
 RcppExport SEXP _adaR_Rcpp_ada_parse(SEXP input_vecSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< CharacterVector >::type input_vec(input_vecSEXP);
+    Rcpp::traits::input_parameter< const CharacterVector& >::type input_vec(input_vecSEXP);
     rcpp_result_gen = Rcpp::wrap(Rcpp_ada_parse(input_vec));
     return rcpp_result_gen;
 END_RCPP

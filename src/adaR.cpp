@@ -1,6 +1,6 @@
 #include "adaR.h"
 
-std::string charsub(ada_string stringi) {
+std::string charsub(const ada_string stringi) {
   const char* res = stringi.data;
   size_t len = stringi.length;
   ada_owned_string stringi_new = ada_idna_to_unicode(res, len);
@@ -10,7 +10,7 @@ std::string charsub(ada_string stringi) {
 }
 
 // [[Rcpp::export]]
-DataFrame Rcpp_ada_parse(CharacterVector input_vec) {
+DataFrame Rcpp_ada_parse(const CharacterVector& input_vec) {
   unsigned int n = input_vec.length();
   CharacterVector href(n);
   CharacterVector protocol(n);
@@ -22,7 +22,7 @@ DataFrame Rcpp_ada_parse(CharacterVector input_vec) {
   CharacterVector pathname(n);
   CharacterVector search(n);
   CharacterVector hash(n);
-  for (int i = 0; i < n; i++) {
+  for (unsigned int i = 0; i < n; i++) {
     String s = input_vec[i];
     const char* input = s.get_cstring();
     ada_url url = ada_parse(input, std::strlen(input));
