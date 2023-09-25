@@ -1,79 +1,71 @@
-#' Check if URL has credentials
+.has <- function(url, func) {
+    if (is.null(url)) {
+        return(logical(0))
+    }
+    func(url)
+}
+
+#' Check if URL has a certain component
+#'
+#' These functions check if URL has a certain component.
 #' @inheritParams ada_url_parse
-#' @return logical
+#' @return logical, `NA` if not a valid URL.
 #' @examples
-#' ada_has_credentials("https://user_1:password_1@example.org:8080/dir/../api?q=1#frag")
+#' url <- c("https://user_1:password_1@example.org:8080/dir/../api?q=1#frag")
+#' ada_has_credentials(url)
+#' ada_has_empty_hostname(url)
+#' ada_has_hostname(url)
+#' ada_has_non_empty_username(url)
+#' ada_has_non_empty_password(url)
+#' ada_has_port(url)
+#' ada_has_hash(url)
+#' ada_has_search(url)
+#' ## these functions are vectorized
+#' urls <- c("http://www.google.com", "http://www.google.com:80", "noturl")
+#' ada_has_port(urls)
 #' @export
 ada_has_credentials <- function(url) {
-    Rcpp_ada_has_credentials(url)
+    .has(url, Rcpp_ada_has_credentials)
 }
 
-#' Check if URL has an empty hostname
-#' @inheritParams ada_url_parse
-#' @return logical
-#' @examples
-#' ada_has_empty_hostname("https://user_1:password_1@example.org:8080/dir/../api?q=1#frag")
+#' @rdname ada_has_credentials
 #' @export
 ada_has_empty_hostname <- function(url) {
-    Rcpp_ada_has_empty_hostname(url)
+    .has(url, Rcpp_ada_has_empty_hostname)
 }
 
-#' Check if URL has a hostname
-#' @inheritParams ada_url_parse
-#' @return logical
-#' @examples
-#' ada_has_hostname("https://user_1:password_1@example.org:8080/dir/../api?q=1#frag")
+#' @rdname ada_has_credentials
 #' @export
 ada_has_hostname <- function(url) {
-    Rcpp_ada_has_hostname(url)
+    .has(url, Rcpp_ada_has_hostname)
 }
 
-#' Check if URL has a non empty username
-#' @inheritParams ada_url_parse
-#' @return logical
-#' @examples
-#' ada_has_non_empty_username("https://user_1:password_1@example.org:8080/dir/../api?q=1#frag")
+#' @rdname ada_has_credentials
 #' @export
 ada_has_non_empty_username <- function(url) {
-    Rcpp_ada_has_non_empty_username(url)
+    .has(url, Rcpp_ada_has_non_empty_username)
 }
 
-#' Check if URL has a non empty password
-#' @inheritParams ada_url_parse
-#' @return logical
-#' @examples
-#' ada_has_non_empty_password("https://user_1:password_1@example.org:8080/dir/../api?q=1#frag")
+#' @rdname ada_has_credentials
 #' @export
 ada_has_non_empty_password <- function(url) {
-    Rcpp_ada_has_non_empty_password(url)
+    .has(url, Rcpp_ada_has_non_empty_password)
 }
 
-#' Check if URL has a port
-#' @inheritParams ada_url_parse
-#' @return logical
-#' @examples
-#' ada_has_port("https://user_1:password_1@example.org:8080/dir/../api?q=1#frag")
+#' @rdname ada_has_credentials
 #' @export
 ada_has_port <- function(url) {
-    Rcpp_ada_has_port(url)
+    .has(url, Rcpp_ada_has_port)
 }
 
-#' Check if URL has a hash
-#' @inheritParams ada_url_parse
-#' @return logical
-#' @examples
-#' ada_has_hash("https://user_1:password_1@example.org:8080/dir/../api?q=1#frag")
+#' @rdname ada_has_credentials
 #' @export
 ada_has_hash <- function(url) {
-    Rcpp_ada_has_hash(url)
+    .has(url, Rcpp_ada_has_hash)
 }
 
-#' Check if URL has a search
-#' @inheritParams ada_url_parse
-#' @return logical
-#' @examples
-#' ada_has_search("https://user_1:password_1@example.org:8080/dir/../api?q=1#frag")
+#' @rdname ada_has_credentials
 #' @export
 ada_has_search <- function(url) {
-    Rcpp_ada_has_search(url)
+    .has(url, Rcpp_ada_has_search)
 }
