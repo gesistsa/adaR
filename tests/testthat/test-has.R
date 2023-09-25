@@ -10,7 +10,7 @@ test_that("all has functions work", {
   expect_true(ada_has_search(url))
 })
 
-has_functions <- c(ada_has_credentials, ada_has_empty_hostname, ada_has_non_empty_password, ada_has_non_empty_username, ada_has_port, ada_has_hash, ada_has_search)
+has_functions <- c(ada_has_credentials, ada_has_empty_hostname, ada_has_hostname, ada_has_non_empty_username, ada_has_non_empty_password, ada_has_port, ada_has_hash, ada_has_search)
 
 test_that("invalid urls should return NA, #26", {
   url <- "thisisnoturl"
