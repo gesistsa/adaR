@@ -7,3 +7,6 @@
 ^codecov.yml$
 ^.covrignore$
 ^.editorconfig$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
