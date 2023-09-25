@@ -2,19 +2,53 @@
 % Please edit documentation in R/has.R
 \name{ada_has_credentials}
 \alias{ada_has_credentials}
-\title{Check if URL has credentials}
+\alias{ada_has_empty_hostname}
+\alias{ada_has_hostname}
+\alias{ada_has_non_empty_username}
+\alias{ada_has_non_empty_password}
+\alias{ada_has_port}
+\alias{ada_has_hash}
+\alias{ada_has_search}
+\title{Check if URL has a certain component}
 \usage{
 ada_has_credentials(url)
+
+ada_has_empty_hostname(url)
+
+ada_has_hostname(url)
+
+ada_has_non_empty_username(url)
+
+ada_has_non_empty_password(url)
+
+ada_has_port(url)
+
+ada_has_hash(url)
+
+ada_has_search(url)
 }
 \arguments{
 \item{url}{character. one or more URL to be parsed}
 }
 \value{
-logical
+logical, \code{NA} if not a valid URL.
 }
 \description{
-Check if URL has credentials
+These functions check if URL has a certain component.
 }
 \examples{
-ada_has_credentials("https://user_1:password_1@example.org:8080/dir/../api?q=1#frag")
+url <- c("https://user_1:password_1@example.org:8080/dir/../api?q=1#frag")
+ada_has_credentials(url)
+ada_has_empty_hostname(url)
+ada_has_hostname(url)
+ada_has_non_empty_username(url)
+ada_has_hostname(url)
+ada_has_non_empty_username(url)
+ada_has_non_empty_password(url)
+ada_has_port(url)
+ada_has_hash(url)
+ada_has_search(url)
+## these functions are vectorized
+urls <- c("http://www.google.com", "http://www.google.com:80", "noturl")
+ada_has_port(urls)
 }
