@@ -83,18 +83,11 @@ bench::mark(
 
 ## Public Suffix extraction
 
-`public_suffix()` takes urls and returns their top level domain from the [public suffix list](https://publicsuffix.org/), **excluding** private domains. 
-This functionality already exists in the R package [psl](https://github.com/hrbrmstr/psl) and [urltools](https://cran.r-project.org/package=urltools).
+`public_suffix()` extracts their top level domain from the [public suffix list](https://publicsuffix.org/), **excluding** private domains. 
+This functionality already exists in the R package [psl](https://github.com/hrbrmstr/psl).
 
-psl relies on a C library an is lighning fast. Hoewver, the package is not on CRAN and has the C lib as a 
+psl relies on a C library and is very fast. However, the package is not on CRAN and has the C library as 
 system requirement. If these are no issues for you and you need that speed, please use that package. 
-
-the performance of urltools for that task is quite comparable to psl, but it does rely on a different set of 
-top level domains (to the best of our knowledge, it does include private domains). 
-
-Overall, both packages over higher performance for this task. This comes with no surprise, since
-our extractor is written in base R. Public suffix extraction is not the main objective of this package, yet
-we wanted to include a function for this task without introducing new dependencies.
 
 ## Acknowledgement
 

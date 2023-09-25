@@ -14,9 +14,9 @@ URL parser written in modern C++ .
 
 It implements several auxilliary functions to work with urls:
 
--   public suffix extraction (top level domain excluding private
-    domains) like [psl](https://github.com/hrbrmstr/psl)
--   fast c++ implementation of `utils::URLdecode` (\~40x speedup)
+- public suffix extraction (top level domain excluding private domains)
+  like [psl](https://github.com/hrbrmstr/psl)
+- fast c++ implementation of `utils::URLdecode` (~40x speedup)
 
 ## Installation
 
@@ -97,31 +97,20 @@ bench::mark(
 #> # A tibble: 2 × 6
 #>   expression      min   median `itr/sec` mem_alloc `gc/sec`
 #>   <bch:expr> <bch:tm> <bch:tm>     <dbl> <bch:byt>    <dbl>
-#> 1 ada           594ms    594ms      1.68    2.67MB     15.1
-#> 2 urltools      393ms    393ms      2.55    2.59MB     15.3
+#> 1 ada           236ms    236ms      4.23    2.67MB     38.1
+#> 2 urltools      164ms    164ms      6.10    2.59MB     42.7
 ```
 
 ## Public Suffix extraction
 
-`public_suffix()` takes urls and returns their top level domain from the
-[public suffix list](https://publicsuffix.org/), **excluding** private
-domains. This functionality already exists in the R package
-[psl](https://github.com/hrbrmstr/psl) and
-[urltools](https://cran.r-project.org/package=urltools).
+`public_suffix()` extracts their top level domain from the [public
+suffix list](https://publicsuffix.org/), **excluding** private domains.
+This functionality already exists in the R package
+[psl](https://github.com/hrbrmstr/psl).
 
-psl relies on a C library an is lighning fast. Hoewver, the package is
-not on CRAN and has the C lib as a system requirement. If these are no
+psl relies on a C library and is very fast. However, the package is not
+on CRAN and has the C library as system requirement. If these are no
 issues for you and you need that speed, please use that package.
-
-the performance of urltools for that task is quite comparable to psl,
-but it does rely on a different set of top level domains (to the best of
-our knowledge, it does include private domains).
-
-Overall, both packages over higher performance for this task. This comes
-with no surprise, since our extractor is written in base R. Public
-suffix extraction is not the main objective of this package, yet we
-wanted to include a function for this task without introducing new
-dependencies.
 
 ## Acknowledgement
 
