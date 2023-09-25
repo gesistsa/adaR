@@ -18,6 +18,14 @@ It implements several auxilliary functions to work with urls:
   like [psl](https://github.com/hrbrmstr/psl)
 - fast c++ implementation of `utils::URLdecode` (~40x speedup)
 
+`adaR` is part of a series of R packages to analyse webtracking data:
+
+- [webtrackR](https://github.com/schochastics/webtrackR): preprocess raw
+  webtracking data
+- [domainator](https://github.com/schochastics/domainator): classify
+  domains
+- [adaR](https://github.com/schochastics/adaR): parse urls
+
 ## Installation
 
 You can install the development version of adaR from
@@ -97,8 +105,8 @@ bench::mark(
 #> # A tibble: 2 × 6
 #>   expression      min   median `itr/sec` mem_alloc `gc/sec`
 #>   <bch:expr> <bch:tm> <bch:tm>     <dbl> <bch:byt>    <dbl>
-#> 1 ada           236ms    236ms      4.23    2.67MB     38.1
-#> 2 urltools      164ms    164ms      6.10    2.59MB     42.7
+#> 1 ada           456ms    456ms      2.19    2.67MB     19.7
+#> 2 urltools      316ms    316ms      3.16    2.59MB     22.1
 ```
 
 ## Public Suffix extraction

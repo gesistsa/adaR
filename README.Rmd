@@ -27,6 +27,12 @@ It implements several auxilliary functions to work with urls:
 - public suffix extraction (top level domain excluding private domains) like [psl](https://github.com/hrbrmstr/psl)
 - fast c++ implementation of `utils::URLdecode` (~40x speedup)
 
+`adaR` is part of a series of R packages to analyse webtracking data:
+
+- [webtrackR](https://github.com/schochastics/webtrackR): preprocess raw webtracking data
+- [domainator](https://github.com/schochastics/domainator): classify domains
+- [adaR](https://github.com/schochastics/adaR): parse urls
+
 ## Installation
 
 You can install the development version of adaR from [GitHub](https://github.com/) with:
