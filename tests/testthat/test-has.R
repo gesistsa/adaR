@@ -19,7 +19,7 @@ test_that("invalid urls should return NA, #26", {
   }
 })
 
-test_that("corners", {
+test_that("corners #31", {
     for (func in has_functions) {
         expect_error(func(c(NA, NA_character_, "")), NA)
     }
