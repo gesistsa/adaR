@@ -15,3 +15,9 @@ test_that("public suffix works on complete list", {
   psla <- public_suffix(urls)
   expect_true(all(psla == psl$fixed))
 })
+
+test_that("corners", {
+    expect_equal(public_suffix(NA), NA_character_)
+    expect_equal(public_suffix(NULL), character(0))
+    expect_equal(public_suffix(""), NA_character_)
+})
