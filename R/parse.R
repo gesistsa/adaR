@@ -6,7 +6,6 @@
 #' ada_url_parse("https://user_1:password_1@example.org:8080/dir/../api?q=1#frag")
 #' @export
 ada_url_parse <- function(url, decode = TRUE) {
-    url <- utf8::as_utf8(url)
     url_parsed <- Rcpp_ada_parse(url)
     if (isTRUE(decode)) {
         return(.decoder(url_parsed))
@@ -27,7 +26,7 @@ ada_url_parse <- function(url, decode = TRUE) {
         return(character(0))
     }
     non_na_index <- which(!is.na(URL))
-    URL[non_na_index] <- url_decode(URL[non_na_index])
+    URL[non_na_index] <- url_decode2(URL[non_na_index])
     URL[!non_na_index] <- NA_character_
     return(URL)
 }

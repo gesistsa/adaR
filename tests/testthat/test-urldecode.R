@@ -16,5 +16,5 @@ test_that("Integration #21", {
 test_that("cpp implementation is correct", {
     enc <- "https%3A%2F%2Fwww.google.de%2Fmaps%2F%4047.6647302%2C9.1389738%2C11z%3Fentry%3Dttu"
     dec <- "https://www.google.de/maps/@47.6647302,9.1389738,11z?entry=ttu"
-    expect_equal(url_decode(enc), dec)
+    expect_equal(url_decode2(enc), dec)
 })
