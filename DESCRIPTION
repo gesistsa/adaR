@@ -18,7 +18,10 @@ Imports:
     fastmatch,
     Rcpp
 Suggests: 
+    knitr,
+    rmarkdown,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
 Depends: 
     R (>= 4.2)
+VignetteBuilder: knitr
