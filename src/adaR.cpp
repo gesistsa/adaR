@@ -114,192 +114,69 @@ LogicalVector Rcpp_ada_has_search(const CharacterVector& url_vec) {
     return Rcpp_ada_has(url_vec, &ada_has_search);
 }
 
-// [[Rcpp::export]]
-CharacterVector Rcpp_ada_get_href(CharacterVector input_vec,
-                                  IntegerVector length_vec) {
-  int n = length_vec.length();
+//higher-order function for all Rcpp_ada_get_*
+CharacterVector Rcpp_ada_get(const CharacterVector& url_vec, std::function<ada_string(ada_url)> func) {
+  unsigned int n = url_vec.length();
   CharacterVector out(n);
-  for (int i = 0; i < input_vec.length(); i++) {
-    String s = input_vec[i];
+  for (int i = 0; i < url_vec.length(); i++) {
+    String s = url_vec[i];
     const char* input = s.get_cstring();
-    size_t length = length_vec[i];
-    ada_url url = ada_parse(input, length);
-    if (ada_is_valid(url)) {
-      out[i] = charsub(ada_get_href(url));
-    } else {
+    ada_url url = ada_parse(input, std::strlen(input));
+    if (!ada_is_valid(url)) {
       out[i] = NA_STRING;
+    } else {
+      out[i] = charsub(func(url));
     }
   }
   return (out);
 }
 
 // [[Rcpp::export]]
-CharacterVector Rcpp_ada_get_username(CharacterVector input_vec,
-                                      IntegerVector length_vec) {
-  int n = length_vec.length();
-  CharacterVector out(n);
-  for (int i = 0; i < input_vec.length(); i++) {
-    String s = input_vec[i];
-    const char* input = s.get_cstring();
-    size_t length = length_vec[i];
-    ada_url url = ada_parse(input, length);
-    if (ada_is_valid(url)) {
-      out[i] = charsub(ada_get_username(url));
-    } else {
-      out[i] = NA_STRING;
-    }
-  }
-  return (out);
+CharacterVector Rcpp_ada_get_href(const CharacterVector& url_vec) {
+  return Rcpp_ada_get(url_vec, &ada_get_href);
 }
 
 // [[Rcpp::export]]
-CharacterVector Rcpp_ada_get_password(CharacterVector input_vec,
-                                      IntegerVector length_vec) {
-  int n = length_vec.length();
-  CharacterVector out(n);
-  for (int i = 0; i < input_vec.length(); i++) {
-    String s = input_vec[i];
-    const char* input = s.get_cstring();
-    size_t length = length_vec[i];
-    ada_url url = ada_parse(input, length);
-    if (ada_is_valid(url)) {
-      out[i] = charsub(ada_get_password(url));
-    } else {
-      out[i] = NA_STRING;
-    }
-  }
-  return (out);
+CharacterVector Rcpp_ada_get_username(const CharacterVector& url_vec) {
+  return Rcpp_ada_get(url_vec, &ada_get_username);
 }
 
 // [[Rcpp::export]]
-CharacterVector Rcpp_ada_get_port(CharacterVector input_vec,
-                                  IntegerVector length_vec) {
-  int n = length_vec.length();
-  CharacterVector out(n);
-  for (int i = 0; i < input_vec.length(); i++) {
-    String s = input_vec[i];
-    const char* input = s.get_cstring();
-    size_t length = length_vec[i];
-    ada_url url = ada_parse(input, length);
-    if (ada_is_valid(url)) {
-      out[i] = charsub(ada_get_port(url));
-    } else {
-      out[i] = NA_STRING;
-    }
-  }
-  return (out);
+CharacterVector Rcpp_ada_get_password(const CharacterVector& url_vec) {
+  return Rcpp_ada_get(url_vec, &ada_get_password);
 }
 
 // [[Rcpp::export]]
-CharacterVector Rcpp_ada_get_hash(CharacterVector input_vec,
-                                  IntegerVector length_vec) {
-  int n = length_vec.length();
-  CharacterVector out(n);
-  for (int i = 0; i < input_vec.length(); i++) {
-    String s = input_vec[i];
-    const char* input = s.get_cstring();
-    size_t length = length_vec[i];
-    ada_url url = ada_parse(input, length);
-    if (ada_is_valid(url)) {
-      out[i] = charsub(ada_get_hash(url));
-    } else {
-      out[i] = NA_STRING;
-    }
-  }
-  return (out);
+CharacterVector Rcpp_ada_get_port(const CharacterVector& url_vec) {
+  return Rcpp_ada_get(url_vec, &ada_get_port);
 }
 
 // [[Rcpp::export]]
-CharacterVector Rcpp_ada_get_host(CharacterVector input_vec,
-                                  IntegerVector length_vec) {
-  int n = length_vec.length();
-  CharacterVector out(n);
-  for (int i = 0; i < input_vec.length(); i++) {
-    String s = input_vec[i];
-    const char* input = s.get_cstring();
-    size_t length = length_vec[i];
-    ada_url url = ada_parse(input, length);
-    if (ada_is_valid(url)) {
-      out[i] = charsub(ada_get_host(url));
-    } else {
-      out[i] = NA_STRING;
-    }
-  }
-  return (out);
+CharacterVector Rcpp_ada_get_hash(const CharacterVector& url_vec) {
+  return Rcpp_ada_get(url_vec, &ada_get_hash);
 }
 
 // [[Rcpp::export]]
-CharacterVector Rcpp_ada_get_hostname(CharacterVector input_vec,
-                                      IntegerVector length_vec) {
-  int n = length_vec.length();
-  CharacterVector out(n);
-  for (int i = 0; i < input_vec.length(); i++) {
-    String s = input_vec[i];
-    const char* input = s.get_cstring();
-    size_t length = length_vec[i];
-    ada_url url = ada_parse(input, length);
-    if (ada_is_valid(url)) {
-      out[i] = charsub(ada_get_hostname(url));
-    } else {
-      out[i] = NA_STRING;
-    }
-  }
-  return (out);
+CharacterVector Rcpp_ada_get_host(const CharacterVector& url_vec) {
+  return Rcpp_ada_get(url_vec, &ada_get_host);
 }
 
 // [[Rcpp::export]]
-CharacterVector Rcpp_ada_get_pathname(CharacterVector input_vec,
-                                      IntegerVector length_vec) {
-  int n = length_vec.length();
-  CharacterVector out(n);
-  for (int i = 0; i < input_vec.length(); i++) {
-    String s = input_vec[i];
-    const char* input = s.get_cstring();
-    size_t length = length_vec[i];
-    ada_url url = ada_parse(input, length);
-    if (ada_is_valid(url)) {
-      out[i] = charsub(ada_get_pathname(url));
-    } else {
-      out[i] = NA_STRING;
-    }
-  }
-  return (out);
+CharacterVector Rcpp_ada_get_hostname(const CharacterVector& url_vec) {
+  return Rcpp_ada_get(url_vec, &ada_get_hostname);
 }
 
 // [[Rcpp::export]]
-CharacterVector Rcpp_ada_get_search(CharacterVector input_vec,
-                                    IntegerVector length_vec) {
-  int n = length_vec.length();
-  CharacterVector out(n);
-  for (int i = 0; i < input_vec.length(); i++) {
-    String s = input_vec[i];
-    const char* input = s.get_cstring();
-    size_t length = length_vec[i];
-    ada_url url = ada_parse(input, length);
-    if (ada_is_valid(url)) {
-      out[i] = charsub(ada_get_search(url));
-    } else {
-      out[i] = NA_STRING;
-    }
-  }
-  return (out);
+CharacterVector Rcpp_ada_get_pathname(const CharacterVector& url_vec) {
+  return Rcpp_ada_get(url_vec, &ada_get_pathname);
 }
 
 // [[Rcpp::export]]
-CharacterVector Rcpp_ada_get_protocol(CharacterVector input_vec,
-                                      IntegerVector length_vec) {
-  int n = length_vec.length();
-  CharacterVector out(n);
-  for (int i = 0; i < input_vec.length(); i++) {
-    String s = input_vec[i];
-    const char* input = s.get_cstring();
-    size_t length = length_vec[i];
-    ada_url url = ada_parse(input, length);
-    if (ada_is_valid(url)) {
-      out[i] = charsub(ada_get_protocol(url));
-    } else {
-      out[i] = NA_STRING;
-    }
-  }
-  return (out);
+CharacterVector Rcpp_ada_get_search(const CharacterVector& url_vec) {
+  return Rcpp_ada_get(url_vec, &ada_get_search);
+}
+
+// [[Rcpp::export]]
+CharacterVector Rcpp_ada_get_protocol(const CharacterVector& url_vec) {
+  return Rcpp_ada_get(url_vec, &ada_get_protocol);
 }
