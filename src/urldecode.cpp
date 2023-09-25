@@ -4,14 +4,14 @@ using namespace Rcpp;
 
 //' Function to percent-decode characters in URLs
 //'
-//' Similar to [utils::URLdecode]
+//' Similar to [utils::URLdecode] and [urltools::url_decode()]
 //'
 //' @param url a character vector
 //' @export
 //' @examples
-//' url_decode("Hello%20World")
+//' url_decode2("Hello%20World")
 // [[Rcpp::export]]
-CharacterVector url_decode(CharacterVector url) {
+CharacterVector url_decode2(CharacterVector url) {
   return sapply(url, [](const String& u) {
     std::string input = u;
     std::string output;
