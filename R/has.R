@@ -2,7 +2,7 @@
     if (is.null(url)) {
         return(logical(0))
     }
-    func(utf8::as_utf8(url))
+    func(url)
 }
 
 #' Check if URL has a certain component
