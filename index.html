@@ -87,6 +87,15 @@
 </li>
 <li>fast c++ implementation of <code><a href="https://rdrr.io/r/utils/URLencode.html" class="external-link">utils::URLdecode</a></code> (~40x speedup)</li>
 </ul>
+<p><code>adaR</code> is part of a series of R packages to analyse webtracking data:</p>
+<ul>
+<li>
+<a href="https://github.com/schochastics/webtrackR" class="external-link">webtrackR</a>: preprocess raw webtracking data</li>
+<li>
+<a href="https://github.com/schochastics/domainator" class="external-link">domainator</a>: classify domains</li>
+<li>
+<a href="https://github.com/schochastics/adaR" class="external-link">adaR</a>: parse urls</li>
+</ul>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
@@ -151,8 +160,8 @@
 <span><span class="co">#&gt; # A tibble: 2 × 6</span></span>
 <span><span class="co">#&gt;   expression      min   median `itr/sec` mem_alloc `gc/sec`</span></span>
 <span><span class="co">#&gt;   &lt;bch:expr&gt; &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt; 1 ada           236ms    236ms      4.23    2.67MB     38.1</span></span>
-<span><span class="co">#&gt; 2 urltools      164ms    164ms      6.10    2.59MB     42.7</span></span></code></pre></div>
+<span><span class="co">#&gt; 1 ada           456ms    456ms      2.19    2.67MB     19.7</span></span>
+<span><span class="co">#&gt; 2 urltools      316ms    316ms      3.16    2.59MB     22.1</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="public-suffix-extraction">Public Suffix extraction<a class="anchor" aria-label="anchor" href="#public-suffix-extraction"></a>
