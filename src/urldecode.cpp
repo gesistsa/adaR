@@ -11,7 +11,7 @@ using namespace Rcpp;
 //' @examples
 //' url_decode2("Hello%20World")
 // [[Rcpp::export]]
-CharacterVector url_decode2(CharacterVector url) {
+CharacterVector url_decode2(const CharacterVector& url) {
   return sapply(url, [](const String& u) {
     std::string input = u;
     std::string output;
@@ -39,7 +39,7 @@ std::string str_reverse(std::string x) {
 }
 
 //[[Rcpp::export]]
-CharacterVector url_reverse(CharacterVector urls) {
+CharacterVector url_reverse(CharacterVector& urls) {
   unsigned int input_size = urls.size();
   CharacterVector output(input_size);
   for (unsigned int i = 0; i < input_size; i++) {

@@ -220,23 +220,23 @@ BEGIN_RCPP
 END_RCPP
 }
 // url_decode2
-CharacterVector url_decode2(CharacterVector url);
+CharacterVector url_decode2(const CharacterVector& url);
 RcppExport SEXP _adaR_url_decode2(SEXP urlSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< CharacterVector >::type url(urlSEXP);
+    Rcpp::traits::input_parameter< const CharacterVector& >::type url(urlSEXP);
     rcpp_result_gen = Rcpp::wrap(url_decode2(url));
     return rcpp_result_gen;
 END_RCPP
 }
 // url_reverse
-CharacterVector url_reverse(CharacterVector urls);
+CharacterVector url_reverse(CharacterVector& urls);
 RcppExport SEXP _adaR_url_reverse(SEXP urlsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< CharacterVector >::type urls(urlsSEXP);
+    Rcpp::traits::input_parameter< CharacterVector& >::type urls(urlsSEXP);
     rcpp_result_gen = Rcpp::wrap(url_reverse(urls));
     return rcpp_result_gen;
 END_RCPP
