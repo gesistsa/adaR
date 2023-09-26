@@ -336,35 +336,35 @@ components shown in the first table.</p>
 generally handle all types of edge cases well.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">corner_cases</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
-<span>  <span class="st">"https://example.com:8080"</span>, <span class="st">"http://user:password@example.com"</span>,</span>
-<span>  <span class="st">"http://[2001:0db8:85a3:0000:0000:8a2e:0370:7334]:8080"</span>, <span class="st">"https://example.com/path/to/resource?query=value&amp;another=thing#fragment"</span>,</span>
-<span>  <span class="st">"http://sub.sub.example.com"</span>, <span class="st">"ftp://files.example.com:2121/download/file.txt"</span>,</span>
-<span>  <span class="st">"http://example.com/path with spaces/and&amp;special=characters?"</span>,</span>
-<span>  <span class="st">"https://user:pa%40ssword@example.com/path"</span>, <span class="st">"http://example.com/..//a/b/../c/./d.html"</span>,</span>
-<span>  <span class="st">"https://example.com:8080/over/under?query=param#and-a-fragment"</span>,</span>
-<span>  <span class="st">"http://192.168.0.1/path/to/resource"</span>, <span class="st">"http://3com.com/path/to/resource"</span>,</span>
-<span>  <span class="st">"http://example.com/%7Eusername/"</span>, <span class="st">"https://example.com/a?query=value&amp;query=value2"</span>,</span>
-<span>  <span class="st">"https://example.com/a/b/c/.."</span>, <span class="st">"ws://websocket.example.com:9000/chat"</span>,</span>
-<span>  <span class="st">"https://example.com:65535/edge-case-port"</span>, <span class="st">"file:///home/user/file.txt"</span>,</span>
-<span>  <span class="st">"http://example.com/a/b/c/%2F%2F"</span>, <span class="st">"http://example.com/a/../a/../a/../a/"</span>,</span>
-<span>  <span class="st">"https://example.com/./././a/"</span>, <span class="st">"http://example.com:8080/a;b?c=d#e"</span>,</span>
-<span>  <span class="st">"http://@example.com"</span>, <span class="st">"http://example.com/@test"</span>, <span class="st">"http://example.com/@@@/a/b"</span>,</span>
-<span>  <span class="st">"https://example.com:0/"</span>, <span class="st">"http://example.com/%25path%20with%20encoded%20chars"</span>,</span>
-<span>  <span class="st">"https://example.com/path?query=%26%3D%3F%23"</span>, <span class="st">"http://example.com:8080/?query=value#fragment#fragment2"</span>,</span>
-<span>  <span class="st">"https://example.xn--80akhbyknj4f/path/to/resource"</span>, <span class="st">"https://example.co.uk/path/to/resource"</span>,</span>
-<span>  <span class="st">"http://username:pass%23word@example.net"</span>, <span class="st">"ftp://downloads.example.edu:3030/files/archive.zip"</span>,</span>
-<span>  <span class="st">"https://example.com:8080/this/is/a/deeply/nested/path/to/a/resource"</span>,</span>
-<span>  <span class="st">"http://another-example.com/..//test/./demo.html"</span>, <span class="st">"https://sub2.sub1.example.org:5000/login?user=test#section2"</span>,</span>
-<span>  <span class="st">"ws://chat.example.biz:5050/livechat"</span>, <span class="st">"http://192.168.1.100/a/b/c/d"</span>,</span>
-<span>  <span class="st">"https://secure.example.shop/cart?item=123&amp;quantity=5"</span>, <span class="st">"http://example.travel/%60%21%40%23%24%25%5E%26*()"</span>,</span>
-<span>  <span class="st">"https://example.museum/path/to/artifact?search=ancient"</span>, <span class="st">"ftp://secure-files.example.co:4040/files/document.docx"</span>,</span>
-<span>  <span class="st">"https://test.example.aero/booking?flight=abc123"</span>, <span class="st">"http://example.asia/%E2%82%AC%E2%82%AC/path"</span>,</span>
-<span>  <span class="st">"http://subdomain.example.tel/contact?name=john"</span>, <span class="st">"ws://game-server.example.jobs:2020/match?id=xyz"</span>,</span>
-<span>  <span class="st">"http://example.mobi/path/with/mobile/content"</span>, <span class="st">"https://example.name/family/tree?name=smith"</span>,</span>
-<span>  <span class="st">"http://192.168.2.2/path?query1=value1&amp;query2=value2"</span>, <span class="st">"http://example.pro/professional/services"</span>,</span>
-<span>  <span class="st">"https://example.info/information/page"</span>, <span class="st">"http://example.int/internal/systems/login"</span>,</span>
-<span>  <span class="st">"https://example.post/postal/services"</span>, <span class="st">"http://example.xxx/age/verification"</span>,</span>
-<span>  <span class="st">"https://example.xxx/another/edge/case/path?with=query#and-fragment"</span></span>
+<span>    <span class="st">"https://example.com:8080"</span>, <span class="st">"http://user:password@example.com"</span>,</span>
+<span>    <span class="st">"http://[2001:0db8:85a3:0000:0000:8a2e:0370:7334]:8080"</span>, <span class="st">"https://example.com/path/to/resource?query=value&amp;another=thing#fragment"</span>,</span>
+<span>    <span class="st">"http://sub.sub.example.com"</span>, <span class="st">"ftp://files.example.com:2121/download/file.txt"</span>,</span>
+<span>    <span class="st">"http://example.com/path with spaces/and&amp;special=characters?"</span>,</span>
+<span>    <span class="st">"https://user:pa%40ssword@example.com/path"</span>, <span class="st">"http://example.com/..//a/b/../c/./d.html"</span>,</span>
+<span>    <span class="st">"https://example.com:8080/over/under?query=param#and-a-fragment"</span>,</span>
+<span>    <span class="st">"http://192.168.0.1/path/to/resource"</span>, <span class="st">"http://3com.com/path/to/resource"</span>,</span>
+<span>    <span class="st">"http://example.com/%7Eusername/"</span>, <span class="st">"https://example.com/a?query=value&amp;query=value2"</span>,</span>
+<span>    <span class="st">"https://example.com/a/b/c/.."</span>, <span class="st">"ws://websocket.example.com:9000/chat"</span>,</span>
+<span>    <span class="st">"https://example.com:65535/edge-case-port"</span>, <span class="st">"file:///home/user/file.txt"</span>,</span>
+<span>    <span class="st">"http://example.com/a/b/c/%2F%2F"</span>, <span class="st">"http://example.com/a/../a/../a/../a/"</span>,</span>
+<span>    <span class="st">"https://example.com/./././a/"</span>, <span class="st">"http://example.com:8080/a;b?c=d#e"</span>,</span>
+<span>    <span class="st">"http://@example.com"</span>, <span class="st">"http://example.com/@test"</span>, <span class="st">"http://example.com/@@@/a/b"</span>,</span>
+<span>    <span class="st">"https://example.com:0/"</span>, <span class="st">"http://example.com/%25path%20with%20encoded%20chars"</span>,</span>
+<span>    <span class="st">"https://example.com/path?query=%26%3D%3F%23"</span>, <span class="st">"http://example.com:8080/?query=value#fragment#fragment2"</span>,</span>
+<span>    <span class="st">"https://example.xn--80akhbyknj4f/path/to/resource"</span>, <span class="st">"https://example.co.uk/path/to/resource"</span>,</span>
+<span>    <span class="st">"http://username:pass%23word@example.net"</span>, <span class="st">"ftp://downloads.example.edu:3030/files/archive.zip"</span>,</span>
+<span>    <span class="st">"https://example.com:8080/this/is/a/deeply/nested/path/to/a/resource"</span>,</span>
+<span>    <span class="st">"http://another-example.com/..//test/./demo.html"</span>, <span class="st">"https://sub2.sub1.example.org:5000/login?user=test#section2"</span>,</span>
+<span>    <span class="st">"ws://chat.example.biz:5050/livechat"</span>, <span class="st">"http://192.168.1.100/a/b/c/d"</span>,</span>
+<span>    <span class="st">"https://secure.example.shop/cart?item=123&amp;quantity=5"</span>, <span class="st">"http://example.travel/%60%21%40%23%24%25%5E%26*()"</span>,</span>
+<span>    <span class="st">"https://example.museum/path/to/artifact?search=ancient"</span>, <span class="st">"ftp://secure-files.example.co:4040/files/document.docx"</span>,</span>
+<span>    <span class="st">"https://test.example.aero/booking?flight=abc123"</span>, <span class="st">"http://example.asia/%E2%82%AC%E2%82%AC/path"</span>,</span>
+<span>    <span class="st">"http://subdomain.example.tel/contact?name=john"</span>, <span class="st">"ws://game-server.example.jobs:2020/match?id=xyz"</span>,</span>
+<span>    <span class="st">"http://example.mobi/path/with/mobile/content"</span>, <span class="st">"https://example.name/family/tree?name=smith"</span>,</span>
+<span>    <span class="st">"http://192.168.2.2/path?query1=value1&amp;query2=value2"</span>, <span class="st">"http://example.pro/professional/services"</span>,</span>
+<span>    <span class="st">"https://example.info/information/page"</span>, <span class="st">"http://example.int/internal/systems/login"</span>,</span>
+<span>    <span class="st">"https://example.post/postal/services"</span>, <span class="st">"http://example.xxx/age/verification"</span>,</span>
+<span>    <span class="st">"https://example.xxx/another/edge/case/path?with=query#and-fragment"</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ada_url_parse.html">ada_url_parse</a></span><span class="op">(</span><span class="va">corner_cases</span><span class="op">)</span></span>
@@ -640,14 +640,18 @@ are present or not.</p>
 <h2 id="public-suffic-extraction">Public suffic extraction<a class="anchor" aria-label="anchor" href="#public-suffic-extraction"></a>
 </h2>
 <p>The package also implements a public suffix extractor
-<code><a href="../reference/public_suffix.html">public_suffix()</a></code>, based on a lookup of the <a href="https://publicsuffix.org/" class="external-link">Public Suffix List</a> (<em>The list
-also includes private top level domains, which we excluded from this
-function</em>).</p>
+public_suffix(), based on a lookup of the <a href="https://publicsuffix.org/" class="external-link">Public Suffix List</a>. Note that from
+this list, we only include registry suffixes (e.g., com, co.uk), which
+are those controlled by a domain name registry and governed by ICANN. We
+do not include “private” suffixes (e.g., blogspot.com) that allow people
+to register subdomains. Hence, we use the term domain in the sense of
+“top domain under a registry suffix”. See <a href="https://github.com/google/guava/wiki/InternetDomainNameExplained" class="external-link uri">https://github.com/google/guava/wiki/InternetDomainNameExplained</a>
+for more details.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">urls</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
-<span>  <span class="st">"https://subsub.sub.domain.co.uk"</span>,</span>
-<span>  <span class="st">"https://domain.api.gov.uk"</span>,</span>
-<span>  <span class="st">"https://thisisnotpart.butthisispartoftheps.kawasaki.jp"</span></span>
+<span>    <span class="st">"https://subsub.sub.domain.co.uk"</span>,</span>
+<span>    <span class="st">"https://domain.api.gov.uk"</span>,</span>
+<span>    <span class="st">"https://thisisnotpart.butthisispartoftheps.kawasaki.jp"</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/public_suffix.html">public_suffix</a></span><span class="op">(</span><span class="va">urls</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "co.uk"                            "gov.uk"                          </span></span>
