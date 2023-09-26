@@ -168,7 +168,3 @@ public_suffix(urls)
 ```
 
 If you are wondering about the last url. The list also contains wildcard suffixes such as `*.kawasaki.jp` which need to be matched.
-
-The function is implemented in base R (to avoid extra (system) dependencies) and is reasonably fast. If you prefer/need 
-a more speedy implementation, check out the [psl](https://github.com/hrbrmstr/psl) package which wraps
-a C library.
