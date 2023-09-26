@@ -11,9 +11,9 @@ test_that("public_suffix works on some examples", {
 })
 
 test_that("public suffix works on complete list", {
-    urls <- paste0("https://dontmatchme.", psl$fixed)
+    urls <- paste0("https://dontmatchme.", setdiff(psl$raw_list, psl$wildcard))
     psla <- public_suffix(urls)
-    expect_true(all(psla == psl$fixed))
+    expect_true(all(psla == setdiff(psl$raw_list, psl$wildcard)))
 })
 
 test_that("corners", {
