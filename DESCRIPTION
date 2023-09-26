@@ -17,8 +17,8 @@ RoxygenNote: 7.2.3
 LinkingTo: 
     Rcpp
 Imports: 
-    fastmatch,
-    Rcpp
+    Rcpp,
+    triebeard
 Suggests: 
     knitr,
     rmarkdown,

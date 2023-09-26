@@ -89,3 +89,7 @@ url_decode2 <- function(url) {
     .Call(`_adaR_url_decode2`, url)
 }
 
+url_reverse <- function(urls) {
+    .Call(`_adaR_url_reverse`, urls)
+}
+
