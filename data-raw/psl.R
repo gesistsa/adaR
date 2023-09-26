@@ -2,22 +2,13 @@ psl <- readLines("https://raw.githubusercontent.com/publicsuffix/list/master/pub
 psl <- psl[1:which(psl == "// ===BEGIN PRIVATE DOMAINS===")]
 psl <- psl[!grepl("^//", psl) & psl != ""]
 wildcard <- psl[grepl("^\\*", psl)]
+wildcard <- stringr::str_remove(wildcard, "\\*\\.")
 fixed <- psl[!grepl("^\\*", psl)]
+raw_list <- c(fixed, wildcard)
+rev_raw_list <- sapply(raw_list, url_reverse)
+psl <- list("raw_list" = raw_list, "wildcard" = wildcard, "rev_raw_list" = rev_raw_list)
 
-psl <- list("fixed" = fixed, "wildcard" = wildcard)
+# trie_ps <- triebeard::trie(sapply(raw_list, url_reverse), raw_list)
+# psl <- list("trie_ps" = trie_ps, "wildcard" = wildcard, "raw" = raw_list)
 
 usethis::use_data(psl, overwrite = TRUE, internal = TRUE)
-
-# Benchmark
-urls <- c(
-    "https://subsub.sub.domain.co.uk",
-    "https://domain.api.gov.uk",
-    "https://domain.co.uk",
-    "https://domain.com",
-    "https://thisisnotpart.butthisispartoftheps.kawasaki.jp"
-)
-
-bench::mark(
-    ada = public_suffix(urls),
-    psl = psl::public_suffix(urls), iterations = 5000, check = FALSE
-)
