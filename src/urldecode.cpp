@@ -32,6 +32,10 @@ std::string decode(String u) {
 //' url_decode2("Hello%20World")
 // [[Rcpp::export]]
 CharacterVector url_decode2(CharacterVector& url) {
+  if (url.isNULL()) {
+    CharacterVector output(0);
+    return output;
+  }
   unsigned int input_size = url.size();
   CharacterVector output(input_size);
   for (unsigned int i = 0; i < input_size; i++) {

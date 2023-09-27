@@ -18,3 +18,7 @@ test_that("cpp implementation is correct", {
     dec <- "https://www.google.de/maps/@47.6647302,9.1389738,11z?entry=ttu"
     expect_equal(url_decode2(enc), dec)
 })
+
+test_that("NA", {
+
+})
