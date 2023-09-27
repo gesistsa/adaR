@@ -15,7 +15,7 @@ public_suffix <- function(url) {
         dom <- mapply(function(x, y) sub(x, "", y), pat, url[with_wildcard][idx], USE.NAMES = FALSE)
         idy <- .has_dot(dom)
         suffix_match[with_wildcard][idx][idy] <- paste0(sub(".*\\.([^\\.]+)$", "\\1", dom[idy]), ".", suffix_match[with_wildcard][idx][idy])
-        suffix_match[with_wildcard][idx][!idy] <- host[with_wildcard][idx][!idy]
+        suffix_match[with_wildcard][idx][!idy] <- host[idx][!idy]
     }
     suffix_match
 }
