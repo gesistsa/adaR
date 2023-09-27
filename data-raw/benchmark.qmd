@@ -151,7 +151,7 @@ bench::mark(
 )
 ```
 
-In terms of runtime, urltools comes out on top. However, adaR provides a competitive performacne and can also deal with large amounts of URLs quite efficiently.
+In terms of runtime, urltools comes out on top. However, adaR provides a very competitive performance and can also deal with large amounts of URLs quite efficiently.
 
 ## Public Suffic extraction
 
