@@ -138,7 +138,7 @@ In most of these cases, the reason why the two yield different results is becaus
 #| label: bench1
 bench::mark(
     urltools = url_parse("https://user_1:password_1@example.org:8080/dir/../api?q=1#frag"),
-    ada = ada_url_parse("https://user_1:password_1@example.org:8080/dir/../api?q=1#frag"), iterations = 1000, check = FALSE
+    ada = ada_url_parse("https://user_1:password_1@example.org:8080/dir/../api?q=1#frag", decode = FALSE), iterations = 1000, check = FALSE
 )
 
 ```
@@ -147,7 +147,7 @@ bench::mark(
 #| label: bench2
 bench::mark(
     urltools = url_parse(top100),
-    ada = ada_url_parse(top100), iterations = 1, check = FALSE
+    ada = ada_url_parse(top100, decode = FALSE), iterations = 1, check = FALSE
 )
 ```
 

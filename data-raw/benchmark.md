@@ -246,20 +246,20 @@ is because the URL does contain an “@” symbol from social media posts.
 ``` r
 bench::mark(
     urltools = url_parse("https://user_1:password_1@example.org:8080/dir/../api?q=1#frag"),
-    ada = ada_url_parse("https://user_1:password_1@example.org:8080/dir/../api?q=1#frag"), iterations = 1000, check = FALSE
+    ada = ada_url_parse("https://user_1:password_1@example.org:8080/dir/../api?q=1#frag", decode = FALSE), iterations = 1000, check = FALSE
 )
 ```
 
     # A tibble: 2 × 6
       expression      min   median `itr/sec` mem_alloc `gc/sec`
       <bch:expr> <bch:tm> <bch:tm>     <dbl> <bch:byt>    <dbl>
-    1 urltools      362µs    426µs     2185.    2.49KB     6.58
-    2 ada           807µs    910µs     1001.   27.41KB     9.09
+    1 urltools      360µs    412µs     2250.    2.49KB     6.77
+    2 ada           545µs    619µs     1485.    2.49KB     8.96
 
 ``` r
 bench::mark(
     urltools = url_parse(top100),
-    ada = ada_url_parse(top100), iterations = 1, check = FALSE
+    ada = ada_url_parse(top100, decode = FALSE), iterations = 1, check = FALSE
 )
 ```
 
@@ -269,8 +269,8 @@ bench::mark(
     # A tibble: 2 × 6
       expression      min   median `itr/sec` mem_alloc `gc/sec`
       <bch:expr> <bch:tm> <bch:tm>     <dbl> <bch:byt>    <dbl>
-    1 urltools      185ms    185ms      5.41    4.93MB     0   
-    2 ada           783ms    783ms      1.28   51.13MB     2.56
+    1 urltools      257ms    257ms      3.90    4.93MB     3.90
+    2 ada           299ms    299ms      3.34    7.96MB     0   
 
 In terms of runtime, urltools comes out on top. However, adaR provides a
 competitive performacne and can also deal with large amounts of URLs
@@ -293,9 +293,9 @@ bench::mark(
     # A tibble: 3 × 6
       expression      min   median `itr/sec` mem_alloc `gc/sec`
       <bch:expr> <bch:tm> <bch:tm>     <dbl> <bch:byt>    <dbl>
-    1 urltools   366.02µs 429.95µs     2059.     103KB     6.20
-    2 ada         18.12µs  19.78µs    47447.    35.9KB     0   
-    3 psl          3.75µs   3.99µs   226058.    17.6KB     0   
+    1 urltools    361.1µs 443.71µs     2085.     103KB     8.37
+    2 ada         18.31µs  19.75µs    49431.    35.9KB     0   
+    3 psl          3.54µs   3.83µs   224215.    17.6KB     0   
 
 (*This comparison is not fair for `urltools` since the function
 `suffix_extract` does more than just extracting the public suffix.*)
