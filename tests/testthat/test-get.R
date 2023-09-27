@@ -12,8 +12,10 @@ test_that("all get functions work", {
     expect_equal(ada_get_protocol(url), "https:")
 })
 
-get_functions <- c(ada_get_href, ada_get_username, ada_get_password, ada_get_host, ada_get_hostname, ada_get_port, ada_get_pathname,
-                   ada_get_search, ada_get_hash, ada_get_protocol)
+get_functions <- c(
+    ada_get_href, ada_get_username, ada_get_password, ada_get_host, ada_get_hostname, ada_get_port, ada_get_pathname,
+    ada_get_search, ada_get_hash, ada_get_protocol
+)
 
 test_that("invalid urls should return NA, #26", {
     url <- "thisisnoturl"
@@ -34,4 +36,13 @@ test_that("corners #31", {
 test_that("decode can pass", {
     expect_equal(ada_get_search("https://www.google.co.jp/search?q=\u30c9\u30a4\u30c4"), "?q=\u30c9\u30a4\u30c4")
     expect_equal(ada_get_search("https://www.google.co.jp/search?q=\u30c9\u30a4\u30c4", decode = FALSE), "?q=%E3%83%89%E3%82%A4%E3%83%84")
+})
+
+test_that("get_domain works", {
+    urls <- paste0("http://sub.domain.", setdiff(psl$raw_list, psl$wildcard))
+    wild <- paste0("http://sub.domain.domain.", psl$wildcard)
+    dom1 <- ada_get_domain(urls)
+    dom2 <- ada_get_domain(wild)
+    expect_true(all(dom1 == paste0("domain.", setdiff(psl$raw_list, psl$wildcard))))
+    expect_true(all(dom2 == paste0("domain.domain.", psl$wildcard)))
 })

@@ -26,6 +26,7 @@
 #' ada_get_pathname(url)
 #' ada_get_search(url)
 #' ada_get_protocol(url)
+#' ada_get_domain(url)
 #' ## these functions are vectorized
 #' urls <- c("http://www.google.com", "http://www.google.com:80", "noturl")
 #' ada_get_port(urls)
@@ -86,4 +87,25 @@ ada_get_search <- function(url, decode = TRUE) {
 #' @export
 ada_get_protocol <- function(url, decode = TRUE) {
     .get(url, decode, Rcpp_ada_get_protocol)
+}
+
+R_ada_get_domain <- function(url) {
+    host <- ada_get_hostname(url)
+    host <- sub("^www\\.", "", host)
+    ps <- public_suffix(url)
+    pat <- paste0("\\.", ps, "$")
+
+    dom <- mapply(function(x, y) sub(x, "", y), pat, host, USE.NAMES = FALSE)
+    domain <- paste0(sub(".*\\.([^\\.]+)$", "\\1", dom), ".", ps)
+    domain[host == ps & !ps %in% psl$wildcard] <- ""
+    domain[host == ps & ps %in% psl$wildcard] <- ps
+    domain[is.na(ps)] <- NA
+    domain[is.na(host)] <- NA
+    domain
+}
+
+#' @rdname ada_get_href
+#' @export
+ada_get_domain <- function(url, decode = TRUE) {
+    .get(url, decode, R_ada_get_domain)
 }
