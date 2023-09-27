@@ -3,15 +3,18 @@ title: "Benchmarking adaR"
 format: gfm
 ---
 
-```{r load_pkgs}
+```{r}
+#| label: load_pkgs
 library(adaR)
 library(urltools)
 ```
 
-## Data 
+## Setup
 We will use several different datasets provided by [ada-url](https://github.com/ada-url/url-various-datasets) and by the [webtrackR](https://github.com/schochastics/webtrackR) package
 
-```{r load_ada-data}
+```{r}
+#| label: load_ada-data
+#| cache: true
 top100 <- readLines("https://raw.githubusercontent.com/ada-url/url-various-datasets/main/top100/top100.txt")
 node_files <- readLines("https://raw.githubusercontent.com/ada-url/url-various-datasets/main/files/node_files.txt")
 linux_files <- readLines("https://raw.githubusercontent.com/ada-url/url-various-datasets/main/files/linux_files.txt")
@@ -24,19 +27,45 @@ data("testdt_tracking", package = "webtrackR")
 - `node_files.txt`: all source files from a given Node.js snapshot as URLs (43415 URLs)
 - `linux_files.txt`: all files from a Linux systems as URLs (169312 URLs).
 - `wikipedia_100k.txt`: 100k URLs from a snapshot of all Wikipedia articles as URLs (March 6th 2023)
-- `top100.txt`: crawl of the top visited 100 websites and extracts unique URLs
+- `top100.txt`: crawl of the top visited 100 websites and extracted unique URLs (98000 URLs)
 - `corner.txt`: a small set of fictional urls which represent corner cases
 
-## Tools
-
-We benchmark `adaR` with the R package [`urltools`](https://github.com/Ironholds/urltools).
+We benchmark `adaR` with the R package [`urltools`](https://github.com/Ironholds/urltools), the standard package for this job.
 
 
-```{r top100}
-ada_url_parse(top100)
+## Parsing urls: correctness
+
+
+Let us first compare the standard output of the respective url parsing functions.
+```{r}
+#| label: output_-_comparison
+urltools::url_parse("http://sub.domain.co.uk/path/to/place")
+ada_url_parse("http://sub.domain.co.uk/path/to/place")
+```
+For fairly regular looking urls, they do provide the same output, however with a slighlty different naming scheme (see the vignette for an explanation of terms).
+
+let us look at a more complex example.
+```{r}
+#| label: long_example
+urltools::url_parse("https://user_1:password_1@example.org:8080/dir/../api?q=1#frag")
+ada_url_parse("https://user_1:password_1@example.org:8080/dir/../api?q=1#frag")
 ```
 
-parse_na <- function(urls){
+`urltools` does not parse for username and password. Additionally, it returns the path "as-is", while ada returns the [WHATWG](https://url.spec.whatwg.org/#url-class) conform path if it contains double-dots.
+
+The must striking difference between the two packages occurs for URLs tha contain the "@" symbol, which is quite common for URLs of social media posts. 
+```{r}
+#| label: at_in_link
+urltools::url_parse("https://fosstodon.org/@schochastics/111105280215225729")
+ada_url_parse("https://fosstodon.org/@schochastics/111105280215225729")
+```
+
+`urltool` fails to parse these links correctly, while `adaR` does catch this. To answer the question of differences betwen the packages a bit more broadly, we run the two parsers on the  benchmark URLs described above.
+
+First, in terms of when they fail to parse anything,independent if the output is correct or not.
+```{r}
+#| label: na_analysis
+parse_na <- function(urls) {
     ada <- ada_url_parse(urls)
     utl <- urltools::url_parse(urls)
     ada_na_lst <- list(urls[is.na(ada$hostname)])
@@ -44,21 +73,105 @@ parse_na <- function(urls){
     tibble::tibble(
         ada_na_abs = sum(is.na(ada$hostname)),
         utl_na_abs = sum(is.na(utl$domain)),
-        ada_na_frac = ada_na_abs/length(urls),
-        utl_na_frac = utl_na_abs/length(urls),
-        ada_na_lst= ada_na_lst,
+        ada_na_frac = ada_na_abs / length(urls),
+        utl_na_frac = utl_na_abs / length(urls),
+        ada_na_lst = ada_na_lst,
         utl_na_lst = utl_na_lst
-    )    
+    )
 }
 
 res <- purrr::map_dfr(list(top100, node_files, linux_files, wiki, corner, testdt_tracking$url), parse_na)
-res[["dataset"]] <- c("top100","node_files","linux_files","wiki","corner","webtrack")
+res[["dataset"]] <- c("top100", "node_files", "linux_files", "wiki", "corner", "webtrack")
+res
+```
 
-diff <- function(urls){
+`urltools` fails to parse all of `linux_files`, which look like this
+```{r}
+#| label: linux_example
+linux_files[12345]
+```
+
+adaR does parse them correctly. 
+
+```{r}
+#| label: ada_linux
+ada_url_parse(linux_files[12345])
+```
+
+What do the 32 failures of the `top100` dataset look like?
+
+```{r}
+#| label: na_100
+res$ada_na_lst[[1]]
+```
+
+These are clearly invalid urls and thus should not be parsed into anything else then NA. Before parsing `adaR` always checks if a URL is WHATWG conform. If it is not, NA is returned. AFAIK, urltools does not provide such a test and tries to parse everything. 
+
+A downside of this strict rule is that URLS without a protocol are not parsed.
+
+```{r}
+#| label: fail_no_prot
+ada_url_parse("domain.de/path/to/file") 
+```
+
+One can argue if this is a [bug or a feature](https://github.com/schochastics/adaR/issues/36), but for the time being, we remain conform with the underlying c++ library in this case.
+
+```{r}
+#| label: diff
+diff <- function(urls) {
     ada <- ada_url_parse(urls)
     utl <- urltools::url_parse(urls)
-    idx <- which(ada$hostname!=utl$domain)
-    tibble::tibble(ada=ada$hostname[idx],urltools=utl$domain[idx],url=urls[idx])
+    idx <- which(ada$hostname != utl$domain)
+    tibble::tibble(url = urls[idx],ada = ada$hostname[idx], urltools = utl$domain[idx])
 }
 
 res2 <- purrr::map_dfr(list(top100, wiki, corner, testdt_tracking$url), diff)
+nrow(res2)
+```
+
+In most of these cases, the reason why the two yield different results is because the URL does contain an "@" symbol from social media posts.
+
+## Parsing urls: runtime
+
+
+```{r}
+#| label: bench1
+bench::mark(
+    urltools = url_parse("https://user_1:password_1@example.org:8080/dir/../api?q=1#frag"),
+    ada = ada_url_parse("https://user_1:password_1@example.org:8080/dir/../api?q=1#frag"), iterations = 1000, check = FALSE
+)
+
+```
+
+```{r}
+#| label: bench2
+bench::mark(
+    urltools = url_parse(top100),
+    ada = ada_url_parse(top100), iterations = 1, check = FALSE
+)
+```
+
+In terms of runtime, urltools comes out on top. However, adaR provides a competitive performacne and can also deal with large amounts of URLs quite efficiently.
+
+## Public Suffic extraction
+
+Here we compare `adaR` with `urltools` and additionally with [`psl`](https://github.com/hrbrmstr/psl), a wrapper for a C library to extract public suffix.
+
+```{r}
+#| label: bench3
+bench::mark(
+    urltools = suffix_extract("https://user_1:password_1@example.org:8080/dir/../api?q=1#frag"),
+    ada = public_suffix("https://user_1:password_1@example.org:8080/dir/../api?q=1#frag"),
+    psl = psl::public_suffix("https://user_1:password_1@example.org:8080/dir/../api?q=1#frag"),iterations = 1000, check = FALSE
+)
+```
+
+(*This comparison is not fair for `urltools` since the function `suffix_extract` does more than just extracting the public suffix.*)
+
+psl is clearly the fastest, which is not surprising given that it is based on extremely efficient C code. Our implementation is quite similar to how urltools handles suffixes and is not too far behind psl.
+
+So, while psl is clearly favored in terms of runtime, it comes with the drawback that it is only available via GitHub (which is not optimal if you want to depend on it) and has a system requirement that (according to GitHub) is not available on Windows. If those two things do not matter to you and you need to process an enormous amount of URLs, then you should use psl. 
+
+## Summary
+
+adaR complements existing packages quite well. While it is (thus far) not as optimized in terms of runtime, it is still competitive and the added value of complying to URL standards can be important in different context. 

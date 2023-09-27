@@ -5,25 +5,19 @@ library(adaR)
 library(urltools)
 ```
 
-
-    Attaching package: 'urltools'
-
-    The following object is masked from 'package:adaR':
-
-        url_decode
-
-## Data
+## Setup
 
 We will use several different datasets provided by
 [ada-url](https://github.com/ada-url/url-various-datasets) and by the
 [webtrackR](https://github.com/schochastics/webtrackR) package
 
 ``` r
+top100 <- readLines("https://raw.githubusercontent.com/ada-url/url-various-datasets/main/top100/top100.txt")
 node_files <- readLines("https://raw.githubusercontent.com/ada-url/url-various-datasets/main/files/node_files.txt")
 linux_files <- readLines("https://raw.githubusercontent.com/ada-url/url-various-datasets/main/files/linux_files.txt")
-top100 <- readLines("https://raw.githubusercontent.com/ada-url/url-various-datasets/main/top100/top100.txt")
 wiki <- readLines("https://raw.githubusercontent.com/ada-url/url-various-datasets/main/wikipedia/wikipedia_100k.txt")
 corner <- readLines("corner.txt")
+data("testdt_tracking", package = "webtrackR")
 ```
 
 - `node_files.txt`: all source files from a given Node.js snapshot as
@@ -32,21 +26,240 @@ corner <- readLines("corner.txt")
   URLs).
 - `wikipedia_100k.txt`: 100k URLs from a snapshot of all Wikipedia
   articles as URLs (March 6th 2023)
-- `top100.txt`: crawl of the top visited 100 websites and extracts
-  unique URLs
+- `top100.txt`: crawl of the top visited 100 websites and extracted
+  unique URLs (98000 URLs)
 - `corner.txt`: a small set of fictional urls which represent corner
   cases
 
-## Tools
-
 We benchmark `adaR` with the R package
-[`urltools`](https://github.com/Ironholds/urltools).
+[`urltools`](https://github.com/Ironholds/urltools), the standard
+package for this job.
+
+## Parsing urls: correctness
+
+Let us first compare the standard output of the respective url parsing
+functions.
+
+``` r
+urltools::url_parse("http://sub.domain.co.uk/path/to/place")
+```
+
+      scheme           domain port          path parameter fragment
+    1   http sub.domain.co.uk <NA> path/to/place      <NA>     <NA>
+
+``` r
+ada_url_parse("http://sub.domain.co.uk/path/to/place")
+```
+
+                                       href protocol username password
+    1 http://sub.domain.co.uk/path/to/place    http:                  
+                  host         hostname port       pathname search hash
+    1 sub.domain.co.uk sub.domain.co.uk      /path/to/place            
+
+For fairly regular looking urls, they do provide the same output,
+however with a slighlty different naming scheme (see the vignette for an
+explanation of terms).
+
+let us look at a more complex example.
+
+``` r
+urltools::url_parse("https://user_1:password_1@example.org:8080/dir/../api?q=1#frag")
+```
+
+      scheme      domain port       path parameter fragment
+    1  https example.org 8080 dir/../api       q=1     frag
+
+``` r
+ada_url_parse("https://user_1:password_1@example.org:8080/dir/../api?q=1#frag")
+```
+
+                                                         href protocol username
+    1 https://user_1:password_1@example.org:8080/api?q=1#frag   https:   user_1
+        password             host    hostname port pathname search  hash
+    1 password_1 example.org:8080 example.org 8080     /api   ?q=1 #frag
+
+`urltools` does not parse for username and password. Additionally, it
+returns the path “as-is”, while ada returns the
+[WHATWG](https://url.spec.whatwg.org/#url-class) conform path if it
+contains double-dots.
+
+The must striking difference between the two packages occurs for URLs
+tha contain the “@” symbol, which is quite common for URLs of social
+media posts.
+
+``` r
+urltools::url_parse("https://fosstodon.org/@schochastics/111105280215225729")
+```
+
+      scheme       domain port               path parameter fragment
+    1  https schochastics <NA> 111105280215225729      <NA>     <NA>
+
+``` r
+ada_url_parse("https://fosstodon.org/@schochastics/111105280215225729")
+```
+
+                                                        href protocol username
+    1 https://fosstodon.org/@schochastics/111105280215225729   https:         
+      password          host      hostname port                          pathname
+    1          fosstodon.org fosstodon.org      /@schochastics/111105280215225729
+      search hash
+    1            
+
+`urltool` fails to parse these links correctly, while `adaR` does catch
+this. To answer the question of differences betwen the packages a bit
+more broadly, we run the two parsers on the benchmark URLs described
+above.
+
+First, in terms of when they fail to parse anything,independent if the
+output is correct or not.
+
+``` r
+parse_na <- function(urls) {
+    ada <- ada_url_parse(urls)
+    utl <- urltools::url_parse(urls)
+    ada_na_lst <- list(urls[is.na(ada$hostname)])
+    utl_na_lst <- list(urls[is.na(utl$domain)])
+    tibble::tibble(
+        ada_na_abs = sum(is.na(ada$hostname)),
+        utl_na_abs = sum(is.na(utl$domain)),
+        ada_na_frac = ada_na_abs / length(urls),
+        utl_na_frac = utl_na_abs / length(urls),
+        ada_na_lst = ada_na_lst,
+        utl_na_lst = utl_na_lst
+    )
+}
+
+res <- purrr::map_dfr(list(top100, node_files, linux_files, wiki, corner, testdt_tracking$url), parse_na)
+res[["dataset"]] <- c("top100", "node_files", "linux_files", "wiki", "corner", "webtrack")
+res
+```
+
+    # A tibble: 6 × 7
+      ada_na_abs utl_na_abs ada_na_frac utl_na_frac ada_na_lst utl_na_lst dataset   
+           <int>      <int>       <dbl>       <dbl> <list>     <list>     <chr>     
+    1         32          8    0.000320   0.0000800 <chr [32]> <chr [8]>  top100    
+    2          0          0    0          0         <chr [0]>  <chr [0]>  node_files
+    3          0     169312    0          1         <chr [0]>  <chr>      linux_fil…
+    4         13          0    0.00013    0         <chr [13]> <chr [0]>  wiki      
+    5          0          1    0          0.0182    <chr [0]>  <chr [1]>  corner    
+    6          0         29    0          0.000585  <chr [0]>  <chr [29]> webtrack  
+
+`urltools` fails to parse all of `linux_files`, which look like this
+
+``` r
+linux_files[12345]
+```
+
+    [1] "file:///var/lib/dpkg/info/ruby2.7-doc.md5sums"
+
+adaR does parse them correctly.
+
+``` r
+ada_url_parse(linux_files[12345])
+```
+
+                                               href protocol username password host
+    1 file:///var/lib/dpkg/info/ruby2.7-doc.md5sums    file:                       
+      hostname port                               pathname search hash
+    1               /var/lib/dpkg/info/ruby2.7-doc.md5sums            
+
+What do the 32 failures of the `top100` dataset look like?
+
+``` r
+res$ada_na_lst[[1]]
+```
+
+     [1] "Researchers from the Vera Institute of Justice, with support from Google.org Fellows, collected data on the number of people in local jails at midyear in both 2018 and 2019 to provide timely information on how incarceration is changing in the United States. This report fills a gap u"                                                                                                                                                                                                                                                                                                             
+     [2] "http://rupaul%27s%20drag%20race%20all%20stars%207%20winners%20cast%20on%20this%20season%27s/"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+     [3] "http://application%20guidelines%20for%20registration%20of%20vetted%20mcs%20experts%20then%20international%20mcs%20network%20is%20dedicated%20to%20maintaining%20an%20updated%20register%20of%20vetted%20mcs%20experts.%20in%20order%20to%20reinvigorate%20the%202012%20register%2C%20the%20following%20terms%20detail%20the%20rules%20and%20procedures%20for%20interested%20individuals%20to%20apply%20for%20listing%20as%20network%20vetted%20mcs%20experts.%20the%20network%20invites%20you%20to%20submit%20an%20application%20in%20accordance%20with%20the%20rules%20set%20out%20in%20this%20notice./"
+     [4] "http://Learn More"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+     [5] ""                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+     [6] ""                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+     [7] "At the Vera Institute of Justice, we envision a society that respects the dignity of every person and safeguards justice for all—and our workplace reflects that same vision."                                                                                                                                                                                                                                                                                                                                                                                                                           
+     [8] ""                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+     [9] ""                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+    [10] ""                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+    [11] "Why Vera?"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+    [12] "We are agents of change, fighting for transformation of the criminal legal and immigration systems during a pivotal moment in American history. At the Vera Inst"                                                                                                                                                                                                                                                                                                                                                                                                                                        
+    [13] "Vera Institute of Justice (Vera) researchers collected year-end 2017 and 2018 prison population data directly from state departments of corrections and the federal Bureau of Prisons (BOP) on the number of people in state and federal prisons on December 31, 2018, in order to provide "                                                                                                                                                                                                                                                                                                             
+    [14] "http://In addition, this research has informed the development of the new IDA Vitality Index"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+    [15] ""                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+    [16] "http://A source close to the production of Chicago Fire confirmed to PEOPLE that star Taylor Kinney is taking a leave of absence from the series. Deadline was the first to report the news."                                                                                                                                                                                                                                                                                                                                                                                                            
+    [17] "http://Poland, Czech Republic, and Bulgaria have taken in the highest number of refugees"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+    [18] "http://Netflix's Our Great National Parks"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+    [19] "http://The Most Expensive (and Explosive) Celebrity Divorces of All Time"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+    [20] "http://Screen Actors Guild Awards"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+    [21] "http://Cardi B Appears in N.Y.C. Court as She's Given Deadline Extension to Finish Community Service"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+    [22] "http://Aria Vera Floral Design"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+    [23] "http://In 2006, Toews was the No. 3 pick in the NHL draft."                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+    [24] "http://Jessica Alba Celebrates Daughter Honor's Graduation: 'Off to High School, Baby Girl!'"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+    [25] "http://venus%20williams%20designed%20her%20latest%20athletic%20wear%20collection%20to%20%27bring%20energy%20to%20your%20workout%27/"                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+    [26] "http://RuPaul's Drag Race All Stars 7 Winners Cast on This Season's"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+    [27] "http://happy thanksgiving from us"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+    [28] "http://seeking%20information%20about%20the%20government's%20use%20and%20interpretation%20of%20Patriot%20Act%20Section%20215"                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+    [29] "/"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+    [30] "https%3A%2F%2Fbit.ly%2F32G1ciy"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+    [31] "&url=https://www.fao.org/europe/en"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+    [32] "&url=https://www.fao.org/europe/en"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+
+These are clearly invalid urls and thus should not be parsed into
+anything else then NA. Before parsing `adaR` always checks if a URL is
+WHATWG conform. If it is not, NA is returned. AFAIK, urltools does not
+provide such a test and tries to parse everything.
+
+A downside of this strict rule is that URLS without a protocol are not
+parsed.
+
+``` r
+ada_url_parse("domain.de/path/to/file") 
+```
+
+                        href protocol username password host hostname port pathname
+    1 domain.de/path/to/file     <NA>     <NA>     <NA> <NA>     <NA> <NA>     <NA>
+      search hash
+    1   <NA> <NA>
+
+One can argue if this is a [bug or a
+feature](https://github.com/schochastics/adaR/issues/36), but for the
+time being, we remain conform with the underlying c++ library in this
+case.
+
+``` r
+diff <- function(urls) {
+    ada <- ada_url_parse(urls)
+    utl <- urltools::url_parse(urls)
+    idx <- which(ada$hostname != utl$domain)
+    tibble::tibble(url = urls[idx],ada = ada$hostname[idx], urltools = utl$domain[idx])
+}
+
+res2 <- purrr::map_dfr(list(top100, wiki, corner, testdt_tracking$url), diff)
+nrow(res2)
+```
+
+    [1] 963
+
+In most of these cases, the reason why the two yield different results
+is because the URL does contain an “@” symbol from social media posts.
+
+## Parsing urls: runtime
 
 ``` r
 bench::mark(
-    ada = ada_get_hostname(top100),
-    urltools = domain(top100),
-    iterations = 1, check = FALSE
+    urltools = url_parse("https://user_1:password_1@example.org:8080/dir/../api?q=1#frag"),
+    ada = ada_url_parse("https://user_1:password_1@example.org:8080/dir/../api?q=1#frag"), iterations = 1000, check = FALSE
+)
+```
+
+    # A tibble: 2 × 6
+      expression      min   median `itr/sec` mem_alloc `gc/sec`
+      <bch:expr> <bch:tm> <bch:tm>     <dbl> <bch:byt>    <dbl>
+    1 urltools      362µs    426µs     2185.    2.49KB     6.58
+    2 ada           807µs    910µs     1001.   27.41KB     9.09
+
+``` r
+bench::mark(
+    urltools = url_parse(top100),
+    ada = ada_url_parse(top100), iterations = 1, check = FALSE
 )
 ```
 
@@ -56,5 +269,51 @@ bench::mark(
     # A tibble: 2 × 6
       expression      min   median `itr/sec` mem_alloc `gc/sec`
       <bch:expr> <bch:tm> <bch:tm>     <dbl> <bch:byt>    <dbl>
-    1 ada           961ms    961ms      1.04    2.73MB    15.6 
-    2 urltools      126ms    126ms      7.92    6.27MB     7.92
+    1 urltools      185ms    185ms      5.41    4.93MB     0   
+    2 ada           783ms    783ms      1.28   51.13MB     2.56
+
+In terms of runtime, urltools comes out on top. However, adaR provides a
+competitive performacne and can also deal with large amounts of URLs
+quite efficiently.
+
+## Public Suffic extraction
+
+Here we compare `adaR` with `urltools` and additionally with
+[`psl`](https://github.com/hrbrmstr/psl), a wrapper for a C library to
+extract public suffix.
+
+``` r
+bench::mark(
+    urltools = suffix_extract("https://user_1:password_1@example.org:8080/dir/../api?q=1#frag"),
+    ada = public_suffix("https://user_1:password_1@example.org:8080/dir/../api?q=1#frag"),
+    psl = psl::public_suffix("https://user_1:password_1@example.org:8080/dir/../api?q=1#frag"),iterations = 1000, check = FALSE
+)
+```
+
+    # A tibble: 3 × 6
+      expression      min   median `itr/sec` mem_alloc `gc/sec`
+      <bch:expr> <bch:tm> <bch:tm>     <dbl> <bch:byt>    <dbl>
+    1 urltools   366.02µs 429.95µs     2059.     103KB     6.20
+    2 ada         18.12µs  19.78µs    47447.    35.9KB     0   
+    3 psl          3.75µs   3.99µs   226058.    17.6KB     0   
+
+(*This comparison is not fair for `urltools` since the function
+`suffix_extract` does more than just extracting the public suffix.*)
+
+psl is clearly the fastest, which is not surprising given that it is
+based on extremely efficient C code. Our implementation is quite similar
+to how urltools handles suffixes and is not too far behind psl.
+
+So, while psl is clearly favored in terms of runtime, it comes with the
+drawback that it is only available via GitHub (which is not optimal if
+you want to depend on it) and has a system requirement that (according
+to GitHub) is not available on Windows. If those two things do not
+matter to you and you need to process an enormous amount of URLs, then
+you should use psl.
+
+## Summary
+
+adaR complements existing packages quite well. While it is (thus far)
+not as optimized in terms of runtime, it is still competitive and the
+added value of complying to URL standards can be important in different
+context.
