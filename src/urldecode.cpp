@@ -2,17 +2,8 @@
 
 using namespace Rcpp;
 
-//' Function to percent-decode characters in URLs
-//'
-//' Similar to [utils::URLdecode]
-//'
-//' @param url a character vector
-//' @export
-//' @examples
-//' url_decode2("Hello%20World")
-// [[Rcpp::export]]
-CharacterVector url_decode2(const CharacterVector& url) {
-  return sapply(url, [](const String& u) {
+
+std::string decode(String u) {
     std::string input = u;
     std::string output;
     size_t i = 0;
@@ -28,9 +19,29 @@ CharacterVector url_decode2(const CharacterVector& url) {
         i += 3;
       }
     }
-
     return output;
-  });
+}
+
+//' Function to percent-decode characters in URLs
+//'
+//' Similar to [utils::URLdecode]
+//'
+//' @param url a character vector
+//' @export
+//' @examples
+//' url_decode2("Hello%20World")
+// [[Rcpp::export]]
+CharacterVector url_decode2(CharacterVector& url) {
+  unsigned int input_size = url.size();
+  CharacterVector output(input_size);
+  for (unsigned int i = 0; i < input_size; i++) {
+    if (url[i] == NA_STRING) {
+      output[i] = NA_STRING;
+    } else {
+      output[i] = decode(url[i]);
+    }
+  }
+  return output;
 }
 
 std::string str_reverse(std::string x) {
