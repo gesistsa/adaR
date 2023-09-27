@@ -1,5 +1,5 @@
 Package: adaR
-Title: A fast WHATWG-compliant url parser
+Title: A Fast WHATWG-Compliant Url Parser
 Version: 0.1.0.9000
 Authors@R: 
     c(person("David", "Schoch", , "david@schochastics.net", role = c("aut", "cre"),
