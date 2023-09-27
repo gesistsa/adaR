@@ -1,0 +1,64 @@
+---
+title: "Benchmarking adaR"
+format: gfm
+---
+
+```{r load_pkgs}
+library(adaR)
+library(urltools)
+```
+
+## Data 
+We will use several different datasets provided by [ada-url](https://github.com/ada-url/url-various-datasets) and by the [webtrackR](https://github.com/schochastics/webtrackR) package
+
+```{r load_ada-data}
+top100 <- readLines("https://raw.githubusercontent.com/ada-url/url-various-datasets/main/top100/top100.txt")
+node_files <- readLines("https://raw.githubusercontent.com/ada-url/url-various-datasets/main/files/node_files.txt")
+linux_files <- readLines("https://raw.githubusercontent.com/ada-url/url-various-datasets/main/files/linux_files.txt")
+wiki <- readLines("https://raw.githubusercontent.com/ada-url/url-various-datasets/main/wikipedia/wikipedia_100k.txt")
+corner <- readLines("corner.txt")
+data("testdt_tracking", package = "webtrackR")
+```
+
+
+- `node_files.txt`: all source files from a given Node.js snapshot as URLs (43415 URLs)
+- `linux_files.txt`: all files from a Linux systems as URLs (169312 URLs).
+- `wikipedia_100k.txt`: 100k URLs from a snapshot of all Wikipedia articles as URLs (March 6th 2023)
+- `top100.txt`: crawl of the top visited 100 websites and extracts unique URLs
+- `corner.txt`: a small set of fictional urls which represent corner cases
+
+## Tools
+
+We benchmark `adaR` with the R package [`urltools`](https://github.com/Ironholds/urltools).
+
+
+```{r top100}
+ada_url_parse(top100)
+```
+
+parse_na <- function(urls){
+    ada <- ada_url_parse(urls)
+    utl <- urltools::url_parse(urls)
+    ada_na_lst <- list(urls[is.na(ada$hostname)])
+    utl_na_lst <- list(urls[is.na(utl$domain)])
+    tibble::tibble(
+        ada_na_abs = sum(is.na(ada$hostname)),
+        utl_na_abs = sum(is.na(utl$domain)),
+        ada_na_frac = ada_na_abs/length(urls),
+        utl_na_frac = utl_na_abs/length(urls),
+        ada_na_lst= ada_na_lst,
+        utl_na_lst = utl_na_lst
+    )    
+}
+
+res <- purrr::map_dfr(list(top100, node_files, linux_files, wiki, corner, testdt_tracking$url), parse_na)
+res[["dataset"]] <- c("top100","node_files","linux_files","wiki","corner","webtrack")
+
+diff <- function(urls){
+    ada <- ada_url_parse(urls)
+    utl <- urltools::url_parse(urls)
+    idx <- which(ada$hostname!=utl$domain)
+    tibble::tibble(ada=ada$hostname[idx],urltools=utl$domain[idx],url=urls[idx])
+}
+
+res2 <- purrr::map_dfr(list(top100, wiki, corner, testdt_tracking$url), diff)
