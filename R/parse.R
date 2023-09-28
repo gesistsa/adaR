@@ -30,6 +30,22 @@ ada_url_parse <- function(url, decode = TRUE) {
     df
 }
 
+#' Function to percent-decode characters in URLs
+#'
+#' Similar to [utils::URLdecode]
+#'
+#' @param url a character vector
+#' @export
+#' @examples
+#' url_decode2("Hello%20World")
+#' @export
+url_decode2 <- function(url) {
+    if (is.null(url)) {
+        return(character(0))
+    }
+    Rcpp_url_decode2(url)
+}
+
 ## NA/NULL-aware utils::URLdecode, hopefully without great performance impact
 .URLdecode <- function(URL) {
     if (is.null(URL)) {
