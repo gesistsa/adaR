@@ -4,11 +4,10 @@ std::string charsub(const ada_string stringi) {
   const char* res = stringi.data;
   size_t len = stringi.length;
   ada_owned_string stringi_new = ada_idna_to_unicode(res, len);
-  res = stringi_new.data;
-  len = stringi_new.length;
-  std::string output = std::string(res, 0, len);
+  std::string_view output(stringi_new.data, stringi_new.length);
+  std::string output2 = {output.begin(), output.end()};
   ada_free_owned_string(stringi_new);
-  return output;
+  return output2;
 }
 
 // [[Rcpp::export]]
