@@ -6,6 +6,8 @@
 <!-- badges: start -->
 
 [![R-CMD-check](https://github.com/schochastics/adaR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/schochastics/adaR/actions/workflows/R-CMD-check.yaml)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/adaR)](https://CRAN.R-project.org/package=adaR)
 <!-- badges: end -->
 
 adaR is a wrapper for [ada-url](https://github.com/ada-url/ada), a
@@ -17,6 +19,9 @@ It implements several auxilliary functions to work with urls:
 - public suffix extraction (top level domain excluding private domains)
   like [psl](https://github.com/hrbrmstr/psl)
 - fast c++ implementation of `utils::URLdecode` (~40x speedup)
+
+More general information on URL parsing can be found in the introductory
+vignette via `vignette("adaR")`.
 
 `adaR` is part of a series of R packages to analyse webtracking data:
 
@@ -36,9 +41,16 @@ You can install the development version of adaR from
 devtools::install_github("schochastics/adaR")
 ```
 
+The version on CRAN can be installed with
+
+``` r
+install.packages("adaR")
+```
+
 ## Example
 
-This is a basic example which shows all the returned components of a URL
+This is a basic example which shows all the returned components of a
+URL.
 
 ``` r
 library(adaR)
@@ -89,36 +101,44 @@ ada_url_parse("https://www.google.com/maps/place/Pennsylvania+Station/@40.751984
 ```
 
 A “raw” url parse using ada is extremely fast (see
-[ada-url.com](https://www.ada-url.com/)) but the implemented interface
-is not yet optimized. The performance is still very compatible with
+[ada-url.com](https://www.ada-url.com/)) but for this to carry over to R
+is tricky. The performance is still very compatible with
 `urltools::url_parse` with the noted advantage in accuracy in some
 practical circumstances.
 
 ``` r
 bench::mark(
-  ada = replicate(1000, ada_url_parse("https://user_1:password_1@example.org:8080/dir/../api?q=1#frag", decode = FALSE)),
-  urltools = replicate(1000, urltools::url_parse("https://user_1:password_1@example.org:8080/dir/../api?q=1#frag")),
-  iterations = 1, check = FALSE
+    ada = ada_url_parse("https://user_1:password_1@example.org:8080/dir/../api?q=1#frag", decode = FALSE),
+    urltools = urltools::url_parse("https://user_1:password_1@example.org:8080/dir/../api?q=1#frag"),
+    iterations = 1, check = FALSE
 )
-#> Warning: Some expressions had a GC in every iteration; so filtering is
-#> disabled.
 #> # A tibble: 2 × 6
 #>   expression      min   median `itr/sec` mem_alloc `gc/sec`
 #>   <bch:expr> <bch:tm> <bch:tm>     <dbl> <bch:byt>    <dbl>
-#> 1 ada           456ms    456ms      2.19    2.67MB     19.7
-#> 2 urltools      316ms    316ms      3.16    2.59MB     22.1
+#> 1 ada           469µs    469µs     2132.    2.49KB        0
+#> 2 urltools      407µs    407µs     2457.    2.49KB        0
 ```
+
+For further benchmark results, see `benchmark.md` in `data_raw`.
 
 ## Public Suffix extraction
 
 `public_suffix()` extracts their top level domain from the [public
 suffix list](https://publicsuffix.org/), **excluding** private domains.
-This functionality already exists in the R package
-[psl](https://github.com/hrbrmstr/psl).
 
-psl relies on a C library and is very fast. However, the package is not
-on CRAN and has the C library as system requirement. If these are no
-issues for you and you need that speed, please use that package.
+``` r
+urls <- c(
+    "https://subsub.sub.domain.co.uk",
+    "https://domain.api.gov.uk",
+    "https://thisisnotpart.butthisispartoftheps.kawasaki.jp"
+)
+public_suffix(urls)
+#> [1] "co.uk"                            "gov.uk"                          
+#> [3] "butthisispartoftheps.kawasaki.jp"
+```
+
+If you are wondering about the last url. The list also contains wildcard
+suffixes such as `*.kawasaki.jp` which need to be matched.
 
 ## Acknowledgement
 

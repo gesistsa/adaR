@@ -1,13 +1,15 @@
 Package: adaR
-Title: A Fast WHATWG-compliant URL Parser
+Title: A Fast WHATWG Compliant URL Parser
 Version: 0.1.0.9000
 Authors@R: 
     c(person("David", "Schoch", , "david@schochastics.net", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0003-2952-4812")),
       person("Chung-hong", "Chan", role = c("aut"), email = "chainsawtiney@gmail.com",
-	   comment = c(ORCID = "0000-0002-6232-7530"))
+	   comment = c(ORCID = "0000-0002-6232-7530")),
+      person("Yagiz", "Nizipli", role = c("ctb", "cph"),comment = "author of ada-url : <https://github.com/ada-url/ada>"),
+      person("Daniel", "Lemire", role = c("ctb", "cph"),comment = "author of ada-url : <https://github.com/ada-url/ada>") 
      )
-Description: A wrapper for ada-url, a WHATWG-compliant and fast URL parser written in modern C++. Also contains auxiliary functions to extract public suffix.
+Description: A wrapper for ada-url, a WHATWG-compliant and fast URL parser written in modern C++. Also contains auxiliary functions such as a public suffix extractor.
 URL: https://schochastics.github.io/adaR/, https://github.com/schochastics/adaR
 BugReports: https://github.com/schochastics/adaR/issues
 License: MIT + file LICENSE
