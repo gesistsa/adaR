@@ -1,4 +1,6 @@
-# adaR 0.1.0.9000
+# adaR 0.2.0.9000
+
+# adaR 0.2.0
 
 * split C++ file to isolate original ada-url code h/t Chung-hong Chan (@chainsawriot)
 * add support for public suffix extraction #14
