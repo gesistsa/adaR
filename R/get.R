@@ -92,7 +92,10 @@ ada_get_protocol <- function(url, decode = TRUE) {
 R_ada_get_domain <- function(url) {
     host <- ada_get_hostname(url)
     host <- sub("^www\\.", "", host)
-    ps <- public_suffix(url)
+    prot <- ada_get_protocol(url)
+    url_new <- paste0(prot, host)
+
+    ps <- public_suffix(url_new)
     pat <- paste0("\\.", ps, "$")
 
     dom <- mapply(function(x, y) sub(x, "", y), pat, host, USE.NAMES = FALSE)

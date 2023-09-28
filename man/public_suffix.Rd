@@ -2,13 +2,22 @@
 % Please edit documentation in R/psl.R
 \name{public_suffix}
 \alias{public_suffix}
-\title{Extract the public suffix from a vector of domains}
+\title{Extract the public suffix from a vector of domains or hostnames}
 \usage{
-public_suffix(url)
+public_suffix(domains)
 }
 \arguments{
-\item{url}{character. one or more URL to be parsed}
+\item{domains}{character. vector of domains or hostnames}
 }
 \description{
-Extract the public suffix from a vector of domains
+Extract the public suffix from a vector of domains or hostnames
+}
+\examples{
+public_suffix("http://example.com")
+
+# doesn't work for general URLs
+public_suffix("http://example.com/path/to/file")
+
+# extracting hostname first does the trick
+public_suffix(ada_get_hostname("http://example.com/path/to/file"))
 }

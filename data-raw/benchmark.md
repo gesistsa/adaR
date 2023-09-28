@@ -9,7 +9,7 @@ library(urltools)
 
 We will use several different datasets provided by
 [ada-url](https://github.com/ada-url/url-various-datasets) and by the
-[webtrackR](https://github.com/schochastics/webtrackR) package
+[webtrackR](https://github.com/schochastics/webtrackR) package.
 
 ``` r
 top100 <- readLines("https://raw.githubusercontent.com/ada-url/url-various-datasets/main/top100/top100.txt")
@@ -57,10 +57,11 @@ ada_url_parse("http://sub.domain.co.uk/path/to/place")
     1 sub.domain.co.uk sub.domain.co.uk      /path/to/place            
 
 For fairly regular looking urls, they do provide the same output,
-however with a slighlty different naming scheme (see the vignette for an
-explanation of terms).
+however with a slighlty different naming scheme. The introductory
+vignette `vignette("adaR")` gives an explanation of the meaning of each
+term.
 
-let us look at a more complex example.
+Let us know look at a more complex example.
 
 ``` r
 urltools::url_parse("https://user_1:password_1@example.org:8080/dir/../api?q=1#frag")
@@ -95,22 +96,20 @@ urltools::url_parse("https://fosstodon.org/@schochastics/111105280215225729")
     1  https schochastics <NA> 111105280215225729      <NA>     <NA>
 
 ``` r
-ada_url_parse("https://fosstodon.org/@schochastics/111105280215225729")
+ada_url_parse("https://fosstodon.org/@schochastics/111105280215225729")[,-1]
 ```
 
-                                                        href protocol username
-    1 https://fosstodon.org/@schochastics/111105280215225729   https:         
-      password          host      hostname port                          pathname
-    1          fosstodon.org fosstodon.org      /@schochastics/111105280215225729
-      search hash
-    1            
+      protocol username password          host      hostname port
+    1   https:                   fosstodon.org fosstodon.org     
+                               pathname search hash
+    1 /@schochastics/111105280215225729            
 
-`urltool` fails to parse these links correctly, while `adaR` does catch
-this. To answer the question of differences betwen the packages a bit
-more broadly, we run the two parsers on the benchmark URLs described
-above.
+`urltool` does not parse the links correctly, while `adaR` does catch
+this special case. To answer the question of differences between the
+packages a bit more broadly, we run the two parsers on the benchmark
+URLs described above.
 
-First, in terms of when they fail to parse anything,independent if the
+First, in terms of when they fail to parse anything, independent if the
 output is correct or not.
 
 ``` r
@@ -203,9 +202,9 @@ res$ada_na_lst[[1]]
     [32] "&url=https://www.fao.org/europe/en"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
 
 These are clearly invalid urls and thus should not be parsed into
-anything else then NA. Before parsing `adaR` always checks if a URL is
-WHATWG conform. If it is not, NA is returned. AFAIK, urltools does not
-provide such a test and tries to parse everything.
+anything else then `NA`. Before parsing `adaR` always checks if a URL is
+WHATWG conform. If it is not, `NA` is returned. `urltools` does not
+provide such a test and tries its best to parse any input.
 
 A downside of this strict rule is that URLS without a protocol are not
 parsed.
@@ -219,10 +218,13 @@ ada_url_parse("domain.de/path/to/file")
       search hash
     1   <NA> <NA>
 
-One can argue if this is a [bug or a
+One can argue if this is either a [bug or a
 feature](https://github.com/schochastics/adaR/issues/36), but for the
 time being, we remain conform with the underlying c++ library in this
 case.
+
+As a second test, we look at the urls that where parsed differently by
+urltools and adaR
 
 ``` r
 diff <- function(urls) {
@@ -238,8 +240,96 @@ nrow(res2)
 
     [1] 963
 
+``` r
+res2
+```
+
+    # A tibble: 963 × 3
+       url                                                            ada   urltools
+       <chr>                                                          <chr> <chr>   
+     1 https://www.tiktok.com/@people                                 www.… people  
+     2 https://flipboard.com/@people                                  flip… people  
+     3 https://medium.com/@circulareconomy                            medi… circula…
+     4 https://tiktok.com/@ellenmacarthurfoundation                   tikt… ellenma…
+     5 https://mastodon.social/@Mozilla                               mast… mozilla 
+     6 https://www.tiktok.com/@mozilla                                www.… mozilla 
+     7 https://www.tiktok.com/@goodwillintl                           www.… goodwil…
+     8 https://medium.com/@codeorg/cs-helps-students-outperform-in-s… medi… codeorg 
+     9 https://medium.com/@codeorg/code-org-resourceful-teachers-hig… medi… codeorg 
+    10 https://medium.com/@codeorg/study-computer-science-students-m… medi… codeorg 
+    # ℹ 953 more rows
+
+``` r
+table(res2$ada)
+```
+
+
+                                                          
+                                                      215 
+                           [2001:db8:85a3::8a2e:370:7334] 
+                                                        1 
+                                               abs.gov.au 
+                                                        1 
+                                     blog.kaporcenter.org 
+                                                       12 
+                                      careers.walmart.com 
+                                                        1 
+                                          docs.github.com 
+                                                        3 
+                                              example.com 
+                                                        2 
+                                        example.испытание 
+                                                        1 
+                                            flipboard.com 
+                                                       10 
+    hqepc&list=plkdbwuz2pblxz1h9g8snvlu6ug5hq2x-u&index=2 
+                                                        1 
+                                              journa.host 
+                                                        1 
+                                           mastodon.green 
+                                                        1 
+                                          mastodon.social 
+                                                        1 
+                                               medium.com 
+                                                      444 
+                                        scamawareness.org 
+                                                        1 
+                                    social.opensource.org 
+                                                        1 
+                                  support.theguardian.com 
+                                                        1 
+                                               tiktok.com 
+                                                        2 
+                                          truthsocial.com 
+                                                        1 
+                                              twitter.com 
+                                                        3 
+                                               w3c.social 
+                                                        1 
+                                          web.archive.org 
+                                                        1 
+                                         www.7‐eleven.com 
+                                                        2 
+                                              www.bsa.org 
+                                                        1 
+                                           www.flickr.com 
+                                                        5 
+                                           www.google.com 
+                                                       12 
+                                              www.ilo.org 
+                                                        1 
+                                           www.tiktok.com 
+                                                      228 
+                                          www.twitter.com 
+                                                        1 
+                                             www.wqln.org 
+                                                        1 
+                                          www.youtube.com 
+                                                        7 
+
 In most of these cases, the reason why the two yield different results
-is because the URL does contain an “@” symbol from social media posts.
+is because the URL does contain an “@” symbol from social media posts
+which urltools is not able to pick up.
 
 ## Parsing urls: runtime
 
@@ -253,8 +343,8 @@ bench::mark(
     # A tibble: 2 × 6
       expression      min   median `itr/sec` mem_alloc `gc/sec`
       <bch:expr> <bch:tm> <bch:tm>     <dbl> <bch:byt>    <dbl>
-    1 urltools      366µs    444µs     2099.    2.49KB     6.31
-    2 ada           561µs    685µs     1330.    2.49KB     8.03
+    1 urltools      115µs    159µs     6326.    2.49KB     12.7
+    2 ada           177µs    241µs     4154.    2.49KB     16.7
 
 ``` r
 bench::mark(
@@ -269,8 +359,8 @@ bench::mark(
     # A tibble: 2 × 6
       expression      min   median `itr/sec` mem_alloc `gc/sec`
       <bch:expr> <bch:tm> <bch:tm>     <dbl> <bch:byt>    <dbl>
-    1 urltools      273ms    273ms      3.66    4.93MB     3.66
-    2 ada           323ms    323ms      3.10    7.96MB     0   
+    1 urltools      160ms    160ms      6.27    6.08MB     6.27
+    2 ada           163ms    163ms      6.15    9.18MB     0   
 
 In terms of runtime, urltools comes out on top. However, adaR provides a
 very competitive performance and can also deal with large amounts of
@@ -293,9 +383,9 @@ bench::mark(
     # A tibble: 3 × 6
       expression      min   median `itr/sec` mem_alloc `gc/sec`
       <bch:expr> <bch:tm> <bch:tm>     <dbl> <bch:byt>    <dbl>
-    1 urltools   371.64µs 474.04µs     1872.     103KB     7.52
-    2 ada          19.6µs  20.81µs    42495.    35.9KB     0   
-    3 psl          3.78µs   4.13µs   180204.    17.6KB     0   
+    1 urltools   124.92µs    171µs     5647.     103KB     11.3
+    2 ada          6.72µs   10.5µs    80483.    35.9KB     80.6
+    3 psl          1.52µs    1.8µs   474131.    17.6KB      0  
 
 (*This comparison is not fair for `urltools` since the function
 `suffix_extract` does more than just extracting the public suffix.*)

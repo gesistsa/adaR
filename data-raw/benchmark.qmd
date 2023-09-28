@@ -10,7 +10,8 @@ library(urltools)
 ```
 
 ## Setup
-We will use several different datasets provided by [ada-url](https://github.com/ada-url/url-various-datasets) and by the [webtrackR](https://github.com/schochastics/webtrackR) package
+
+We will use several different datasets provided by [ada-url](https://github.com/ada-url/url-various-datasets) and by the [webtrackR](https://github.com/schochastics/webtrackR) package.
 
 ```{r}
 #| label: load_ada-data
@@ -35,16 +36,15 @@ We benchmark `adaR` with the R package [`urltools`](https://github.com/Ironholds
 
 ## Parsing urls: correctness
 
-
 Let us first compare the standard output of the respective url parsing functions.
 ```{r}
 #| label: output_-_comparison
 urltools::url_parse("http://sub.domain.co.uk/path/to/place")
 ada_url_parse("http://sub.domain.co.uk/path/to/place")
 ```
-For fairly regular looking urls, they do provide the same output, however with a slighlty different naming scheme (see the vignette for an explanation of terms).
+For fairly regular looking urls, they do provide the same output, however with a slighlty different naming scheme. The introductory vignette `vignette("adaR")` gives an explanation of the meaning of each term.
 
-let us look at a more complex example.
+Let us know look at a more complex example.
 ```{r}
 #| label: long_example
 urltools::url_parse("https://user_1:password_1@example.org:8080/dir/../api?q=1#frag")
@@ -57,12 +57,12 @@ The must striking difference between the two packages occurs for URLs tha contai
 ```{r}
 #| label: at_in_link
 urltools::url_parse("https://fosstodon.org/@schochastics/111105280215225729")
-ada_url_parse("https://fosstodon.org/@schochastics/111105280215225729")
+ada_url_parse("https://fosstodon.org/@schochastics/111105280215225729")[,-1]
 ```
 
-`urltool` fails to parse these links correctly, while `adaR` does catch this. To answer the question of differences betwen the packages a bit more broadly, we run the two parsers on the  benchmark URLs described above.
+`urltool` does not parse the links correctly, while `adaR` does catch this special case. To answer the question of differences between the packages a bit more broadly, we run the two parsers on the benchmark URLs described above.
 
-First, in terms of when they fail to parse anything,independent if the output is correct or not.
+First, in terms of when they fail to parse anything, independent if the output is correct or not.
 ```{r}
 #| label: na_analysis
 parse_na <- function(urls) {
@@ -105,7 +105,7 @@ What do the 32 failures of the `top100` dataset look like?
 res$ada_na_lst[[1]]
 ```
 
-These are clearly invalid urls and thus should not be parsed into anything else then NA. Before parsing `adaR` always checks if a URL is WHATWG conform. If it is not, NA is returned. AFAIK, urltools does not provide such a test and tries to parse everything. 
+These are clearly invalid urls and thus should not be parsed into anything else then `NA`. Before parsing `adaR` always checks if a URL is WHATWG conform. If it is not, `NA` is returned. `urltools` does not provide such a test and tries its best to parse any input. 
 
 A downside of this strict rule is that URLS without a protocol are not parsed.
 
@@ -114,8 +114,9 @@ A downside of this strict rule is that URLS without a protocol are not parsed.
 ada_url_parse("domain.de/path/to/file") 
 ```
 
-One can argue if this is a [bug or a feature](https://github.com/schochastics/adaR/issues/36), but for the time being, we remain conform with the underlying c++ library in this case.
+One can argue if this is either a [bug or a feature](https://github.com/schochastics/adaR/issues/36), but for the time being, we remain conform with the underlying c++ library in this case.
 
+As a second test, we look at the urls that where parsed differently by urltools and adaR
 ```{r}
 #| label: diff
 diff <- function(urls) {
@@ -127,9 +128,11 @@ diff <- function(urls) {
 
 res2 <- purrr::map_dfr(list(top100, wiki, corner, testdt_tracking$url), diff)
 nrow(res2)
+res2
+table(res2$ada)
 ```
 
-In most of these cases, the reason why the two yield different results is because the URL does contain an "@" symbol from social media posts.
+In most of these cases, the reason why the two yield different results is because the URL does contain an "@" symbol from social media posts which urltools is not able to pick up.
 
 ## Parsing urls: runtime
 
