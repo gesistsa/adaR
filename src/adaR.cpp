@@ -6,7 +6,9 @@ std::string charsub(const ada_string stringi) {
   ada_owned_string stringi_new = ada_idna_to_unicode(res, len);
   res = stringi_new.data;
   len = stringi_new.length;
-  return std::string(res, 0, len);
+  std::string output = std::string(res, 0, len);
+  ada_free_owned_string(stringi_new);
+  return output;
 }
 
 // [[Rcpp::export]]
@@ -24,8 +26,8 @@ DataFrame Rcpp_ada_parse(const CharacterVector& input_vec) {
   CharacterVector hash(n);
   for (unsigned int i = 0; i < n; i++) {
     String s = input_vec[i];
-    const char* input = s.get_cstring();
-    ada_url url = ada_parse(input, std::strlen(input));
+    std::string_view input(s.get_cstring());
+    ada_url url = ada_parse(input.data(), input.length());
     if (ada_is_valid(url)) {
       href[i] = charsub(ada_get_href(url));
       protocol[i] = charsub(ada_get_protocol(url));
@@ -49,6 +51,7 @@ DataFrame Rcpp_ada_parse(const CharacterVector& input_vec) {
       search[i] = NA_STRING;
       hash[i] = NA_STRING;
     }
+    ada_free(url);
   }
   return (DataFrame::create(Named("href") = href, _["protocol"] = protocol,
                             _["username"] = username, _["password"] = password,
@@ -63,13 +66,14 @@ LogicalVector Rcpp_ada_has(const CharacterVector& url_vec, std::function<bool(ad
   LogicalVector out(n);
   for (unsigned int i = 0; i < n; i++) {
     String s = url_vec[i];
-    const char* input = s.get_cstring();
-    ada_url url = ada_parse(input, std::strlen(input));
+    std::string_view input(s.get_cstring());
+    ada_url url = ada_parse(input.data(), input.length());
     if (!ada_is_valid(url)) {
       out[i] = NA_LOGICAL;
     } else {
       out[i] = func(url);
     }
+    ada_free(url);
   }
   return out;
 }
@@ -120,13 +124,14 @@ CharacterVector Rcpp_ada_get(const CharacterVector& url_vec, std::function<ada_s
   CharacterVector out(n);
   for (int i = 0; i < url_vec.length(); i++) {
     String s = url_vec[i];
-    const char* input = s.get_cstring();
-    ada_url url = ada_parse(input, std::strlen(input));
+    std::string_view input(s.get_cstring());
+    ada_url url = ada_parse(input.data(), input.length());
     if (!ada_is_valid(url)) {
       out[i] = NA_STRING;
     } else {
       out[i] = charsub(func(url));
     }
+    ada_free(url);
   }
   return (out);
 }
