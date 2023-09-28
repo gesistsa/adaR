@@ -92,6 +92,12 @@ ada_get_protocol <- function(url, decode = TRUE) {
 R_ada_get_domain <- function(url) {
     host <- ada_get_hostname(url)
     host <- sub("^www\\.", "", host)
+    match <- ifelse(ada_has_port(url), paste0(":", ada_get_port(url), ".*"), "")
+    url <- mapply(function(x, y) gsub(x, "", y), match, url, USE.NAMES = FALSE)
+
+    match <- gregexpr("(?<![:/])/.*", url, perl = TRUE)
+
+    url <- vapply(regmatches(url, match, invert = TRUE), function(x) x[1], character(1))
     ps <- public_suffix(url)
     pat <- paste0("\\.", ps, "$")
 
