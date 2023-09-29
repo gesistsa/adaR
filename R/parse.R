@@ -35,6 +35,7 @@ ada_url_parse <- function(url, decode = TRUE) {
 #' Similar to [utils::URLdecode]
 #'
 #' @param url a character vector
+#' @return precent decoded URLs as character vector
 #' @export
 #' @examples
 #' url_decode2("Hello%20World")

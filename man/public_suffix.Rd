@@ -9,6 +9,9 @@ public_suffix(domains)
 \arguments{
 \item{domains}{character. vector of domains or hostnames}
 }
+\value{
+public suffixes of domains as character vector
+}
 \description{
 Extract the public suffix from a vector of domains or hostnames
 }

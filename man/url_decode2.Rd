@@ -9,6 +9,9 @@ url_decode2(url)
 \arguments{
 \item{url}{a character vector}
 }
+\value{
+precent decoded URLs as character vector
+}
 \description{
 Similar to \link[utils:URLencode]{utils::URLdecode}
 }

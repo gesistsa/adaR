@@ -2,6 +2,7 @@
 #'
 #' @param domains character. vector of domains or hostnames
 #' @export
+#' @return public suffixes of domains as character vector
 #' @examples
 #' public_suffix("http://example.com")
 #'
