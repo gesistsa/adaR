@@ -16,20 +16,20 @@ URL parser written in modern C++ .
 
 It implements several auxilliary functions to work with urls:
 
-- public suffix extraction (top level domain excluding private domains)
-  like [psl](https://github.com/hrbrmstr/psl)
-- fast c++ implementation of `utils::URLdecode` (~40x speedup)
+-   public suffix extraction (top level domain excluding private
+    domains) like [psl](https://github.com/hrbrmstr/psl)
+-   fast c++ implementation of `utils::URLdecode` (\~40x speedup)
 
 More general information on URL parsing can be found in the introductory
 vignette via `vignette("adaR")`.
 
 `adaR` is part of a series of R packages to analyse webtracking data:
 
-- [webtrackR](https://github.com/schochastics/webtrackR): preprocess raw
-  webtracking data
-- [domainator](https://github.com/schochastics/domainator): classify
-  domains
-- [adaR](https://github.com/schochastics/adaR): parse urls
+-   [webtrackR](https://github.com/schochastics/webtrackR): preprocess
+    raw webtracking data
+-   [domainator](https://github.com/schochastics/domainator): classify
+    domains
+-   [adaR](https://github.com/schochastics/adaR): parse urls
 
 ## Installation
 
@@ -102,7 +102,7 @@ ada_url_parse("https://www.google.com/maps/place/Pennsylvania+Station/@40.751984
 
 A “raw” url parse using ada is extremely fast (see
 [ada-url.com](https://www.ada-url.com/)) but for this to carry over to R
-is tricky. The performance is still very compatible with
+is tricky. The performance is still compatible with
 `urltools::url_parse` with the noted advantage in accuracy in some
 practical circumstances.
 
@@ -115,8 +115,8 @@ bench::mark(
 #> # A tibble: 2 × 6
 #>   expression      min   median `itr/sec` mem_alloc `gc/sec`
 #>   <bch:expr> <bch:tm> <bch:tm>     <dbl> <bch:byt>    <dbl>
-#> 1 ada           469µs    469µs     2132.    2.49KB        0
-#> 2 urltools      407µs    407µs     2457.    2.49KB        0
+#> 1 ada           821µs    821µs     1219.    2.49KB        0
+#> 2 urltools      535µs    535µs     1870.    2.49KB        0
 ```
 
 For further benchmark results, see `benchmark.md` in `data_raw`.

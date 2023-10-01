@@ -154,7 +154,7 @@ bench::mark(
 )
 ```
 
-In terms of runtime, urltools comes out on top. However, adaR provides a very competitive performance and can also deal with large amounts of URLs quite efficiently.
+In terms of runtime, both are almost indiscernible. The advantage of adaR is its added accuracy.
 
 ## Public Suffic extraction
 
@@ -177,4 +177,4 @@ So, while psl is clearly favored in terms of runtime, it comes with the drawback
 
 ## Summary
 
-adaR complements existing packages quite well. While it is (thus far) not as optimized in terms of runtime, it is still competitive and the added value of complying to URL standards can be important in different context. 
+adaR complements existing packages quite well. It is for most taks competitive in terms of runtime but comes with the added value of complying to URL standards which can be important in certain situations. 

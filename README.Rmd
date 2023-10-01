@@ -84,7 +84,7 @@ ada_url_parse("https://www.google.com/maps/place/Pennsylvania+Station/@40.751984
 ```
 
 A "raw" url parse using ada is extremely fast (see [ada-url.com](https://www.ada-url.com/)) but for this to carry over to R is tricky. 
-The performance is still very compatible with `urltools::url_parse` with the noted advantage in accuracy in some
+The performance is still compatible with `urltools::url_parse` with the noted advantage in accuracy in some
 practical circumstances.
 
 ```{r faster}

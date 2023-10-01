@@ -343,8 +343,8 @@ bench::mark(
     # A tibble: 2 × 6
       expression      min   median `itr/sec` mem_alloc `gc/sec`
       <bch:expr> <bch:tm> <bch:tm>     <dbl> <bch:byt>    <dbl>
-    1 urltools      253µs    261µs     3770.    2.49KB     7.55
-    2 ada           382µs    391µs     2523.    2.49KB    10.1 
+    1 urltools      358µs    438µs     2231.    2.49KB     15.7
+    2 ada           522µs    627µs     1512.    2.49KB     12.2
 
 ``` r
 bench::mark(
@@ -359,8 +359,8 @@ bench::mark(
     # A tibble: 2 × 6
       expression      min   median `itr/sec` mem_alloc `gc/sec`
       <bch:expr> <bch:tm> <bch:tm>     <dbl> <bch:byt>    <dbl>
-    1 urltools      215ms    215ms      4.66    6.08MB     4.66
-    2 ada           169ms    169ms      5.93    9.18MB     0   
+    1 urltools      239ms    239ms      4.18    6.08MB     4.18
+    2 ada           243ms    243ms      4.12    9.18MB     0   
 
 In terms of runtime, urltools comes out on top. However, adaR provides a
 very competitive performance and can also deal with large amounts of
@@ -383,9 +383,9 @@ bench::mark(
     # A tibble: 3 × 6
       expression      min   median `itr/sec` mem_alloc `gc/sec`
       <bch:expr> <bch:tm> <bch:tm>     <dbl> <bch:byt>    <dbl>
-    1 urltools   257.68µs  271.2µs     3500.     103KB     7.01
-    2 ada         15.63µs  19.12µs    50826.    35.9KB    50.9 
-    3 psl          3.88µs   4.05µs   240812.    17.6KB     0   
+    1 urltools   374.82µs 461.52µs     1975.     103KB     9.92
+    2 ada         19.23µs  30.34µs    32993.    35.9KB    33.0 
+    3 psl          4.79µs   5.36µs   159206.    17.6KB     0   
 
 (*This comparison is not fair for `urltools` since the function
 `suffix_extract` does more than just extracting the public suffix.*)
