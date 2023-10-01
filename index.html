@@ -152,7 +152,7 @@
 <span><span class="co">#&gt; 1 /maps/place/Pennsylvania+Station/@40.7519848,-74.0015045,14.7z/data=!4m   5!3m4!1s0x89c259ae15b2adcb:0x7955420634fd7eba!8m2!3d40.750568!4d-73.993519</span></span>
 <span><span class="co">#&gt;   search hash</span></span>
 <span><span class="co">#&gt; 1</span></span></code></pre></div>
-<p>A “raw” url parse using ada is extremely fast (see <a href="https://www.ada-url.com/" class="external-link">ada-url.com</a>) but for this to carry over to R is tricky. The performance is still very compatible with <code>urltools::url_parse</code> with the noted advantage in accuracy in some practical circumstances.</p>
+<p>A “raw” url parse using ada is extremely fast (see <a href="https://www.ada-url.com/" class="external-link">ada-url.com</a>) but for this to carry over to R is tricky. The performance is still compatible with <code>urltools::url_parse</code> with the noted advantage in accuracy in some practical circumstances.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">bench</span><span class="fu">::</span><span class="fu">mark</span><span class="op">(</span></span>
 <span>    ada <span class="op">=</span> <span class="fu"><a href="reference/ada_url_parse.html">ada_url_parse</a></span><span class="op">(</span><span class="st">"https://user_1:password_1@example.org:8080/dir/../api?q=1#frag"</span>, decode <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>,</span>
@@ -162,8 +162,8 @@
 <span><span class="co">#&gt; # A tibble: 2 × 6</span></span>
 <span><span class="co">#&gt;   expression      min   median `itr/sec` mem_alloc `gc/sec`</span></span>
 <span><span class="co">#&gt;   &lt;bch:expr&gt; &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt; 1 ada           469µs    469µs     2132.    2.49KB        0</span></span>
-<span><span class="co">#&gt; 2 urltools      407µs    407µs     2457.    2.49KB        0</span></span></code></pre></div>
+<span><span class="co">#&gt; 1 ada           821µs    821µs     1219.    2.49KB        0</span></span>
+<span><span class="co">#&gt; 2 urltools      535µs    535µs     1870.    2.49KB        0</span></span></code></pre></div>
 <p>For further benchmark results, see <code>benchmark.md</code> in <code>data_raw</code>.</p>
 </div>
 <div class="section level2">
