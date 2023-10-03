@@ -2,11 +2,7 @@
     if (is.null(url)) {
         return(character(0))
     }
-    out <- func(url)
-    if (isTRUE(decode)) {
-        return(url_decode2(out))
-    }
-    return(out)
+    func(url, decode)
 }
 
 #' Get a specific component of URL
@@ -110,5 +106,12 @@ R_ada_get_domain <- function(url) {
 #' @rdname ada_get_href
 #' @export
 ada_get_domain <- function(url, decode = TRUE) {
-    .get(url, decode, R_ada_get_domain)
+    if (is.null(url)) {
+        return(character(0))
+    }
+    res <- R_ada_get_domain(url)
+    if (decode) {
+        return(url_decode2(res))
+    }
+    return(res)
 }
