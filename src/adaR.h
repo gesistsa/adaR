@@ -8,7 +8,7 @@ using namespace Rcpp;
 std::string charsub(ada_string stringi);
 
 // cash cow
-DataFrame Rcpp_ada_parse(CharacterVector input_vec, IntegerVector length_vec, bool decode);
+DataFrame Rcpp_ada_parse(CharacterVector input_vec, bool decode);
 
 // has_*
 LogicalVector Rcpp_ada_has_credentials(const CharacterVector& url_vec);
