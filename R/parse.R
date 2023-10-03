@@ -16,18 +16,7 @@ ada_url_parse <- function(url, decode = TRUE) {
             search = character(0), hash = character(0)
         ), row.names = integer(0), class = "data.frame"))
     }
-    url_parsed <- Rcpp_ada_parse(url)
-    if (isTRUE(decode)) {
-        return(.decoder(url_parsed))
-    }
-    return(url_parsed)
-}
-
-.decoder <- function(df) {
-    for (i in seq_len(ncol(df))) {
-        df[[i]] <- .URLdecode(df[[i]])
-    }
-    df
+    Rcpp_ada_parse(url, decode)
 }
 
 #' Function to percent-decode characters in URLs
@@ -45,15 +34,4 @@ url_decode2 <- function(url) {
         return(character(0))
     }
     Rcpp_url_decode2(url)
-}
-
-## NA/NULL-aware utils::URLdecode, hopefully without great performance impact
-.URLdecode <- function(URL) {
-    if (is.null(URL)) {
-        return(character(0))
-    }
-    non_na_index <- which(!is.na(URL))
-    URL[non_na_index] <- url_decode2(URL[non_na_index])
-    URL[!non_na_index] <- NA_character_
-    return(URL)
 }

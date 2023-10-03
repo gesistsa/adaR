@@ -1,7 +1,4 @@
-#include <Rcpp.h>
-
-using namespace Rcpp;
-
+#include "urldecode.h"
 
 std::string decode(String u) {
     std::string input = u;
@@ -52,6 +49,5 @@ CharacterVector url_reverse(CharacterVector& urls) {
       output[i] = str_reverse(Rcpp::as<std::string>(urls[i]));
     }
   }
-
   return output;
 }
