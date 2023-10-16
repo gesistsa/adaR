@@ -117,6 +117,18 @@ Rcpp_ada_set_hash <- function(url_vec, subst, decode) {
     .Call(`_adaR_Rcpp_ada_set_hash`, url_vec, subst, decode)
 }
 
+Rcpp_ada_clear_port <- function(url_vec, decode) {
+    .Call(`_adaR_Rcpp_ada_clear_port`, url_vec, decode)
+}
+
+Rcpp_ada_clear_hash <- function(url_vec, decode) {
+    .Call(`_adaR_Rcpp_ada_clear_hash`, url_vec, decode)
+}
+
+Rcpp_ada_clear_search <- function(url_vec, decode) {
+    .Call(`_adaR_Rcpp_ada_clear_search`, url_vec, decode)
+}
+
 Rcpp_url_decode2 <- function(url) {
     .Call(`_adaR_Rcpp_url_decode2`, url)
 }

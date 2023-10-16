@@ -302,3 +302,44 @@ CharacterVector Rcpp_ada_set_hash(const CharacterVector& url_vec,
                                   const CharacterVector& subst, bool decode) {
   return Rcpp_ada_set<void>(url_vec, &ada_set_hash, subst, decode);
 }
+
+// higher order function for ada_clear_*
+CharacterVector Rcpp_ada_clear(const CharacterVector& url_vec,
+                               std::function<void(ada_url)> func, bool decode) {
+  unsigned int n = url_vec.length();
+  CharacterVector out(n);
+  for (int i = 0; i < url_vec.length(); i++) {
+    String s = url_vec[i];
+    std::string_view input(s.get_cstring());
+    ada_url url = ada_parse(input.data(), input.length());
+    if (!ada_is_valid(url)) {
+      out[i] = NA_STRING;
+    } else {
+      func(url);
+      out[i] = charsub(ada_get_href(url));
+    }
+    ada_free(url);
+  }
+  if (decode) {
+    out = Rcpp_url_decode2(out);
+  }
+  return (out);
+}
+
+// [[Rcpp::export]]
+CharacterVector Rcpp_ada_clear_port(const CharacterVector& url_vec,
+                                    bool decode) {
+  return Rcpp_ada_clear(url_vec, &ada_clear_port, decode);
+}
+
+// [[Rcpp::export]]
+CharacterVector Rcpp_ada_clear_hash(const CharacterVector& url_vec,
+                                    bool decode) {
+  return Rcpp_ada_clear(url_vec, &ada_clear_hash, decode);
+}
+
+// [[Rcpp::export]]
+CharacterVector Rcpp_ada_clear_search(const CharacterVector& url_vec,
+                                      bool decode) {
+  return Rcpp_ada_clear(url_vec, &ada_clear_search, decode);
+}
