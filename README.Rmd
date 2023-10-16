@@ -98,6 +98,13 @@ bench::mark(
 
 For further benchmark results, see `benchmark.md` in `data_raw`.
 
+There are four more groups of functions available to work with url parsing:
+
+- `ada_get_*()` get a specific component 
+- `ada_has_*()` check if a specific component is present
+- `ada_set_*()` set a specific component from URLS
+- `ada_clear_*()` remove a specific component from URLS
+
 ## Public Suffix extraction
 
 `public_suffix()` extracts their top level domain from the [public suffix list](https://publicsuffix.org/), **excluding** private domains. 
