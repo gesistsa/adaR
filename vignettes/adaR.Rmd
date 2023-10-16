@@ -151,6 +151,19 @@ ada_get_hostname(corner_cases)
 ada_has_search(corner_cases)
 ```
 
+`ada_set_*()` can be used to set specific components of a URL.
+```{r ada_set}
+ada_set_hostname("https://example.de/test", "example.com")
+```
+
+`ada_clear_*()` can be used to remove certain components.
+```{r ada_clear}
+url <- "https://user_1:password_1@example.org:8080/dir/../api?q=1#frag"
+ada_clear_port(url)
+ada_clear_hash(url)
+ada_clear_search(url)
+```
+
 ## Public suffic extraction
 
 The package also implements a public suffix extractor public_suffix(), based on a lookup of the [Public Suffix List](https://publicsuffix.org/). 
