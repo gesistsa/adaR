@@ -26,10 +26,6 @@ test_that("invalid urls should return NA", {
 
 test_that("invalid component handling", {
     url <- "https://user_1:password_1@example.org:8080/dir/../api?q=1#frag"
-    # expect_equal(ada_get_username(ada_set_username(url, "user_2")), "user_2")
-    # expect_equal(ada_get_password(ada_set_password(url, "hunter2")), "hunter2")
-    expect_equal(ada_get_host(ada_set_host(url, "example.de1234")), "example.org:8080")
-    expect_equal(ada_get_hostname(ada_set_hostname(url, "example.net")), "example.org")
-    expect_equal(ada_get_port(ada_set_port(url, "blabla")), "")
+    expect_equal(ada_get_port(ada_set_port(url, "blabla")), "8080")
     expect_equal(ada_get_protocol(ada_set_protocol(url, "abc:")), "https:")
 })

@@ -220,12 +220,14 @@ CharacterVector Rcpp_ada_set_bool(
   CharacterVector out(n);
   for (int i = 0; i < url_vec.length(); i++) {
     String s = url_vec[i];
+    String s2 = subst[i];
     std::string_view input(s.get_cstring());
+    std::string_view replace(s2.get_cstring());
     ada_url url = ada_parse(input.data(), input.length());
     if (!ada_is_valid(url)) {
       out[i] = NA_STRING;
     } else {
-      func(url, subst[i], input.length());
+      func(url, replace.data(), replace.length());
       out[i] = charsub(ada_get_href(url));
     }
     ada_free(url);
@@ -245,12 +247,14 @@ CharacterVector Rcpp_ada_set_void(
   CharacterVector out(n);
   for (int i = 0; i < url_vec.length(); i++) {
     String s = url_vec[i];
+    String s2 = subst[i];
     std::string_view input(s.get_cstring());
+    std::string_view replace(s2.get_cstring());
     ada_url url = ada_parse(input.data(), input.length());
     if (!ada_is_valid(url)) {
       out[i] = NA_STRING;
     } else {
-      func(url, subst[i], input.length());
+      func(url, replace.data(), replace.length());
       out[i] = charsub(ada_get_href(url));
     }
     ada_free(url);
