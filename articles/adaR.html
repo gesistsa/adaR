@@ -36,7 +36,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">adaR</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -635,6 +635,21 @@ are present or not.</p>
 <span><span class="co">#&gt; [25] FALSE FALSE FALSE  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE</span></span>
 <span><span class="co">#&gt; [37] FALSE FALSE  TRUE FALSE  TRUE FALSE  TRUE FALSE  TRUE  TRUE FALSE  TRUE</span></span>
 <span><span class="co">#&gt; [49]  TRUE FALSE FALSE FALSE FALSE FALSE  TRUE</span></span></code></pre></div>
+<p><code>ada_set_*()</code> can be used to set specific components of a
+URL.</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/ada_set_href.html">ada_set_hostname</a></span><span class="op">(</span><span class="st">"https://example.de/test"</span>, <span class="st">"example.com"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "https://example.com/test"</span></span></code></pre></div>
+<p><code>ada_clear_*()</code> can be used to remove certain
+components.</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">url</span> <span class="op">&lt;-</span> <span class="st">"https://user_1:password_1@example.org:8080/dir/../api?q=1#frag"</span></span>
+<span><span class="fu"><a href="../reference/ada_clear_port.html">ada_clear_port</a></span><span class="op">(</span><span class="va">url</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "https://user_1:password_1@example.org/api?q=1#frag"</span></span>
+<span><span class="fu"><a href="../reference/ada_clear_port.html">ada_clear_hash</a></span><span class="op">(</span><span class="va">url</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "https://user_1:password_1@example.org:8080/api?q=1"</span></span>
+<span><span class="fu"><a href="../reference/ada_clear_port.html">ada_clear_search</a></span><span class="op">(</span><span class="va">url</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "https://user_1:password_1@example.org:8080/api#frag"</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="public-suffic-extraction">Public suffic extraction<a class="anchor" aria-label="anchor" href="#public-suffic-extraction"></a>
@@ -647,7 +662,7 @@ do not include “private” suffixes (e.g., blogspot.com) that allow people
 to register subdomains. Hence, we use the term domain in the sense of
 “top domain under a registry suffix”. See <a href="https://github.com/google/guava/wiki/InternetDomainNameExplained" class="external-link uri">https://github.com/google/guava/wiki/InternetDomainNameExplained</a>
 for more details.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">urls</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
 <span>    <span class="st">"https://subsub.sub.domain.co.uk"</span>,</span>
 <span>    <span class="st">"https://domain.api.gov.uk"</span>,</span>
