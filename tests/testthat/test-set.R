@@ -1,0 +1,13 @@
+test_that("all set functions work", {
+    url <- "https://user_1:password_1@example.org:8080/dir/../api?q=1#frag"
+    expect_equal(ada_get_href(ada_set_href(url, "https://example.org:8000/api?q=2#das")), "https://example.org:8000/api?q=2#das")
+    expect_equal(ada_get_username(ada_set_username(url, "user_2")), "user_2")
+    expect_equal(ada_get_password(ada_set_password(url, "hunter2")), "hunter2")
+    expect_equal(ada_get_host(ada_set_host(url, "example.de:1234")), "example.de:1234")
+    expect_equal(ada_get_hostname(ada_set_hostname(url, "example.net/")), "example.net")
+    expect_equal(ada_get_port(ada_set_port(url, "1234")), "1234")
+    expect_equal(ada_get_pathname(ada_set_pathname(url, "/dat")), "/dat")
+    expect_equal(ada_get_search(ada_set_search(url, "q=2")), "?q=2")
+    expect_equal(ada_get_hash(ada_set_hash(url, "section1")), "#section1")
+    expect_equal(ada_get_protocol(ada_set_protocol(url, "ws:")), "ws:")
+})

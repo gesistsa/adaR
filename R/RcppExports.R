@@ -77,6 +77,46 @@ Rcpp_ada_get_protocol <- function(url_vec, decode) {
     .Call(`_adaR_Rcpp_ada_get_protocol`, url_vec, decode)
 }
 
+Rcpp_ada_set_href <- function(url_vec, subst, decode) {
+    .Call(`_adaR_Rcpp_ada_set_href`, url_vec, subst, decode)
+}
+
+Rcpp_ada_set_username <- function(url_vec, subst, decode) {
+    .Call(`_adaR_Rcpp_ada_set_username`, url_vec, subst, decode)
+}
+
+Rcpp_ada_set_password <- function(url_vec, subst, decode) {
+    .Call(`_adaR_Rcpp_ada_set_password`, url_vec, subst, decode)
+}
+
+Rcpp_ada_set_port <- function(url_vec, subst, decode) {
+    .Call(`_adaR_Rcpp_ada_set_port`, url_vec, subst, decode)
+}
+
+Rcpp_ada_set_host <- function(url_vec, subst, decode) {
+    .Call(`_adaR_Rcpp_ada_set_host`, url_vec, subst, decode)
+}
+
+Rcpp_ada_set_hostname <- function(url_vec, subst, decode) {
+    .Call(`_adaR_Rcpp_ada_set_hostname`, url_vec, subst, decode)
+}
+
+Rcpp_ada_set_pathname <- function(url_vec, subst, decode) {
+    .Call(`_adaR_Rcpp_ada_set_pathname`, url_vec, subst, decode)
+}
+
+Rcpp_ada_set_protocol <- function(url_vec, subst, decode) {
+    .Call(`_adaR_Rcpp_ada_set_protocol`, url_vec, subst, decode)
+}
+
+Rcpp_ada_set_search <- function(url_vec, subst, decode) {
+    .Call(`_adaR_Rcpp_ada_set_search`, url_vec, subst, decode)
+}
+
+Rcpp_ada_set_hash <- function(url_vec, subst, decode) {
+    .Call(`_adaR_Rcpp_ada_set_hash`, url_vec, subst, decode)
+}
+
 Rcpp_url_decode2 <- function(url) {
     .Call(`_adaR_Rcpp_url_decode2`, url)
 }
