@@ -9,7 +9,7 @@
         input <- rep(input, length(url))
     }
     if (length(input) != length(url)) {
-        stop("input must have lkength one ot the same length as url", call. = FALSE)
+        stop("input must have length one or the same length as url", call. = FALSE)
     }
     func(url, input, decode)
 }

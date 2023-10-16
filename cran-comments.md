@@ -1,22 +1,10 @@
-## Resubmission of initial submission
+## Update from 0.2.0 to 0.3.0
 
-Please always write package names, software names and API (application
-programming interface) names in single quotes in title and description.
-e.g: --> 'WHATWG', 'C++', 'ada-url'
-Please note that package names are case sensitive.
+* bump ada_url version to 2.7.0
+* export all `ada_clear_*()` functions
+* export all `ada_set_*()` functions
+* added `ada_get_basename()`
 
--> fixed
-
-If there are references describing the methods in your package, please
-add these in the description field of your DESCRIPTION file in the form
-
--> there are no official or citable references describing the method 
-
-Missing Rd-tags:
-      public_suffix.Rd: \value
-      url_decode2.Rd: \value
-
--> fixed
 
 # Test environments
 * ubuntu 22.04, R 4.3.1
@@ -24,6 +12,9 @@ Missing Rd-tags:
 
 ## R CMD check results
 
-0 errors | 0 warnings | 1 note
+0 errors | 0 warnings | 1 note (Ubuntu)
 
-* This is a new release.
+checking installed package size ... NOTE
+   installed size is  5.8Mb
+   sub-directories of 1Mb or more:
+   libs   5.3Mb

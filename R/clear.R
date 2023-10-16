@@ -17,17 +17,17 @@
 #' ada_clear_search(url)
 #' @export
 ada_clear_port <- function(url, decode = TRUE) {
-    .get(url, decode, Rcpp_ada_clear_port)
+    .clear(url, decode, Rcpp_ada_clear_port)
 }
 
 #' @rdname ada_clear_port
 #' @export
 ada_clear_hash <- function(url, decode = TRUE) {
-    .get(url, decode, Rcpp_ada_clear_hash)
+    .clear(url, decode, Rcpp_ada_clear_hash)
 }
 
 #' @rdname ada_clear_port
 #' @export
 ada_clear_search <- function(url, decode = TRUE) {
-    .get(url, decode, Rcpp_ada_clear_search)
+    .clear(url, decode, Rcpp_ada_clear_search)
 }

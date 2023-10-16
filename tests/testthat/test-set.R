@@ -29,3 +29,11 @@ test_that("invalid component handling", {
     expect_equal(ada_get_port(ada_set_port(url, "blabla")), "8080")
     expect_equal(ada_get_protocol(ada_set_protocol(url, "abc:")), "https:")
 })
+
+test_that("uneven vectors", {
+    expect_error(ada_set_protocol(rep("https://google.de", 3), rep("ws:", 2)))
+})
+
+test_that("NULL input", {
+    expect_equal(ada_set_protocol("https://google.de", NULL), "https://google.de")
+})

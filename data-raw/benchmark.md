@@ -343,8 +343,8 @@ bench::mark(
     # A tibble: 2 × 6
       expression      min   median `itr/sec` mem_alloc `gc/sec`
       <bch:expr> <bch:tm> <bch:tm>     <dbl> <bch:byt>    <dbl>
-    1 urltools      358µs    438µs     2231.    2.49KB     15.7
-    2 ada           522µs    627µs     1512.    2.49KB     12.2
+    1 urltools      338µs    384µs     2411.    2.49KB    12.1 
+    2 ada           516µs    580µs     1612.    2.49KB     9.73
 
 ``` r
 bench::mark(
@@ -359,12 +359,11 @@ bench::mark(
     # A tibble: 2 × 6
       expression      min   median `itr/sec` mem_alloc `gc/sec`
       <bch:expr> <bch:tm> <bch:tm>     <dbl> <bch:byt>    <dbl>
-    1 urltools      239ms    239ms      4.18    6.08MB     4.18
-    2 ada           243ms    243ms      4.12    9.18MB     0   
+    1 urltools      230ms    230ms      4.34    6.08MB     4.34
+    2 ada           245ms    245ms      4.09    9.18MB     0   
 
-In terms of runtime, urltools comes out on top. However, adaR provides a
-very competitive performance and can also deal with large amounts of
-URLs quite efficiently.
+In terms of runtime, both are almost indiscernible. The advantage of
+adaR is its added accuracy.
 
 ## Public Suffic extraction
 
@@ -383,9 +382,9 @@ bench::mark(
     # A tibble: 3 × 6
       expression      min   median `itr/sec` mem_alloc `gc/sec`
       <bch:expr> <bch:tm> <bch:tm>     <dbl> <bch:byt>    <dbl>
-    1 urltools   374.82µs 461.52µs     1975.     103KB     9.92
-    2 ada         19.23µs  30.34µs    32993.    35.9KB    33.0 
-    3 psl          4.79µs   5.36µs   159206.    17.6KB     0   
+    1 urltools   368.29µs 448.09µs     2047.     103KB     10.3
+    2 ada         18.87µs  20.47µs    45943.    35.9KB      0  
+    3 psl          3.85µs   5.62µs   163250.    17.6KB    163. 
 
 (*This comparison is not fair for `urltools` since the function
 `suffix_extract` does more than just extracting the public suffix.*)
@@ -403,7 +402,6 @@ you should use psl.
 
 ## Summary
 
-adaR complements existing packages quite well. While it is (thus far)
-not as optimized in terms of runtime, it is still competitive and the
-added value of complying to URL standards can be important in different
-context.
+adaR complements existing packages quite well. It is for most taks
+competitive in terms of runtime but comes with the added value of
+complying to URL standards which can be important in certain situations.

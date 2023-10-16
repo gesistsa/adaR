@@ -8,6 +8,10 @@
 [![R-CMD-check](https://github.com/schochastics/adaR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/schochastics/adaR/actions/workflows/R-CMD-check.yaml)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/adaR)](https://CRAN.R-project.org/package=adaR)
+[![CRAN
+Downloads](http://cranlogs.r-pkg.org/badges/adaR)](https://CRAN.R-project.org/package=adaR)
+[![Codecov test
+coverage](https://codecov.io/gh/schochastics/adaR/branch/main/graph/badge.svg)](https://app.codecov.io/gh/schochastics/adaR?branch=main)
 [![ada-url
 Version](https://img.shields.io/badge/ada_url-2.7.0-blue)](https://github.com/ada-url/ada)
 <!-- badges: end -->
@@ -57,10 +61,10 @@ URL.
 ``` r
 library(adaR)
 ada_url_parse("https://user_1:password_1@example.org:8080/dir/../api?q=1#frag")
-#>                                                      href protocol username   password
-#> 1 https://user_1:password_1@example.org:8080/api?q=1#frag   https:   user_1 password_1
-#>               host    hostname port pathname search  hash
-#> 1 example.org:8080 example.org 8080     /api   ?q=1 #frag
+#>                                                      href protocol username
+#> 1 https://user_1:password_1@example.org:8080/api?q=1#frag   https:   user_1
+#>     password             host    hostname port pathname search  hash
+#> 1 password_1 example.org:8080 example.org 8080     /api   ?q=1 #frag
 ```
 
 ``` cpp
@@ -85,10 +89,10 @@ urltools::url_parse("https://www.google.com/maps/place/Pennsylvania+Station/@40.
    7z/data=!4m5!3m4!1s0x89c259ae15b2adcb:0x7955420634fd7eba!8m2!3d40.750568!4d-73.993519")
 #>   scheme                            domain port
 #> 1  https 40.7519848,-74.0015045,14.\n   7z <NA>
-#>                                                                                 path parameter
-#> 1 data=!4m5!3m4!1s0x89c259ae15b2adcb:0x7955420634fd7eba!8m2!3d40.750568!4d-73.993519      <NA>
-#>   fragment
-#> 1     <NA>
+#>                                                                                 path
+#> 1 data=!4m5!3m4!1s0x89c259ae15b2adcb:0x7955420634fd7eba!8m2!3d40.750568!4d-73.993519
+#>   parameter fragment
+#> 1      <NA>     <NA>
 
 ada_url_parse("https://www.google.com/maps/place/Pennsylvania+Station/@40.7519848,-74.0015045,14.7z/data=!4m
    5!3m4!1s0x89c259ae15b2adcb:0x7955420634fd7eba!8m2!3d40.750568!4d-73.993519")
@@ -117,11 +121,19 @@ bench::mark(
 #> # A tibble: 2 × 6
 #>   expression      min   median `itr/sec` mem_alloc `gc/sec`
 #>   <bch:expr> <bch:tm> <bch:tm>     <dbl> <bch:byt>    <dbl>
-#> 1 ada           831µs    831µs     1204.    2.49KB        0
-#> 2 urltools      582µs    582µs     1718.    2.49KB        0
+#> 1 ada           592µs    592µs     1689.    2.49KB        0
+#> 2 urltools      597µs    597µs     1675.    2.49KB        0
 ```
 
 For further benchmark results, see `benchmark.md` in `data_raw`.
+
+There are four more groups of functions available to work with url
+parsing:
+
+-   `ada_get_*()` get a specific component
+-   `ada_has_*()` check if a specific component is present
+-   `ada_set_*()` set a specific component from URLS
+-   `ada_clear_*()` remove a specific component from URLS
 
 ## Public Suffix extraction
 

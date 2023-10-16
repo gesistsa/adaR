@@ -12,6 +12,7 @@
 \alias{ada_get_search}
 \alias{ada_get_protocol}
 \alias{ada_get_domain}
+\alias{ada_get_basename}
 \title{Get a specific component of URL}
 \usage{
 ada_get_href(url, decode = TRUE)
@@ -35,6 +36,8 @@ ada_get_search(url, decode = TRUE)
 ada_get_protocol(url, decode = TRUE)
 
 ada_get_domain(url, decode = TRUE)
+
+ada_get_basename(url)
 }
 \arguments{
 \item{url}{character. one or more URL to be parsed}
@@ -60,6 +63,7 @@ ada_get_pathname(url)
 ada_get_search(url)
 ada_get_protocol(url)
 ada_get_domain(url)
+ada_get_basename(url)
 ## these functions are vectorized
 urls <- c("http://www.google.com", "http://www.google.com:80", "noturl")
 ada_get_port(urls)

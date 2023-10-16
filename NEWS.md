@@ -1,6 +1,9 @@
-# adaR (development version)
+# adaR 0.3.0
 
-# adaR 0.2.0.9000
+* bump ada_url version to 2.7.0 #58
+* export all `ada_clear_*()` functions #57
+* export all `ada_set_*()` functions #15 h/t @chainsawriot for the c++ template
+* added `ada_get_basename()` #56
 
 # adaR 0.2.0
 
