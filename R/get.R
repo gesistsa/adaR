@@ -23,6 +23,7 @@
 #' ada_get_search(url)
 #' ada_get_protocol(url)
 #' ada_get_domain(url)
+#' ada_get_basename(url)
 #' ## these functions are vectorized
 #' urls <- c("http://www.google.com", "http://www.google.com:80", "noturl")
 #' ada_get_port(urls)
@@ -114,4 +115,16 @@ ada_get_domain <- function(url, decode = TRUE) {
         return(url_decode2(res))
     }
     return(res)
+}
+
+#' @rdname ada_get_href
+#' @export
+ada_get_basename <- function(x) {
+    protocol <- ada_get_protocol(x)
+    not_na <- !is.na(protocol)
+    tmp <- protocol[not_na]
+    host <- ada_get_hostname(x[not_na])
+    basename <- rep(NA_character_, length(x))
+    basename[not_na] <- paste0(tmp, "//", host)
+    basename
 }
