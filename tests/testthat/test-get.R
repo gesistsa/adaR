@@ -10,11 +10,13 @@ test_that("all get functions work", {
     expect_equal(ada_get_search(url), "?q=1")
     expect_equal(ada_get_hash(url), "#frag")
     expect_equal(ada_get_protocol(url), "https:")
+    expect_equal(ada_get_domain(url), "example.org")
+    expect_equal(ada_get_basename(url), "https://example.org")
 })
 
 get_functions <- c(
     ada_get_href, ada_get_username, ada_get_password, ada_get_host, ada_get_hostname, ada_get_port, ada_get_pathname,
-    ada_get_search, ada_get_hash, ada_get_protocol
+    ada_get_search, ada_get_hash, ada_get_protocol, ada_get_domain, ada_get_basename
 )
 
 test_that("invalid urls should return NA, #26", {
