@@ -1,0 +1,13 @@
+temp <- tempfile(fileext = "zip")
+download.file("https://github.com/ada-url/ada/releases/latest/download/singleheader.zip", temp)
+unzip(temp, exdir = "src/ada/")
+unlink(temp)
+
+release <- gh::gh("/repos/ada-url/ada/releases/latest")
+tag <- gsub("v", "", release$tag_name)
+readme <- readLines("README.Rmd")
+idx <- grepl("ada-url Version", readme)
+readme[idx] <- gsub("[0-9]+\\.[0-9]+\\.[0-9]+", tag, readme[idx])
+writeLines(readme, "README.Rmd")
+rmarkdown::render("README.Rmd")
+system("rm README.html")
