@@ -8,6 +8,10 @@
 [![R-CMD-check](https://github.com/schochastics/adaR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/schochastics/adaR/actions/workflows/R-CMD-check.yaml)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/adaR)](https://CRAN.R-project.org/package=adaR)
+[![CRAN
+Downloads](http://cranlogs.r-pkg.org/badges/adaR)](https://CRAN.R-project.org/package=adaR)
+[![Codecov test
+coverage](https://codecov.io/gh/schochastics/adaR/branch/main/graph/badge.svg)](https://app.codecov.io/gh/schochastics/adaR?branch=main)
 [![ada-url
 Version](https://img.shields.io/badge/ada_url-2.7.0-blue)](https://github.com/ada-url/ada)
 <!-- badges: end -->
@@ -117,8 +121,8 @@ bench::mark(
 #> # A tibble: 2 × 6
 #>   expression      min   median `itr/sec` mem_alloc `gc/sec`
 #>   <bch:expr> <bch:tm> <bch:tm>     <dbl> <bch:byt>    <dbl>
-#> 1 ada           641µs    641µs     1560.    2.49KB        0
-#> 2 urltools      562µs    562µs     1779.    2.49KB        0
+#> 1 ada           592µs    592µs     1689.    2.49KB        0
+#> 2 urltools      597µs    597µs     1675.    2.49KB        0
 ```
 
 For further benchmark results, see `benchmark.md` in `data_raw`.
