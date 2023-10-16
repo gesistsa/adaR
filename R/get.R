@@ -119,12 +119,12 @@ ada_get_domain <- function(url, decode = TRUE) {
 
 #' @rdname ada_get_href
 #' @export
-ada_get_basename <- function(x) {
-    protocol <- ada_get_protocol(x)
+ada_get_basename <- function(url) {
+    protocol <- ada_get_protocol(url)
     not_na <- !is.na(protocol)
     tmp <- protocol[not_na]
-    host <- ada_get_hostname(x[not_na])
-    basename <- rep(NA_character_, length(x))
+    host <- ada_get_hostname(url[not_na])
+    basename <- rep(NA_character_, length(url))
     basename[not_na] <- paste0(tmp, "//", host)
     basename
 }
