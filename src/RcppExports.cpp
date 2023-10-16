@@ -360,6 +360,42 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// Rcpp_ada_clear_port
+CharacterVector Rcpp_ada_clear_port(const CharacterVector& url_vec, bool decode);
+RcppExport SEXP _adaR_Rcpp_ada_clear_port(SEXP url_vecSEXP, SEXP decodeSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const CharacterVector& >::type url_vec(url_vecSEXP);
+    Rcpp::traits::input_parameter< bool >::type decode(decodeSEXP);
+    rcpp_result_gen = Rcpp::wrap(Rcpp_ada_clear_port(url_vec, decode));
+    return rcpp_result_gen;
+END_RCPP
+}
+// Rcpp_ada_clear_hash
+CharacterVector Rcpp_ada_clear_hash(const CharacterVector& url_vec, bool decode);
+RcppExport SEXP _adaR_Rcpp_ada_clear_hash(SEXP url_vecSEXP, SEXP decodeSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const CharacterVector& >::type url_vec(url_vecSEXP);
+    Rcpp::traits::input_parameter< bool >::type decode(decodeSEXP);
+    rcpp_result_gen = Rcpp::wrap(Rcpp_ada_clear_hash(url_vec, decode));
+    return rcpp_result_gen;
+END_RCPP
+}
+// Rcpp_ada_clear_search
+CharacterVector Rcpp_ada_clear_search(const CharacterVector& url_vec, bool decode);
+RcppExport SEXP _adaR_Rcpp_ada_clear_search(SEXP url_vecSEXP, SEXP decodeSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const CharacterVector& >::type url_vec(url_vecSEXP);
+    Rcpp::traits::input_parameter< bool >::type decode(decodeSEXP);
+    rcpp_result_gen = Rcpp::wrap(Rcpp_ada_clear_search(url_vec, decode));
+    return rcpp_result_gen;
+END_RCPP
+}
 // Rcpp_url_decode2
 CharacterVector Rcpp_url_decode2(CharacterVector& url);
 RcppExport SEXP _adaR_Rcpp_url_decode2(SEXP urlSEXP) {
@@ -413,6 +449,9 @@ static const R_CallMethodDef CallEntries[] = {
     {"_adaR_Rcpp_ada_set_protocol", (DL_FUNC) &_adaR_Rcpp_ada_set_protocol, 3},
     {"_adaR_Rcpp_ada_set_search", (DL_FUNC) &_adaR_Rcpp_ada_set_search, 3},
     {"_adaR_Rcpp_ada_set_hash", (DL_FUNC) &_adaR_Rcpp_ada_set_hash, 3},
+    {"_adaR_Rcpp_ada_clear_port", (DL_FUNC) &_adaR_Rcpp_ada_clear_port, 2},
+    {"_adaR_Rcpp_ada_clear_hash", (DL_FUNC) &_adaR_Rcpp_ada_clear_hash, 2},
+    {"_adaR_Rcpp_ada_clear_search", (DL_FUNC) &_adaR_Rcpp_ada_clear_search, 2},
     {"_adaR_Rcpp_url_decode2", (DL_FUNC) &_adaR_Rcpp_url_decode2, 1},
     {"_adaR_url_reverse", (DL_FUNC) &_adaR_url_reverse, 1},
     {NULL, NULL, 0}
