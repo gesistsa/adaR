@@ -35,5 +35,5 @@ test_that("uneven vectors", {
 })
 
 test_that("NULL input", {
-    expect_error(ada_set_protocol("https://google.de", NULL), "https://google.de")
+    expect_equal(ada_set_protocol("https://google.de", NULL), "https://google.de")
 })
