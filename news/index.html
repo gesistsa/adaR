@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">adaR</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.1</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -31,7 +31,7 @@
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
 
       <ul class="navbar-nav"><li class="nav-item">
-  <a class="external-link nav-link" href="https://github.com/schochastics/adaR/" aria-label="github">
+  <a class="external-link nav-link" href="https://github.com/gesistsa/adaR/" aria-label="github">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -44,29 +44,31 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Changelog</h1>
-      <small>Source: <a href="https://github.com/schochastics/adaR/blob/HEAD/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
+      <small>Source: <a href="https://github.com/gesistsa/adaR/blob/HEAD/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="development version" id="adar-development-version">adaR (development version)<a class="anchor" aria-label="anchor" href="#adar-development-version"></a></h2>
-</div>
+<h2 class="pkg-version" data-toc-text="0.3.1" id="adar-031">adaR 0.3.1<a class="anchor" aria-label="anchor" href="#adar-031"></a></h2>
+<ul><li>bumped ada-url to 2.7.3</li>
+<li>transferred repository from schochastics to gesistsa</li>
+</ul></div>
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.3.0" id="adar-030">adaR 0.3.0<a class="anchor" aria-label="anchor" href="#adar-030"></a></h2>
-<ul><li>bump ada_url version to 2.7.0 <a href="https://github.com/schochastics/adaR/issues/58" class="external-link">#58</a></li>
-<li>export all <code>ada_clear_*()</code> functions <a href="https://github.com/schochastics/adaR/issues/57" class="external-link">#57</a></li>
-<li>export all <code>ada_set_*()</code> functions <a href="https://github.com/schochastics/adaR/issues/15" class="external-link">#15</a> h/t <a href="https://github.com/chainsawriot" class="external-link">@chainsawriot</a> for the c++ template</li>
-<li>added <code><a href="../reference/ada_get_href.html">ada_get_basename()</a></code> <a href="https://github.com/schochastics/adaR/issues/56" class="external-link">#56</a></li>
+<h2 class="pkg-version" data-toc-text="0.3.0" id="adar-030">adaR 0.3.0<a class="anchor" aria-label="anchor" href="#adar-030"></a></h2><p class="text-muted">CRAN release: 2023-10-16</p>
+<ul><li>bump ada_url version to 2.7.0 <a href="https://github.com/gesistsa/adaR/issues/58" class="external-link">#58</a></li>
+<li>export all <code>ada_clear_*()</code> functions <a href="https://github.com/gesistsa/adaR/issues/57" class="external-link">#57</a></li>
+<li>export all <code>ada_set_*()</code> functions <a href="https://github.com/gesistsa/adaR/issues/15" class="external-link">#15</a> h/t <a href="https://github.com/chainsawriot" class="external-link">@chainsawriot</a> for the c++ template</li>
+<li>added <code><a href="../reference/ada_get_href.html">ada_get_basename()</a></code> <a href="https://github.com/gesistsa/adaR/issues/56" class="external-link">#56</a></li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.2.0" id="adar-020">adaR 0.2.0<a class="anchor" aria-label="anchor" href="#adar-020"></a></h2><p class="text-muted">CRAN release: 2023-10-01</p>
 <ul><li>split C++ file to isolate original ada-url code h/t Chung-hong Chan (<a href="https://github.com/chainsawriot" class="external-link">@chainsawriot</a>)</li>
-<li>add support for public suffix extraction <a href="https://github.com/schochastics/adaR/issues/14" class="external-link">#14</a></li>
-<li>add support for punycode <a href="https://github.com/schochastics/adaR/issues/18" class="external-link">#18</a></li>
+<li>add support for public suffix extraction <a href="https://github.com/gesistsa/adaR/issues/14" class="external-link">#14</a></li>
+<li>add support for punycode <a href="https://github.com/gesistsa/adaR/issues/18" class="external-link">#18</a></li>
 <li>added <code>url_decode2</code> as a fast alternative to <code><a href="https://rdrr.io/r/utils/URLencode.html" class="external-link">utils::URLdecode</a></code>
 </li>
-<li>improved vectorization of <code>ada_get_*</code> and <code>ada_has_*</code> <a href="https://github.com/schochastics/adaR/issues/26" class="external-link">#26</a> and <a href="https://github.com/schochastics/adaR/issues/30" class="external-link">#30</a> h/t Chung-hong Chan (<a href="https://github.com/chainsawriot" class="external-link">@chainsawriot</a>)</li>
-<li>fixed <a href="https://github.com/schochastics/adaR/issues/47" class="external-link">#47</a> h/t Chung-hong Chan (<a href="https://github.com/chainsawriot" class="external-link">@chainsawriot</a>)</li>
-<li>added <code><a href="../reference/ada_get_href.html">ada_get_domain()</a></code> <a href="https://github.com/schochastics/adaR/issues/43" class="external-link">#43</a></li>
+<li>improved vectorization of <code>ada_get_*</code> and <code>ada_has_*</code> <a href="https://github.com/gesistsa/adaR/issues/26" class="external-link">#26</a> and <a href="https://github.com/gesistsa/adaR/issues/30" class="external-link">#30</a> h/t Chung-hong Chan (<a href="https://github.com/chainsawriot" class="external-link">@chainsawriot</a>)</li>
+<li>fixed <a href="https://github.com/gesistsa/adaR/issues/47" class="external-link">#47</a> h/t Chung-hong Chan (<a href="https://github.com/chainsawriot" class="external-link">@chainsawriot</a>)</li>
+<li>added <code><a href="../reference/ada_get_href.html">ada_get_domain()</a></code> <a href="https://github.com/gesistsa/adaR/issues/43" class="external-link">#43</a></li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.1.0" id="adar-010">adaR 0.1.0<a class="anchor" aria-label="anchor" href="#adar-010"></a></h2>
@@ -74,10 +76,10 @@
 </li>
 <li>added <code>ada_get_*</code>
 </li>
-<li>error handling for wrong urls <a href="https://github.com/schochastics/adaR/issues/2" class="external-link">#2</a></li>
-<li>fixed <a href="https://github.com/schochastics/adaR/issues/5" class="external-link">#5</a> h/t Chung-hong Chan (<a href="https://github.com/chainsawriot" class="external-link">@chainsawriot</a>)</li>
-<li>add has checks <a href="https://github.com/schochastics/adaR/issues/7" class="external-link">#7</a></li>
-<li>vectorized functions <a href="https://github.com/schochastics/adaR/issues/4" class="external-link">#4</a></li>
+<li>error handling for wrong urls <a href="https://github.com/gesistsa/adaR/issues/2" class="external-link">#2</a></li>
+<li>fixed <a href="https://github.com/gesistsa/adaR/issues/5" class="external-link">#5</a> h/t Chung-hong Chan (<a href="https://github.com/chainsawriot" class="external-link">@chainsawriot</a>)</li>
+<li>add has checks <a href="https://github.com/gesistsa/adaR/issues/7" class="external-link">#7</a></li>
+<li>vectorized functions <a href="https://github.com/gesistsa/adaR/issues/4" class="external-link">#4</a></li>
 <li>tests h/t Chung-hong Chan (<a href="https://github.com/chainsawriot" class="external-link">@chainsawriot</a>)</li>
 </ul></div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
