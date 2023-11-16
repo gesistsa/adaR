@@ -37,7 +37,7 @@ More general information on URL parsing can be found in the introductory vignett
 
 - [webtrackR](https://github.com/schochastics/webtrackR): preprocess raw webtracking data
 - [domainator](https://github.com/schochastics/domainator): classify domains
-- [adaR](https://github.com/schochastics/adaR): parse urls
+- [adaR](https://github.com/gesistsa/adaR): parse urls
 
 ## Installation
 

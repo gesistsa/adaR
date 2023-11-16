@@ -35,7 +35,7 @@ vignette via `vignette("adaR")`.
   webtracking data
 - [domainator](https://github.com/schochastics/domainator): classify
   domains
-- [adaR](https://github.com/schochastics/adaR): parse urls
+- [adaR](https://github.com/gesistsa/adaR): parse urls
 
 ## Installation
 
@@ -61,12 +61,10 @@ URL.
 ``` r
 library(adaR)
 ada_url_parse("https://user_1:password_1@example.org:8080/dir/../api?q=1#frag")
-#>                                                      href
-#> 1 https://user_1:password_1@example.org:8080/api?q=1#frag
-#>   protocol username   password             host
-#> 1   https:   user_1 password_1 example.org:8080
-#>      hostname port pathname search  hash
-#> 1 example.org 8080     /api   ?q=1 #frag
+#>                                                      href protocol username
+#> 1 https://user_1:password_1@example.org:8080/api?q=1#frag   https:   user_1
+#>     password             host    hostname port pathname search  hash
+#> 1 password_1 example.org:8080 example.org 8080     /api   ?q=1 #frag
 ```
 
 ``` cpp
@@ -100,10 +98,8 @@ ada_url_parse("https://www.google.com/maps/place/Pennsylvania+Station/@40.751984
    5!3m4!1s0x89c259ae15b2adcb:0x7955420634fd7eba!8m2!3d40.750568!4d-73.993519")
 #>                                                                                                                                                                         href
 #> 1 https://www.google.com/maps/place/Pennsylvania+Station/@40.7519848,-74.0015045,14.7z/data=!4m   5!3m4!1s0x89c259ae15b2adcb:0x7955420634fd7eba!8m2!3d40.750568!4d-73.993519
-#>   protocol username password           host
-#> 1   https:                   www.google.com
-#>         hostname port
-#> 1 www.google.com     
+#>   protocol username password           host       hostname port
+#> 1   https:                   www.google.com www.google.com     
 #>                                                                                                                                               pathname
 #> 1 /maps/place/Pennsylvania+Station/@40.7519848,-74.0015045,14.7z/data=!4m   5!3m4!1s0x89c259ae15b2adcb:0x7955420634fd7eba!8m2!3d40.750568!4d-73.993519
 #>   search hash
@@ -123,10 +119,10 @@ bench::mark(
     iterations = 1, check = FALSE
 )
 #> # A tibble: 2 × 6
-#>   expression      min  median `itr/sec` mem_alloc `gc/sec`
-#>   <bch:expr> <bch:tm> <bch:t>     <dbl> <bch:byt>    <dbl>
-#> 1 ada           458µs   458µs     2183.    2.49KB        0
-#> 2 urltools      421µs   421µs     2374.    2.49KB        0
+#>   expression      min   median `itr/sec` mem_alloc `gc/sec`
+#>   <bch:expr> <bch:tm> <bch:tm>     <dbl> <bch:byt>    <dbl>
+#> 1 ada           227µs    227µs     4405.    2.49KB        0
+#> 2 urltools      229µs    229µs     4373.    2.49KB        0
 ```
 
 For further benchmark results, see `benchmark.md` in `data_raw`.
@@ -151,8 +147,7 @@ urls <- c(
     "https://thisisnotpart.butthisispartoftheps.kawasaki.jp"
 )
 public_suffix(urls)
-#> [1] "co.uk"                           
-#> [2] "gov.uk"                          
+#> [1] "co.uk"                            "gov.uk"                          
 #> [3] "butthisispartoftheps.kawasaki.jp"
 ```
 
