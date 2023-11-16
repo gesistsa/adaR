@@ -10,8 +10,8 @@ Authors@R:
       person("Daniel", "Lemire", role = c("ctb", "cph"),comment = "author of ada-url : <https://github.com/ada-url/ada>") 
      )
 Description: A wrapper for 'ada-url', a 'WHATWG' compliant and fast URL parser written in modern 'C++'. Also contains auxiliary functions such as a public suffix extractor.
-URL: https://schochastics.github.io/adaR/, https://github.com/schochastics/adaR
-BugReports: https://github.com/schochastics/adaR/issues
+URL: https://gesistsa.github.io/adaR/, https://github.com/gesistsa/adaR
+BugReports: https://github.com/gesistsa/adaR/issues
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)

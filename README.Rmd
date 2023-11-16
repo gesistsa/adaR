@@ -16,11 +16,11 @@ knitr::opts_chunk$set(
 # adaR <img src="man/figures/logo.png" align="right" height="139" alt="" />
 
 <!-- badges: start -->
-[![R-CMD-check](https://github.com/schochastics/adaR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/schochastics/adaR/actions/workflows/R-CMD-check.yaml)
+[![R-CMD-check](https://github.com/gesistsa/adaR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/gesistsa/adaR/actions/workflows/R-CMD-check.yaml)
 [![CRAN status](https://www.r-pkg.org/badges/version/adaR)](https://CRAN.R-project.org/package=adaR)
 [![CRAN Downloads](http://cranlogs.r-pkg.org/badges/adaR)](https://CRAN.R-project.org/package=adaR)
-[![Codecov test coverage](https://codecov.io/gh/schochastics/adaR/branch/main/graph/badge.svg)](https://app.codecov.io/gh/schochastics/adaR?branch=main)
-[![ada-url Version](https://img.shields.io/badge/ada_url-2.7.0-blue)](https://github.com/ada-url/ada)
+[![Codecov test coverage](https://codecov.io/gh/gesistsa/adaR/branch/main/graph/badge.svg)](https://app.codecov.io/gh/gesistsa/adaR?branch=main)
+[![ada-url Version](https://img.shields.io/badge/ada_url-2.7.3-blue)](https://github.com/ada-url/ada)
 <!-- badges: end -->
 
 adaR is a wrapper for [ada-url](https://github.com/ada-url/ada), a
@@ -45,7 +45,7 @@ You can install the development version of adaR from [GitHub](https://github.com
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("schochastics/adaR")
+devtools::install_github("gesistsa/adaR")
 ```
 
 The version on CRAN can be installed with
