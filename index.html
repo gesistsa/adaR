@@ -95,7 +95,7 @@
 <li>
 <a href="https://github.com/schochastics/domainator" class="external-link">domainator</a>: classify domains</li>
 <li>
-<a href="https://github.com/schochastics/adaR" class="external-link">adaR</a>: parse urls</li>
+<a href="https://github.com/gesistsa/adaR" class="external-link">adaR</a>: parse urls</li>
 </ul>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
@@ -115,12 +115,10 @@
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://gesistsa.github.io/adaR/" class="external-link">adaR</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="reference/ada_url_parse.html">ada_url_parse</a></span><span class="op">(</span><span class="st">"https://user_1:password_1@example.org:8080/dir/../api?q=1#frag"</span><span class="op">)</span></span>
-<span><span class="co">#&gt;                                                      href</span></span>
-<span><span class="co">#&gt; 1 https://user_1:password_1@example.org:8080/api?q=1#frag</span></span>
-<span><span class="co">#&gt;   protocol username   password             host</span></span>
-<span><span class="co">#&gt; 1   https:   user_1 password_1 example.org:8080</span></span>
-<span><span class="co">#&gt;      hostname port pathname search  hash</span></span>
-<span><span class="co">#&gt; 1 example.org 8080     /api   ?q=1 #frag</span></span></code></pre></div>
+<span><span class="co">#&gt;                                                      href protocol username</span></span>
+<span><span class="co">#&gt; 1 https://user_1:password_1@example.org:8080/api?q=1#frag   https:   user_1</span></span>
+<span><span class="co">#&gt;     password             host    hostname port pathname search  hash</span></span>
+<span><span class="co">#&gt; 1 password_1 example.org:8080 example.org 8080     /api   ?q=1 #frag</span></span></code></pre></div>
 <div class="sourceCode" id="cb4"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>  <span class="co">/*</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co">   * https://user:pass@example.com:1234/foo/bar?baz#quux</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">   *       |     |    |          | ^^^^|       |   |</span></span>
@@ -148,10 +146,8 @@
 <span><span class="st">   5!3m4!1s0x89c259ae15b2adcb:0x7955420634fd7eba!8m2!3d40.750568!4d-73.993519"</span><span class="op">)</span></span>
 <span><span class="co">#&gt;                                                                                                                                                                         href</span></span>
 <span><span class="co">#&gt; 1 https://www.google.com/maps/place/Pennsylvania+Station/@40.7519848,-74.0015045,14.7z/data=!4m   5!3m4!1s0x89c259ae15b2adcb:0x7955420634fd7eba!8m2!3d40.750568!4d-73.993519</span></span>
-<span><span class="co">#&gt;   protocol username password           host</span></span>
-<span><span class="co">#&gt; 1   https:                   www.google.com</span></span>
-<span><span class="co">#&gt;         hostname port</span></span>
-<span><span class="co">#&gt; 1 www.google.com     </span></span>
+<span><span class="co">#&gt;   protocol username password           host       hostname port</span></span>
+<span><span class="co">#&gt; 1   https:                   www.google.com www.google.com     </span></span>
 <span><span class="co">#&gt;                                                                                                                                               pathname</span></span>
 <span><span class="co">#&gt; 1 /maps/place/Pennsylvania+Station/@40.7519848,-74.0015045,14.7z/data=!4m   5!3m4!1s0x89c259ae15b2adcb:0x7955420634fd7eba!8m2!3d40.750568!4d-73.993519</span></span>
 <span><span class="co">#&gt;   search hash</span></span>
@@ -164,10 +160,10 @@
 <span>    iterations <span class="op">=</span> <span class="fl">1</span>, check <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 2 × 6</span></span>
-<span><span class="co">#&gt;   expression      min  median `itr/sec` mem_alloc `gc/sec`</span></span>
-<span><span class="co">#&gt;   &lt;bch:expr&gt; &lt;bch:tm&gt; &lt;bch:t&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt; 1 ada           458µs   458µs     2183.    2.49KB        0</span></span>
-<span><span class="co">#&gt; 2 urltools      421µs   421µs     2374.    2.49KB        0</span></span></code></pre></div>
+<span><span class="co">#&gt;   expression      min   median `itr/sec` mem_alloc `gc/sec`</span></span>
+<span><span class="co">#&gt;   &lt;bch:expr&gt; &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt; 1 ada           227µs    227µs     4405.    2.49KB        0</span></span>
+<span><span class="co">#&gt; 2 urltools      229µs    229µs     4373.    2.49KB        0</span></span></code></pre></div>
 <p>For further benchmark results, see <code>benchmark.md</code> in <code>data_raw</code>.</p>
 <p>There are four more groups of functions available to work with url parsing:</p>
 <ul>
@@ -192,8 +188,7 @@
 <span>    <span class="st">"https://thisisnotpart.butthisispartoftheps.kawasaki.jp"</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="reference/public_suffix.html">public_suffix</a></span><span class="op">(</span><span class="va">urls</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "co.uk"                           </span></span>
-<span><span class="co">#&gt; [2] "gov.uk"                          </span></span>
+<span><span class="co">#&gt; [1] "co.uk"                            "gov.uk"                          </span></span>
 <span><span class="co">#&gt; [3] "butthisispartoftheps.kawasaki.jp"</span></span></code></pre></div>
 <p>If you are wondering about the last url. The list also contains wildcard suffixes such as <code>*.kawasaki.jp</code> which need to be matched.</p>
 </div>
