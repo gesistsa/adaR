@@ -1,4 +1,4 @@
-.set <- function(url, decode, input, func) {
+.set <- function(url, decode, input, func, to_unicode) {
     if (is.null(url)) {
         return(character(0))
     }
@@ -11,7 +11,7 @@
     if (length(input) != length(url)) {
         stop("input must have length one or the same length as url", call. = FALSE)
     }
-    func(url, input, decode)
+    func(url, input, decode, to_unicode)
 }
 
 #' Set a specific component of URL
@@ -34,60 +34,60 @@
 #' ada_set_search(url, "q=2")
 #' ada_set_protocol(url, "ws:")
 #' @export
-ada_set_href <- function(url, input, decode = TRUE) {
-    .set(url, decode, input, Rcpp_ada_set_href)
+ada_set_href <- function(url, input, decode = TRUE, to_unicode = TRUE) {
+    .set(url, decode, input, Rcpp_ada_set_href, to_unicode)
 }
 
 #' @rdname ada_set_href
 #' @export
-ada_set_username <- function(url, input, decode = TRUE) {
-    .set(url, decode, input, Rcpp_ada_set_username)
+ada_set_username <- function(url, input, decode = TRUE, to_unicode = TRUE) {
+    .set(url, decode, input, Rcpp_ada_set_username, to_unicode)
 }
 
 #' @rdname ada_set_href
 #' @export
-ada_set_password <- function(url, input, decode = TRUE) {
-    .set(url, decode, input, Rcpp_ada_set_password)
+ada_set_password <- function(url, input, decode = TRUE, to_unicode = TRUE) {
+    .set(url, decode, input, Rcpp_ada_set_password, to_unicode)
 }
 
 #' @rdname ada_set_href
 #' @export
-ada_set_port <- function(url, input, decode = TRUE) {
-    .set(url, decode, input, Rcpp_ada_set_port)
+ada_set_port <- function(url, input, decode = TRUE, to_unicode = TRUE) {
+    .set(url, decode, input, Rcpp_ada_set_port, to_unicode)
 }
 
 #' @rdname ada_set_href
 #' @export
-ada_set_host <- function(url, input, decode = TRUE) {
-    .set(url, decode, input, Rcpp_ada_set_host)
+ada_set_host <- function(url, input, decode = TRUE, to_unicode = TRUE) {
+    .set(url, decode, input, Rcpp_ada_set_host, to_unicode)
 }
 
 #' @rdname ada_set_href
 #' @export
-ada_set_hostname <- function(url, input, decode = TRUE) {
-    .set(url, decode, input, Rcpp_ada_set_hostname)
+ada_set_hostname <- function(url, input, decode = TRUE, to_unicode = TRUE) {
+    .set(url, decode, input, Rcpp_ada_set_hostname, to_unicode)
 }
 
 #' @rdname ada_set_href
 #' @export
-ada_set_pathname <- function(url, input, decode = TRUE) {
-    .set(url, decode, input, Rcpp_ada_set_pathname)
+ada_set_pathname <- function(url, input, decode = TRUE, to_unicode = TRUE) {
+    .set(url, decode, input, Rcpp_ada_set_pathname, to_unicode)
 }
 
 #' @rdname ada_set_href
 #' @export
-ada_set_protocol <- function(url, input, decode = TRUE) {
-    .set(url, decode, input, Rcpp_ada_set_protocol)
+ada_set_protocol <- function(url, input, decode = TRUE, to_unicode = TRUE) {
+    .set(url, decode, input, Rcpp_ada_set_protocol, to_unicode)
 }
 
 #' @rdname ada_set_href
 #' @export
-ada_set_search <- function(url, input, decode = TRUE) {
-    .set(url, decode, input, Rcpp_ada_set_search)
+ada_set_search <- function(url, input, decode = TRUE, to_unicode = TRUE) {
+    .set(url, decode, input, Rcpp_ada_set_search, to_unicode)
 }
 
 #' @rdname ada_set_href
 #' @export
-ada_set_hash <- function(url, input, decode = TRUE) {
-    .set(url, decode, input, Rcpp_ada_set_hash)
+ada_set_hash <- function(url, input, decode = TRUE, to_unicode = TRUE) {
+    .set(url, decode, input, Rcpp_ada_set_hash, to_unicode)
 }

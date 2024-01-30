@@ -1,8 +1,8 @@
-.clear <- function(url, decode, func) {
+.clear <- function(url, decode, func, to_unicode) {
     if (is.null(url)) {
         return(character(0))
     }
-    func(url, decode)
+    func(url, decode, to_unicode)
 }
 
 #' Clear a specific component of URL
@@ -16,18 +16,18 @@
 #' ada_clear_hash(url)
 #' ada_clear_search(url)
 #' @export
-ada_clear_port <- function(url, decode = TRUE) {
-    .clear(url, decode, Rcpp_ada_clear_port)
+ada_clear_port <- function(url, decode = TRUE, to_unicode = TRUE) {
+    .clear(url, decode, Rcpp_ada_clear_port, to_unicode)
 }
 
 #' @rdname ada_clear_port
 #' @export
-ada_clear_hash <- function(url, decode = TRUE) {
-    .clear(url, decode, Rcpp_ada_clear_hash)
+ada_clear_hash <- function(url, decode = TRUE, to_unicode = TRUE) {
+    .clear(url, decode, Rcpp_ada_clear_hash, to_unicode)
 }
 
 #' @rdname ada_clear_port
 #' @export
-ada_clear_search <- function(url, decode = TRUE) {
-    .clear(url, decode, Rcpp_ada_clear_search)
+ada_clear_search <- function(url, decode = TRUE, to_unicode = TRUE) {
+    .clear(url, decode, Rcpp_ada_clear_search, to_unicode)
 }

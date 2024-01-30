@@ -15,25 +15,25 @@
 \alias{ada_get_basename}
 \title{Get a specific component of URL}
 \usage{
-ada_get_href(url, decode = TRUE)
+ada_get_href(url, decode = TRUE, to_unicode = TRUE)
 
-ada_get_username(url, decode = TRUE)
+ada_get_username(url, decode = TRUE, to_unicode = TRUE)
 
-ada_get_password(url, decode = TRUE)
+ada_get_password(url, decode = TRUE, to_unicode = TRUE)
 
-ada_get_port(url, decode = TRUE)
+ada_get_port(url, decode = TRUE, to_unicode = TRUE)
 
-ada_get_hash(url, decode = TRUE)
+ada_get_hash(url, decode = TRUE, to_unicode = TRUE)
 
-ada_get_host(url, decode = TRUE)
+ada_get_host(url, decode = TRUE, to_unicode = TRUE)
 
-ada_get_hostname(url, decode = TRUE)
+ada_get_hostname(url, decode = TRUE, to_unicode = TRUE)
 
-ada_get_pathname(url, decode = TRUE)
+ada_get_pathname(url, decode = TRUE, to_unicode = TRUE)
 
-ada_get_search(url, decode = TRUE)
+ada_get_search(url, decode = TRUE, to_unicode = TRUE)
 
-ada_get_protocol(url, decode = TRUE)
+ada_get_protocol(url, decode = TRUE, to_unicode = TRUE)
 
 ada_get_domain(url, decode = TRUE)
 
@@ -43,6 +43,9 @@ ada_get_basename(url)
 \item{url}{character. one or more URL to be parsed}
 
 \item{decode}{logical. Whether to decode the output (see \code{\link[utils:URLencode]{utils::URLdecode()}}), default to \code{TRUE}}
+
+\item{to_unicode}{logical. Whether to convert the output to unicode. default
+is TRUE}
 }
 \value{
 character, \code{NA} if not a valid URL

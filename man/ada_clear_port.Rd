@@ -6,16 +6,19 @@
 \alias{ada_clear_search}
 \title{Clear a specific component of URL}
 \usage{
-ada_clear_port(url, decode = TRUE)
+ada_clear_port(url, decode = TRUE, to_unicode = TRUE)
 
-ada_clear_hash(url, decode = TRUE)
+ada_clear_hash(url, decode = TRUE, to_unicode = TRUE)
 
-ada_clear_search(url, decode = TRUE)
+ada_clear_search(url, decode = TRUE, to_unicode = TRUE)
 }
 \arguments{
 \item{url}{character. one or more URL to be parsed}
 
 \item{decode}{logical. Whether to decode the output (see \code{\link[utils:URLencode]{utils::URLdecode()}}), default to \code{TRUE}}
+
+\item{to_unicode}{logical. Whether to convert the output to unicode. default
+is TRUE}
 }
 \value{
 character, \code{NA} if not a valid URL

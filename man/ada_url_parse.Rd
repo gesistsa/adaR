@@ -4,12 +4,15 @@
 \alias{ada_url_parse}
 \title{Use ada-url to parse a url}
 \usage{
-ada_url_parse(url, decode = TRUE)
+ada_url_parse(url, decode = TRUE, to_unicode = TRUE)
 }
 \arguments{
 \item{url}{character. one or more URL to be parsed}
 
 \item{decode}{logical. Whether to decode the output (see \code{\link[utils:URLencode]{utils::URLdecode()}}), default to \code{TRUE}}
+
+\item{to_unicode}{logical. Whether to convert the output to unicode. default
+is TRUE}
 }
 \value{
 A data frame of the url components:

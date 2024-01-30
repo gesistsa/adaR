@@ -1,13 +1,15 @@
 #' Use ada-url to parse a url
 #' @param url character. one or more URL to be parsed
 #' @param decode logical. Whether to decode the output (see [utils::URLdecode()]), default to `TRUE`
+#' @param to_unicode logical. Whether to convert the output to unicode. default
+#' is TRUE
 #' @details For details on the returned components refer to the introductory vignette.
 #' @return A data frame of the url components:
 #' href, protocol, username, password, host, hostname, port, pathname, search, and hash
 #' @examples
 #' ada_url_parse("https://user_1:password_1@example.org:8080/dir/../api?q=1#frag")
 #' @export
-ada_url_parse <- function(url, decode = TRUE) {
+ada_url_parse <- function(url, decode = TRUE, to_unicode = TRUE) {
     if (is.null(url)) {
         return(structure(list(
             href = character(0), protocol = character(0),
@@ -16,7 +18,7 @@ ada_url_parse <- function(url, decode = TRUE) {
             search = character(0), hash = character(0)
         ), row.names = integer(0), class = "data.frame"))
     }
-    Rcpp_ada_parse(url, decode)
+    Rcpp_ada_parse(url, decode, to_unicode)
 }
 
 #' Function to percent-decode characters in URLs
