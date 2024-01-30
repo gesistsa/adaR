@@ -127,3 +127,11 @@ test_that("domain with path #51", {
     expect_equal(ada_get_domain(url), "example.org")
     expect_equal(ada_get_domain(corner_cases), corner_domains)
 })
+
+test_that("to_unicode #66", {
+    url <- "http://xn--53-6kcainf4buoffq.xn--p1ai/doof/junior-programmer.html"
+    no <- ada_get_href(url, to_unicode = TRUE)
+    yes <- ada_get_href(url, to_unicode = FALSE)
+    expect_true(url != no)
+    expect_true(url == yes)
+})
