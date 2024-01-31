@@ -128,8 +128,24 @@ test_that("domain with path #51", {
     expect_equal(ada_get_domain(corner_cases), corner_domains)
 })
 
-test_that("#66", {
+test_that("href fix #66", {
     url <- "http://xn--53-6kcainf4buoffq.xn--p1ai/doof/junior-programmer.html"
     yes <- ada_get_href(url)
     expect_true(url == yes)
+    examples <- c(
+        "http://xn--53-6kcainf4buoffq.xn--p1ai/pood/junior-electrical-engineer-jobs-remote.html",
+        "http://xn--80abb0biooohbv.xn--p1ai/",
+        "http://xn--alicantesueo-khb.com/insomnio",
+        "https://normal-url.com/this-path-will-be-fine",
+        "http://xn--53-6kcainf4buoffq.xn--p1ai/this-path-will-not-be-fine"
+    )
+    pathnames <- ada_get_pathname(examples, decode = FALSE)
+    result_pathnames <- ada_set_pathname(examples, pathnames, decode = FALSE)
+    expect_true(all(examples == result_pathnames))
+    ## unicode see #67
+    url <- "http://xn--53-6kcainf4buoffq.xn--p1ai/\u6e2f\u805e/junior-programmer.html"
+    res <- adaR::ada_url_parse(url)
+    expect_equal(res$href, url) ## doesn't mess up
+    expect_equal(res$pathname, "/\u6e2f\u805e/junior-programmer.html")
+    expect_false(res$host == "xn--53-6kcainf4buoffq.xn--p1ai") ## puny code is converted
 })
