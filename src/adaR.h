@@ -6,7 +6,7 @@
 
 using namespace Rcpp;
 
-std::string charsub(ada_string stringi);
+std::string charsub(const ada_string stringi, bool to_unicode);
 
 // cash cow
 DataFrame Rcpp_ada_parse(CharacterVector input_vec, bool decode);
