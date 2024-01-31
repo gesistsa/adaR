@@ -2,7 +2,8 @@
 
 #include "urldecode.h"
 
-std::string charsub(const ada_string stringi, bool to_unicode) {
+std::string charsub(const ada_string stringi, bool to_unicode = true) {
+  // to_unicode = false should only be used for href, see #66
   const char* res = stringi.data;
   size_t len = stringi.length;
   if (to_unicode) {
@@ -19,8 +20,7 @@ std::string charsub(const ada_string stringi, bool to_unicode) {
 }
 
 // [[Rcpp::export]]
-DataFrame Rcpp_ada_parse(const CharacterVector& input_vec, bool decode,
-                         bool to_unicode) {
+DataFrame Rcpp_ada_parse(const CharacterVector& input_vec, bool decode) {
   unsigned int n = input_vec.length();
   CharacterVector href(n);
   CharacterVector protocol(n);
@@ -37,16 +37,16 @@ DataFrame Rcpp_ada_parse(const CharacterVector& input_vec, bool decode,
     std::string_view input(s.get_cstring());
     ada_url url = ada_parse(input.data(), input.length());
     if (ada_is_valid(url)) {
-      href[i] = charsub(ada_get_href(url), to_unicode);
-      protocol[i] = charsub(ada_get_protocol(url), to_unicode);
-      username[i] = charsub(ada_get_username(url), to_unicode);
-      password[i] = charsub(ada_get_password(url), to_unicode);
-      host[i] = charsub(ada_get_host(url), to_unicode);
-      hostname[i] = charsub(ada_get_hostname(url), to_unicode);
-      port[i] = charsub(ada_get_port(url), to_unicode);
-      pathname[i] = charsub(ada_get_pathname(url), to_unicode);
-      search[i] = charsub(ada_get_search(url), to_unicode);
-      hash[i] = charsub(ada_get_hash(url), to_unicode);
+      href[i] = charsub(ada_get_href(url), false);
+      protocol[i] = charsub(ada_get_protocol(url), true);
+      username[i] = charsub(ada_get_username(url), true);
+      password[i] = charsub(ada_get_password(url), true);
+      host[i] = charsub(ada_get_host(url), true);
+      hostname[i] = charsub(ada_get_hostname(url), true);
+      port[i] = charsub(ada_get_port(url), true);
+      pathname[i] = charsub(ada_get_pathname(url), true);
+      search[i] = charsub(ada_get_search(url), true);
+      hash[i] = charsub(ada_get_hash(url), true);
     } else {
       href[i] = s;
       protocol[i] = NA_STRING;
@@ -163,63 +163,58 @@ CharacterVector Rcpp_ada_get(const CharacterVector& url_vec,
 }
 
 // [[Rcpp::export]]
-CharacterVector Rcpp_ada_get_href(const CharacterVector& url_vec, bool decode,
-                                  bool to_unicode) {
-  return Rcpp_ada_get(url_vec, &ada_get_href, decode, to_unicode);
+CharacterVector Rcpp_ada_get_href(const CharacterVector& url_vec, bool decode) {
+  return Rcpp_ada_get(url_vec, &ada_get_href, decode, false);
 }
 
 // [[Rcpp::export]]
 CharacterVector Rcpp_ada_get_username(const CharacterVector& url_vec,
-                                      bool decode, bool to_unicode) {
-  return Rcpp_ada_get(url_vec, &ada_get_username, decode, to_unicode);
+                                      bool decode) {
+  return Rcpp_ada_get(url_vec, &ada_get_username, decode, true);
 }
 
 // [[Rcpp::export]]
 CharacterVector Rcpp_ada_get_password(const CharacterVector& url_vec,
-                                      bool decode, bool to_unicode) {
-  return Rcpp_ada_get(url_vec, &ada_get_password, decode, to_unicode);
+                                      bool decode) {
+  return Rcpp_ada_get(url_vec, &ada_get_password, decode, true);
 }
 
 // [[Rcpp::export]]
-CharacterVector Rcpp_ada_get_port(const CharacterVector& url_vec, bool decode,
-                                  bool to_unicode) {
-  return Rcpp_ada_get(url_vec, &ada_get_port, decode, to_unicode);
+CharacterVector Rcpp_ada_get_port(const CharacterVector& url_vec, bool decode) {
+  return Rcpp_ada_get(url_vec, &ada_get_port, decode, true);
 }
 
 // [[Rcpp::export]]
-CharacterVector Rcpp_ada_get_hash(const CharacterVector& url_vec, bool decode,
-                                  bool to_unicode) {
-  return Rcpp_ada_get(url_vec, &ada_get_hash, decode, to_unicode);
+CharacterVector Rcpp_ada_get_hash(const CharacterVector& url_vec, bool decode) {
+  return Rcpp_ada_get(url_vec, &ada_get_hash, decode, true);
 }
 
 // [[Rcpp::export]]
-CharacterVector Rcpp_ada_get_host(const CharacterVector& url_vec, bool decode,
-                                  bool to_unicode) {
-  return Rcpp_ada_get(url_vec, &ada_get_host, decode, to_unicode);
+CharacterVector Rcpp_ada_get_host(const CharacterVector& url_vec, bool decode) {
+  return Rcpp_ada_get(url_vec, &ada_get_host, decode, true);
 }
 
 // [[Rcpp::export]]
 CharacterVector Rcpp_ada_get_hostname(const CharacterVector& url_vec,
-                                      bool decode, bool to_unicode) {
-  return Rcpp_ada_get(url_vec, &ada_get_hostname, decode, to_unicode);
+                                      bool decode) {
+  return Rcpp_ada_get(url_vec, &ada_get_hostname, decode, true);
 }
 
 // [[Rcpp::export]]
 CharacterVector Rcpp_ada_get_pathname(const CharacterVector& url_vec,
-                                      bool decode, bool to_unicode) {
-  return Rcpp_ada_get(url_vec, &ada_get_pathname, decode, to_unicode);
+                                      bool decode) {
+  return Rcpp_ada_get(url_vec, &ada_get_pathname, decode, true);
 }
 
 // [[Rcpp::export]]
-CharacterVector Rcpp_ada_get_search(const CharacterVector& url_vec, bool decode,
-                                    bool to_unicode) {
-  return Rcpp_ada_get(url_vec, &ada_get_search, decode, to_unicode);
+CharacterVector Rcpp_ada_get_search(const CharacterVector& url_vec, bool decode) {
+  return Rcpp_ada_get(url_vec, &ada_get_search, decode, true);
 }
 
 // [[Rcpp::export]]
 CharacterVector Rcpp_ada_get_protocol(const CharacterVector& url_vec,
-                                      bool decode, bool to_unicode) {
-  return Rcpp_ada_get(url_vec, &ada_get_protocol, decode, to_unicode);
+                                      bool decode) {
+  return Rcpp_ada_get(url_vec, &ada_get_protocol, decode, true);
 }
 
 // higher-order function for Rcpp_ada_set_*
@@ -227,7 +222,7 @@ template <typename T>
 CharacterVector Rcpp_ada_set(
     const CharacterVector& url_vec,
     std::function<T(ada_url, const char*, size_t)> func,
-    const CharacterVector& subst, bool decode, bool to_unicode) {
+    const CharacterVector& subst, bool decode) {
   unsigned int n = url_vec.length();
   CharacterVector out(n);
   for (int i = 0; i < url_vec.length(); i++) {
@@ -240,7 +235,7 @@ CharacterVector Rcpp_ada_set(
       out[i] = NA_STRING;
     } else {
       func(url, replace.data(), replace.length());
-      out[i] = charsub(ada_get_href(url), to_unicode);
+      out[i] = charsub(ada_get_href(url), false);
     }
     ada_free(url);
   }
@@ -251,84 +246,67 @@ CharacterVector Rcpp_ada_set(
 }
 // [[Rcpp::export]]
 CharacterVector Rcpp_ada_set_href(const CharacterVector& url_vec,
-                                  const CharacterVector& subst, bool decode,
-                                  bool to_unicode) {
-  return Rcpp_ada_set<bool>(url_vec, &ada_set_href, subst, decode, to_unicode);
+                                  const CharacterVector& subst, bool decode) {
+  return Rcpp_ada_set<bool>(url_vec, &ada_set_href, subst, decode);
 }
 
 // [[Rcpp::export]]
 CharacterVector Rcpp_ada_set_username(const CharacterVector& url_vec,
-                                      const CharacterVector& subst, bool decode,
-                                      bool to_unicode) {
-  return Rcpp_ada_set<bool>(url_vec, &ada_set_username, subst, decode,
-                            to_unicode);
+                                      const CharacterVector& subst, bool decode) {
+  return Rcpp_ada_set<bool>(url_vec, &ada_set_username, subst, decode);
 }
 
 // [[Rcpp::export]]
 CharacterVector Rcpp_ada_set_password(const CharacterVector& url_vec,
-                                      const CharacterVector& subst, bool decode,
-                                      bool to_unicode) {
-  return Rcpp_ada_set<bool>(url_vec, &ada_set_password, subst, decode,
-                            to_unicode);
+                                      const CharacterVector& subst, bool decode) {
+  return Rcpp_ada_set<bool>(url_vec, &ada_set_password, subst, decode);
 }
 
 // [[Rcpp::export]]
 CharacterVector Rcpp_ada_set_port(const CharacterVector& url_vec,
-                                  const CharacterVector& subst, bool decode,
-                                  bool to_unicode) {
-  return Rcpp_ada_set<bool>(url_vec, &ada_set_port, subst, decode, to_unicode);
+                                  const CharacterVector& subst, bool decode) {
+  return Rcpp_ada_set<bool>(url_vec, &ada_set_port, subst, decode);
 }
 
 // [[Rcpp::export]]
 CharacterVector Rcpp_ada_set_host(const CharacterVector& url_vec,
-                                  const CharacterVector& subst, bool decode,
-                                  bool to_unicode) {
-  return Rcpp_ada_set<bool>(url_vec, &ada_set_host, subst, decode, to_unicode);
+                                  const CharacterVector& subst, bool decode) {
+  return Rcpp_ada_set<bool>(url_vec, &ada_set_host, subst, decode);
 }
 
 // [[Rcpp::export]]
 CharacterVector Rcpp_ada_set_hostname(const CharacterVector& url_vec,
-                                      const CharacterVector& subst, bool decode,
-                                      bool to_unicode) {
-  return Rcpp_ada_set<bool>(url_vec, &ada_set_hostname, subst, decode,
-                            to_unicode);
+                                      const CharacterVector& subst, bool decode) {
+  return Rcpp_ada_set<bool>(url_vec, &ada_set_hostname, subst, decode);
 }
 
 // [[Rcpp::export]]
 CharacterVector Rcpp_ada_set_pathname(const CharacterVector& url_vec,
-                                      const CharacterVector& subst, bool decode,
-                                      bool to_unicode) {
-  return Rcpp_ada_set<bool>(url_vec, &ada_set_pathname, subst, decode,
-                            to_unicode);
+                                      const CharacterVector& subst, bool decode) {
+  return Rcpp_ada_set<bool>(url_vec, &ada_set_pathname, subst, decode);
 }
 
 // [[Rcpp::export]]
 CharacterVector Rcpp_ada_set_protocol(const CharacterVector& url_vec,
-                                      const CharacterVector& subst, bool decode,
-                                      bool to_unicode) {
-  return Rcpp_ada_set<bool>(url_vec, &ada_set_protocol, subst, decode,
-                            to_unicode);
+                                      const CharacterVector& subst, bool decode) {
+  return Rcpp_ada_set<bool>(url_vec, &ada_set_protocol, subst, decode);
 }
 
 // [[Rcpp::export]]
 CharacterVector Rcpp_ada_set_search(const CharacterVector& url_vec,
-                                    const CharacterVector& subst, bool decode,
-                                    bool to_unicode) {
-  return Rcpp_ada_set<void>(url_vec, &ada_set_search, subst, decode,
-                            to_unicode);
+                                    const CharacterVector& subst, bool decode) {
+  return Rcpp_ada_set<void>(url_vec, &ada_set_search, subst, decode);
 }
 
 // [[Rcpp::export]]
 CharacterVector Rcpp_ada_set_hash(const CharacterVector& url_vec,
-                                  const CharacterVector& subst, bool decode,
-                                  bool to_unicode) {
-  return Rcpp_ada_set<void>(url_vec, &ada_set_hash, subst, decode, to_unicode);
+                                  const CharacterVector& subst, bool decode) {
+  return Rcpp_ada_set<void>(url_vec, &ada_set_hash, subst, decode);
 }
 
 // higher order function for ada_clear_*
 CharacterVector Rcpp_ada_clear(const CharacterVector& url_vec,
-                               std::function<void(ada_url)> func, bool decode,
-                               bool to_unicode) {
+                               std::function<void(ada_url)> func, bool decode) {
   unsigned int n = url_vec.length();
   CharacterVector out(n);
   for (int i = 0; i < url_vec.length(); i++) {
@@ -339,7 +317,7 @@ CharacterVector Rcpp_ada_clear(const CharacterVector& url_vec,
       out[i] = NA_STRING;
     } else {
       func(url);
-      out[i] = charsub(ada_get_href(url), to_unicode);
+      out[i] = charsub(ada_get_href(url), false);
     }
     ada_free(url);
   }
@@ -350,19 +328,17 @@ CharacterVector Rcpp_ada_clear(const CharacterVector& url_vec,
 }
 
 // [[Rcpp::export]]
-CharacterVector Rcpp_ada_clear_port(const CharacterVector& url_vec, bool decode,
-                                    bool to_unicode) {
-  return Rcpp_ada_clear(url_vec, &ada_clear_port, decode, to_unicode);
+CharacterVector Rcpp_ada_clear_port(const CharacterVector& url_vec, bool decode) {
+  return Rcpp_ada_clear(url_vec, &ada_clear_port, decode);
 }
 
 // [[Rcpp::export]]
-CharacterVector Rcpp_ada_clear_hash(const CharacterVector& url_vec, bool decode,
-                                    bool to_unicode) {
-  return Rcpp_ada_clear(url_vec, &ada_clear_hash, decode, to_unicode);
+CharacterVector Rcpp_ada_clear_hash(const CharacterVector& url_vec, bool decode) {
+  return Rcpp_ada_clear(url_vec, &ada_clear_hash, decode);
 }
 
 // [[Rcpp::export]]
 CharacterVector Rcpp_ada_clear_search(const CharacterVector& url_vec,
-                                      bool decode, bool to_unicode) {
-  return Rcpp_ada_clear(url_vec, &ada_clear_search, decode, to_unicode);
+                                      bool decode) {
+  return Rcpp_ada_clear(url_vec, &ada_clear_search, decode);
 }

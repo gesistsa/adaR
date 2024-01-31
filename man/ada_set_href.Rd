@@ -13,25 +13,25 @@
 \alias{ada_set_hash}
 \title{Set a specific component of URL}
 \usage{
-ada_set_href(url, input, decode = TRUE, to_unicode = TRUE)
+ada_set_href(url, input, decode = TRUE)
 
-ada_set_username(url, input, decode = TRUE, to_unicode = TRUE)
+ada_set_username(url, input, decode = TRUE)
 
-ada_set_password(url, input, decode = TRUE, to_unicode = TRUE)
+ada_set_password(url, input, decode = TRUE)
 
-ada_set_port(url, input, decode = TRUE, to_unicode = TRUE)
+ada_set_port(url, input, decode = TRUE)
 
-ada_set_host(url, input, decode = TRUE, to_unicode = TRUE)
+ada_set_host(url, input, decode = TRUE)
 
-ada_set_hostname(url, input, decode = TRUE, to_unicode = TRUE)
+ada_set_hostname(url, input, decode = TRUE)
 
-ada_set_pathname(url, input, decode = TRUE, to_unicode = TRUE)
+ada_set_pathname(url, input, decode = TRUE)
 
-ada_set_protocol(url, input, decode = TRUE, to_unicode = TRUE)
+ada_set_protocol(url, input, decode = TRUE)
 
-ada_set_search(url, input, decode = TRUE, to_unicode = TRUE)
+ada_set_search(url, input, decode = TRUE)
 
-ada_set_hash(url, input, decode = TRUE, to_unicode = TRUE)
+ada_set_hash(url, input, decode = TRUE)
 }
 \arguments{
 \item{url}{character. one or more URL to be parsed}
@@ -40,9 +40,6 @@ ada_set_hash(url, input, decode = TRUE, to_unicode = TRUE)
 or same length as url.}
 
 \item{decode}{logical. Whether to decode the output (see \code{\link[utils:URLencode]{utils::URLdecode()}}), default to \code{TRUE}}
-
-\item{to_unicode}{logical. Whether to convert the output to unicode. default
-is TRUE}
 }
 \value{
 character, \code{NA} if not a valid URL

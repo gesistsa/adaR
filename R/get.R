@@ -1,8 +1,8 @@
-.get <- function(url, decode, func, to_unicode) {
+.get <- function(url, decode, func) {
     if (is.null(url)) {
         return(character(0))
     }
-    func(url, decode, to_unicode)
+    func(url, decode)
 }
 
 #' Get a specific component of URL
@@ -28,62 +28,62 @@
 #' urls <- c("http://www.google.com", "http://www.google.com:80", "noturl")
 #' ada_get_port(urls)
 #' @export
-ada_get_href <- function(url, decode = TRUE, to_unicode = TRUE) {
-    .get(url, decode, Rcpp_ada_get_href, to_unicode)
+ada_get_href <- function(url, decode = TRUE) {
+    .get(url, decode, Rcpp_ada_get_href)
 }
 
 #' @rdname ada_get_href
 #' @export
-ada_get_username <- function(url, decode = TRUE, to_unicode = TRUE) {
-    .get(url, decode, Rcpp_ada_get_username, to_unicode)
+ada_get_username <- function(url, decode = TRUE) {
+    .get(url, decode, Rcpp_ada_get_username)
 }
 
 #' @rdname ada_get_href
 #' @export
-ada_get_password <- function(url, decode = TRUE, to_unicode = TRUE) {
-    .get(url, decode, Rcpp_ada_get_password, to_unicode)
+ada_get_password <- function(url, decode = TRUE) {
+    .get(url, decode, Rcpp_ada_get_password)
 }
 
 #' @rdname ada_get_href
 #' @export
-ada_get_port <- function(url, decode = TRUE, to_unicode = TRUE) {
-    .get(url, decode, Rcpp_ada_get_port, to_unicode)
+ada_get_port <- function(url, decode = TRUE) {
+    .get(url, decode, Rcpp_ada_get_port)
 }
 
 #' @rdname ada_get_href
 #' @export
-ada_get_hash <- function(url, decode = TRUE, to_unicode = TRUE) {
-    .get(url, decode, Rcpp_ada_get_hash, to_unicode)
+ada_get_hash <- function(url, decode = TRUE) {
+    .get(url, decode, Rcpp_ada_get_hash)
 }
 
 #' @rdname ada_get_href
 #' @export
-ada_get_host <- function(url, decode = TRUE, to_unicode = TRUE) {
-    .get(url, decode, Rcpp_ada_get_host, to_unicode)
+ada_get_host <- function(url, decode = TRUE) {
+    .get(url, decode, Rcpp_ada_get_host)
 }
 
 #' @rdname ada_get_href
 #' @export
-ada_get_hostname <- function(url, decode = TRUE, to_unicode = TRUE) {
-    .get(url, decode, Rcpp_ada_get_hostname, to_unicode)
+ada_get_hostname <- function(url, decode = TRUE) {
+    .get(url, decode, Rcpp_ada_get_hostname)
 }
 
 #' @rdname ada_get_href
 #' @export
-ada_get_pathname <- function(url, decode = TRUE, to_unicode = TRUE) {
-    .get(url, decode, Rcpp_ada_get_pathname, to_unicode)
+ada_get_pathname <- function(url, decode = TRUE) {
+    .get(url, decode, Rcpp_ada_get_pathname)
 }
 
 #' @rdname ada_get_href
 #' @export
-ada_get_search <- function(url, decode = TRUE, to_unicode = TRUE) {
-    .get(url, decode, Rcpp_ada_get_search, to_unicode)
+ada_get_search <- function(url, decode = TRUE) {
+    .get(url, decode, Rcpp_ada_get_search)
 }
 
 #' @rdname ada_get_href
 #' @export
-ada_get_protocol <- function(url, decode = TRUE, to_unicode = TRUE) {
-    .get(url, decode, Rcpp_ada_get_protocol, to_unicode)
+ada_get_protocol <- function(url, decode = TRUE) {
+    .get(url, decode, Rcpp_ada_get_protocol)
 }
 
 R_ada_get_domain <- function(url) {

@@ -11,15 +11,14 @@ Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
 // Rcpp_ada_parse
-DataFrame Rcpp_ada_parse(const CharacterVector& input_vec, bool decode, bool to_unicode);
-RcppExport SEXP _adaR_Rcpp_ada_parse(SEXP input_vecSEXP, SEXP decodeSEXP, SEXP to_unicodeSEXP) {
+DataFrame Rcpp_ada_parse(const CharacterVector& input_vec, bool decode);
+RcppExport SEXP _adaR_Rcpp_ada_parse(SEXP input_vecSEXP, SEXP decodeSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const CharacterVector& >::type input_vec(input_vecSEXP);
     Rcpp::traits::input_parameter< bool >::type decode(decodeSEXP);
-    Rcpp::traits::input_parameter< bool >::type to_unicode(to_unicodeSEXP);
-    rcpp_result_gen = Rcpp::wrap(Rcpp_ada_parse(input_vec, decode, to_unicode));
+    rcpp_result_gen = Rcpp::wrap(Rcpp_ada_parse(input_vec, decode));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -112,311 +111,288 @@ BEGIN_RCPP
 END_RCPP
 }
 // Rcpp_ada_get_href
-CharacterVector Rcpp_ada_get_href(const CharacterVector& url_vec, bool decode, bool to_unicode);
-RcppExport SEXP _adaR_Rcpp_ada_get_href(SEXP url_vecSEXP, SEXP decodeSEXP, SEXP to_unicodeSEXP) {
+CharacterVector Rcpp_ada_get_href(const CharacterVector& url_vec, bool decode);
+RcppExport SEXP _adaR_Rcpp_ada_get_href(SEXP url_vecSEXP, SEXP decodeSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const CharacterVector& >::type url_vec(url_vecSEXP);
     Rcpp::traits::input_parameter< bool >::type decode(decodeSEXP);
-    Rcpp::traits::input_parameter< bool >::type to_unicode(to_unicodeSEXP);
-    rcpp_result_gen = Rcpp::wrap(Rcpp_ada_get_href(url_vec, decode, to_unicode));
+    rcpp_result_gen = Rcpp::wrap(Rcpp_ada_get_href(url_vec, decode));
     return rcpp_result_gen;
 END_RCPP
 }
 // Rcpp_ada_get_username
-CharacterVector Rcpp_ada_get_username(const CharacterVector& url_vec, bool decode, bool to_unicode);
-RcppExport SEXP _adaR_Rcpp_ada_get_username(SEXP url_vecSEXP, SEXP decodeSEXP, SEXP to_unicodeSEXP) {
+CharacterVector Rcpp_ada_get_username(const CharacterVector& url_vec, bool decode);
+RcppExport SEXP _adaR_Rcpp_ada_get_username(SEXP url_vecSEXP, SEXP decodeSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const CharacterVector& >::type url_vec(url_vecSEXP);
     Rcpp::traits::input_parameter< bool >::type decode(decodeSEXP);
-    Rcpp::traits::input_parameter< bool >::type to_unicode(to_unicodeSEXP);
-    rcpp_result_gen = Rcpp::wrap(Rcpp_ada_get_username(url_vec, decode, to_unicode));
+    rcpp_result_gen = Rcpp::wrap(Rcpp_ada_get_username(url_vec, decode));
     return rcpp_result_gen;
 END_RCPP
 }
 // Rcpp_ada_get_password
-CharacterVector Rcpp_ada_get_password(const CharacterVector& url_vec, bool decode, bool to_unicode);
-RcppExport SEXP _adaR_Rcpp_ada_get_password(SEXP url_vecSEXP, SEXP decodeSEXP, SEXP to_unicodeSEXP) {
+CharacterVector Rcpp_ada_get_password(const CharacterVector& url_vec, bool decode);
+RcppExport SEXP _adaR_Rcpp_ada_get_password(SEXP url_vecSEXP, SEXP decodeSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const CharacterVector& >::type url_vec(url_vecSEXP);
     Rcpp::traits::input_parameter< bool >::type decode(decodeSEXP);
-    Rcpp::traits::input_parameter< bool >::type to_unicode(to_unicodeSEXP);
-    rcpp_result_gen = Rcpp::wrap(Rcpp_ada_get_password(url_vec, decode, to_unicode));
+    rcpp_result_gen = Rcpp::wrap(Rcpp_ada_get_password(url_vec, decode));
     return rcpp_result_gen;
 END_RCPP
 }
 // Rcpp_ada_get_port
-CharacterVector Rcpp_ada_get_port(const CharacterVector& url_vec, bool decode, bool to_unicode);
-RcppExport SEXP _adaR_Rcpp_ada_get_port(SEXP url_vecSEXP, SEXP decodeSEXP, SEXP to_unicodeSEXP) {
+CharacterVector Rcpp_ada_get_port(const CharacterVector& url_vec, bool decode);
+RcppExport SEXP _adaR_Rcpp_ada_get_port(SEXP url_vecSEXP, SEXP decodeSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const CharacterVector& >::type url_vec(url_vecSEXP);
     Rcpp::traits::input_parameter< bool >::type decode(decodeSEXP);
-    Rcpp::traits::input_parameter< bool >::type to_unicode(to_unicodeSEXP);
-    rcpp_result_gen = Rcpp::wrap(Rcpp_ada_get_port(url_vec, decode, to_unicode));
+    rcpp_result_gen = Rcpp::wrap(Rcpp_ada_get_port(url_vec, decode));
     return rcpp_result_gen;
 END_RCPP
 }
 // Rcpp_ada_get_hash
-CharacterVector Rcpp_ada_get_hash(const CharacterVector& url_vec, bool decode, bool to_unicode);
-RcppExport SEXP _adaR_Rcpp_ada_get_hash(SEXP url_vecSEXP, SEXP decodeSEXP, SEXP to_unicodeSEXP) {
+CharacterVector Rcpp_ada_get_hash(const CharacterVector& url_vec, bool decode);
+RcppExport SEXP _adaR_Rcpp_ada_get_hash(SEXP url_vecSEXP, SEXP decodeSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const CharacterVector& >::type url_vec(url_vecSEXP);
     Rcpp::traits::input_parameter< bool >::type decode(decodeSEXP);
-    Rcpp::traits::input_parameter< bool >::type to_unicode(to_unicodeSEXP);
-    rcpp_result_gen = Rcpp::wrap(Rcpp_ada_get_hash(url_vec, decode, to_unicode));
+    rcpp_result_gen = Rcpp::wrap(Rcpp_ada_get_hash(url_vec, decode));
     return rcpp_result_gen;
 END_RCPP
 }
 // Rcpp_ada_get_host
-CharacterVector Rcpp_ada_get_host(const CharacterVector& url_vec, bool decode, bool to_unicode);
-RcppExport SEXP _adaR_Rcpp_ada_get_host(SEXP url_vecSEXP, SEXP decodeSEXP, SEXP to_unicodeSEXP) {
+CharacterVector Rcpp_ada_get_host(const CharacterVector& url_vec, bool decode);
+RcppExport SEXP _adaR_Rcpp_ada_get_host(SEXP url_vecSEXP, SEXP decodeSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const CharacterVector& >::type url_vec(url_vecSEXP);
     Rcpp::traits::input_parameter< bool >::type decode(decodeSEXP);
-    Rcpp::traits::input_parameter< bool >::type to_unicode(to_unicodeSEXP);
-    rcpp_result_gen = Rcpp::wrap(Rcpp_ada_get_host(url_vec, decode, to_unicode));
+    rcpp_result_gen = Rcpp::wrap(Rcpp_ada_get_host(url_vec, decode));
     return rcpp_result_gen;
 END_RCPP
 }
 // Rcpp_ada_get_hostname
-CharacterVector Rcpp_ada_get_hostname(const CharacterVector& url_vec, bool decode, bool to_unicode);
-RcppExport SEXP _adaR_Rcpp_ada_get_hostname(SEXP url_vecSEXP, SEXP decodeSEXP, SEXP to_unicodeSEXP) {
+CharacterVector Rcpp_ada_get_hostname(const CharacterVector& url_vec, bool decode);
+RcppExport SEXP _adaR_Rcpp_ada_get_hostname(SEXP url_vecSEXP, SEXP decodeSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const CharacterVector& >::type url_vec(url_vecSEXP);
     Rcpp::traits::input_parameter< bool >::type decode(decodeSEXP);
-    Rcpp::traits::input_parameter< bool >::type to_unicode(to_unicodeSEXP);
-    rcpp_result_gen = Rcpp::wrap(Rcpp_ada_get_hostname(url_vec, decode, to_unicode));
+    rcpp_result_gen = Rcpp::wrap(Rcpp_ada_get_hostname(url_vec, decode));
     return rcpp_result_gen;
 END_RCPP
 }
 // Rcpp_ada_get_pathname
-CharacterVector Rcpp_ada_get_pathname(const CharacterVector& url_vec, bool decode, bool to_unicode);
-RcppExport SEXP _adaR_Rcpp_ada_get_pathname(SEXP url_vecSEXP, SEXP decodeSEXP, SEXP to_unicodeSEXP) {
+CharacterVector Rcpp_ada_get_pathname(const CharacterVector& url_vec, bool decode);
+RcppExport SEXP _adaR_Rcpp_ada_get_pathname(SEXP url_vecSEXP, SEXP decodeSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const CharacterVector& >::type url_vec(url_vecSEXP);
     Rcpp::traits::input_parameter< bool >::type decode(decodeSEXP);
-    Rcpp::traits::input_parameter< bool >::type to_unicode(to_unicodeSEXP);
-    rcpp_result_gen = Rcpp::wrap(Rcpp_ada_get_pathname(url_vec, decode, to_unicode));
+    rcpp_result_gen = Rcpp::wrap(Rcpp_ada_get_pathname(url_vec, decode));
     return rcpp_result_gen;
 END_RCPP
 }
 // Rcpp_ada_get_search
-CharacterVector Rcpp_ada_get_search(const CharacterVector& url_vec, bool decode, bool to_unicode);
-RcppExport SEXP _adaR_Rcpp_ada_get_search(SEXP url_vecSEXP, SEXP decodeSEXP, SEXP to_unicodeSEXP) {
+CharacterVector Rcpp_ada_get_search(const CharacterVector& url_vec, bool decode);
+RcppExport SEXP _adaR_Rcpp_ada_get_search(SEXP url_vecSEXP, SEXP decodeSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const CharacterVector& >::type url_vec(url_vecSEXP);
     Rcpp::traits::input_parameter< bool >::type decode(decodeSEXP);
-    Rcpp::traits::input_parameter< bool >::type to_unicode(to_unicodeSEXP);
-    rcpp_result_gen = Rcpp::wrap(Rcpp_ada_get_search(url_vec, decode, to_unicode));
+    rcpp_result_gen = Rcpp::wrap(Rcpp_ada_get_search(url_vec, decode));
     return rcpp_result_gen;
 END_RCPP
 }
 // Rcpp_ada_get_protocol
-CharacterVector Rcpp_ada_get_protocol(const CharacterVector& url_vec, bool decode, bool to_unicode);
-RcppExport SEXP _adaR_Rcpp_ada_get_protocol(SEXP url_vecSEXP, SEXP decodeSEXP, SEXP to_unicodeSEXP) {
+CharacterVector Rcpp_ada_get_protocol(const CharacterVector& url_vec, bool decode);
+RcppExport SEXP _adaR_Rcpp_ada_get_protocol(SEXP url_vecSEXP, SEXP decodeSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const CharacterVector& >::type url_vec(url_vecSEXP);
     Rcpp::traits::input_parameter< bool >::type decode(decodeSEXP);
-    Rcpp::traits::input_parameter< bool >::type to_unicode(to_unicodeSEXP);
-    rcpp_result_gen = Rcpp::wrap(Rcpp_ada_get_protocol(url_vec, decode, to_unicode));
+    rcpp_result_gen = Rcpp::wrap(Rcpp_ada_get_protocol(url_vec, decode));
     return rcpp_result_gen;
 END_RCPP
 }
 // Rcpp_ada_set_href
-CharacterVector Rcpp_ada_set_href(const CharacterVector& url_vec, const CharacterVector& subst, bool decode, bool to_unicode);
-RcppExport SEXP _adaR_Rcpp_ada_set_href(SEXP url_vecSEXP, SEXP substSEXP, SEXP decodeSEXP, SEXP to_unicodeSEXP) {
+CharacterVector Rcpp_ada_set_href(const CharacterVector& url_vec, const CharacterVector& subst, bool decode);
+RcppExport SEXP _adaR_Rcpp_ada_set_href(SEXP url_vecSEXP, SEXP substSEXP, SEXP decodeSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const CharacterVector& >::type url_vec(url_vecSEXP);
     Rcpp::traits::input_parameter< const CharacterVector& >::type subst(substSEXP);
     Rcpp::traits::input_parameter< bool >::type decode(decodeSEXP);
-    Rcpp::traits::input_parameter< bool >::type to_unicode(to_unicodeSEXP);
-    rcpp_result_gen = Rcpp::wrap(Rcpp_ada_set_href(url_vec, subst, decode, to_unicode));
+    rcpp_result_gen = Rcpp::wrap(Rcpp_ada_set_href(url_vec, subst, decode));
     return rcpp_result_gen;
 END_RCPP
 }
 // Rcpp_ada_set_username
-CharacterVector Rcpp_ada_set_username(const CharacterVector& url_vec, const CharacterVector& subst, bool decode, bool to_unicode);
-RcppExport SEXP _adaR_Rcpp_ada_set_username(SEXP url_vecSEXP, SEXP substSEXP, SEXP decodeSEXP, SEXP to_unicodeSEXP) {
+CharacterVector Rcpp_ada_set_username(const CharacterVector& url_vec, const CharacterVector& subst, bool decode);
+RcppExport SEXP _adaR_Rcpp_ada_set_username(SEXP url_vecSEXP, SEXP substSEXP, SEXP decodeSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const CharacterVector& >::type url_vec(url_vecSEXP);
     Rcpp::traits::input_parameter< const CharacterVector& >::type subst(substSEXP);
     Rcpp::traits::input_parameter< bool >::type decode(decodeSEXP);
-    Rcpp::traits::input_parameter< bool >::type to_unicode(to_unicodeSEXP);
-    rcpp_result_gen = Rcpp::wrap(Rcpp_ada_set_username(url_vec, subst, decode, to_unicode));
+    rcpp_result_gen = Rcpp::wrap(Rcpp_ada_set_username(url_vec, subst, decode));
     return rcpp_result_gen;
 END_RCPP
 }
 // Rcpp_ada_set_password
-CharacterVector Rcpp_ada_set_password(const CharacterVector& url_vec, const CharacterVector& subst, bool decode, bool to_unicode);
-RcppExport SEXP _adaR_Rcpp_ada_set_password(SEXP url_vecSEXP, SEXP substSEXP, SEXP decodeSEXP, SEXP to_unicodeSEXP) {
+CharacterVector Rcpp_ada_set_password(const CharacterVector& url_vec, const CharacterVector& subst, bool decode);
+RcppExport SEXP _adaR_Rcpp_ada_set_password(SEXP url_vecSEXP, SEXP substSEXP, SEXP decodeSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const CharacterVector& >::type url_vec(url_vecSEXP);
     Rcpp::traits::input_parameter< const CharacterVector& >::type subst(substSEXP);
     Rcpp::traits::input_parameter< bool >::type decode(decodeSEXP);
-    Rcpp::traits::input_parameter< bool >::type to_unicode(to_unicodeSEXP);
-    rcpp_result_gen = Rcpp::wrap(Rcpp_ada_set_password(url_vec, subst, decode, to_unicode));
+    rcpp_result_gen = Rcpp::wrap(Rcpp_ada_set_password(url_vec, subst, decode));
     return rcpp_result_gen;
 END_RCPP
 }
 // Rcpp_ada_set_port
-CharacterVector Rcpp_ada_set_port(const CharacterVector& url_vec, const CharacterVector& subst, bool decode, bool to_unicode);
-RcppExport SEXP _adaR_Rcpp_ada_set_port(SEXP url_vecSEXP, SEXP substSEXP, SEXP decodeSEXP, SEXP to_unicodeSEXP) {
+CharacterVector Rcpp_ada_set_port(const CharacterVector& url_vec, const CharacterVector& subst, bool decode);
+RcppExport SEXP _adaR_Rcpp_ada_set_port(SEXP url_vecSEXP, SEXP substSEXP, SEXP decodeSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const CharacterVector& >::type url_vec(url_vecSEXP);
     Rcpp::traits::input_parameter< const CharacterVector& >::type subst(substSEXP);
     Rcpp::traits::input_parameter< bool >::type decode(decodeSEXP);
-    Rcpp::traits::input_parameter< bool >::type to_unicode(to_unicodeSEXP);
-    rcpp_result_gen = Rcpp::wrap(Rcpp_ada_set_port(url_vec, subst, decode, to_unicode));
+    rcpp_result_gen = Rcpp::wrap(Rcpp_ada_set_port(url_vec, subst, decode));
     return rcpp_result_gen;
 END_RCPP
 }
 // Rcpp_ada_set_host
-CharacterVector Rcpp_ada_set_host(const CharacterVector& url_vec, const CharacterVector& subst, bool decode, bool to_unicode);
-RcppExport SEXP _adaR_Rcpp_ada_set_host(SEXP url_vecSEXP, SEXP substSEXP, SEXP decodeSEXP, SEXP to_unicodeSEXP) {
+CharacterVector Rcpp_ada_set_host(const CharacterVector& url_vec, const CharacterVector& subst, bool decode);
+RcppExport SEXP _adaR_Rcpp_ada_set_host(SEXP url_vecSEXP, SEXP substSEXP, SEXP decodeSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const CharacterVector& >::type url_vec(url_vecSEXP);
     Rcpp::traits::input_parameter< const CharacterVector& >::type subst(substSEXP);
     Rcpp::traits::input_parameter< bool >::type decode(decodeSEXP);
-    Rcpp::traits::input_parameter< bool >::type to_unicode(to_unicodeSEXP);
-    rcpp_result_gen = Rcpp::wrap(Rcpp_ada_set_host(url_vec, subst, decode, to_unicode));
+    rcpp_result_gen = Rcpp::wrap(Rcpp_ada_set_host(url_vec, subst, decode));
     return rcpp_result_gen;
 END_RCPP
 }
 // Rcpp_ada_set_hostname
-CharacterVector Rcpp_ada_set_hostname(const CharacterVector& url_vec, const CharacterVector& subst, bool decode, bool to_unicode);
-RcppExport SEXP _adaR_Rcpp_ada_set_hostname(SEXP url_vecSEXP, SEXP substSEXP, SEXP decodeSEXP, SEXP to_unicodeSEXP) {
+CharacterVector Rcpp_ada_set_hostname(const CharacterVector& url_vec, const CharacterVector& subst, bool decode);
+RcppExport SEXP _adaR_Rcpp_ada_set_hostname(SEXP url_vecSEXP, SEXP substSEXP, SEXP decodeSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const CharacterVector& >::type url_vec(url_vecSEXP);
     Rcpp::traits::input_parameter< const CharacterVector& >::type subst(substSEXP);
     Rcpp::traits::input_parameter< bool >::type decode(decodeSEXP);
-    Rcpp::traits::input_parameter< bool >::type to_unicode(to_unicodeSEXP);
-    rcpp_result_gen = Rcpp::wrap(Rcpp_ada_set_hostname(url_vec, subst, decode, to_unicode));
+    rcpp_result_gen = Rcpp::wrap(Rcpp_ada_set_hostname(url_vec, subst, decode));
     return rcpp_result_gen;
 END_RCPP
 }
 // Rcpp_ada_set_pathname
-CharacterVector Rcpp_ada_set_pathname(const CharacterVector& url_vec, const CharacterVector& subst, bool decode, bool to_unicode);
-RcppExport SEXP _adaR_Rcpp_ada_set_pathname(SEXP url_vecSEXP, SEXP substSEXP, SEXP decodeSEXP, SEXP to_unicodeSEXP) {
+CharacterVector Rcpp_ada_set_pathname(const CharacterVector& url_vec, const CharacterVector& subst, bool decode);
+RcppExport SEXP _adaR_Rcpp_ada_set_pathname(SEXP url_vecSEXP, SEXP substSEXP, SEXP decodeSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const CharacterVector& >::type url_vec(url_vecSEXP);
     Rcpp::traits::input_parameter< const CharacterVector& >::type subst(substSEXP);
     Rcpp::traits::input_parameter< bool >::type decode(decodeSEXP);
-    Rcpp::traits::input_parameter< bool >::type to_unicode(to_unicodeSEXP);
-    rcpp_result_gen = Rcpp::wrap(Rcpp_ada_set_pathname(url_vec, subst, decode, to_unicode));
+    rcpp_result_gen = Rcpp::wrap(Rcpp_ada_set_pathname(url_vec, subst, decode));
     return rcpp_result_gen;
 END_RCPP
 }
 // Rcpp_ada_set_protocol
-CharacterVector Rcpp_ada_set_protocol(const CharacterVector& url_vec, const CharacterVector& subst, bool decode, bool to_unicode);
-RcppExport SEXP _adaR_Rcpp_ada_set_protocol(SEXP url_vecSEXP, SEXP substSEXP, SEXP decodeSEXP, SEXP to_unicodeSEXP) {
+CharacterVector Rcpp_ada_set_protocol(const CharacterVector& url_vec, const CharacterVector& subst, bool decode);
+RcppExport SEXP _adaR_Rcpp_ada_set_protocol(SEXP url_vecSEXP, SEXP substSEXP, SEXP decodeSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const CharacterVector& >::type url_vec(url_vecSEXP);
     Rcpp::traits::input_parameter< const CharacterVector& >::type subst(substSEXP);
     Rcpp::traits::input_parameter< bool >::type decode(decodeSEXP);
-    Rcpp::traits::input_parameter< bool >::type to_unicode(to_unicodeSEXP);
-    rcpp_result_gen = Rcpp::wrap(Rcpp_ada_set_protocol(url_vec, subst, decode, to_unicode));
+    rcpp_result_gen = Rcpp::wrap(Rcpp_ada_set_protocol(url_vec, subst, decode));
     return rcpp_result_gen;
 END_RCPP
 }
 // Rcpp_ada_set_search
-CharacterVector Rcpp_ada_set_search(const CharacterVector& url_vec, const CharacterVector& subst, bool decode, bool to_unicode);
-RcppExport SEXP _adaR_Rcpp_ada_set_search(SEXP url_vecSEXP, SEXP substSEXP, SEXP decodeSEXP, SEXP to_unicodeSEXP) {
+CharacterVector Rcpp_ada_set_search(const CharacterVector& url_vec, const CharacterVector& subst, bool decode);
+RcppExport SEXP _adaR_Rcpp_ada_set_search(SEXP url_vecSEXP, SEXP substSEXP, SEXP decodeSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const CharacterVector& >::type url_vec(url_vecSEXP);
     Rcpp::traits::input_parameter< const CharacterVector& >::type subst(substSEXP);
     Rcpp::traits::input_parameter< bool >::type decode(decodeSEXP);
-    Rcpp::traits::input_parameter< bool >::type to_unicode(to_unicodeSEXP);
-    rcpp_result_gen = Rcpp::wrap(Rcpp_ada_set_search(url_vec, subst, decode, to_unicode));
+    rcpp_result_gen = Rcpp::wrap(Rcpp_ada_set_search(url_vec, subst, decode));
     return rcpp_result_gen;
 END_RCPP
 }
 // Rcpp_ada_set_hash
-CharacterVector Rcpp_ada_set_hash(const CharacterVector& url_vec, const CharacterVector& subst, bool decode, bool to_unicode);
-RcppExport SEXP _adaR_Rcpp_ada_set_hash(SEXP url_vecSEXP, SEXP substSEXP, SEXP decodeSEXP, SEXP to_unicodeSEXP) {
+CharacterVector Rcpp_ada_set_hash(const CharacterVector& url_vec, const CharacterVector& subst, bool decode);
+RcppExport SEXP _adaR_Rcpp_ada_set_hash(SEXP url_vecSEXP, SEXP substSEXP, SEXP decodeSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const CharacterVector& >::type url_vec(url_vecSEXP);
     Rcpp::traits::input_parameter< const CharacterVector& >::type subst(substSEXP);
     Rcpp::traits::input_parameter< bool >::type decode(decodeSEXP);
-    Rcpp::traits::input_parameter< bool >::type to_unicode(to_unicodeSEXP);
-    rcpp_result_gen = Rcpp::wrap(Rcpp_ada_set_hash(url_vec, subst, decode, to_unicode));
+    rcpp_result_gen = Rcpp::wrap(Rcpp_ada_set_hash(url_vec, subst, decode));
     return rcpp_result_gen;
 END_RCPP
 }
 // Rcpp_ada_clear_port
-CharacterVector Rcpp_ada_clear_port(const CharacterVector& url_vec, bool decode, bool to_unicode);
-RcppExport SEXP _adaR_Rcpp_ada_clear_port(SEXP url_vecSEXP, SEXP decodeSEXP, SEXP to_unicodeSEXP) {
+CharacterVector Rcpp_ada_clear_port(const CharacterVector& url_vec, bool decode);
+RcppExport SEXP _adaR_Rcpp_ada_clear_port(SEXP url_vecSEXP, SEXP decodeSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const CharacterVector& >::type url_vec(url_vecSEXP);
     Rcpp::traits::input_parameter< bool >::type decode(decodeSEXP);
-    Rcpp::traits::input_parameter< bool >::type to_unicode(to_unicodeSEXP);
-    rcpp_result_gen = Rcpp::wrap(Rcpp_ada_clear_port(url_vec, decode, to_unicode));
+    rcpp_result_gen = Rcpp::wrap(Rcpp_ada_clear_port(url_vec, decode));
     return rcpp_result_gen;
 END_RCPP
 }
 // Rcpp_ada_clear_hash
-CharacterVector Rcpp_ada_clear_hash(const CharacterVector& url_vec, bool decode, bool to_unicode);
-RcppExport SEXP _adaR_Rcpp_ada_clear_hash(SEXP url_vecSEXP, SEXP decodeSEXP, SEXP to_unicodeSEXP) {
+CharacterVector Rcpp_ada_clear_hash(const CharacterVector& url_vec, bool decode);
+RcppExport SEXP _adaR_Rcpp_ada_clear_hash(SEXP url_vecSEXP, SEXP decodeSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const CharacterVector& >::type url_vec(url_vecSEXP);
     Rcpp::traits::input_parameter< bool >::type decode(decodeSEXP);
-    Rcpp::traits::input_parameter< bool >::type to_unicode(to_unicodeSEXP);
-    rcpp_result_gen = Rcpp::wrap(Rcpp_ada_clear_hash(url_vec, decode, to_unicode));
+    rcpp_result_gen = Rcpp::wrap(Rcpp_ada_clear_hash(url_vec, decode));
     return rcpp_result_gen;
 END_RCPP
 }
 // Rcpp_ada_clear_search
-CharacterVector Rcpp_ada_clear_search(const CharacterVector& url_vec, bool decode, bool to_unicode);
-RcppExport SEXP _adaR_Rcpp_ada_clear_search(SEXP url_vecSEXP, SEXP decodeSEXP, SEXP to_unicodeSEXP) {
+CharacterVector Rcpp_ada_clear_search(const CharacterVector& url_vec, bool decode);
+RcppExport SEXP _adaR_Rcpp_ada_clear_search(SEXP url_vecSEXP, SEXP decodeSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const CharacterVector& >::type url_vec(url_vecSEXP);
     Rcpp::traits::input_parameter< bool >::type decode(decodeSEXP);
-    Rcpp::traits::input_parameter< bool >::type to_unicode(to_unicodeSEXP);
-    rcpp_result_gen = Rcpp::wrap(Rcpp_ada_clear_search(url_vec, decode, to_unicode));
+    rcpp_result_gen = Rcpp::wrap(Rcpp_ada_clear_search(url_vec, decode));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -444,7 +420,7 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_adaR_Rcpp_ada_parse", (DL_FUNC) &_adaR_Rcpp_ada_parse, 3},
+    {"_adaR_Rcpp_ada_parse", (DL_FUNC) &_adaR_Rcpp_ada_parse, 2},
     {"_adaR_Rcpp_ada_has_credentials", (DL_FUNC) &_adaR_Rcpp_ada_has_credentials, 1},
     {"_adaR_Rcpp_ada_has_empty_hostname", (DL_FUNC) &_adaR_Rcpp_ada_has_empty_hostname, 1},
     {"_adaR_Rcpp_ada_has_hostname", (DL_FUNC) &_adaR_Rcpp_ada_has_hostname, 1},
@@ -453,29 +429,29 @@ static const R_CallMethodDef CallEntries[] = {
     {"_adaR_Rcpp_ada_has_port", (DL_FUNC) &_adaR_Rcpp_ada_has_port, 1},
     {"_adaR_Rcpp_ada_has_hash", (DL_FUNC) &_adaR_Rcpp_ada_has_hash, 1},
     {"_adaR_Rcpp_ada_has_search", (DL_FUNC) &_adaR_Rcpp_ada_has_search, 1},
-    {"_adaR_Rcpp_ada_get_href", (DL_FUNC) &_adaR_Rcpp_ada_get_href, 3},
-    {"_adaR_Rcpp_ada_get_username", (DL_FUNC) &_adaR_Rcpp_ada_get_username, 3},
-    {"_adaR_Rcpp_ada_get_password", (DL_FUNC) &_adaR_Rcpp_ada_get_password, 3},
-    {"_adaR_Rcpp_ada_get_port", (DL_FUNC) &_adaR_Rcpp_ada_get_port, 3},
-    {"_adaR_Rcpp_ada_get_hash", (DL_FUNC) &_adaR_Rcpp_ada_get_hash, 3},
-    {"_adaR_Rcpp_ada_get_host", (DL_FUNC) &_adaR_Rcpp_ada_get_host, 3},
-    {"_adaR_Rcpp_ada_get_hostname", (DL_FUNC) &_adaR_Rcpp_ada_get_hostname, 3},
-    {"_adaR_Rcpp_ada_get_pathname", (DL_FUNC) &_adaR_Rcpp_ada_get_pathname, 3},
-    {"_adaR_Rcpp_ada_get_search", (DL_FUNC) &_adaR_Rcpp_ada_get_search, 3},
-    {"_adaR_Rcpp_ada_get_protocol", (DL_FUNC) &_adaR_Rcpp_ada_get_protocol, 3},
-    {"_adaR_Rcpp_ada_set_href", (DL_FUNC) &_adaR_Rcpp_ada_set_href, 4},
-    {"_adaR_Rcpp_ada_set_username", (DL_FUNC) &_adaR_Rcpp_ada_set_username, 4},
-    {"_adaR_Rcpp_ada_set_password", (DL_FUNC) &_adaR_Rcpp_ada_set_password, 4},
-    {"_adaR_Rcpp_ada_set_port", (DL_FUNC) &_adaR_Rcpp_ada_set_port, 4},
-    {"_adaR_Rcpp_ada_set_host", (DL_FUNC) &_adaR_Rcpp_ada_set_host, 4},
-    {"_adaR_Rcpp_ada_set_hostname", (DL_FUNC) &_adaR_Rcpp_ada_set_hostname, 4},
-    {"_adaR_Rcpp_ada_set_pathname", (DL_FUNC) &_adaR_Rcpp_ada_set_pathname, 4},
-    {"_adaR_Rcpp_ada_set_protocol", (DL_FUNC) &_adaR_Rcpp_ada_set_protocol, 4},
-    {"_adaR_Rcpp_ada_set_search", (DL_FUNC) &_adaR_Rcpp_ada_set_search, 4},
-    {"_adaR_Rcpp_ada_set_hash", (DL_FUNC) &_adaR_Rcpp_ada_set_hash, 4},
-    {"_adaR_Rcpp_ada_clear_port", (DL_FUNC) &_adaR_Rcpp_ada_clear_port, 3},
-    {"_adaR_Rcpp_ada_clear_hash", (DL_FUNC) &_adaR_Rcpp_ada_clear_hash, 3},
-    {"_adaR_Rcpp_ada_clear_search", (DL_FUNC) &_adaR_Rcpp_ada_clear_search, 3},
+    {"_adaR_Rcpp_ada_get_href", (DL_FUNC) &_adaR_Rcpp_ada_get_href, 2},
+    {"_adaR_Rcpp_ada_get_username", (DL_FUNC) &_adaR_Rcpp_ada_get_username, 2},
+    {"_adaR_Rcpp_ada_get_password", (DL_FUNC) &_adaR_Rcpp_ada_get_password, 2},
+    {"_adaR_Rcpp_ada_get_port", (DL_FUNC) &_adaR_Rcpp_ada_get_port, 2},
+    {"_adaR_Rcpp_ada_get_hash", (DL_FUNC) &_adaR_Rcpp_ada_get_hash, 2},
+    {"_adaR_Rcpp_ada_get_host", (DL_FUNC) &_adaR_Rcpp_ada_get_host, 2},
+    {"_adaR_Rcpp_ada_get_hostname", (DL_FUNC) &_adaR_Rcpp_ada_get_hostname, 2},
+    {"_adaR_Rcpp_ada_get_pathname", (DL_FUNC) &_adaR_Rcpp_ada_get_pathname, 2},
+    {"_adaR_Rcpp_ada_get_search", (DL_FUNC) &_adaR_Rcpp_ada_get_search, 2},
+    {"_adaR_Rcpp_ada_get_protocol", (DL_FUNC) &_adaR_Rcpp_ada_get_protocol, 2},
+    {"_adaR_Rcpp_ada_set_href", (DL_FUNC) &_adaR_Rcpp_ada_set_href, 3},
+    {"_adaR_Rcpp_ada_set_username", (DL_FUNC) &_adaR_Rcpp_ada_set_username, 3},
+    {"_adaR_Rcpp_ada_set_password", (DL_FUNC) &_adaR_Rcpp_ada_set_password, 3},
+    {"_adaR_Rcpp_ada_set_port", (DL_FUNC) &_adaR_Rcpp_ada_set_port, 3},
+    {"_adaR_Rcpp_ada_set_host", (DL_FUNC) &_adaR_Rcpp_ada_set_host, 3},
+    {"_adaR_Rcpp_ada_set_hostname", (DL_FUNC) &_adaR_Rcpp_ada_set_hostname, 3},
+    {"_adaR_Rcpp_ada_set_pathname", (DL_FUNC) &_adaR_Rcpp_ada_set_pathname, 3},
+    {"_adaR_Rcpp_ada_set_protocol", (DL_FUNC) &_adaR_Rcpp_ada_set_protocol, 3},
+    {"_adaR_Rcpp_ada_set_search", (DL_FUNC) &_adaR_Rcpp_ada_set_search, 3},
+    {"_adaR_Rcpp_ada_set_hash", (DL_FUNC) &_adaR_Rcpp_ada_set_hash, 3},
+    {"_adaR_Rcpp_ada_clear_port", (DL_FUNC) &_adaR_Rcpp_ada_clear_port, 2},
+    {"_adaR_Rcpp_ada_clear_hash", (DL_FUNC) &_adaR_Rcpp_ada_clear_hash, 2},
+    {"_adaR_Rcpp_ada_clear_search", (DL_FUNC) &_adaR_Rcpp_ada_clear_search, 2},
     {"_adaR_Rcpp_url_decode2", (DL_FUNC) &_adaR_Rcpp_url_decode2, 1},
     {"_adaR_url_reverse", (DL_FUNC) &_adaR_url_reverse, 1},
     {NULL, NULL, 0}
