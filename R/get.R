@@ -29,7 +29,11 @@
 #' ada_get_port(urls)
 #' @export
 ada_get_href <- function(url, decode = TRUE) {
-    .get(url, decode, Rcpp_ada_get_href)
+    if (decode) {
+        return(url_decode2(url))
+    } else {
+        return(url)
+    }
 }
 
 #' @rdname ada_get_href

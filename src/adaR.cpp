@@ -12,6 +12,12 @@ std::string charsub(const ada_string stringi) {
   return output2;
 }
 
+std::string ada_string_to_std_string(const ada_string stringi) {
+  std::string_view output(stringi.data, stringi.length);
+  std::string output2 = {output.begin(), output.end()};
+  return output2;
+}
+
 // [[Rcpp::export]]
 DataFrame Rcpp_ada_parse(const CharacterVector& input_vec, bool decode) {
   unsigned int n = input_vec.length();
@@ -30,7 +36,7 @@ DataFrame Rcpp_ada_parse(const CharacterVector& input_vec, bool decode) {
     std::string_view input(s.get_cstring());
     ada_url url = ada_parse(input.data(), input.length());
     if (ada_is_valid(url)) {
-      href[i] = charsub(ada_get_href(url));
+      href[i] = s;  // charsub(ada_get_href(url));
       protocol[i] = charsub(ada_get_protocol(url));
       username[i] = charsub(ada_get_username(url));
       password[i] = charsub(ada_get_password(url));
@@ -155,7 +161,7 @@ CharacterVector Rcpp_ada_get(const CharacterVector& url_vec,
   return (out);
 }
 
-// [[Rcpp::export]]
+//[[Rcpp::export]]
 CharacterVector Rcpp_ada_get_href(const CharacterVector& url_vec, bool decode) {
   return Rcpp_ada_get(url_vec, &ada_get_href, decode);
 }
@@ -229,7 +235,7 @@ CharacterVector Rcpp_ada_set(
       out[i] = NA_STRING;
     } else {
       func(url, replace.data(), replace.length());
-      out[i] = charsub(ada_get_href(url));
+      out[i] = ada_string_to_std_string(ada_get_href(url));
     }
     ada_free(url);
   }
@@ -316,7 +322,7 @@ CharacterVector Rcpp_ada_clear(const CharacterVector& url_vec,
       out[i] = NA_STRING;
     } else {
       func(url);
-      out[i] = charsub(ada_get_href(url));
+      out[i] = ada_string_to_std_string(ada_get_href(url));
     }
     ada_free(url);
   }
