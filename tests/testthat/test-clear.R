@@ -15,3 +15,8 @@ test_that("invalid urls should return NA", {
         expect_equal(func(url), NA_character_)
     }
 })
+
+test_that("clear with puny code will still return puny, ref#66", {
+    url <- "http://xn--53-6kcainf4buoffq.xn--p1ai/junior-programmer.html?ap=123"
+    expect_equal(ada_clear_search(url), "http://xn--53-6kcainf4buoffq.xn--p1ai/junior-programmer.html")
+})

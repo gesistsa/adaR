@@ -142,10 +142,4 @@ test_that("href fix #66", {
     pathnames <- ada_get_pathname(examples, decode = FALSE)
     result_pathnames <- ada_set_pathname(examples, pathnames, decode = FALSE)
     expect_true(all(examples == result_pathnames))
-    ## unicode see #67
-    url <- "http://xn--53-6kcainf4buoffq.xn--p1ai/\u6e2f\u805e/junior-programmer.html"
-    res <- adaR::ada_url_parse(url)
-    expect_equal(res$href, url) ## doesn't mess up
-    expect_equal(res$pathname, "/\u6e2f\u805e/junior-programmer.html")
-    expect_false(res$host == "xn--53-6kcainf4buoffq.xn--p1ai") ## puny code is converted
 })

@@ -37,3 +37,9 @@ test_that("uneven vectors", {
 test_that("NULL input", {
     expect_equal(ada_set_protocol("https://google.de", NULL), "https://google.de")
 })
+
+test_that("setting with puny code will still return puny, ref#66", {
+    url <- "http://xn--53-6kcainf4buoffq.xn--p1ai/junior-programmer.html"
+    expect_equal(ada_set_protocol(url, "ws:"), "ws://xn--53-6kcainf4buoffq.xn--p1ai/junior-programmer.html")
+    expect_equal(ada_set_href(url, "http://xn--53-6kcainf4buoffq.xn--p1ai/junior-programmer.html"), "http://xn--53-6kcainf4buoffq.xn--p1ai/junior-programmer.html")
+})

@@ -45,3 +45,12 @@ test_that("corner cases", {
     expect_equal(x$host, c(NA_character_, NA_character_, NA_character_, NA_character_))
     expect_equal(y$host, c(NA_character_, NA_character_, NA_character_, NA_character_))
 })
+
+test_that("#66", {
+    ## unicode see #67
+    url <- "http://xn--53-6kcainf4buoffq.xn--p1ai/\u6e2f\u805e/junior-programmer.html"
+    res <- adaR::ada_url_parse(url)
+    expect_equal(res$href, url) ## doesn't mess up
+    expect_equal(res$pathname, "/\u6e2f\u805e/junior-programmer.html")
+    expect_false(res$host == "xn--53-6kcainf4buoffq.xn--p1ai") ## puny code is converted
+})
