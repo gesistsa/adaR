@@ -13,7 +13,7 @@ Downloads](http://cranlogs.r-pkg.org/badges/adaR)](https://CRAN.R-project.org/pa
 [![Codecov test
 coverage](https://codecov.io/gh/gesistsa/adaR/branch/main/graph/badge.svg)](https://app.codecov.io/gh/gesistsa/adaR?branch=main)
 [![ada-url
-Version](https://img.shields.io/badge/ada_url-2.7.3-blue)](https://github.com/ada-url/ada)
+Version](https://img.shields.io/badge/ada_url-2.7.6-blue)](https://github.com/ada-url/ada)
 <!-- badges: end -->
 
 adaR is a wrapper for [ada-url](https://github.com/ada-url/ada), a
@@ -22,20 +22,20 @@ URL parser written in modern C++ .
 
 It implements several auxilliary functions to work with urls:
 
-- public suffix extraction (top level domain excluding private domains)
-  like [psl](https://github.com/hrbrmstr/psl)
-- fast c++ implementation of `utils::URLdecode` (~40x speedup)
+-   public suffix extraction (top level domain excluding private
+    domains) like [psl](https://github.com/hrbrmstr/psl)
+-   fast c++ implementation of `utils::URLdecode` (\~40x speedup)
 
 More general information on URL parsing can be found in the introductory
 vignette via `vignette("adaR")`.
 
 `adaR` is part of a series of R packages to analyse webtracking data:
 
-- [webtrackR](https://github.com/schochastics/webtrackR): preprocess raw
-  webtracking data
-- [domainator](https://github.com/schochastics/domainator): classify
-  domains
-- [adaR](https://github.com/gesistsa/adaR): parse urls
+-   [webtrackR](https://github.com/schochastics/webtrackR): preprocess
+    raw webtracking data
+-   [domainator](https://github.com/schochastics/domainator): classify
+    domains
+-   [adaR](https://github.com/gesistsa/adaR): parse urls
 
 ## Installation
 
@@ -121,8 +121,8 @@ bench::mark(
 #> # A tibble: 2 × 6
 #>   expression      min   median `itr/sec` mem_alloc `gc/sec`
 #>   <bch:expr> <bch:tm> <bch:tm>     <dbl> <bch:byt>    <dbl>
-#> 1 ada           227µs    227µs     4405.    2.49KB        0
-#> 2 urltools      229µs    229µs     4373.    2.49KB        0
+#> 1 ada          2.43ms   2.43ms      411.    2.49KB        0
+#> 2 urltools   526.26µs 526.26µs     1900.    2.49KB        0
 ```
 
 For further benchmark results, see `benchmark.md` in `data_raw`.
@@ -130,10 +130,10 @@ For further benchmark results, see `benchmark.md` in `data_raw`.
 There are four more groups of functions available to work with url
 parsing:
 
-- `ada_get_*()` get a specific component
-- `ada_has_*()` check if a specific component is present
-- `ada_set_*()` set a specific component from URLS
-- `ada_clear_*()` remove a specific component from URLS
+-   `ada_get_*()` get a specific component
+-   `ada_has_*()` check if a specific component is present
+-   `ada_set_*()` set a specific component from URLS
+-   `ada_clear_*()` remove a specific component from URLS
 
 ## Public Suffix extraction
 
