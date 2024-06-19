@@ -1,0 +1,155 @@
+# --------------------------------------------
+# CITATION file created with {cffr} R package
+# See also: https://docs.ropensci.org/cffr/
+# --------------------------------------------
+ 
+cff-version: 1.2.0
+message: 'To cite package "adaR" in publications use:'
+type: software
+license: MIT
+title: 'adaR: A Fast ''WHATWG'' Compliant URL Parser'
+version: 0.3.2
+abstract: A wrapper for 'ada-url', a 'WHATWG' compliant and fast URL parser written
+  in modern 'C++'. Also contains auxiliary functions such as a public suffix extractor.
+authors:
+- family-names: Schoch
+  given-names: David
+  email: david@schochastics.net
+  orcid: https://orcid.org/0000-0003-2952-4812
+- family-names: Chan
+  given-names: Chung-hong
+  email: chainsawtiney@gmail.com
+  orcid: https://orcid.org/0000-0002-6232-7530
+repository: https://CRAN.R-project.org/package=adaR
+repository-code: https://github.com/gesistsa/adaR
+url: https://gesistsa.github.io/adaR/
+contact:
+- family-names: Schoch
+  given-names: David
+  email: david@schochastics.net
+  orcid: https://orcid.org/0000-0003-2952-4812
+keywords:
+- r
+- rstats
+- rstats-package
+- url-parser
+references:
+- type: software
+  title: Rcpp
+  abstract: 'Rcpp: Seamless R and C++ Integration'
+  notes: LinkingTo
+  url: https://www.rcpp.org
+  repository: https://CRAN.R-project.org/package=Rcpp
+  authors:
+  - family-names: Eddelbuettel
+    given-names: Dirk
+  - family-names: Francois
+    given-names: Romain
+  - family-names: Allaire
+    given-names: JJ
+  - family-names: Ushey
+    given-names: Kevin
+  - family-names: Kou
+    given-names: Qiang
+  - family-names: Russell
+    given-names: Nathan
+  - family-names: Ucar
+    given-names: Inaki
+  - family-names: Bates
+    given-names: Douglas
+  - family-names: Chambers
+    given-names: John
+  year: '2024'
+- type: software
+  title: triebeard
+  abstract: 'triebeard: ''Radix'' Trees in ''Rcpp'''
+  notes: Imports
+  url: https://github.com/Ironholds/triebeard/
+  repository: https://CRAN.R-project.org/package=triebeard
+  authors:
+  - family-names: Keyes
+    given-names: Os
+  - family-names: Schmidt
+    given-names: Drew
+  - family-names: Takano
+    given-names: Yuuki
+  year: '2024'
+- type: software
+  title: knitr
+  abstract: 'knitr: A General-Purpose Package for Dynamic Report Generation in R'
+  notes: Suggests
+  url: https://yihui.org/knitr/
+  repository: https://CRAN.R-project.org/package=knitr
+  authors:
+  - family-names: Xie
+    given-names: Yihui
+    email: xie@yihui.name
+    orcid: https://orcid.org/0000-0003-0645-5666
+  year: '2024'
+- type: software
+  title: rmarkdown
+  abstract: 'rmarkdown: Dynamic Documents for R'
+  notes: Suggests
+  url: https://pkgs.rstudio.com/rmarkdown/
+  repository: https://CRAN.R-project.org/package=rmarkdown
+  authors:
+  - family-names: Allaire
+    given-names: JJ
+    email: jj@posit.co
+  - family-names: Xie
+    given-names: Yihui
+    email: xie@yihui.name
+    orcid: https://orcid.org/0000-0003-0645-5666
+  - family-names: Dervieux
+    given-names: Christophe
+    email: cderv@posit.co
+    orcid: https://orcid.org/0000-0003-4474-2498
+  - family-names: McPherson
+    given-names: Jonathan
+    email: jonathan@posit.co
+  - family-names: Luraschi
+    given-names: Javier
+  - family-names: Ushey
+    given-names: Kevin
+    email: kevin@posit.co
+  - family-names: Atkins
+    given-names: Aron
+    email: aron@posit.co
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@posit.co
+  - family-names: Cheng
+    given-names: Joe
+    email: joe@posit.co
+  - family-names: Chang
+    given-names: Winston
+    email: winston@posit.co
+  - family-names: Iannone
+    given-names: Richard
+    email: rich@posit.co
+    orcid: https://orcid.org/0000-0003-3925-190X
+  year: '2024'
+- type: software
+  title: testthat
+  abstract: 'testthat: Unit Testing for R'
+  notes: Suggests
+  url: https://testthat.r-lib.org
+  repository: https://CRAN.R-project.org/package=testthat
+  authors:
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@posit.co
+  year: '2024'
+  version: '>= 3.0.0'
+- type: software
+  title: 'R: A Language and Environment for Statistical Computing'
+  notes: Depends
+  url: https://www.R-project.org/
+  authors:
+  - name: R Core Team
+  institution:
+    name: R Foundation for Statistical Computing
+    address: Vienna, Austria
+  year: '2024'
+  version: '>= 4.2'
+
