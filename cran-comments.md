@@ -1,7 +1,6 @@
-## Update from 0.3.0 to 0.3.1
+## Update from 0.3.2 to 0.3.3
 
-* bump ada_url version to 2.7.3
-* repository transferred to gesistsa
+* bump ada_url version to 2.9.0
 
 
 # Test environments

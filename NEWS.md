@@ -1,3 +1,7 @@
+# adaR 0.3.3
+
+* * bumped ada-url to 2.9.0
+
 # adaR 0.3.2
 
 * fixed #66

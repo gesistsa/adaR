@@ -13,7 +13,7 @@ Downloads](http://cranlogs.r-pkg.org/badges/adaR)](https://CRAN.R-project.org/pa
 [![Codecov test
 coverage](https://codecov.io/gh/gesistsa/adaR/branch/main/graph/badge.svg)](https://app.codecov.io/gh/gesistsa/adaR?branch=main)
 [![ada-url
-Version](https://img.shields.io/badge/ada_url-2.7.6-blue)](https://github.com/ada-url/ada)
+Version](https://img.shields.io/badge/ada_url-2.9.0-blue)](https://github.com/ada-url/ada)
 <!-- badges: end -->
 
 adaR is a wrapper for [ada-url](https://github.com/ada-url/ada), a
@@ -61,10 +61,10 @@ URL.
 ``` r
 library(adaR)
 ada_url_parse("https://user_1:password_1@example.org:8080/dir/../api?q=1#frag")
-#>                                                      href protocol username
-#> 1 https://user_1:password_1@example.org:8080/api?q=1#frag   https:   user_1
-#>     password             host    hostname port pathname search  hash
-#> 1 password_1 example.org:8080 example.org 8080     /api   ?q=1 #frag
+#>                                                      href protocol username   password
+#> 1 https://user_1:password_1@example.org:8080/api?q=1#frag   https:   user_1 password_1
+#>               host    hostname port pathname search  hash
+#> 1 example.org:8080 example.org 8080     /api   ?q=1 #frag
 ```
 
 ``` cpp
@@ -93,7 +93,9 @@ urltools::url_parse("https://www.google.com/maps/place/Pennsylvania+Station/@40.
 #> 1 data=!4m5!3m4!1s0x89c259ae15b2adcb:0x7955420634fd7eba!8m2!3d40.750568!4d-73.993519
 #>   parameter fragment
 #> 1      <NA>     <NA>
+```
 
+``` r
 ada_url_parse("https://www.google.com/maps/place/Pennsylvania+Station/@40.7519848,-74.0015045,14.7z/data=!4m
    5!3m4!1s0x89c259ae15b2adcb:0x7955420634fd7eba!8m2!3d40.750568!4d-73.993519")
 #>                                                                                                                                                                         href
@@ -121,8 +123,8 @@ bench::mark(
 #> # A tibble: 2 × 6
 #>   expression      min   median `itr/sec` mem_alloc `gc/sec`
 #>   <bch:expr> <bch:tm> <bch:tm>     <dbl> <bch:byt>    <dbl>
-#> 1 ada          2.43ms   2.43ms      411.    2.49KB        0
-#> 2 urltools   526.26µs 526.26µs     1900.    2.49KB        0
+#> 1 ada          3.32ms   3.32ms      301.        0B        0
+#> 2 urltools   566.68µs 566.68µs     1765.        0B        0
 ```
 
 For further benchmark results, see `benchmark.md` in `data_raw`.

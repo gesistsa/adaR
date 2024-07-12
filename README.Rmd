@@ -20,7 +20,7 @@ knitr::opts_chunk$set(
 [![CRAN status](https://www.r-pkg.org/badges/version/adaR)](https://CRAN.R-project.org/package=adaR)
 [![CRAN Downloads](http://cranlogs.r-pkg.org/badges/adaR)](https://CRAN.R-project.org/package=adaR)
 [![Codecov test coverage](https://codecov.io/gh/gesistsa/adaR/branch/main/graph/badge.svg)](https://app.codecov.io/gh/gesistsa/adaR?branch=main)
-[![ada-url Version](https://img.shields.io/badge/ada_url-2.7.6-blue)](https://github.com/ada-url/ada)
+[![ada-url Version](https://img.shields.io/badge/ada_url-2.9.0-blue)](https://github.com/ada-url/ada)
 <!-- badges: end -->
 
 adaR is a wrapper for [ada-url](https://github.com/ada-url/ada), a
