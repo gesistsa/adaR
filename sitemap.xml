@@ -1,54 +1,20 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://schochastics.github.io/adaR/404.html</loc>
-  </url>
-  <url>
-    <loc>https://schochastics.github.io/adaR/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>https://schochastics.github.io/adaR/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>https://schochastics.github.io/adaR/articles/adaR.html</loc>
-  </url>
-  <url>
-    <loc>https://schochastics.github.io/adaR/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>https://schochastics.github.io/adaR/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://schochastics.github.io/adaR/index.html</loc>
-  </url>
-  <url>
-    <loc>https://schochastics.github.io/adaR/methodshub.html</loc>
-  </url>
-  <url>
-    <loc>https://schochastics.github.io/adaR/news/index.html</loc>
-  </url>
-  <url>
-    <loc>https://schochastics.github.io/adaR/reference/ada_clear_port.html</loc>
-  </url>
-  <url>
-    <loc>https://schochastics.github.io/adaR/reference/ada_get_href.html</loc>
-  </url>
-  <url>
-    <loc>https://schochastics.github.io/adaR/reference/ada_has_credentials.html</loc>
-  </url>
-  <url>
-    <loc>https://schochastics.github.io/adaR/reference/ada_set_href.html</loc>
-  </url>
-  <url>
-    <loc>https://schochastics.github.io/adaR/reference/ada_url_parse.html</loc>
-  </url>
-  <url>
-    <loc>https://schochastics.github.io/adaR/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://schochastics.github.io/adaR/reference/public_suffix.html</loc>
-  </url>
-  <url>
-    <loc>https://schochastics.github.io/adaR/reference/url_decode2.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://schochastics.github.io/adaR/404.html</loc></url>
+<url><loc>https://schochastics.github.io/adaR/LICENSE-text.html</loc></url>
+<url><loc>https://schochastics.github.io/adaR/LICENSE.html</loc></url>
+<url><loc>https://schochastics.github.io/adaR/articles/adaR.html</loc></url>
+<url><loc>https://schochastics.github.io/adaR/articles/index.html</loc></url>
+<url><loc>https://schochastics.github.io/adaR/authors.html</loc></url>
+<url><loc>https://schochastics.github.io/adaR/index.html</loc></url>
+<url><loc>https://schochastics.github.io/adaR/methodshub.html</loc></url>
+<url><loc>https://schochastics.github.io/adaR/news/index.html</loc></url>
+<url><loc>https://schochastics.github.io/adaR/reference/ada_clear_port.html</loc></url>
+<url><loc>https://schochastics.github.io/adaR/reference/ada_get_href.html</loc></url>
+<url><loc>https://schochastics.github.io/adaR/reference/ada_has_credentials.html</loc></url>
+<url><loc>https://schochastics.github.io/adaR/reference/ada_set_href.html</loc></url>
+<url><loc>https://schochastics.github.io/adaR/reference/ada_url_parse.html</loc></url>
+<url><loc>https://schochastics.github.io/adaR/reference/index.html</loc></url>
+<url><loc>https://schochastics.github.io/adaR/reference/public_suffix.html</loc></url>
+<url><loc>https://schochastics.github.io/adaR/reference/url_decode2.html</loc></url>
 </urlset>
+

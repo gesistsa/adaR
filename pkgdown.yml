@@ -1,10 +1,9 @@
 pandoc: 3.1.11
-pkgdown: 2.0.9
+pkgdown: 2.1.0
 pkgdown_sha: ~
 articles:
   adaR: adaR.html
-last_built: 2024-06-19T11:18Z
+last_built: 2024-07-12T10:36Z
 urls:
   reference: https://schochastics.github.io/adaR/reference
   article: https://schochastics.github.io/adaR/articles
-
