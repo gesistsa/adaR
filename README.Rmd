@@ -17,8 +17,8 @@ knitr::opts_chunk$set(
 
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/gesistsa/adaR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/gesistsa/adaR/actions/workflows/R-CMD-check.yaml)
-[![CRAN status](https://cranlogs.r-pkg.org/badges/version/adaR)](https://CRAN.R-project.org/package=adaR)
-[![CRAN Downloads](http://cranlogs.r-pkg.org/badges/adaR)](https://CRAN.R-project.org/package=adaR)
+[![CRAN status](https://www.r-pkg.org/badges/version/adaR)](https://CRAN.R-project.org/package=adaR)
+[![CRAN Downloads](https://cranlogs.r-pkg.org/badges/adaR)](https://CRAN.R-project.org/package=adaR)
 [![Codecov test coverage](https://codecov.io/gh/gesistsa/adaR/branch/main/graph/badge.svg)](https://app.codecov.io/gh/gesistsa/adaR?branch=main)
 [![ada-url Version](https://img.shields.io/badge/ada_url-2.9.0-blue)](https://github.com/ada-url/ada)
 <!-- badges: end -->

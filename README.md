@@ -7,9 +7,9 @@
 
 [![R-CMD-check](https://github.com/gesistsa/adaR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/gesistsa/adaR/actions/workflows/R-CMD-check.yaml)
 [![CRAN
-status](https://cranlogs.r-pkg.org/badges/version/adaR)](https://CRAN.R-project.org/package=adaR)
+status](https://www.r-pkg.org/badges/version/adaR)](https://CRAN.R-project.org/package=adaR)
 [![CRAN
-Downloads](http://cranlogs.r-pkg.org/badges/adaR)](https://CRAN.R-project.org/package=adaR)
+Downloads](https://cranlogs.r-pkg.org/badges/adaR)](https://CRAN.R-project.org/package=adaR)
 [![Codecov test
 coverage](https://codecov.io/gh/gesistsa/adaR/branch/main/graph/badge.svg)](https://app.codecov.io/gh/gesistsa/adaR?branch=main)
 [![ada-url
@@ -121,8 +121,8 @@ bench::mark(
 #> # A tibble: 2 × 6
 #>   expression      min   median `itr/sec` mem_alloc `gc/sec`
 #>   <bch:expr> <bch:tm> <bch:tm>     <dbl> <bch:byt>    <dbl>
-#> 1 ada          1.69ms   1.69ms      593.        0B        0
-#> 2 urltools   737.84µs 737.84µs     1355.        0B        0
+#> 1 ada          1.24ms   1.24ms      806.        0B        0
+#> 2 urltools    812.7µs  812.7µs     1230.        0B        0
 ```
 
 For further benchmark results, see `benchmark.md` in `data_raw`.
