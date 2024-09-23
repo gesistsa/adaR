@@ -17,7 +17,7 @@ knitr::opts_chunk$set(
 
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/gesistsa/adaR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/gesistsa/adaR/actions/workflows/R-CMD-check.yaml)
-[![CRAN status](https://www.r-pkg.org/badges/version/adaR)](https://CRAN.R-project.org/package=adaR)
+[![CRAN status](https://cranlogs.r-pkg.org/badges/version/adaR)](https://CRAN.R-project.org/package=adaR)
 [![CRAN Downloads](http://cranlogs.r-pkg.org/badges/adaR)](https://CRAN.R-project.org/package=adaR)
 [![Codecov test coverage](https://codecov.io/gh/gesistsa/adaR/branch/main/graph/badge.svg)](https://app.codecov.io/gh/gesistsa/adaR?branch=main)
 [![ada-url Version](https://img.shields.io/badge/ada_url-2.9.0-blue)](https://github.com/ada-url/ada)
@@ -77,7 +77,7 @@ ada_url_parse("https://user_1:password_1@example.org:8080/dir/../api?q=1#frag")
    */
 ```
 
-It solves some problems of urltools with more complex urls. 
+It solves some problems of urltools with more complex urls.
 ```{r better}
 urltools::url_parse("https://www.google.com/maps/place/Pennsylvania+Station/@40.7519848,-74.0015045,14.
    7z/data=!4m5!3m4!1s0x89c259ae15b2adcb:0x7955420634fd7eba!8m2!3d40.750568!4d-73.993519")
@@ -86,7 +86,7 @@ ada_url_parse("https://www.google.com/maps/place/Pennsylvania+Station/@40.751984
    5!3m4!1s0x89c259ae15b2adcb:0x7955420634fd7eba!8m2!3d40.750568!4d-73.993519")
 ```
 
-A "raw" url parse using ada is extremely fast (see [ada-url.com](https://www.ada-url.com/)) but for this to carry over to R is tricky. 
+A "raw" url parse using ada is extremely fast (see [ada-url.com](https://www.ada-url.com/)) but for this to carry over to R is tricky.
 The performance is still compatible with `urltools::url_parse` with the noted advantage in accuracy in some
 practical circumstances.
 
@@ -102,14 +102,14 @@ For further benchmark results, see `benchmark.md` in `data_raw`.
 
 There are four more groups of functions available to work with url parsing:
 
-- `ada_get_*()` get a specific component 
+- `ada_get_*()` get a specific component
 - `ada_has_*()` check if a specific component is present
 - `ada_set_*()` set a specific component from URLS
 - `ada_clear_*()` remove a specific component from URLS
 
 ## Public Suffix extraction
 
-`public_suffix()` extracts their top level domain from the [public suffix list](https://publicsuffix.org/), **excluding** private domains. 
+`public_suffix()` extracts their top level domain from the [public suffix list](https://publicsuffix.org/), **excluding** private domains.
 
 ```{r public_suffix}
 urls <- c(
