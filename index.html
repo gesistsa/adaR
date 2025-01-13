@@ -11,8 +11,8 @@
 <script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/Roboto-0.4.9/font.css" rel="stylesheet">
 <link href="deps/JetBrains_Mono-0.4.9/font.css" rel="stylesheet">
 <link href="deps/Roboto_Slab-0.4.9/font.css" rel="stylesheet">
-<link href="deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
-<link href="deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
+<link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="A Fast WHATWG Compliant URL Parser">
 <meta name="description" content="A wrapper for ada-url, a WHATWG compliant and fast URL parser written in modern C++. Also contains auxiliary functions such as a public suffix extractor.">
 <meta property="og:description" content="A wrapper for ada-url, a WHATWG compliant and fast URL parser written in modern C++. Also contains auxiliary functions such as a public suffix extractor.">
@@ -26,7 +26,7 @@
 
     <a class="navbar-brand me-2" href="index.html">adaR</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.3.9999</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -132,13 +132,13 @@
 <code class="sourceCode R"><span><span class="fu">bench</span><span class="fu">::</span><span class="fu">mark</span><span class="op">(</span></span>
 <span>    ada <span class="op">=</span> <span class="fu"><a href="reference/ada_url_parse.html">ada_url_parse</a></span><span class="op">(</span><span class="st">"https://user_1:password_1@example.org:8080/dir/../api?q=1#frag"</span>, decode <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>,</span>
 <span>    urltools <span class="op">=</span> <span class="fu">urltools</span><span class="fu">::</span><span class="fu">url_parse</span><span class="op">(</span><span class="st">"https://user_1:password_1@example.org:8080/dir/../api?q=1#frag"</span><span class="op">)</span>,</span>
-<span>    iterations <span class="op">=</span> <span class="fl">1</span>, check <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span>    check <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 2 × 6</span></span>
 <span><span class="co">#&gt;   expression      min   median `itr/sec` mem_alloc `gc/sec`</span></span>
 <span><span class="co">#&gt;   &lt;bch:expr&gt; &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt; 1 ada          1.24ms   1.24ms      806.        0B        0</span></span>
-<span><span class="co">#&gt; 2 urltools    812.7µs  812.7µs     1230.        0B        0</span></span></code></pre></div>
+<span><span class="co">#&gt; 1 ada          2.83µs   3.24µs   286849.        0B     28.7</span></span>
+<span><span class="co">#&gt; 2 urltools   123.41µs 134.36µs     7277.        0B     36.8</span></span></code></pre></div>
 <p>For further benchmark results, see <code>benchmark.md</code> in <code>data_raw</code>.</p>
 <p>There are four more groups of functions available to work with url parsing:</p>
 <ul>
