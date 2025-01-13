@@ -1,3 +1,7 @@
+# adaR 0.3.3.9999
+
+* improved ada_url_parse performance(#73)
+
 # adaR 0.3.3
 
 * * bumped ada-url to 2.9.0

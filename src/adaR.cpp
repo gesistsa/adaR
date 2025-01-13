@@ -20,7 +20,7 @@ std::string charsub(const ada_string stringi, bool to_unicode = true) {
 }
 
 // [[Rcpp::export]]
-DataFrame Rcpp_ada_parse(const CharacterVector& input_vec, bool decode) {
+List Rcpp_ada_parse(const CharacterVector& input_vec, bool decode) {
   unsigned int n = input_vec.length();
   CharacterVector href(n);
   CharacterVector protocol(n);
@@ -32,6 +32,7 @@ DataFrame Rcpp_ada_parse(const CharacterVector& input_vec, bool decode) {
   CharacterVector pathname(n);
   CharacterVector search(n);
   CharacterVector hash(n);
+  Rcpp::IntegerVector row_name(n);
   for (unsigned int i = 0; i < n; i++) {
     String s = input_vec[i];
     std::string_view input(s.get_cstring());
@@ -60,6 +61,7 @@ DataFrame Rcpp_ada_parse(const CharacterVector& input_vec, bool decode) {
       hash[i] = NA_STRING;
     }
     ada_free(url);
+    row_name[i] = i + 1;
   }
   if (decode) {
     href = Rcpp_url_decode2(href);
@@ -73,12 +75,19 @@ DataFrame Rcpp_ada_parse(const CharacterVector& input_vec, bool decode) {
     search = Rcpp_url_decode2(search);
     hash = Rcpp_url_decode2(hash);
   }
-  return (DataFrame::create(Named("href") = href, _["protocol"] = protocol,
-                            _["username"] = username, _["password"] = password,
-                            _["host"] = host, _["hostname"] = hostname,
-                            _["port"] = port, _["pathname"] = pathname,
-                            _["search"] = search, _["hash"] = hash));
+
+  List result = List::create(Named("href") = href, _["protocol"] = protocol,
+                        _["username"] = username, _["password"] = password,
+                        _["host"] = host, _["hostname"] = hostname,
+                        _["port"] = port, _["pathname"] = pathname,
+                        _["search"] = search, _["hash"] = hash);
+  // as data.frame is expensive - create from the list
+  result.attr("row.names") = row_name;
+  result.attr("class") = "data.frame";
+
+  return result;
 }
+
 
 // higher-order function for all Rcpp_ada_has_*
 LogicalVector Rcpp_ada_has(const CharacterVector& url_vec,

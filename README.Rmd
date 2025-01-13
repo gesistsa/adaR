@@ -94,7 +94,7 @@ practical circumstances.
 bench::mark(
     ada = ada_url_parse("https://user_1:password_1@example.org:8080/dir/../api?q=1#frag", decode = FALSE),
     urltools = urltools::url_parse("https://user_1:password_1@example.org:8080/dir/../api?q=1#frag"),
-    iterations = 1, check = FALSE
+    check = FALSE
 )
 ```
 
