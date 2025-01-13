@@ -11,7 +11,7 @@ Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
 // Rcpp_ada_parse
-DataFrame Rcpp_ada_parse(const CharacterVector& input_vec, bool decode);
+List Rcpp_ada_parse(const CharacterVector& input_vec, bool decode);
 RcppExport SEXP _adaR_Rcpp_ada_parse(SEXP input_vecSEXP, SEXP decodeSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
