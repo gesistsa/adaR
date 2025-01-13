@@ -116,13 +116,13 @@ practical circumstances.
 bench::mark(
     ada = ada_url_parse("https://user_1:password_1@example.org:8080/dir/../api?q=1#frag", decode = FALSE),
     urltools = urltools::url_parse("https://user_1:password_1@example.org:8080/dir/../api?q=1#frag"),
-    iterations = 1, check = FALSE
+    check = FALSE
 )
 #> # A tibble: 2 × 6
 #>   expression      min   median `itr/sec` mem_alloc `gc/sec`
 #>   <bch:expr> <bch:tm> <bch:tm>     <dbl> <bch:byt>    <dbl>
-#> 1 ada          1.24ms   1.24ms      806.        0B        0
-#> 2 urltools    812.7µs  812.7µs     1230.        0B        0
+#> 1 ada          2.83µs   3.24µs   286849.        0B     28.7
+#> 2 urltools   123.41µs 134.36µs     7277.        0B     36.8
 ```
 
 For further benchmark results, see `benchmark.md` in `data_raw`.
