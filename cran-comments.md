@@ -1,6 +1,7 @@
-## Update from 0.3.2 to 0.3.3
+## Update from 0.3.3 to 0.3.4
 
-* bump ada_url version to 2.9.0
+* improved ada_url_parse performance
+* bump ada_url version to 2.9.2
 
 
 # Test environments

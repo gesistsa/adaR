@@ -1,4 +1,4 @@
-# adaR 0.3.3.9999
+# adaR 0.3.4
 
 * improved ada_url_parse performance(#73)
 
