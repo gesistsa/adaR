@@ -13,7 +13,7 @@ Downloads](https://cranlogs.r-pkg.org/badges/adaR)](https://CRAN.R-project.org/p
 [![Codecov test
 coverage](https://codecov.io/gh/gesistsa/adaR/branch/main/graph/badge.svg)](https://app.codecov.io/gh/gesistsa/adaR?branch=main)
 [![ada-url
-Version](https://img.shields.io/badge/ada_url-2.9.0-blue)](https://github.com/ada-url/ada)
+Version](https://img.shields.io/badge/ada_url-2.9.2-blue)](https://github.com/ada-url/ada)
 <!-- badges: end -->
 
 adaR is a wrapper for [ada-url](https://github.com/ada-url/ada), a
@@ -61,10 +61,12 @@ URL.
 ``` r
 library(adaR)
 ada_url_parse("https://user_1:password_1@example.org:8080/dir/../api?q=1#frag")
-#>                                                      href protocol username
-#> 1 https://user_1:password_1@example.org:8080/api?q=1#frag   https:   user_1
-#>     password             host    hostname port pathname search  hash
-#> 1 password_1 example.org:8080 example.org 8080     /api   ?q=1 #frag
+#>                                                      href protocol
+#> 1 https://user_1:password_1@example.org:8080/api?q=1#frag   https:
+#>   username   password             host    hostname port pathname
+#> 1   user_1 password_1 example.org:8080 example.org 8080     /api
+#>   search  hash
+#> 1   ?q=1 #frag
 ```
 
 ``` cpp
@@ -121,8 +123,8 @@ bench::mark(
 #> # A tibble: 2 × 6
 #>   expression      min   median `itr/sec` mem_alloc `gc/sec`
 #>   <bch:expr> <bch:tm> <bch:tm>     <dbl> <bch:byt>    <dbl>
-#> 1 ada          2.83µs   3.24µs   286849.        0B     28.7
-#> 2 urltools   123.41µs 134.36µs     7277.        0B     36.8
+#> 1 ada           160µs    171µs     5757.        0B     13.3
+#> 2 urltools      103µs    109µs     9071.        0B     15.5
 ```
 
 For further benchmark results, see `benchmark.md` in `data_raw`.
@@ -147,7 +149,8 @@ urls <- c(
     "https://thisisnotpart.butthisispartoftheps.kawasaki.jp"
 )
 public_suffix(urls)
-#> [1] "co.uk"                            "gov.uk"                          
+#> [1] "co.uk"                           
+#> [2] "gov.uk"                          
 #> [3] "butthisispartoftheps.kawasaki.jp"
 ```
 
