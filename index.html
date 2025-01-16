@@ -66,7 +66,7 @@
 <p><code>adaR</code> is part of a series of R packages to analyse webtracking data:</p>
 <ul>
 <li>
-<a href="https://github.com/schochastics/webtrackR" class="external-link">webtrackR</a>: preprocess raw webtracking data</li>
+<a href="https://github.com/gesistsa/webtrackR" class="external-link">webtrackR</a>: preprocess raw webtracking data</li>
 <li>
 <a href="https://github.com/schochastics/domainator" class="external-link">domainator</a>: classify domains</li>
 <li>
@@ -90,12 +90,10 @@
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://gesistsa.github.io/adaR/" class="external-link">adaR</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="reference/ada_url_parse.html">ada_url_parse</a></span><span class="op">(</span><span class="st">"https://user_1:password_1@example.org:8080/dir/../api?q=1#frag"</span><span class="op">)</span></span>
-<span><span class="co">#&gt;                                                      href protocol</span></span>
-<span><span class="co">#&gt; 1 https://user_1:password_1@example.org:8080/api?q=1#frag   https:</span></span>
-<span><span class="co">#&gt;   username   password             host    hostname port pathname</span></span>
-<span><span class="co">#&gt; 1   user_1 password_1 example.org:8080 example.org 8080     /api</span></span>
-<span><span class="co">#&gt;   search  hash</span></span>
-<span><span class="co">#&gt; 1   ?q=1 #frag</span></span></code></pre></div>
+<span><span class="co">#&gt;                                                      href protocol username</span></span>
+<span><span class="co">#&gt; 1 https://user_1:password_1@example.org:8080/api?q=1#frag   https:   user_1</span></span>
+<span><span class="co">#&gt;     password             host    hostname port pathname search  hash</span></span>
+<span><span class="co">#&gt; 1 password_1 example.org:8080 example.org 8080     /api   ?q=1 #frag</span></span></code></pre></div>
 <div class="sourceCode" id="cb4"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>  <span class="co">/*</span></span>
 <span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="co">   * https://user:pass@example.com:1234/foo/bar?baz#quux</span></span>
 <span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="co">   *       |     |    |          | ^^^^|       |   |</span></span>
@@ -132,15 +130,15 @@
 <p>A “raw” url parse using ada is extremely fast (see <a href="https://www.ada-url.com/" class="external-link">ada-url.com</a>) but for this to carry over to R is tricky. The performance is still compatible with <code>urltools::url_parse</code> with the noted advantage in accuracy in some practical circumstances.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">bench</span><span class="fu">::</span><span class="fu">mark</span><span class="op">(</span></span>
-<span>    ada <span class="op">=</span> <span class="fu"><a href="reference/ada_url_parse.html">ada_url_parse</a></span><span class="op">(</span><span class="st">"https://user_1:password_1@example.org:8080/dir/../api?q=1#frag"</span>, decode <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>,</span>
-<span>    urltools <span class="op">=</span> <span class="fu">urltools</span><span class="fu">::</span><span class="fu">url_parse</span><span class="op">(</span><span class="st">"https://user_1:password_1@example.org:8080/dir/../api?q=1#frag"</span><span class="op">)</span>,</span>
-<span>    check <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span>  ada <span class="op">=</span> <span class="fu"><a href="reference/ada_url_parse.html">ada_url_parse</a></span><span class="op">(</span><span class="st">"https://user_1:password_1@example.org:8080/dir/../api?q=1#frag"</span>, decode <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>,</span>
+<span>  urltools <span class="op">=</span> <span class="fu">urltools</span><span class="fu">::</span><span class="fu">url_parse</span><span class="op">(</span><span class="st">"https://user_1:password_1@example.org:8080/dir/../api?q=1#frag"</span><span class="op">)</span>,</span>
+<span>  check <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 2 × 6</span></span>
 <span><span class="co">#&gt;   expression      min   median `itr/sec` mem_alloc `gc/sec`</span></span>
 <span><span class="co">#&gt;   &lt;bch:expr&gt; &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt; 1 ada           160µs    171µs     5757.        0B     13.3</span></span>
-<span><span class="co">#&gt; 2 urltools      103µs    109µs     9071.        0B     15.5</span></span></code></pre></div>
+<span><span class="co">#&gt; 1 ada           158µs    165µs     5913.        0B     45.3</span></span>
+<span><span class="co">#&gt; 2 urltools      104µs    108µs     8488.        0B     42.6</span></span></code></pre></div>
 <p>For further benchmark results, see <code>benchmark.md</code> in <code>data_raw</code>.</p>
 <p>There are four more groups of functions available to work with url parsing:</p>
 <ul>
@@ -160,13 +158,12 @@
 <p><code><a href="reference/public_suffix.html">public_suffix()</a></code> extracts their top level domain from the <a href="https://publicsuffix.org/" class="external-link">public suffix list</a>, <strong>excluding</strong> private domains.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">urls</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
-<span>    <span class="st">"https://subsub.sub.domain.co.uk"</span>,</span>
-<span>    <span class="st">"https://domain.api.gov.uk"</span>,</span>
-<span>    <span class="st">"https://thisisnotpart.butthisispartoftheps.kawasaki.jp"</span></span>
+<span>  <span class="st">"https://subsub.sub.domain.co.uk"</span>,</span>
+<span>  <span class="st">"https://domain.api.gov.uk"</span>,</span>
+<span>  <span class="st">"https://thisisnotpart.butthisispartoftheps.kawasaki.jp"</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="reference/public_suffix.html">public_suffix</a></span><span class="op">(</span><span class="va">urls</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "co.uk"                           </span></span>
-<span><span class="co">#&gt; [2] "gov.uk"                          </span></span>
+<span><span class="co">#&gt; [1] "co.uk"                            "gov.uk"                          </span></span>
 <span><span class="co">#&gt; [3] "butthisispartoftheps.kawasaki.jp"</span></span></code></pre></div>
 <p>If you are wondering about the last url. The list also contains wildcard suffixes such as <code>*.kawasaki.jp</code> which need to be matched.</p>
 </div>
