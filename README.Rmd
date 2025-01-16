@@ -6,10 +6,10 @@ output: github_document
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
-    collapse = TRUE,
-    comment = "#>",
-    fig.path = "man/figures/README-",
-    out.width = "100%"
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
 )
 ```
 
@@ -35,7 +35,7 @@ More general information on URL parsing can be found in the introductory vignett
 
 `adaR` is part of a series of R packages to analyse webtracking data:
 
-- [webtrackR](https://github.com/schochastics/webtrackR): preprocess raw webtracking data
+- [webtrackR](https://github.com/gesistsa/webtrackR): preprocess raw webtracking data
 - [domainator](https://github.com/schochastics/domainator): classify domains
 - [adaR](https://github.com/gesistsa/adaR): parse urls
 
@@ -92,9 +92,9 @@ practical circumstances.
 
 ```{r faster}
 bench::mark(
-    ada = ada_url_parse("https://user_1:password_1@example.org:8080/dir/../api?q=1#frag", decode = FALSE),
-    urltools = urltools::url_parse("https://user_1:password_1@example.org:8080/dir/../api?q=1#frag"),
-    check = FALSE
+  ada = ada_url_parse("https://user_1:password_1@example.org:8080/dir/../api?q=1#frag", decode = FALSE),
+  urltools = urltools::url_parse("https://user_1:password_1@example.org:8080/dir/../api?q=1#frag"),
+  check = FALSE
 )
 ```
 
@@ -113,9 +113,9 @@ There are four more groups of functions available to work with url parsing:
 
 ```{r public_suffix}
 urls <- c(
-    "https://subsub.sub.domain.co.uk",
-    "https://domain.api.gov.uk",
-    "https://thisisnotpart.butthisispartoftheps.kawasaki.jp"
+  "https://subsub.sub.domain.co.uk",
+  "https://domain.api.gov.uk",
+  "https://thisisnotpart.butthisispartoftheps.kawasaki.jp"
 )
 public_suffix(urls)
 ```
