@@ -165,7 +165,8 @@ Here we compare `adaR` with `urltools` and additionally with [`psl`](https://git
 bench::mark(
     urltools = suffix_extract("https://user_1:password_1@example.org:8080/dir/../api?q=1#frag"),
     ada = public_suffix("https://user_1:password_1@example.org:8080/dir/../api?q=1#frag"),
-    psl = psl::public_suffix("https://user_1:password_1@example.org:8080/dir/../api?q=1#frag"),iterations = 1000, check = FALSE
+    #psl = psl::public_suffix("https://user_1:password_1@example.org:8080/dir/../api?q=1#frag"),
+    check = FALSE
 )
 ```
 

@@ -1,5 +1,6 @@
 # Benchmarking adaR
 
+
 ``` r
 library(adaR)
 library(urltools)
@@ -343,8 +344,8 @@ bench::mark(
     # A tibble: 2 × 6
       expression      min   median `itr/sec` mem_alloc `gc/sec`
       <bch:expr> <bch:tm> <bch:tm>     <dbl> <bch:byt>    <dbl>
-    1 urltools      338µs    384µs     2411.    2.49KB    12.1 
-    2 ada           516µs    580µs     1612.    2.49KB     9.73
+    1 urltools    105.9µs 111.07µs     8054.        0B     40.5
+    2 ada          2.21µs   2.42µs   408755.        0B      0  
 
 ``` r
 bench::mark(
@@ -359,8 +360,8 @@ bench::mark(
     # A tibble: 2 × 6
       expression      min   median `itr/sec` mem_alloc `gc/sec`
       <bch:expr> <bch:tm> <bch:tm>     <dbl> <bch:byt>    <dbl>
-    1 urltools      230ms    230ms      4.34    6.08MB     4.34
-    2 ada           245ms    245ms      4.09    9.18MB     0   
+    1 urltools     99.4ms   99.4ms     10.1     4.96MB     10.1
+    2 ada         103.2ms  103.2ms      9.69    8.64MB      0  
 
 In terms of runtime, both are almost indiscernible. The advantage of
 adaR is its added accuracy.
@@ -375,16 +376,16 @@ extract public suffix.
 bench::mark(
     urltools = suffix_extract("https://user_1:password_1@example.org:8080/dir/../api?q=1#frag"),
     ada = public_suffix("https://user_1:password_1@example.org:8080/dir/../api?q=1#frag"),
-    psl = psl::public_suffix("https://user_1:password_1@example.org:8080/dir/../api?q=1#frag"),iterations = 1000, check = FALSE
+    #psl = psl::public_suffix("https://user_1:password_1@example.org:8080/dir/../api?q=1#frag"),
+    check = FALSE
 )
 ```
 
-    # A tibble: 3 × 6
+    # A tibble: 2 × 6
       expression      min   median `itr/sec` mem_alloc `gc/sec`
       <bch:expr> <bch:tm> <bch:tm>     <dbl> <bch:byt>    <dbl>
-    1 urltools   368.29µs 448.09µs     2047.     103KB     10.3
-    2 ada         18.87µs  20.47µs    45943.    35.9KB      0  
-    3 psl          3.85µs   5.62µs   163250.    17.6KB    163. 
+    1 urltools   102.83µs    110µs     9028.    95.6KB     28.4
+    2 ada          4.84µs   5.33µs   181773.    30.9KB     36.4
 
 (*This comparison is not fair for `urltools` since the function
 `suffix_extract` does more than just extracting the public suffix.*)
