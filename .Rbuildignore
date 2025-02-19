@@ -20,3 +20,4 @@
 ^_quarto\.yml$
 ^\.quarto$
 ^methodshub
+^\.binder$
