@@ -3,7 +3,7 @@ pkgdown: 2.1.1
 pkgdown_sha: ~
 articles:
   adaR: adaR.html
-last_built: 2025-02-19T14:21Z
+last_built: 2025-04-07T05:01Z
 urls:
   reference: https://schochastics.github.io/adaR/reference
   article: https://schochastics.github.io/adaR/articles
