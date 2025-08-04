@@ -41,9 +41,9 @@ With R installed:
 install.packages("adaR")
 ```
 
-<!-- ## Hardware Requirements (Optional) -->
-<!-- - The hardware requirements may be needed in specific cases when a method is known to require more memory/compute power.  -->
-<!-- - The method need to be executed on a specific architecture (GPUs, Hadoop cluster etc.) -->
+## Hardware Requirements
+
+adaR runs on any machine that can run R.
 
 ## Input Data 
 
@@ -67,10 +67,6 @@ urls
 ```
 
 The output data is a data frame of parsed URLs.
-
-## Hardware Requirements
-
-adaR runs on any machine that can run R.
 
 ## How to Use
 
