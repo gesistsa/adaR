@@ -68,6 +68,10 @@ urls
 
 The output data is a data frame of parsed URLs.
 
+## Hardware Requirements
+
+adaR runs on any machine that can run R.
+
 ## How to Use
 
 <!-- - Providing HowTos on the method for different types of usages -->
@@ -87,6 +91,10 @@ urls <- c("https://www.google.de/search?q=GESIS&client=ubuntu&hs=ixb&sca_esv=dcc
 
 ada_url_parse(urls)
 ```
+
+## Technical Details
+
+Check the official [CRAN page](https://doi.org/10.32614/CRAN.package.adaR) for further information.
 
 ## Contact Details
 
