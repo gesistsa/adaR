@@ -41,9 +41,9 @@ With R installed:
 install.packages("adaR")
 ```
 
-<!-- ## Hardware Requirements (Optional) -->
-<!-- - The hardware requirements may be needed in specific cases when a method is known to require more memory/compute power.  -->
-<!-- - The method need to be executed on a specific architecture (GPUs, Hadoop cluster etc.) -->
+## Hardware Requirements
+
+adaR runs on any machine that can run R.
 
 ## Input Data 
 
@@ -87,6 +87,10 @@ urls <- c("https://www.google.de/search?q=GESIS&client=ubuntu&hs=ixb&sca_esv=dcc
 
 ada_url_parse(urls)
 ```
+
+## Technical Details
+
+Check the official [CRAN page](https://doi.org/10.32614/CRAN.package.adaR) for further information.
 
 ## Contact Details
 
