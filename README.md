@@ -13,7 +13,7 @@ Downloads](https://cranlogs.r-pkg.org/badges/adaR)](https://CRAN.R-project.org/p
 [![Codecov test
 coverage](https://codecov.io/gh/gesistsa/adaR/branch/main/graph/badge.svg)](https://app.codecov.io/gh/gesistsa/adaR?branch=main)
 [![ada-url
-Version](https://img.shields.io/badge/ada_url-3.2.2-blue)](https://github.com/ada-url/ada)
+Version](https://img.shields.io/badge/ada_url-3.4.2-blue)](https://github.com/ada-url/ada)
 <!-- badges: end -->
 
 adaR is a wrapper for [ada-url](https://github.com/ada-url/ada), a
@@ -125,8 +125,8 @@ bench::mark(
 #> # A tibble: 2 × 6
 #>   expression      min   median `itr/sec` mem_alloc `gc/sec`
 #>   <bch:expr> <bch:tm> <bch:tm>     <dbl> <bch:byt>    <dbl>
-#> 1 ada          9.43µs   10.5µs    90598.        0B     9.06
-#> 2 urltools   102.25µs  108.1µs     9143.        0B    16.3
+#> 1 ada          2.21µs   2.46µs   384709.        0B     38.5
+#> 2 urltools   101.93µs 106.44µs     9258.        0B     61.9
 ```
 
 For further benchmark results, see `benchmark.md` in `data_raw`.

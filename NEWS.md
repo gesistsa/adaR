@@ -1,10 +1,14 @@
+# adaR 0.3.5
+
+* bumped ada-url to 3.4.2
+
 # adaR 0.3.4
 
 * improved ada_url_parse performance(#73)
 
 # adaR 0.3.3
 
-* * bumped ada-url to 2.9.0
+* bumped ada-url to 2.9.0
 
 # adaR 0.3.2
 
