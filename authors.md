@@ -16,7 +16,7 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/gesistsa/adaR/blob/main/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/gesistsa/adaR/blob/v0.3.5/DESCRIPTION)
 
 Schoch D, Chan C (2026). *adaR: A Fast 'WHATWG' Compliant URL Parser*. R
 package version 0.3.5, <https://gesistsa.github.io/adaR/>.
