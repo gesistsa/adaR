@@ -1,1 +1,12 @@
 CXX_STD=CXX20
+
+# Check compiler version for GCC
+# ada-url requires GCC >= 12 for full C++20 support
+CXX_VERSION := $(shell $(CXX) -dumpversion 2>/dev/null)
+CXX_MAJOR := $(shell echo $(CXX_VERSION) | cut -d. -f1)
+
+ifeq ($(shell $(CXX) -v 2>&1 | grep -c "gcc"),1)
+  ifeq ($(shell [ $(CXX_MAJOR) -lt 12 ] && echo 1),1)
+    $(error adaR requires GCC >= 12 for C++20 support. Current version: $(CXX_VERSION). Please upgrade your compiler or use Clang.)
+  endif
+endif

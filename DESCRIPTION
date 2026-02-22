@@ -29,4 +29,4 @@ Config/testthat/edition: 3
 Depends: 
     R (>= 4.2)
 VignetteBuilder: knitr
-SystemRequirements: C++20
+SystemRequirements: C++20, GNU make, GCC >= 12 (or Clang with equivalent C++20 support)
