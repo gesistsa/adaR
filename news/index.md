@@ -2,6 +2,8 @@
 
 ## adaR 0.3.5
 
+CRAN release: 2026-02-21
+
 - bumped ada-url to 3.4.2
 
 ## adaR 0.3.4
