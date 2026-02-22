@@ -1,12 +1,21 @@
 CXX_STD=CXX20
 
-# Check compiler version for GCC
-# ada-url requires GCC >= 12 for full C++20 support
+# ada-url requires GCC >= 12 or Clang >= 15 for full C++20 support
+# (including <ranges> and correct concept syntax).
+# Apple Clang 14 / Xcode 14 (default on macOS Big Sur) is NOT sufficient.
 CXX_VERSION := $(shell $(CXX) -dumpversion 2>/dev/null)
 CXX_MAJOR := $(shell echo $(CXX_VERSION) | cut -d. -f1)
+IS_GCC   := $(shell $(CXX) --version 2>&1 | grep -c "^g++\|GCC")
+IS_CLANG := $(shell $(CXX) --version 2>&1 | grep -c "[Cc]lang")
 
-ifeq ($(shell $(CXX) -v 2>&1 | grep -c "gcc"),1)
+ifeq ($(IS_GCC),1)
   ifeq ($(shell [ $(CXX_MAJOR) -lt 12 ] && echo 1),1)
-    $(error adaR requires GCC >= 12 for C++20 support. Current version: $(CXX_VERSION). Please upgrade your compiler or use Clang.)
+    $(error adaR requires GCC >= 12 for C++20 support (found GCC $(CXX_VERSION)). On Ubuntu 22.04 the default is GCC 11 -- install gcc-12 or later.)
+  endif
+endif
+
+ifeq ($(IS_CLANG),1)
+  ifeq ($(shell [ $(CXX_MAJOR) -lt 15 ] && echo 1),1)
+    $(error adaR requires Clang >= 15 for C++20 support (found Clang $(CXX_VERSION)). Apple Clang from Xcode 15+ or upstream Clang 15+ is required.)
   endif
 endif
