@@ -344,8 +344,8 @@ bench::mark(
     # A tibble: 2 × 6
       expression      min   median `itr/sec` mem_alloc `gc/sec`
       <bch:expr> <bch:tm> <bch:tm>     <dbl> <bch:byt>    <dbl>
-    1 urltools    105.9µs 111.07µs     8054.        0B     40.5
-    2 ada          2.21µs   2.42µs   408755.        0B      0  
+    1 urltools   104.06µs 114.35µs     8599.        0B     43.2
+    2 ada          2.62µs   2.87µs   340934.        0B      0  
 
 ``` r
 bench::mark(
@@ -360,8 +360,8 @@ bench::mark(
     # A tibble: 2 × 6
       expression      min   median `itr/sec` mem_alloc `gc/sec`
       <bch:expr> <bch:tm> <bch:tm>     <dbl> <bch:byt>    <dbl>
-    1 urltools     99.4ms   99.4ms     10.1     4.96MB     10.1
-    2 ada         103.2ms  103.2ms      9.69    8.64MB      0  
+    1 urltools      106ms    106ms      9.40    4.97MB     9.40
+    2 ada           103ms    103ms      9.75    8.66MB     0   
 
 In terms of runtime, both are almost indiscernible. The advantage of
 adaR is its added accuracy.
@@ -384,8 +384,8 @@ bench::mark(
     # A tibble: 2 × 6
       expression      min   median `itr/sec` mem_alloc `gc/sec`
       <bch:expr> <bch:tm> <bch:tm>     <dbl> <bch:byt>    <dbl>
-    1 urltools   102.83µs    110µs     9028.    95.6KB     28.4
-    2 ada          4.84µs   5.33µs   181773.    30.9KB     36.4
+    1 urltools    102.5µs  114.9µs     8638.    95.6KB     29.5
+    2 ada          20.8µs   23.5µs    41675.    67.7KB     29.2
 
 (*This comparison is not fair for `urltools` since the function
 `suffix_extract` does more than just extracting the public suffix.*)

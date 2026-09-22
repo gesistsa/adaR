@@ -45,6 +45,7 @@ ada_url_parse("http://sub.domain.co.uk/path/to/place")
 For fairly regular looking urls, they do provide the same output, however with a slighlty different naming scheme. The introductory vignette `vignette("adaR")` gives an explanation of the meaning of each term.
 
 Let us know look at a more complex example.
+
 ```{r}
 #| label: long_example
 urltools::url_parse("https://user_1:password_1@example.org:8080/dir/../api?q=1#frag")
