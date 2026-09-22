@@ -4,10 +4,14 @@
 \alias{public_suffix}
 \title{Extract the public suffix from a vector of domains or hostnames}
 \usage{
-public_suffix(domains)
+public_suffix(domains, icann_only = FALSE)
 }
 \arguments{
 \item{domains}{character. vector of domains or hostnames}
+
+\item{icann_only}{logical. Whether to use only the ICANN section of the
+public suffix list, ignoring privately registered suffixes such as
+\code{github.io} or \code{blogspot.com}. Defaults to \code{FALSE}.}
 }
 \value{
 public suffixes of domains as character vector
@@ -31,4 +35,8 @@ public_suffix("http://example.com/path/to/file")
 
 # *.kobe.jp is a wildcard rule, !city.kobe.jp an exception to it
 public_suffix(c("foo.kobe.jp", "city.kobe.jp"))
+
+# privately registered suffixes are included by default
+public_suffix("foo.github.io")
+public_suffix("foo.github.io", icann_only = TRUE)
 }

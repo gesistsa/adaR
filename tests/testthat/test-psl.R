@@ -6,14 +6,23 @@ test_that("public_suffix works on some examples", {
     )
     ps <- public_suffix(urls)
     expect_equal(ps[1], "co.uk")
-    expect_equal(ps[2], "gov.uk")
+    # api.gov.uk is a privately registered suffix, included by default
+    expect_equal(ps[2], "api.gov.uk")
+    expect_equal(public_suffix(urls[2], icann_only = TRUE), "gov.uk")
     expect_equal(ps[3], "butthisispartoftheps.kawasaki.jp")
 })
 
-test_that("public suffix works on complete list", {
-    urls <- paste0("https://dontmatchme.", setdiff(psl$raw_list, psl$wildcard))
-    psla <- public_suffix(urls)
-    expect_true(all(psla == setdiff(psl$raw_list, psl$wildcard)))
+test_that("public suffix works on the complete ICANN list", {
+    rules <- setdiff(psl$icann$raw_list, psl$icann$wildcard)
+    urls <- paste0("https://dontmatchme.", rules)
+    expect_equal(public_suffix(urls, icann_only = TRUE), rules)
+    expect_equal(public_suffix(urls), rules)
+})
+
+test_that("public suffix works on the complete private list", {
+    rules <- setdiff(psl$private$raw_list, psl$private$wildcard)
+    urls <- paste0("https://dontmatchme.", rules)
+    expect_equal(public_suffix(urls), rules)
 })
 
 test_that("corners", {
@@ -104,7 +113,7 @@ test_that("exception (!) rules override wildcard rules", {
 })
 
 test_that("every exception rule in the shipped list resolves", {
-    rules <- adaR_env$exception
+    rules <- adaR_env$rules_all$exception
     expect_gt(length(rules), 0)
     expect_false(any(grepl("^!", rules)))
     # each rule's own suffix is the rule minus its leftmost label
@@ -116,4 +125,30 @@ test_that("every exception rule in the shipped list resolves", {
 test_that("exception rules mix correctly with other inputs", {
     x <- c("http://www.city.kobe.jp/a", "foo.kobe.jp", "example.com", NA, "c.d.ck")
     expect_equal(public_suffix(x), c("kobe.jp", "foo.kobe.jp", "com", NA, "d.ck"))
+})
+
+test_that("private suffixes are included by default, #65", {
+    x <- c("foo.github.io", "myblog.blogspot.com", "bucket.s3.amazonaws.com",
+           "app.herokuapp.com", "x.eu-west-1.compute.amazonaws.com")
+    expect_equal(
+        public_suffix(x),
+        c("github.io", "blogspot.com", "s3.amazonaws.com", "herokuapp.com",
+          "eu-west-1.compute.amazonaws.com")
+    )
+    expect_equal(
+        public_suffix(x, icann_only = TRUE),
+        c("io", "com", "com", "com", "com")
+    )
+})
+
+test_that("icann_only does not change purely ICANN lookups", {
+    x <- c("a.co.uk", "www.google.com", "city.kobe.jp", "foo.kobe.jp", "a.b.ck")
+    expect_equal(public_suffix(x), public_suffix(x, icann_only = TRUE))
+})
+
+test_that("icann_only keeps the corner cases intact", {
+    expect_equal(public_suffix(NULL, icann_only = TRUE), character(0))
+    expect_equal(public_suffix(NA, icann_only = TRUE), NA_character_)
+    expect_equal(public_suffix("", icann_only = TRUE), NA_character_)
+    expect_equal(public_suffix("evil.com/path.de", icann_only = TRUE), NA_character_)
 })

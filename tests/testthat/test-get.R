@@ -40,13 +40,23 @@ test_that("decode can pass", {
     expect_equal(ada_get_search("https://www.google.co.jp/search?q=\u30c9\u30a4\u30c4", decode = FALSE), "?q=%E3%83%89%E3%82%A4%E3%83%84")
 })
 
-test_that("get_domain works", {
-    urls <- paste0("http://sub.domain.", setdiff(psl$raw_list, psl$wildcard))
-    wild <- paste0("http://sub.domain.domain.", psl$wildcard)
-    dom1 <- ada_get_domain(urls)
-    dom2 <- ada_get_domain(wild)
-    expect_true(all(dom1 == paste0("domain.", setdiff(psl$raw_list, psl$wildcard))))
-    expect_true(all(dom2 == paste0("domain.domain.", psl$wildcard)))
+test_that("get_domain works over the whole ICANN list", {
+    fixed <- setdiff(psl$icann$raw_list, psl$icann$wildcard)
+    urls <- paste0("http://sub.domain.", fixed)
+    wild <- paste0("http://sub.domain.domain.", psl$icann$wildcard)
+    expect_equal(ada_get_domain(urls, icann_only = TRUE), paste0("domain.", fixed))
+    expect_equal(
+        ada_get_domain(wild, icann_only = TRUE),
+        paste0("domain.domain.", psl$icann$wildcard)
+    )
+})
+
+test_that("get_domain works over the whole private list", {
+    fixed <- setdiff(psl$private$raw_list, psl$private$wildcard)
+    urls <- paste0("http://sub.domain.", fixed)
+    wild <- paste0("http://sub.domain.domain.", psl$private$wildcard)
+    expect_equal(ada_get_domain(urls), paste0("domain.", fixed))
+    expect_equal(ada_get_domain(wild), paste0("domain.domain.", psl$private$wildcard))
 })
 
 corner_cases <- c(
@@ -178,4 +188,22 @@ test_that("a leading www. does not change the domain", {
     expect_equal(ada_get_domain("https://www.google.com/x"), "google.com")
     expect_equal(ada_get_domain("http://google.com"), "google.com")
     expect_equal(ada_get_domain("https://www.sub.example.co.uk/a"), "example.co.uk")
+})
+
+test_that("ada_get_domain includes private suffixes by default, #65", {
+    x <- c("https://foo.github.io/p", "http://myblog.blogspot.com",
+           "https://www.google.com/x")
+    expect_equal(
+        ada_get_domain(x),
+        c("foo.github.io", "myblog.blogspot.com", "google.com")
+    )
+    expect_equal(
+        ada_get_domain(x, icann_only = TRUE),
+        c("github.io", "blogspot.com", "google.com")
+    )
+    # decode and icann_only are independent
+    expect_equal(
+        ada_get_domain("https://foo.github.io/p", decode = FALSE, icann_only = TRUE),
+        "github.io"
+    )
 })

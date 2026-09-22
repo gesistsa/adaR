@@ -28,7 +28,7 @@ adaR is a wrapper for [ada-url](https://github.com/ada-url/ada), a
 
 It implements several auxilliary functions to work with urls:
 
-- public suffix extraction (top level domain excluding private domains) like [psl](https://github.com/hrbrmstr/psl)
+- public suffix extraction (including privately registered suffixes such as `github.io`) like [psl](https://github.com/hrbrmstr/psl)
 - fast c++ implementation of `utils::URLdecode` (~40x speedup)
 
 More general information on URL parsing can be found in the introductory vignette via `vignette("adaR")`.
@@ -109,7 +109,7 @@ There are four more groups of functions available to work with url parsing:
 
 ## Public Suffix extraction
 
-`public_suffix()` extracts their top level domain from the [public suffix list](https://publicsuffix.org/), **excluding** private domains.
+`public_suffix()` extracts their top level domain from the [public suffix list](https://publicsuffix.org/). Privately registered suffixes such as `github.io` and `blogspot.com` are **included** by default; pass `icann_only = TRUE` to use only the ICANN section.
 
 ```{r public_suffix}
 urls <- c(
