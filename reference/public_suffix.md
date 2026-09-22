@@ -21,7 +21,8 @@ public suffixes of domains as character vector
 ## Details
 
 `domains` may be either full URLs or bare hostnames; anything that does
-not parse as a URL is treated as a hostname.
+not parse as a URL is treated as a hostname. Wildcard (`*`) and
+exception (`!`) rules of the public suffix list are both honoured.
 
 ## Examples
 
@@ -36,4 +37,8 @@ public_suffix("example.com")
 # for general URLs the hostname is extracted first
 public_suffix("http://example.com/path/to/file")
 #> [1] "com"
+
+# *.kobe.jp is a wildcard rule, !city.kobe.jp an exception to it
+public_suffix(c("foo.kobe.jp", "city.kobe.jp"))
+#> [1] "foo.kobe.jp" "kobe.jp"    
 ```

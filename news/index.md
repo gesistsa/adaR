@@ -2,6 +2,20 @@
 
 ## adaR (development version)
 
+- [`public_suffix()`](https://schochastics.github.io/adaR/reference/public_suffix.md)
+  now honours the exception (`!`) rules of the public suffix list, which
+  were previously stored with their `!` prefix and could never match.
+  `public_suffix("city.kobe.jp")` is now `"kobe.jp"` rather than
+  `"city.kobe.jp"`, and
+  [`ada_get_domain()`](https://schochastics.github.io/adaR/reference/ada_get_href.md)
+  returns a domain instead of `""` for hosts under those rules
+- [`ada_get_domain()`](https://schochastics.github.io/adaR/reference/ada_get_href.md)
+  no longer strips a leading `www.` before looking up the suffix; the
+  result is unchanged for ordinary hosts but `www.ck` and similar no
+  longer come back as `NA`
+- the C++ loops check for a user interrupt, so long vectors can be
+  cancelled with Ctrl-C
+  ([\#49](https://github.com/gesistsa/adaR/issues/49))
 - fixed
   [`url_decode2()`](https://schochastics.github.io/adaR/reference/url_decode2.md)
   dropping the remainder of a string after a `%` that is not followed by
