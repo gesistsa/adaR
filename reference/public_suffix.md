@@ -5,7 +5,7 @@ Extract the public suffix from a vector of domains or hostnames
 ## Usage
 
 ``` r
-public_suffix(domains)
+public_suffix(domains, icann_only = FALSE)
 ```
 
 ## Arguments
@@ -13,6 +13,12 @@ public_suffix(domains)
 - domains:
 
   character. vector of domains or hostnames
+
+- icann_only:
+
+  logical. Whether to use only the ICANN section of the public suffix
+  list, ignoring privately registered suffixes such as `github.io` or
+  `blogspot.com`. Defaults to `FALSE`.
 
 ## Value
 
@@ -41,4 +47,10 @@ public_suffix("http://example.com/path/to/file")
 # *.kobe.jp is a wildcard rule, !city.kobe.jp an exception to it
 public_suffix(c("foo.kobe.jp", "city.kobe.jp"))
 #> [1] "foo.kobe.jp" "kobe.jp"    
+
+# privately registered suffixes are included by default
+public_suffix("foo.github.io")
+#> [1] "github.io"
+public_suffix("foo.github.io", icann_only = TRUE)
+#> [1] "io"
 ```

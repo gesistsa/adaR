@@ -25,7 +25,7 @@ ada_get_search(url, decode = TRUE)
 
 ada_get_protocol(url, decode = TRUE)
 
-ada_get_domain(url, decode = TRUE)
+ada_get_domain(url, decode = TRUE, icann_only = FALSE)
 
 ada_get_basename(url, decode = TRUE)
 ```
@@ -41,6 +41,12 @@ ada_get_basename(url, decode = TRUE)
   logical. Whether to decode the output (see
   [`utils::URLdecode()`](https://rdrr.io/r/utils/URLencode.html)),
   default to `TRUE`
+
+- icann_only:
+
+  logical. Whether to use only the ICANN section of the public suffix
+  list, ignoring privately registered suffixes such as `github.io` or
+  `blogspot.com`. Defaults to `FALSE`.
 
 ## Value
 
@@ -74,6 +80,11 @@ ada_get_domain(url)
 #> [1] "example.org"
 ada_get_basename(url)
 #> [1] "https://example.org"
+## privately registered suffixes count by default
+ada_get_domain("https://foo.github.io/page")
+#> [1] "foo.github.io"
+ada_get_domain("https://foo.github.io/page", icann_only = TRUE)
+#> [1] "github.io"
 ## these functions are vectorized
 urls <- c("http://www.google.com", "http://www.google.com:80", "noturl")
 ada_get_port(urls)

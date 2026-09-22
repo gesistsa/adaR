@@ -6,8 +6,8 @@ URL parser written in modern C++ .
 
 It implements several auxilliary functions to work with urls:
 
-- public suffix extraction (top level domain excluding private domains)
-  like [psl](https://github.com/hrbrmstr/psl)
+- public suffix extraction (including privately registered suffixes such
+  as `github.io`) like [psl](https://github.com/hrbrmstr/psl)
 - fast c++ implementation of
   [`utils::URLdecode`](https://rdrr.io/r/utils/URLencode.html) (~40x
   speedup)
@@ -51,12 +51,10 @@ URL.
 
 library(adaR)
 ada_url_parse("https://user_1:password_1@example.org:8080/dir/../api?q=1#frag")
-#>                                                      href protocol
-#> 1 https://user_1:password_1@example.org:8080/api?q=1#frag   https:
-#>   username   password             host    hostname port pathname search
-#> 1   user_1 password_1 example.org:8080 example.org 8080     /api   ?q=1
-#>    hash
-#> 1 #frag
+#>                                                      href protocol username
+#> 1 https://user_1:password_1@example.org:8080/api?q=1#frag   https:   user_1
+#>     password             host    hostname port pathname search  hash
+#> 1 password_1 example.org:8080 example.org 8080     /api   ?q=1 #frag
 ```
 
 ``` cpp
@@ -115,8 +113,8 @@ bench::mark(
 #> # A tibble: 2 × 6
 #>   expression      min   median `itr/sec` mem_alloc `gc/sec`
 #>   <bch:expr> <bch:tm> <bch:tm>     <dbl> <bch:byt>    <dbl>
-#> 1 ada          2.17µs   2.38µs   404868.        0B     40.5
-#> 2 urltools   103.28µs 108.65µs     8802.        0B     70.8
+#> 1 ada          2.62µs   2.91µs   335896.        0B     33.6
+#> 2 urltools   101.23µs 105.98µs     9245.        0B     47.1
 ```
 
 For further benchmark results, see `benchmark.md` in `data_raw`.
@@ -133,7 +131,9 @@ parsing:
 
 [`public_suffix()`](https://schochastics.github.io/adaR/reference/public_suffix.md)
 extracts their top level domain from the [public suffix
-list](https://publicsuffix.org/), **excluding** private domains.
+list](https://publicsuffix.org/). Privately registered suffixes such as
+`github.io` and `blogspot.com` are **included** by default; pass
+`icann_only = TRUE` to use only the ICANN section.
 
 ``` r
 
@@ -143,7 +143,7 @@ urls <- c(
   "https://thisisnotpart.butthisispartoftheps.kawasaki.jp"
 )
 public_suffix(urls)
-#> [1] "co.uk"                            "gov.uk"                          
+#> [1] "co.uk"                            "api.gov.uk"                      
 #> [3] "butthisispartoftheps.kawasaki.jp"
 ```
 

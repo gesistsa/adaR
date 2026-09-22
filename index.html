@@ -58,7 +58,7 @@
 <p>adaR is a wrapper for <a href="https://github.com/ada-url/ada" class="external-link">ada-url</a>, a <a href="https://url.spec.whatwg.org/#url-parsing" class="external-link">WHATWG</a>-compliant and fast URL parser written in modern C++ .</p>
 <p>It implements several auxilliary functions to work with urls:</p>
 <ul>
-<li>public suffix extraction (top level domain excluding private domains) like <a href="https://github.com/hrbrmstr/psl" class="external-link">psl</a>
+<li>public suffix extraction (including privately registered suffixes such as <code>github.io</code>) like <a href="https://github.com/hrbrmstr/psl" class="external-link">psl</a>
 </li>
 <li>fast c++ implementation of <code><a href="https://rdrr.io/r/utils/URLencode.html" class="external-link">utils::URLdecode</a></code> (~40x speedup)</li>
 </ul>
@@ -90,12 +90,10 @@
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://gesistsa.github.io/adaR/" class="external-link">adaR</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="reference/ada_url_parse.html">ada_url_parse</a></span><span class="op">(</span><span class="st">"https://user_1:password_1@example.org:8080/dir/../api?q=1#frag"</span><span class="op">)</span></span>
-<span><span class="co">#&gt;                                                      href protocol</span></span>
-<span><span class="co">#&gt; 1 https://user_1:password_1@example.org:8080/api?q=1#frag   https:</span></span>
-<span><span class="co">#&gt;   username   password             host    hostname port pathname search</span></span>
-<span><span class="co">#&gt; 1   user_1 password_1 example.org:8080 example.org 8080     /api   ?q=1</span></span>
-<span><span class="co">#&gt;    hash</span></span>
-<span><span class="co">#&gt; 1 #frag</span></span></code></pre></div>
+<span><span class="co">#&gt;                                                      href protocol username</span></span>
+<span><span class="co">#&gt; 1 https://user_1:password_1@example.org:8080/api?q=1#frag   https:   user_1</span></span>
+<span><span class="co">#&gt;     password             host    hostname port pathname search  hash</span></span>
+<span><span class="co">#&gt; 1 password_1 example.org:8080 example.org 8080     /api   ?q=1 #frag</span></span></code></pre></div>
 <div class="sourceCode" id="cb4"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>  <span class="co">/*</span></span>
 <span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="co">   * https://user:pass@example.com:1234/foo/bar?baz#quux</span></span>
 <span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="co">   *       |     |    |          | ^^^^|       |   |</span></span>
@@ -139,8 +137,8 @@
 <span><span class="co">#&gt; # A tibble: 2 × 6</span></span>
 <span><span class="co">#&gt;   expression      min   median `itr/sec` mem_alloc `gc/sec`</span></span>
 <span><span class="co">#&gt;   &lt;bch:expr&gt; &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt; 1 ada          2.17µs   2.38µs   404868.        0B     40.5</span></span>
-<span><span class="co">#&gt; 2 urltools   103.28µs 108.65µs     8802.        0B     70.8</span></span></code></pre></div>
+<span><span class="co">#&gt; 1 ada          2.62µs   2.91µs   335896.        0B     33.6</span></span>
+<span><span class="co">#&gt; 2 urltools   101.23µs 105.98µs     9245.        0B     47.1</span></span></code></pre></div>
 <p>For further benchmark results, see <code>benchmark.md</code> in <code>data_raw</code>.</p>
 <p>There are four more groups of functions available to work with url parsing:</p>
 <ul>
@@ -157,7 +155,7 @@
 <div class="section level2">
 <h2 id="public-suffix-extraction">Public Suffix extraction<a class="anchor" aria-label="anchor" href="#public-suffix-extraction"></a>
 </h2>
-<p><code><a href="reference/public_suffix.html">public_suffix()</a></code> extracts their top level domain from the <a href="https://publicsuffix.org/" class="external-link">public suffix list</a>, <strong>excluding</strong> private domains.</p>
+<p><code><a href="reference/public_suffix.html">public_suffix()</a></code> extracts their top level domain from the <a href="https://publicsuffix.org/" class="external-link">public suffix list</a>. Privately registered suffixes such as <code>github.io</code> and <code>blogspot.com</code> are <strong>included</strong> by default; pass <code>icann_only = TRUE</code> to use only the ICANN section.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">urls</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
 <span>  <span class="st">"https://subsub.sub.domain.co.uk"</span>,</span>
@@ -165,7 +163,7 @@
 <span>  <span class="st">"https://thisisnotpart.butthisispartoftheps.kawasaki.jp"</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="reference/public_suffix.html">public_suffix</a></span><span class="op">(</span><span class="va">urls</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "co.uk"                            "gov.uk"                          </span></span>
+<span><span class="co">#&gt; [1] "co.uk"                            "api.gov.uk"                      </span></span>
 <span><span class="co">#&gt; [3] "butthisispartoftheps.kawasaki.jp"</span></span></code></pre></div>
 <p>If you are wondering about the last url. The list also contains wildcard suffixes such as <code>*.kawasaki.jp</code> which need to be matched.</p>
 </div>

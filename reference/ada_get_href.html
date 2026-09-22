@@ -57,7 +57,7 @@
 <span></span>
 <span><span class="fu">ada_get_protocol</span><span class="op">(</span><span class="va">url</span>, decode <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">ada_get_domain</span><span class="op">(</span><span class="va">url</span>, decode <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu">ada_get_domain</span><span class="op">(</span><span class="va">url</span>, decode <span class="op">=</span> <span class="cn">TRUE</span>, icann_only <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">ada_get_basename</span><span class="op">(</span><span class="va">url</span>, decode <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -72,6 +72,12 @@
 
 <dt id="arg-decode">decode<a class="anchor" aria-label="anchor" href="#arg-decode"></a></dt>
 <dd><p>logical. Whether to decode the output (see <code><a href="https://rdrr.io/r/utils/URLencode.html" class="external-link">utils::URLdecode()</a></code>), default to <code>TRUE</code></p></dd>
+
+
+<dt id="arg-icann-only">icann_only<a class="anchor" aria-label="anchor" href="#arg-icann-only"></a></dt>
+<dd><p>logical. Whether to use only the ICANN section of the
+public suffix list, ignoring privately registered suffixes such as
+<code>github.io</code> or <code>blogspot.com</code>. Defaults to <code>FALSE</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -106,6 +112,11 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "example.org"</span>
 <span class="r-in"><span><span class="fu">ada_get_basename</span><span class="op">(</span><span class="va">url</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "https://example.org"</span>
+<span class="r-in"><span><span class="co">## privately registered suffixes count by default</span></span></span>
+<span class="r-in"><span><span class="fu">ada_get_domain</span><span class="op">(</span><span class="st">"https://foo.github.io/page"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "foo.github.io"</span>
+<span class="r-in"><span><span class="fu">ada_get_domain</span><span class="op">(</span><span class="st">"https://foo.github.io/page"</span>, icann_only <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "github.io"</span>
 <span class="r-in"><span><span class="co">## these functions are vectorized</span></span></span>
 <span class="r-in"><span><span class="va">urls</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"http://www.google.com"</span>, <span class="st">"http://www.google.com:80"</span>, <span class="st">"noturl"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">ada_get_port</span><span class="op">(</span><span class="va">urls</span><span class="op">)</span></span></span>

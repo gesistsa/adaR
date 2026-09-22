@@ -449,10 +449,12 @@ The package also implements a public suffix extractor public_suffix(),
 based on a lookup of the [Public Suffix
 List](https://publicsuffix.org/). Note that from this list, we only
 include registry suffixes (e.g., com, co.uk), which are those controlled
-by a domain name registry and governed by ICANN. We do not include
+by a domain name registry and governed by ICANN. By default we include
 “private” suffixes (e.g., blogspot.com) that allow people to register
-subdomains. Hence, we use the term domain in the sense of “top domain
-under a registry suffix”. See
+subdomains, so `myblog.blogspot.com` is treated as its own domain. Pass
+`icann_only = TRUE` to restrict the lookup to the ICANN section of the
+list, in which case the domain is the “top domain under a registry
+suffix” (`blogspot.com`). See
 <https://github.com/google/guava/wiki/InternetDomainNameExplained> for
 more details.
 
@@ -464,7 +466,7 @@ urls <- c(
     "https://thisisnotpart.butthisispartoftheps.kawasaki.jp"
 )
 public_suffix(urls)
-#> [1] "co.uk"                            "gov.uk"                          
+#> [1] "co.uk"                            "api.gov.uk"                      
 #> [3] "butthisispartoftheps.kawasaki.jp"
 ```
 
