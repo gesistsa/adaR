@@ -167,3 +167,15 @@ test_that("ada_get_domain accepts a bare domain and is idempotent, #36", {
     expect_equal(ada_get_domain("bit.ly/32G1ciy"), NA_character_)
     expect_equal(ada_get_domain("notdomain/notpath"), NA_character_)
 })
+
+test_that("ada_get_domain honours exception rules", {
+    expect_equal(ada_get_domain("http://www.city.kobe.jp/page"), "city.kobe.jp")
+    expect_equal(ada_get_domain("http://www.city.kawasaki.jp/p"), "city.kawasaki.jp")
+    expect_equal(ada_get_domain("http://www.ck/x"), "www.ck")
+})
+
+test_that("a leading www. does not change the domain", {
+    expect_equal(ada_get_domain("https://www.google.com/x"), "google.com")
+    expect_equal(ada_get_domain("http://google.com"), "google.com")
+    expect_equal(ada_get_domain("https://www.sub.example.co.uk/a"), "example.co.uk")
+})

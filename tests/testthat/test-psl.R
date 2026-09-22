@@ -89,3 +89,31 @@ test_that("URLs, hostnames and junk mix correctly in one call", {
     expect_equal(public_suffix(x), c("co.uk", "com", NA, NA, NA, "d.ck"))
     expect_equal(ada_get_domain(x), c("a.co.uk", "github.com", NA, NA, NA, "c.d.ck"))
 })
+
+test_that("exception (!) rules override wildcard rules", {
+    # !city.kobe.jp cancels *.kobe.jp, so the suffix is the rule minus its
+    # leftmost label. These were dead entries in the trie before.
+    expect_equal(public_suffix("city.kobe.jp"), "kobe.jp")
+    expect_equal(public_suffix("www.city.kobe.jp"), "kobe.jp")
+    expect_equal(public_suffix("city.kawasaki.jp"), "kawasaki.jp")
+    expect_equal(public_suffix("www.city.kawasaki.jp"), "kawasaki.jp")
+    expect_equal(public_suffix("www.ck"), "ck")
+    # the wildcard still applies where no exception matches
+    expect_equal(public_suffix("foo.kobe.jp"), "foo.kobe.jp")
+    expect_equal(public_suffix("foo.ck"), "foo.ck")
+})
+
+test_that("every exception rule in the shipped list resolves", {
+    rules <- adaR_env$exception
+    expect_gt(length(rules), 0)
+    expect_false(any(grepl("^!", rules)))
+    # each rule's own suffix is the rule minus its leftmost label
+    expect_equal(public_suffix(rules), sub("^[^.]+\\.", "", rules))
+    # and so is that of a host sitting under it
+    expect_equal(public_suffix(paste0("shop.", rules)), sub("^[^.]+\\.", "", rules))
+})
+
+test_that("exception rules mix correctly with other inputs", {
+    x <- c("http://www.city.kobe.jp/a", "foo.kobe.jp", "example.com", NA, "c.d.ck")
+    expect_equal(public_suffix(x), c("kobe.jp", "foo.kobe.jp", "com", NA, "d.ck"))
+})
