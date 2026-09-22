@@ -1,5 +1,20 @@
 # adaR (development version)
 
+## Breaking changes
+
+* privately registered suffixes (`github.io`, `blogspot.com`,
+  `s3.amazonaws.com`, ...) are now part of the public suffix list lookup (#65).
+  `public_suffix()` and `ada_get_domain()` gained an `icann_only` argument,
+  defaulting to `FALSE`; pass `icann_only = TRUE` for the previous behaviour.
+
+  ``` r
+  public_suffix("foo.github.io")                      # "github.io" (was "io")
+  ada_get_domain("https://foo.github.io/p")           # "foo.github.io"
+  ada_get_domain("https://foo.github.io/p", icann_only = TRUE)  # "github.io"
+  ```
+
+## Other changes
+
 * `public_suffix()` now honours the exception (`!`) rules of the public suffix
   list, which were previously stored with their `!` prefix and could never
   match. `public_suffix("city.kobe.jp")` is now `"kobe.jp"` rather than

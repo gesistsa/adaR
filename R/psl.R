@@ -1,6 +1,9 @@
 #' Extract the public suffix from a vector of domains or hostnames
 #'
 #' @param domains character. vector of domains or hostnames
+#' @param icann_only logical. Whether to use only the ICANN section of the
+#' public suffix list, ignoring privately registered suffixes such as
+#' `github.io` or `blogspot.com`. Defaults to `FALSE`.
 #' @details `domains` may be either full URLs or bare hostnames; anything that
 #' does not parse as a URL is treated as a hostname. Wildcard (`*`) and
 #' exception (`!`) rules of the public suffix list are both honoured.
@@ -17,17 +20,22 @@
 #'
 #' # *.kobe.jp is a wildcard rule, !city.kobe.jp an exception to it
 #' public_suffix(c("foo.kobe.jp", "city.kobe.jp"))
-public_suffix <- function(domains) {
+#'
+#' # privately registered suffixes are included by default
+#' public_suffix("foo.github.io")
+#' public_suffix("foo.github.io", icann_only = TRUE)
+public_suffix <- function(domains, icann_only = FALSE) {
     domains <- .check_url(domains, arg = "domains")
     if (is.null(domains)) {
         return(character(0))
     }
+    rules <- .psl_rules(icann_only)
     host <- .as_hostname(domains)
-    suffix_match <- triebeard::longest_match(adaR_env$trie_ps, url_reverse(host))
+    suffix_match <- triebeard::longest_match(rules$trie, url_reverse(host))
 
     # A wildcard rule such as *.ck means the label *before* the matched suffix
     # is part of the public suffix too.
-    w <- which(suffix_match %in% psl$wildcard & !is.na(host))
+    w <- which(suffix_match %in% rules$wildcard & !is.na(host))
     if (length(w) > 0L) {
         # host == suffix already is the full suffix, nothing to extend
         w <- w[host[w] != suffix_match[w]]
@@ -43,7 +51,7 @@ public_suffix <- function(domains) {
     }
 
     # Exception rules beat wildcard rules, so they are applied last.
-    .apply_exceptions(host, suffix_match)
+    .apply_exceptions(host, suffix_match, rules$exception)
 }
 
 #' Apply the public suffix list's exception (`!`) rules
@@ -54,8 +62,8 @@ public_suffix <- function(domains) {
 #' There is a handful of these, so looping over the rules is cheaper than
 #' another trie lookup.
 #' @noRd
-.apply_exceptions <- function(host, suffix) {
-    for (rule in adaR_env$exception) {
+.apply_exceptions <- function(host, suffix, exception) {
+    for (rule in exception) {
         hit <- !is.na(host) & (host == rule | endsWith(host, paste0(".", rule)))
         if (any(hit)) {
             suffix[hit] <- sub("^[^.]+\\.", "", rule)

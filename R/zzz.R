@@ -1,19 +1,30 @@
 adaR_env <- new.env(parent = emptyenv())
 
 .onLoad <- function(...) {
-    adaR_env$trie_ps <- triebeard::trie(psl$rev_raw_list, psl$raw_list)
-    adaR_env$exception <- .psl_exceptions()
+    adaR_env$rules_icann <- .make_rules(psl$icann)
+    adaR_env$rules_all <- .make_rules(.merge_sections(psl$icann, psl$private))
 }
 
-#' Exception rules of the public suffix list, without their leading `!`
-#'
-#' Read from `psl$exception` when present. Older `sysdata.rda` builds left the
-#' exception rules inside `raw_list` with the `!` attached, so fall back to
-#' recovering them from there.
+#' Turn one section of the public suffix list into a lookup-ready rule set
 #' @noRd
-.psl_exceptions <- function() {
-    if (!is.null(psl$exception)) {
-        return(psl$exception)
-    }
-    sub("^!", "", grep("^!", psl$raw_list, value = TRUE))
+.make_rules <- function(x) {
+    list(
+        trie = triebeard::trie(x$rev_raw_list, x$raw_list),
+        wildcard = x$wildcard,
+        exception = x$exception
+    )
+}
+
+#' Concatenate the ICANN and private sections
+#'
+#' The two sections do not overlap, so the rules can simply be appended.
+#' @noRd
+.merge_sections <- function(a, b) {
+    Map(c, a, b)
+}
+
+#' Pick the rule set for a given `icann_only`
+#' @noRd
+.psl_rules <- function(icann_only) {
+    if (isTRUE(icann_only)) adaR_env$rules_icann else adaR_env$rules_all
 }

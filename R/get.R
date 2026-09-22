@@ -2,6 +2,7 @@
 #'
 #' These functions get a specific component of URL.
 #' @inheritParams ada_url_parse
+#' @inheritParams public_suffix
 #' @return character, `NA` if not a valid URL
 #' @examples
 #' url <- "https://user_1:password_1@example.org:8080/dir/../api?q=1#frag"
@@ -17,6 +18,9 @@
 #' ada_get_protocol(url)
 #' ada_get_domain(url)
 #' ada_get_basename(url)
+#' ## privately registered suffixes count by default
+#' ada_get_domain("https://foo.github.io/page")
+#' ada_get_domain("https://foo.github.io/page", icann_only = TRUE)
 #' ## these functions are vectorized
 #' urls <- c("http://www.google.com", "http://www.google.com:80", "noturl")
 #' ada_get_port(urls)
@@ -79,28 +83,29 @@ ada_get_protocol <- function(url, decode = TRUE) {
     .ada_call(url, Rcpp_ada_get_protocol, decode)
 }
 
-R_ada_get_domain <- function(url) {
+R_ada_get_domain <- function(url, icann_only = FALSE) {
     host <- .as_hostname(url)
+    wildcard <- .psl_rules(icann_only)$wildcard
 
-    ps <- public_suffix(host)
+    ps <- public_suffix(host, icann_only = icann_only)
     remainder <- .strip_suffix(host, ps)
     domain <- paste0(sub(".*\\.([^\\.]+)$", "\\1", remainder), ".", ps)
 
     is_suffix <- !is.na(host) & !is.na(ps) & host == ps
-    domain[is_suffix & !ps %in% psl$wildcard] <- ""
-    domain[is_suffix & ps %in% psl$wildcard] <- ps[is_suffix & ps %in% psl$wildcard]
+    domain[is_suffix & !ps %in% wildcard] <- ""
+    domain[is_suffix & ps %in% wildcard] <- ps[is_suffix & ps %in% wildcard]
     domain[is.na(ps) | is.na(host)] <- NA_character_
     domain
 }
 
 #' @rdname ada_get_href
 #' @export
-ada_get_domain <- function(url, decode = TRUE) {
+ada_get_domain <- function(url, decode = TRUE, icann_only = FALSE) {
     url <- .check_url(url)
     if (is.null(url)) {
         return(character(0))
     }
-    res <- R_ada_get_domain(url)
+    res <- R_ada_get_domain(url, icann_only = icann_only)
     if (decode) {
         return(url_decode2(res))
     }
