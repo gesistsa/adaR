@@ -8,6 +8,7 @@
 #' ada_url_parse("https://user_1:password_1@example.org:8080/dir/../api?q=1#frag")
 #' @export
 ada_url_parse <- function(url, decode = TRUE) {
+    url <- .check_url(url)
     if (is.null(url)) {
         return(structure(list(
             href = character(0), protocol = character(0),
@@ -24,14 +25,12 @@ ada_url_parse <- function(url, decode = TRUE) {
 #' Similar to [utils::URLdecode]
 #'
 #' @param url a character vector
-#' @return precent decoded URLs as character vector
-#' @export
+#' @return percent decoded URLs as character vector
+#' @details A `%` that is not followed by two hexadecimal digits is not a valid
+#' escape sequence and is returned unchanged.
 #' @examples
 #' url_decode2("Hello%20World")
 #' @export
 url_decode2 <- function(url) {
-    if (is.null(url)) {
-        return(character(0))
-    }
-    Rcpp_url_decode2(url)
+    .ada_call(url, Rcpp_url_decode2)
 }

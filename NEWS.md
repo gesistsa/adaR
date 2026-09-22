@@ -1,3 +1,18 @@
+# adaR (development version)
+
+* fixed `url_decode2()` dropping the remainder of a string after a `%` that is
+  not followed by two hex digits (the escape is now passed through verbatim)
+* fixed `public_suffix()` erroring on two or more bare hostnames matching a
+  wildcard rule, e.g. `public_suffix(c("a.b.ck", "c.d.ck"))`
+* `public_suffix()` now accepts full URLs with a path (#54), and returns the
+  same suffix for a URL and its hostname
+* `ada_get_domain()` now accepts a bare domain, so it is idempotent (#36);
+  schemeless input with a path is still `NA`
+* `ada_get_basename()` gained the `decode` argument the other getters have, and
+  no longer appends `//` for schemes without an authority component
+* all exported functions now error on non-character input instead of silently
+  returning `NA`
+
 # adaR 0.3.5
 
 * bumped ada-url to 3.4.2

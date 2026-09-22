@@ -37,12 +37,12 @@ ada_get_protocol(url, decode = TRUE)
 
 ada_get_domain(url, decode = TRUE)
 
-ada_get_basename(url)
+ada_get_basename(url, decode = TRUE)
 }
 \arguments{
 \item{url}{character. one or more URL to be parsed}
 
-\item{decode}{logical. Whether to decode the output (see \code{\link[utils:URLencode]{utils::URLdecode()}}), default to \code{TRUE}}
+\item{decode}{logical. Whether to decode the output (see \code{\link[utils:URLdecode]{utils::URLdecode()}}), default to \code{TRUE}}
 }
 \value{
 character, \code{NA} if not a valid URL

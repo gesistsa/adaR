@@ -6,62 +6,22 @@
 
 using namespace Rcpp;
 
-std::string charsub(const ada_string stringi, bool to_unicode);
+// Owning wrapper around an ada_url handle, so that the handle is released even
+// if Rcpp throws while the result vector is being filled.
+class AdaUrl {
+ public:
+  explicit AdaUrl(std::string_view input)
+      : url_(ada_parse(input.data(), input.length())) {}
+  ~AdaUrl() { ada_free(url_); }
 
-// cash cow
-DataFrame Rcpp_ada_parse(CharacterVector input_vec, bool decode);
+  AdaUrl(const AdaUrl&) = delete;
+  AdaUrl& operator=(const AdaUrl&) = delete;
 
-// has_*
-LogicalVector Rcpp_ada_has_credentials(const CharacterVector& url_vec);
-LogicalVector Rcpp_ada_has_empty_hostname(const CharacterVector& url_vec);
-LogicalVector Rcpp_ada_has_hostname(const CharacterVector& url_vec);
-LogicalVector Rcpp_ada_has_non_empty_username(const CharacterVector& url_vec);
-LogicalVector Rcpp_ada_has_non_empty_password(const CharacterVector& url_vec);
-LogicalVector Rcpp_ada_has_port(const CharacterVector& url_vec);
-LogicalVector Rcpp_ada_has_hash(const CharacterVector& url_vec);
-LogicalVector Rcpp_ada_has_search(const CharacterVector& url_vec);
+  bool is_valid() const { return ada_is_valid(url_); }
+  ada_url get() const { return url_; }
 
-// get_*
-CharacterVector Rcpp_ada_get_href(const CharacterVector& url_vec, bool decode);
-CharacterVector Rcpp_ada_get_username(const CharacterVector& url_vec,
-                                      bool decode);
-CharacterVector Rcpp_ada_get_password(const CharacterVector& url_vec,
-                                      bool decode);
-CharacterVector Rcpp_ada_get_port(const CharacterVector& url_vec, bool decode);
-CharacterVector Rcpp_ada_get_hash(const CharacterVector& url_vec, bool decode);
-CharacterVector Rcpp_ada_get_host(const CharacterVector& url_vec, bool decode);
-CharacterVector Rcpp_ada_get_hostname(const CharacterVector& url_vec,
-                                      bool decode);
-CharacterVector Rcpp_ada_get_pathname(const CharacterVector& url_vec,
-                                      bool decode);
-CharacterVector Rcpp_ada_get_search(const CharacterVector& url_vec,
-                                    bool decode);
-CharacterVector Rcpp_ada_get_protocol(const CharacterVector& url_vec,
-                                      bool decode);
+ private:
+  ada_url url_;
+};
 
-// set_*
-CharacterVector Rcpp_ada_set_href(const CharacterVector& url_vec,
-                                  const CharacterVector& subst, bool decode);
-CharacterVector Rcpp_ada_set_username(const CharacterVector& url_vec,
-                                      const CharacterVector& subst,
-                                      bool decode);
-CharacterVector Rcpp_ada_set_password(const CharacterVector& url_vec,
-                                      const CharacterVector& subst,
-                                      bool decode);
-CharacterVector Rcpp_ada_set_port(const CharacterVector& url_vec,
-                                  const CharacterVector& subst, bool decode);
-CharacterVector Rcpp_ada_set_host(const CharacterVector& url_vec,
-                                  const CharacterVector& subst, bool decode);
-CharacterVector Rcpp_ada_set_hostname(const CharacterVector& url_vec,
-                                      const CharacterVector& subst,
-                                      bool decode);
-CharacterVector Rcpp_ada_set_pathname(const CharacterVector& url_vec,
-                                      const CharacterVector& subst,
-                                      bool decode);
-CharacterVector Rcpp_ada_set_protocol(const CharacterVector& url_vec,
-                                      const CharacterVector& subst,
-                                      bool decode);
-CharacterVector Rcpp_ada_set_search(const CharacterVector& url_vec,
-                                    const CharacterVector& subst, bool decode);
-CharacterVector Rcpp_ada_set_hash(const CharacterVector& url_vec,
-                                  const CharacterVector& subst, bool decode);
+std::string charsub(const ada_string stringi, bool to_unicode = true);

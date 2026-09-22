@@ -10,10 +10,14 @@ url_decode2(url)
 \item{url}{a character vector}
 }
 \value{
-precent decoded URLs as character vector
+percent decoded URLs as character vector
 }
 \description{
-Similar to \link[utils:URLencode]{utils::URLdecode}
+Similar to \link[utils:URLdecode]{utils::URLdecode}
+}
+\details{
+A \verb{\%} that is not followed by two hexadecimal digits is not a valid
+escape sequence and is returned unchanged.
 }
 \examples{
 url_decode2("Hello\%20World")
