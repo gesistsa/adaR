@@ -13,6 +13,13 @@ std::string charsub(const ada_string stringi, bool to_unicode) {
   return output;
 }
 
+// Give the user a chance to interrupt long vectors. checkUserInterrupt()
+// throws, which is safe here because AdaUrl releases its handle while the
+// stack unwinds.
+static inline void poll_interrupt(R_xlen_t i) {
+  if ((i & 0x3FFF) == 0) Rcpp::checkUserInterrupt();
+}
+
 // [[Rcpp::export]]
 List Rcpp_ada_parse(const CharacterVector& input_vec, bool decode) {
   const R_xlen_t n = input_vec.length();
@@ -28,6 +35,7 @@ List Rcpp_ada_parse(const CharacterVector& input_vec, bool decode) {
   CharacterVector hash(n);
   Rcpp::IntegerVector row_name(n);
   for (R_xlen_t i = 0; i < n; i++) {
+    poll_interrupt(i);
     String s = input_vec[i];
     std::string_view input(s.get_cstring());
     AdaUrl url(input);
@@ -88,6 +96,7 @@ LogicalVector Rcpp_ada_has(const CharacterVector& url_vec, F func) {
   const R_xlen_t n = url_vec.length();
   LogicalVector out(n);
   for (R_xlen_t i = 0; i < n; i++) {
+    poll_interrupt(i);
     String s = url_vec[i];
     std::string_view input(s.get_cstring());
     AdaUrl url(input);
@@ -143,6 +152,7 @@ CharacterVector Rcpp_ada_get(const CharacterVector& url_vec, F func,
   const R_xlen_t n = url_vec.length();
   CharacterVector out(n);
   for (R_xlen_t i = 0; i < n; i++) {
+    poll_interrupt(i);
     String s = url_vec[i];
     std::string_view input(s.get_cstring());
     AdaUrl url(input);
@@ -223,6 +233,7 @@ CharacterVector Rcpp_ada_set(const CharacterVector& url_vec, F func,
   const R_xlen_t n = url_vec.length();
   CharacterVector out(n);
   for (R_xlen_t i = 0; i < n; i++) {
+    poll_interrupt(i);
     String s = url_vec[i];
     String s2 = subst[i];
     std::string_view input(s.get_cstring());
@@ -313,6 +324,7 @@ CharacterVector Rcpp_ada_clear(const CharacterVector& url_vec, F func,
   const R_xlen_t n = url_vec.length();
   CharacterVector out(n);
   for (R_xlen_t i = 0; i < n; i++) {
+    poll_interrupt(i);
     String s = url_vec[i];
     std::string_view input(s.get_cstring());
     AdaUrl url(input);

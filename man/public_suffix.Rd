@@ -17,7 +17,8 @@ Extract the public suffix from a vector of domains or hostnames
 }
 \details{
 \code{domains} may be either full URLs or bare hostnames; anything that
-does not parse as a URL is treated as a hostname.
+does not parse as a URL is treated as a hostname. Wildcard (\code{*}) and
+exception (\code{!}) rules of the public suffix list are both honoured.
 }
 \examples{
 public_suffix("http://example.com")
@@ -27,4 +28,7 @@ public_suffix("example.com")
 
 # for general URLs the hostname is extracted first
 public_suffix("http://example.com/path/to/file")
+
+# *.kobe.jp is a wildcard rule, !city.kobe.jp an exception to it
+public_suffix(c("foo.kobe.jp", "city.kobe.jp"))
 }

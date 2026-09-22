@@ -2,7 +2,8 @@
 #'
 #' @param domains character. vector of domains or hostnames
 #' @details `domains` may be either full URLs or bare hostnames; anything that
-#' does not parse as a URL is treated as a hostname.
+#' does not parse as a URL is treated as a hostname. Wildcard (`*`) and
+#' exception (`!`) rules of the public suffix list are both honoured.
 #' @export
 #' @return public suffixes of domains as character vector
 #' @examples
@@ -13,6 +14,9 @@
 #'
 #' # for general URLs the hostname is extracted first
 #' public_suffix("http://example.com/path/to/file")
+#'
+#' # *.kobe.jp is a wildcard rule, !city.kobe.jp an exception to it
+#' public_suffix(c("foo.kobe.jp", "city.kobe.jp"))
 public_suffix <- function(domains) {
     domains <- .check_url(domains, arg = "domains")
     if (is.null(domains)) {
@@ -37,7 +41,27 @@ public_suffix <- function(domains) {
         )
         suffix_match[w[!has_label]] <- host[w[!has_label]]
     }
-    suffix_match
+
+    # Exception rules beat wildcard rules, so they are applied last.
+    .apply_exceptions(host, suffix_match)
+}
+
+#' Apply the public suffix list's exception (`!`) rules
+#'
+#' A rule such as `!city.kobe.jp` cancels the `*.kobe.jp` wildcard: where the
+#' rule matches, the public suffix is the rule minus its leftmost label, so
+#' `city.kobe.jp` and `www.city.kobe.jp` both have the suffix `kobe.jp`.
+#' There is a handful of these, so looping over the rules is cheaper than
+#' another trie lookup.
+#' @noRd
+.apply_exceptions <- function(host, suffix) {
+    for (rule in adaR_env$exception) {
+        hit <- !is.na(host) & (host == rule | endsWith(host, paste0(".", rule)))
+        if (any(hit)) {
+            suffix[hit] <- sub("^[^.]+\\.", "", rule)
+        }
+    }
+    suffix
 }
 
 #' Treat each element as a hostname, parsing it out of a URL where possible

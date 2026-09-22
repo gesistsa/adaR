@@ -80,7 +80,7 @@ ada_get_protocol <- function(url, decode = TRUE) {
 }
 
 R_ada_get_domain <- function(url) {
-    host <- sub("^www\\.", "", .as_hostname(url))
+    host <- .as_hostname(url)
 
     ps <- public_suffix(host)
     remainder <- .strip_suffix(host, ps)
