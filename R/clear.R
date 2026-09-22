@@ -1,10 +1,3 @@
-.clear <- function(url, decode, func) {
-    if (is.null(url)) {
-        return(character(0))
-    }
-    func(url, decode)
-}
-
 #' Clear a specific component of URL
 #'
 #' These functions clears a specific component of URL.
@@ -17,17 +10,17 @@
 #' ada_clear_search(url)
 #' @export
 ada_clear_port <- function(url, decode = TRUE) {
-    .clear(url, decode, Rcpp_ada_clear_port)
+    .ada_call(url, Rcpp_ada_clear_port, decode)
 }
 
 #' @rdname ada_clear_port
 #' @export
 ada_clear_hash <- function(url, decode = TRUE) {
-    .clear(url, decode, Rcpp_ada_clear_hash)
+    .ada_call(url, Rcpp_ada_clear_hash, decode)
 }
 
 #' @rdname ada_clear_port
 #' @export
 ada_clear_search <- function(url, decode = TRUE) {
-    .clear(url, decode, Rcpp_ada_clear_search)
+    .ada_call(url, Rcpp_ada_clear_search, decode)
 }

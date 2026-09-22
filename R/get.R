@@ -1,10 +1,3 @@
-.get <- function(url, decode, func) {
-    if (is.null(url)) {
-        return(character(0))
-    }
-    func(url, decode)
-}
-
 #' Get a specific component of URL
 #'
 #' These functions get a specific component of URL.
@@ -29,84 +22,81 @@
 #' ada_get_port(urls)
 #' @export
 ada_get_href <- function(url, decode = TRUE) {
-    .get(url, decode, Rcpp_ada_get_href)
+    .ada_call(url, Rcpp_ada_get_href, decode)
 }
 
 #' @rdname ada_get_href
 #' @export
 ada_get_username <- function(url, decode = TRUE) {
-    .get(url, decode, Rcpp_ada_get_username)
+    .ada_call(url, Rcpp_ada_get_username, decode)
 }
 
 #' @rdname ada_get_href
 #' @export
 ada_get_password <- function(url, decode = TRUE) {
-    .get(url, decode, Rcpp_ada_get_password)
+    .ada_call(url, Rcpp_ada_get_password, decode)
 }
 
 #' @rdname ada_get_href
 #' @export
 ada_get_port <- function(url, decode = TRUE) {
-    .get(url, decode, Rcpp_ada_get_port)
+    .ada_call(url, Rcpp_ada_get_port, decode)
 }
 
 #' @rdname ada_get_href
 #' @export
 ada_get_hash <- function(url, decode = TRUE) {
-    .get(url, decode, Rcpp_ada_get_hash)
+    .ada_call(url, Rcpp_ada_get_hash, decode)
 }
 
 #' @rdname ada_get_href
 #' @export
 ada_get_host <- function(url, decode = TRUE) {
-    .get(url, decode, Rcpp_ada_get_host)
+    .ada_call(url, Rcpp_ada_get_host, decode)
 }
 
 #' @rdname ada_get_href
 #' @export
 ada_get_hostname <- function(url, decode = TRUE) {
-    .get(url, decode, Rcpp_ada_get_hostname)
+    .ada_call(url, Rcpp_ada_get_hostname, decode)
 }
 
 #' @rdname ada_get_href
 #' @export
 ada_get_pathname <- function(url, decode = TRUE) {
-    .get(url, decode, Rcpp_ada_get_pathname)
+    .ada_call(url, Rcpp_ada_get_pathname, decode)
 }
 
 #' @rdname ada_get_href
 #' @export
 ada_get_search <- function(url, decode = TRUE) {
-    .get(url, decode, Rcpp_ada_get_search)
+    .ada_call(url, Rcpp_ada_get_search, decode)
 }
 
 #' @rdname ada_get_href
 #' @export
 ada_get_protocol <- function(url, decode = TRUE) {
-    .get(url, decode, Rcpp_ada_get_protocol)
+    .ada_call(url, Rcpp_ada_get_protocol, decode)
 }
 
 R_ada_get_domain <- function(url) {
-    host <- ada_get_hostname(url)
-    host <- sub("^www\\.", "", host)
-    prot <- ada_get_protocol(url)
-    url_new <- paste0(prot, host)
+    host <- sub("^www\\.", "", .as_hostname(url))
 
-    ps <- public_suffix(url_new)
-    pat <- paste0("\\.", ps, "$")
+    ps <- public_suffix(host)
+    remainder <- .strip_suffix(host, ps)
+    domain <- paste0(sub(".*\\.([^\\.]+)$", "\\1", remainder), ".", ps)
 
-    dom <- mapply(function(x, y) sub(x, "", y), pat, host, USE.NAMES = FALSE)
-    domain <- paste0(sub(".*\\.([^\\.]+)$", "\\1", dom), ".", ps)
-    domain[host == ps & !ps %in% psl$wildcard] <- ""
-    domain[host == ps & ps %in% psl$wildcard] <- ps
-    domain[is.na(ps)] <- NA
-    domain[is.na(host)] <- NA
+    is_suffix <- !is.na(host) & !is.na(ps) & host == ps
+    domain[is_suffix & !ps %in% psl$wildcard] <- ""
+    domain[is_suffix & ps %in% psl$wildcard] <- ps[is_suffix & ps %in% psl$wildcard]
+    domain[is.na(ps) | is.na(host)] <- NA_character_
     domain
 }
 
 #' @rdname ada_get_href
 #' @export
 ada_get_domain <- function(url, decode = TRUE) {
+    url <- .check_url(url)
     if (is.null(url)) {
         return(character(0))
     }
@@ -114,17 +104,23 @@ ada_get_domain <- function(url, decode = TRUE) {
     if (decode) {
         return(url_decode2(res))
     }
-    return(res)
+    res
 }
 
 #' @rdname ada_get_href
 #' @export
-ada_get_basename <- function(url) {
-    protocol <- ada_get_protocol(url)
-    not_na <- !is.na(protocol)
-    tmp <- protocol[not_na]
-    host <- ada_get_hostname(url[not_na])
-    basename <- rep(NA_character_, length(url))
-    basename[not_na] <- paste0(tmp, "//", host)
+ada_get_basename <- function(url, decode = TRUE) {
+    protocol <- ada_get_protocol(url, decode = decode)
+    hostname <- ada_get_hostname(url, decode = decode)
+    # non-special schemes (mailto:, data:, ...) have no authority component
+    sep <- ifelse(.has_authority(url), "//", "")
+    basename <- paste0(protocol, sep, hostname)
+    basename[is.na(protocol)] <- NA_character_
     basename
+}
+
+#' Does the URL have an authority (`//`) component?
+#' @noRd
+.has_authority <- function(url) {
+    ada_has_hostname(url) & !ada_has_empty_hostname(url)
 }

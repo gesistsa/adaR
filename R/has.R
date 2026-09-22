@@ -1,10 +1,3 @@
-.has <- function(url, func) {
-    if (is.null(url)) {
-        return(logical(0))
-    }
-    func(url)
-}
-
 #' Check if URL has a certain component
 #'
 #' These functions check if URL has a certain component.
@@ -25,47 +18,47 @@
 #' ada_has_port(urls)
 #' @export
 ada_has_credentials <- function(url) {
-    .has(url, Rcpp_ada_has_credentials)
+    .ada_call(url, Rcpp_ada_has_credentials, empty = logical(0))
 }
 
 #' @rdname ada_has_credentials
 #' @export
 ada_has_empty_hostname <- function(url) {
-    .has(url, Rcpp_ada_has_empty_hostname)
+    .ada_call(url, Rcpp_ada_has_empty_hostname, empty = logical(0))
 }
 
 #' @rdname ada_has_credentials
 #' @export
 ada_has_hostname <- function(url) {
-    .has(url, Rcpp_ada_has_hostname)
+    .ada_call(url, Rcpp_ada_has_hostname, empty = logical(0))
 }
 
 #' @rdname ada_has_credentials
 #' @export
 ada_has_non_empty_username <- function(url) {
-    .has(url, Rcpp_ada_has_non_empty_username)
+    .ada_call(url, Rcpp_ada_has_non_empty_username, empty = logical(0))
 }
 
 #' @rdname ada_has_credentials
 #' @export
 ada_has_non_empty_password <- function(url) {
-    .has(url, Rcpp_ada_has_non_empty_password)
+    .ada_call(url, Rcpp_ada_has_non_empty_password, empty = logical(0))
 }
 
 #' @rdname ada_has_credentials
 #' @export
 ada_has_port <- function(url) {
-    .has(url, Rcpp_ada_has_port)
+    .ada_call(url, Rcpp_ada_has_port, empty = logical(0))
 }
 
 #' @rdname ada_has_credentials
 #' @export
 ada_has_hash <- function(url) {
-    .has(url, Rcpp_ada_has_hash)
+    .ada_call(url, Rcpp_ada_has_hash, empty = logical(0))
 }
 
 #' @rdname ada_has_credentials
 #' @export
 ada_has_search <- function(url) {
-    .has(url, Rcpp_ada_has_search)
+    .ada_call(url, Rcpp_ada_has_search, empty = logical(0))
 }

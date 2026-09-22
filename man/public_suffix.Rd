@@ -15,12 +15,16 @@ public suffixes of domains as character vector
 \description{
 Extract the public suffix from a vector of domains or hostnames
 }
+\details{
+\code{domains} may be either full URLs or bare hostnames; anything that
+does not parse as a URL is treated as a hostname.
+}
 \examples{
 public_suffix("http://example.com")
 
-# doesn't work for general URLs
-public_suffix("http://example.com/path/to/file")
+# hostnames work too
+public_suffix("example.com")
 
-# extracting hostname first does the trick
-public_suffix(ada_get_hostname("http://example.com/path/to/file"))
+# for general URLs the hostname is extracted first
+public_suffix("http://example.com/path/to/file")
 }

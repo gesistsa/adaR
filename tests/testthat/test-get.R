@@ -143,3 +143,27 @@ test_that("href fix #66", {
     result_pathnames <- ada_set_pathname(examples, pathnames, decode = FALSE)
     expect_true(all(examples == result_pathnames))
 })
+
+test_that("ada_get_basename accepts decode, like the other getters", {
+    url <- "https://user_1:password_1@example.org:8080/dir/../api?q=1#frag"
+    expect_equal(ada_get_basename(url, decode = FALSE), "https://example.org")
+    expect_equal(ada_get_basename(url, decode = TRUE), "https://example.org")
+    expect_true("decode" %in% names(formals(ada_get_basename)))
+})
+
+test_that("ada_get_basename omits // for schemes without an authority", {
+    expect_equal(ada_get_basename("mailto:me@example.org"), "mailto:")
+    expect_equal(
+        ada_get_basename(c("https://x.org:8080/p", "noturl")),
+        c("https://x.org", NA_character_)
+    )
+})
+
+test_that("ada_get_domain accepts a bare domain and is idempotent, #36", {
+    url <- "https://github.com/schochastics/adaR/issues/36"
+    expect_equal(ada_get_domain(url), "github.com")
+    expect_equal(ada_get_domain(ada_get_domain(url)), "github.com")
+    # but a schemeless URL with a path stays NA (strict mode, see #36)
+    expect_equal(ada_get_domain("bit.ly/32G1ciy"), NA_character_)
+    expect_equal(ada_get_domain("notdomain/notpath"), NA_character_)
+})

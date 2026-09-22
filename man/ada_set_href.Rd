@@ -39,7 +39,7 @@ ada_set_hash(url, input, decode = TRUE)
 \item{input}{character. containing new component for URL. Vector of length 1
 or same length as url.}
 
-\item{decode}{logical. Whether to decode the output (see \code{\link[utils:URLencode]{utils::URLdecode()}}), default to \code{TRUE}}
+\item{decode}{logical. Whether to decode the output (see \code{\link[utils:URLdecode]{utils::URLdecode()}}), default to \code{TRUE}}
 }
 \value{
 character, \code{NA} if not a valid URL
