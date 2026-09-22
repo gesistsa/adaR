@@ -1,14 +1,15 @@
-# --------------------------------------------
-# CITATION file created with {cffr} R package
+# ------------------------------------------------
+# CITATION.cff file created with {cffr} R package
 # See also: https://docs.ropensci.org/cffr/
-# --------------------------------------------
+# ------------------------------------------------
  
 cff-version: 1.2.0
 message: 'To cite package "adaR" in publications use:'
 type: software
 license: MIT
 title: 'adaR: A Fast ''WHATWG'' Compliant URL Parser'
-version: 0.3.2
+version: 0.4.0
+doi: 10.32614/CRAN.package.adaR
 abstract: A wrapper for 'ada-url', a 'WHATWG' compliant and fast URL parser written
   in modern 'C++'. Also contains auxiliary functions such as a public suffix extractor.
 authors:
@@ -43,23 +44,32 @@ references:
   authors:
   - family-names: Eddelbuettel
     given-names: Dirk
+    email: edd@debian.org
+    orcid: https://orcid.org/0000-0001-6419-907X
   - family-names: Francois
     given-names: Romain
+    orcid: https://orcid.org/0000-0002-2444-4226
   - family-names: Allaire
     given-names: JJ
+    orcid: https://orcid.org/0000-0003-0174-9868
   - family-names: Ushey
     given-names: Kevin
+    orcid: https://orcid.org/0000-0003-2880-7407
   - family-names: Kou
     given-names: Qiang
+    orcid: https://orcid.org/0000-0001-6786-5453
   - family-names: Russell
     given-names: Nathan
   - family-names: Ucar
-    given-names: Inaki
+    given-names: Iñaki
+    orcid: https://orcid.org/0000-0001-6403-5550
   - family-names: Bates
-    given-names: Douglas
+    given-names: Doug
+    orcid: https://orcid.org/0000-0001-8316-9503
   - family-names: Chambers
     given-names: John
-  year: '2024'
+  year: '2026'
+  doi: 10.32614/CRAN.package.Rcpp
 - type: software
   title: triebeard
   abstract: 'triebeard: ''Radix'' Trees in ''Rcpp'''
@@ -73,7 +83,8 @@ references:
     given-names: Drew
   - family-names: Takano
     given-names: Yuuki
-  year: '2024'
+  year: '2026'
+  doi: 10.32614/CRAN.package.triebeard
 - type: software
   title: knitr
   abstract: 'knitr: A General-Purpose Package for Dynamic Report Generation in R'
@@ -85,7 +96,8 @@ references:
     given-names: Yihui
     email: xie@yihui.name
     orcid: https://orcid.org/0000-0003-0645-5666
-  year: '2024'
+  year: '2026'
+  doi: 10.32614/CRAN.package.knitr
 - type: software
   title: rmarkdown
   abstract: 'rmarkdown: Dynamic Documents for R'
@@ -128,7 +140,8 @@ references:
     given-names: Richard
     email: rich@posit.co
     orcid: https://orcid.org/0000-0003-3925-190X
-  year: '2024'
+  year: '2026'
+  doi: 10.32614/CRAN.package.rmarkdown
 - type: software
   title: testthat
   abstract: 'testthat: Unit Testing for R'
@@ -139,7 +152,8 @@ references:
   - family-names: Wickham
     given-names: Hadley
     email: hadley@posit.co
-  year: '2024'
+  year: '2026'
+  doi: 10.32614/CRAN.package.testthat
   version: '>= 3.0.0'
 - type: software
   title: 'R: A Language and Environment for Statistical Computing'
@@ -150,6 +164,6 @@ references:
   institution:
     name: R Foundation for Statistical Computing
     address: Vienna, Austria
-  year: '2024'
+  year: '2026'
   version: '>= 4.2'
 
