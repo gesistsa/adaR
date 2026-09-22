@@ -18,17 +18,22 @@ public_suffix(domains)
 
 public suffixes of domains as character vector
 
+## Details
+
+`domains` may be either full URLs or bare hostnames; anything that does
+not parse as a URL is treated as a hostname.
+
 ## Examples
 
 ``` r
 public_suffix("http://example.com")
 #> [1] "com"
 
-# doesn't work for general URLs
-public_suffix("http://example.com/path/to/file")
-#> [1] NA
+# hostnames work too
+public_suffix("example.com")
+#> [1] "com"
 
-# extracting hostname first does the trick
-public_suffix(ada_get_hostname("http://example.com/path/to/file"))
+# for general URLs the hostname is extracted first
+public_suffix("http://example.com/path/to/file")
 #> [1] "com"
 ```

@@ -1,6 +1,7 @@
 # Introduction to adaR
 
 ``` r
+
 library(adaR)
 ```
 
@@ -13,15 +14,15 @@ and has specific components that give information about how the resource
 can be fetched. The table below gives an overview of the components of a
 valid URL.
 
-| Name                | Description                                                                                   | Example                                     |
-|---------------------|-----------------------------------------------------------------------------------------------|---------------------------------------------|
-| Protocol            | Indicates the protocol to access the resource.                                                | `http://`                                   |
-| Username & Password | Contains authentication info. Separated by a colon and followed by an `@`.                    | `username:password@`                        |
-| Hostname            | Refers to the domain name or IP of the server where the resource resides.                     | `example.com` or `192.168.1.1`              |
-| Port                | Specifies the technical gate used to access the resources on the server.                      | `:8080`                                     |
-| Pathname            | Provides info about the location of the resource on the server, often like a filesystem path. | `/directory/file.html` or `/images/pic.jpg` |
-| Query               | Provides additional parameters, often for search queries or data retrieval.                   | `?key1=value1&key2=value2`                  |
-| Fragment            | Refers to a specific part of a web resource or document, like an anchor.                      | `#section2`                                 |
+| Name | Description | Example |
+|----|----|----|
+| Protocol | Indicates the protocol to access the resource. | `http://` |
+| Username & Password | Contains authentication info. Separated by a colon and followed by an `@`. | `username:password@` |
+| Hostname | Refers to the domain name or IP of the server where the resource resides. | `example.com` or `192.168.1.1` |
+| Port | Specifies the technical gate used to access the resources on the server. | `:8080` |
+| Pathname | Provides info about the location of the resource on the server, often like a filesystem path. | `/directory/file.html` or `/images/pic.jpg` |
+| Query | Provides additional parameters, often for search queries or data retrieval. | `?key1=value1&key2=value2` |
+| Fragment | Refers to a specific part of a web resource or document, like an anchor. | `#section2` |
 
 A full URL might look something like this:
 
@@ -38,29 +39,29 @@ is referred to as `search` and the `fragment` as `hash` in `adaR`.
 
 Some more relevant subcomponents are given in the following table.
 
-| Term                   | Description                                                                                                                                                                         | Example                        |
-|------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------|
-| Domain                 | A name that represents an IP address of the server which hosts the website. It’s a human-readable form of an address where web resources can be accessed.                           | `example.com`                  |
-| Subdomain              | A subset or a smaller part of the main domain. It’s used to organize and navigate to different sections or services of a website.                                                   | `blog.example.com`             |
-| Top-Level Domain (TLD) | The last segment of the domain name. It follows the last dot in the domain name. Indicates the purpose or origin of a domain.                                                       | `.com`, `.net`, `.org`         |
-| Public Suffix          | A domain under which Internet users can directly register their own domain names. Public suffixes include TLDs as well as certain subdomains under which domains can be registered. | `co.uk`, `com.au`, `github.io` |
+| Term | Description | Example |
+|----|----|----|
+| Domain | A name that represents an IP address of the server which hosts the website. It’s a human-readable form of an address where web resources can be accessed. | `example.com` |
+| Subdomain | A subset or a smaller part of the main domain. It’s used to organize and navigate to different sections or services of a website. | `blog.example.com` |
+| Top-Level Domain (TLD) | The last segment of the domain name. It follows the last dot in the domain name. Indicates the purpose or origin of a domain. | `.com`, `.net`, `.org` |
+| Public Suffix | A domain under which Internet users can directly register their own domain names. Public suffixes include TLDs as well as certain subdomains under which domains can be registered. | `co.uk`, `com.au`, `github.io` |
 
 But wait, there is more. The table below gives the definition of several
 terms that are of relevance when dealing with URLs and the `adaR`
 package.
 
-| Term                 | Description                                                                                                       | Example                                                                              |
-|----------------------|-------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------|
-| Authority            | Combines user info, hostname, and port. Identifies the party responsible for the resource.                        | `userinfo@host:port`                                                                 |
-| Relative URL         | A URL without the scheme and host, often starting with a path. Relative to a base URL.                            | `/path/to/file.html`                                                                 |
-| Absolute URL         | A full URL specifying scheme and host.                                                                            | `https://example.com/path/to/file.html`                                              |
-| Base URL             | The URL to which relative URLs are resolved.                                                                      | `<base href="https://example.com/page/">`                                            |
-| Percent Encoding     | Encodes special characters within a URI using `%` followed by two hexadecimal digits.                             | `Hello%20World` (represents “Hello World”)                                           |
-| Punycode             | Represents Unicode characters in domain names using ASCII.                                                        | `xn--80akhbyknj4f` (represents `пример`)                                             |
-| URL Canonicalization | Converts a URL into a standardized or normalized format.                                                          | From `https://example.com:443/../a.html` to `https://example.com/a.html`             |
-| URL Shortening       | Converts a long URL into a significantly shorter version that redirects to the original URL.                      | Shortening `https://example.com/some-long-path` might give `https://exmpl.co/abc123` |
-| URL Slug             | Part of a URL derived from the title of a webpage, usually human-readable and used for SEO.                       | For a post titled “How to Bake”, slug might be `how-to-bake`                         |
-| URI vs URL           | URI is a broader category including URLs (locator) and URNs (name). All URLs are URIs, but not all URIs are URLs. | URI: `mailto:john.doe@example.com`, URL: `https://example.com`                       |
+| Term | Description | Example |
+|----|----|----|
+| Authority | Combines user info, hostname, and port. Identifies the party responsible for the resource. | `userinfo@host:port` |
+| Relative URL | A URL without the scheme and host, often starting with a path. Relative to a base URL. | `/path/to/file.html` |
+| Absolute URL | A full URL specifying scheme and host. | `https://example.com/path/to/file.html` |
+| Base URL | The URL to which relative URLs are resolved. | `<base href="https://example.com/page/">` |
+| Percent Encoding | Encodes special characters within a URI using `%` followed by two hexadecimal digits. | `Hello%20World` (represents “Hello World”) |
+| Punycode | Represents Unicode characters in domain names using ASCII. | `xn--80akhbyknj4f` (represents `пример`) |
+| URL Canonicalization | Converts a URL into a standardized or normalized format. | From `https://example.com:443/../a.html` to `https://example.com/a.html` |
+| URL Shortening | Converts a long URL into a significantly shorter version that redirects to the original URL. | Shortening `https://example.com/some-long-path` might give `https://exmpl.co/abc123` |
+| URL Slug | Part of a URL derived from the title of a webpage, usually human-readable and used for SEO. | For a post titled “How to Bake”, slug might be `how-to-bake` |
+| URI vs URL | URI is a broader category including URLs (locator) and URNs (name). All URLs are URIs, but not all URIs are URLs. | URI: `mailto:john.doe@example.com`, URL: `https://example.com` |
 
 ## “WHATWG compliant”
 
@@ -97,6 +98,7 @@ The function
 decomposes a url into the components shown in the first table.
 
 ``` r
+
 ada_url_parse("https://user_1:password_1@example.org:8080/dir/../api?q=1#frag")
 #>                                                      href protocol username
 #> 1 https://user_1:password_1@example.org:8080/api?q=1#frag   https:   user_1
@@ -108,6 +110,7 @@ The function can deal with punycode and percent encoding and does
 generally handle all types of edge cases well.
 
 ``` r
+
 corner_cases <- c(
     "https://example.com:8080", "http://user:password@example.com",
     "http://[2001:0db8:85a3:0000:0000:8a2e:0370:7334]:8080", "https://example.com/path/to/resource?query=value&another=thing#fragment",
@@ -374,6 +377,7 @@ URL. Specific components can be parsed with the `ada_get_*()` set of
 functions.
 
 ``` r
+
 ada_get_hostname(corner_cases)
 #>  [1] "example.com"                    "example.com"                   
 #>  [3] "[2001:db8:85a3::8a2e:370:7334]" "example.com"                   
@@ -409,6 +413,7 @@ ada_get_hostname(corner_cases)
 not.
 
 ``` r
+
 ada_has_search(corner_cases)
 #>  [1] FALSE FALSE FALSE  TRUE FALSE FALSE  TRUE FALSE FALSE  TRUE FALSE FALSE
 #> [13] FALSE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE
@@ -420,6 +425,7 @@ ada_has_search(corner_cases)
 `ada_set_*()` can be used to set specific components of a URL.
 
 ``` r
+
 ada_set_hostname("https://example.de/test", "example.com")
 #> [1] "https://example.com/test"
 ```
@@ -427,6 +433,7 @@ ada_set_hostname("https://example.de/test", "example.com")
 `ada_clear_*()` can be used to remove certain components.
 
 ``` r
+
 url <- "https://user_1:password_1@example.org:8080/dir/../api?q=1#frag"
 ada_clear_port(url)
 #> [1] "https://user_1:password_1@example.org/api?q=1#frag"
@@ -450,6 +457,7 @@ under a registry suffix”. See
 more details.
 
 ``` r
+
 urls <- c(
     "https://subsub.sub.domain.co.uk",
     "https://domain.api.gov.uk",

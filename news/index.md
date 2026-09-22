@@ -1,5 +1,29 @@
 # Changelog
 
+## adaR (development version)
+
+- fixed
+  [`url_decode2()`](https://schochastics.github.io/adaR/reference/url_decode2.md)
+  dropping the remainder of a string after a `%` that is not followed by
+  two hex digits (the escape is now passed through verbatim)
+- fixed
+  [`public_suffix()`](https://schochastics.github.io/adaR/reference/public_suffix.md)
+  erroring on two or more bare hostnames matching a wildcard rule,
+  e.g. `public_suffix(c("a.b.ck", "c.d.ck"))`
+- [`public_suffix()`](https://schochastics.github.io/adaR/reference/public_suffix.md)
+  now accepts full URLs with a path
+  ([\#54](https://github.com/gesistsa/adaR/issues/54)), and returns the
+  same suffix for a URL and its hostname
+- [`ada_get_domain()`](https://schochastics.github.io/adaR/reference/ada_get_href.md)
+  now accepts a bare domain, so it is idempotent
+  ([\#36](https://github.com/gesistsa/adaR/issues/36)); schemeless input
+  with a path is still `NA`
+- [`ada_get_basename()`](https://schochastics.github.io/adaR/reference/ada_get_href.md)
+  gained the `decode` argument the other getters have, and no longer
+  appends `//` for schemes without an authority component
+- all exported functions now error on non-character input instead of
+  silently returning `NA`
+
 ## adaR 0.3.5
 
 CRAN release: 2026-02-21

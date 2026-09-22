@@ -27,7 +27,7 @@ ada_get_protocol(url, decode = TRUE)
 
 ada_get_domain(url, decode = TRUE)
 
-ada_get_basename(url)
+ada_get_basename(url, decode = TRUE)
 ```
 
 ## Arguments
